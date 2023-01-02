@@ -64,6 +64,7 @@
 \newcommand{\F}{\mathtt{F}}
 \newcommand{\T}{\mathtt{T}}
 \usepackage{pgfgantt}
+\usepackage{pdflscape}
 
 \newcommand{\lorf}{\ensuremath{\lor\F}}
 \newcommand{\lort}{\ensuremath{\lor\T}}
@@ -196,16 +197,53 @@
 \thispagestyle{empty}
 
 \section{Problemanalyse}
-\section{Skitse over BasicReversi}
+Modelen deles op i to:
+\begin{enumerate}
+    \item Brættet og brikker
+    \item Regelsættet
+\end{enumerate}
+Brættet og brikkerne skal være indeholdt i et objekt med metoder der gør det muligt at placere og vende brikker. Vi benytter et heltals-array med tre stadier: 0 for et tomt felt, 1 for hvid brik og 2 for sort brik. En række metoder vil blive implementerede til at placere og vende brikker og kontrollere om et træk er lovligt.\newline
+I forhold til regelsættet, vil et træks lovlighed kunne afgøres af klassen med bræt objektet. De resterende regler bruger logikken beskrevet i \cref{tbl:logic}:
+\begin{table}[H]
+    \centering
+    \caption{Regelsættets logiske implementering}\label{tbl:logic}
+        \begin{tabular}{ll}
+        \toprule
+        Problem & Løsning \\
+        \midrule
+        Startende spiller & Spillere tildeles navne som tilfældigt tildeles farver. Hvid starter hver gang. \\
+        Startkonfiguration & Hvid farve får lov til at sætte to brikker. Sort placeres i de resterende midterfelter. \\
+        Turbaseret spil & Klasse med metoder der afgør om man skal melde pas, \\
+         & om et træk skal gøres om jf. brætklassen samt om spillet er slut. \\
+        Afsluttet spil & Metodekald til brætklassen tæller vundet TN. \\
+        Uafgjort & Spillet initialiseres igen med ny startende spiller. \\
+        Genstart & Metodekald konstruere bræt objektet igen og nye farver tildeles. \\
+         \bottomrule
+    \end{tabular}
+\end{table}
+Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvindue der guider spillerne (hvis tur, skal der meldes pas, etc.), en pas knap og en genstart knap.
+\section{Skitse over problemet}
 \section{Tilvalg af avancerede tilføjelser}
-\subsection{Brikker vendes automatisk}
-\subsection{Andre størrelser af brættet}
-\subsection{Visning af mulige træk}
-\subsection{Visning af brikker, der vendes ved mulige træk}
-\subsection{Visning af tid}
-\subsection{High-score}
-\subsection{Gemme/Hente spil}
-
-\newpage
-\subsection{Delopgaver \& Tidsplan}
+\cref{tbl:avanceret} viser mulige tilføjelser til den avancerede version.
+\begin{table}[H]
+    \centering
+    \caption{Mulige avancerede tilvalg}\label{tbl:avanceret}
+    \begin{tabular}{lllll}
+    \toprule
+       Brikker vendes automatisk  & Visning af mulige træk & Visning af tid & High-score & Gemme/Hente spil\\
+       Visuelle effekter og lyd & Speed-Reversi & Fullscreen & Valg af farver & Spillernavne \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+\section{Delopgaver \& Tidsplan}
+\begin{figure}[H]
+    \centering
+    \caption{Ganttdiagram over projektet}\label{fig:gantt}
+    \begin{ganttchart}[
+hgrid,
+vgrid,
+time slot format = isodate]{2023-01-04}{2023-01-20}
+\gantttitlecalendar{month=shortname, day} \\
+\end{ganttchart}
+\end{figure}
 \end{document}
