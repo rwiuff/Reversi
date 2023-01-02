@@ -1,0 +1,220 @@
+%Author(s), Course variables
+\newcommand{\titl}{Projektbeskrivelse}
+\newcommand{\auth}{Rasmus Wiuff}
+\newcommand{\SID}{s163977}
+\newcommand{\courseno}{02121}
+\newcommand{\course}{Indtroduktion til Softwareteknologi}
+\newcommand{\lb}{\\}
+%Basics
+\documentclass[a4paper, danish]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[moderate]{savetrees}
+%Symbols and scientifics
+\usepackage{amsmath, amsfonts, amssymb, bm}
+\numberwithin{equation}{section}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\sisetup{
+    per-mode = power ,
+    round-mode = figures ,
+    round-precision = 3 ,
+    scientific-notation = false ,
+    output-decimal-marker = {.} ,
+    exponent-product = \times ,
+    separate-uncertainty = true ,
+    uncertainty-separator = \ ,
+    range-phrase = - ,
+    range-units =  single ,
+    inter-unit-product = \ensuremath{{\cdot{}}} ,
+    number-unit-product = \ ,
+    multi-part-units = single ,
+}
+
+%Appendix, TOC and Bibliography
+\usepackage{appendix}
+\renewcommand\appendixtocname{Appendices}
+\usepackage[nottoc]{tocbibind}
+\setcounter{tocdepth}{2}
+\usepackage{lastpage}
+
+%Figures
+\usepackage[svgnames]{xcolor} % Required to specify font color
+\usepackage{float}
+\usepackage{graphicx}
+    \graphicspath{{C:/Users/rwiuf/Dropbox/LaTeXgraphics}}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage[format=plain,
+    labelfont={bf,it,footnotesize},
+    textfont={it,footnotesize}]{caption}
+% \captionsetup[table]{name=Huskeord}
+\captionsetup{font={stretch=0.9}}
+\usepackage{wrapfig}
+\usepackage[a4paper, centering, rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=3.5cm]{geometry}
+\usepackage{etoolbox}
+\usepackage{verbatim}
+\usepackage[space]{grffile}
+\usepackage[final]{pdfpages}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{fontawesome}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\F}{\mathtt{F}}
+\newcommand{\T}{\mathtt{T}}
+
+\newcommand{\lorf}{\ensuremath{\lor\F}}
+\newcommand{\lort}{\ensuremath{\lor\T}}
+\newcommand{\landf}{\ensuremath{\land\F}}
+\newcommand{\landt}{\ensuremath{\land\T}}
+\newcommand{\tof}{\ensuremath{\to\!\F}}
+\newcommand{\tot}{\ensuremath{\to\!\T}}
+\newcommand{\lrf}{\ensuremath{\leftrightarrow\!\F}}
+\newcommand{\lrt}{\ensuremath{\leftrightarrow\!\T}}
+\newcommand{\negf}{\ensuremath{\neg\F}}
+\newcommand{\negt}{\ensuremath{\neg\T}}
+\newcommand{\allf}{\ensuremath{\forall\F}}
+\newcommand{\allt}{\ensuremath{\forall\T}}
+\newcommand{\exf}{\ensuremath{\exists\F}}
+\newcommand{\ext}{\ensuremath{\exists\T}}
+
+\newcommand{\first}[2]{\node (root) {\textcolor{red}{\scriptsize 1} \(#1\) : \texttt{#2}};}
+\newcommand{\formula}[4]{\node (#1) [#2] {\textcolor{red}{\scriptsize #1} \(#3\) : \texttt{#4}};}
+\newcommand{\branch}[2]{\path (#1) edge[-] (#2);}
+\newcommand{\rbranch}[4]{\path (#3) edge[-] node [midway, right, blue] {\(#1\) på \(#2\)} (#4);}
+\newcommand{\closed}[2]{\node (#1) [below = .1em of #2] {\(\times\)};}
+\newcommand{\open}[2]{\node (#1) [below = .1em of #2] {\(\bigcirc\)};}
+\newenvironment{tableau}{\begin{tikzpicture}[node distance = .5pt]}{\end{tikzpicture}}
+
+%Header footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\titl \lb \courseno\ \course}
+\chead{\includegraphics[width=.05\textwidth]{DTU}}
+\rhead{\auth \lb \SID}
+\cfoot{Side \thepage\, af \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{36.75034pt}
+
+%Text tools
+\usepackage{listings}
+\usepackage{parcolumns}
+\usepackage[super]{nth}
+\usepackage[normalem]{ulem}
+\usepackage{import}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+\hypersetup{
+    colorlinks   = true, %Colours links instead of ugly boxes
+    urlcolor     = blue, %Colour for external hyperlinks
+    linkcolor    = blue, %Colour of internal links
+    citecolor   = red %Colour of citations
+}
+\usepackage[capitalise]{cleveref}
+% \crefname{table}{Huskeord}{Huskeord}
+\usepackage{enumitem}
+\newlist{arrowlist}{itemize}{1}
+\setlist[arrowlist]{label={\(\rightarrow\)}}
+\usepackage{booktabs}
+\usepackage{todonotes}
+\usepackage{silence}
+\usepackage[square, longnamesfirst, numbers]{natbib}
+\usepackage{empheq}
+\usepackage{minted}
+\setminted{fontsize=\small,
+           linenos=true}
+\usemintedstyle{tango}
+\renewcommand{\listoflistingscaption}{Listings}
+\newcommand{\im}[3]{\inputminted[linenos=true, python3=true, firstline=#2, lastline=#3]{python}{#1}}
+\newcommand{\java}[3]{\inputminted[linenos=true, firstline=#2, lastline=#3]{java}{#1}}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems}
+\usepackage{pseudo}
+\usepackage{tabularx}
+\usepackage{tabto}
+\TabPositions{1.5cm}
+\pseudodefinestyle{fullwidth}{
+    begin-tabular =
+    \tabularx{\linewidth}[t]{@{}
+        r
+        >{\pseudosetup}
+        X
+        >{\leavevmode\small\color{blue}}
+        p{0.5\linewidth}
+        @{}},
+    end-tabular =\endtabularx,
+    setup-append = \RestorePseudoEq
+}
+\pseudoset{
+    label=\small\arabic*,
+    hd-space,
+    ct-left = \hfill\texttt{*/},
+    ct-right = \texttt{*/},
+    ctfont = \texttt,
+    fullwidth,
+}
+\newtcbtheorem[number within = section, crefname = {Algoritme}{algoritmer}]{algorithm}{Algoritme}{pseudo/tworuled, float}{alg}
+
+%Definitions and new commands
+\newcommand{\degr}{^{\circ}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\mathinhead[2]{\texorpdfstring{\(\boldsymbol{#1}\)}{#2}}
+
+%Title and sectioning
+\def\Vhrulefill{\leavevmode\leaders\hrule height 0.7ex depth \dimexpr0.4pt-0.7ex\hfill\kern0pt}
+\usepackage{titlesec}
+\definecolor{DTUred}{cmyk}{0, .91, .72, .23}
+\definecolor{FMNgrey}{cmyk}{.73,.43,.53,.38}
+\newcolumntype{a}{>{\columncolor{gray}}c}
+%Use letters insted of numbers in section numbering
+% \renewcommand{\thesection}{\Alph{section}}
+% \renewcommand{\thesubsection}{\Alph{subsection}}
+
+\begin{document}
+
+\titleformat{\section}[block]
+{\normalfont\Large\scshape\filright\color{DTUred}}{\fbox{\thesection}}{1em}{}
+
+\titleformat{\subsection}
+{\titlerule
+    \vspace{.8ex}%
+    \normalfont\scshape\color{FMNgrey}}
+{\thesubsection.}{.5em}{}
+
+\title{\includegraphics[width=.15\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
+\author{af \auth \ \textbf{\SID}}
+\date{\today}
+\maketitle
+
+\pagenumbering{arabic}
+
+\thispagestyle{empty}
+
+\section{Overskrift}
+
+%Bibliography herunder:
+%\newpage
+
+%\bibliographystyle{unsrtnat}
+%\bibliography{Bibliography}
+
+%\newpage
+
+%\listoffigures
+% \newpage
+% \renewcommand{\listtablename}{Liste over huskeord}
+% \listoftables
+%\newpage
+
+%Appendicer herunder:
+
+%\input{Appendix.tex}
+
+\end{document}
