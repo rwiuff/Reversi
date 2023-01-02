@@ -59,7 +59,8 @@
 \usepackage{dcolumn}
 \usepackage{fontawesome}
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usepackage{flowchart}
+\usetikzlibrary{positioning, arrows}
 \newcommand{\ttt}[1]{\texttt{#1}}
 \newcommand{\F}{\mathtt{F}}
 \newcommand{\T}{\mathtt{T}}
@@ -187,7 +188,7 @@
     \normalfont\scshape\color{FMNgrey}}
 {\thesubsection.}{.5em}{}
 
-\title{\vspace{-3cm}\includegraphics[width=.10\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
+\title{\vspace{-4cm}\includegraphics[width=.10\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
 \author{af \textbf{s224819} \ Aslan Dalhoff Behbahani, \ \textbf{s224739} \ Yahya Alwan,\\\textbf{s224786} \ Abinav Reddy Aleti \ og \ \textbf{s163977} \ Rasmus Wiuff \\ \textbf{Gruppe 16}}
 \date{4. januar 2023}
 \maketitle
@@ -197,13 +198,8 @@
 \thispagestyle{empty}
 
 \section{Problemanalyse}
-Projektet tager udgangspunkt i Model-View-Controller. Modelen deles op i to:
-\begin{enumerate}
-    \item Brættet og brikker
-    \item Regelsættet
-\end{enumerate}
-Brættet og brikkerne skal være indeholdt i et objekt med metoder der gør det muligt at placere og vende brikker. Vi benytter et heltals-array med tre stadier: 0 for et tomt felt, 1 for hvid brik og 2 for sort brik. En række metoder vil blive implementerede til at placere og vende brikker og kontrollere om et træk er lovligt.\newline
-I forhold til regelsættet, vil et træks lovlighed kunne afgøres af klassen med bræt objektet. De resterende regler bruger logikken beskrevet i \cref{tbl:logic}:
+Projektet tager udgangspunkt i Model-View-Controller. Modelen deles udgør en klasse med en konstruktør for brættet og intern logik for placering og vending af brikker.
+Vi benytter et heltals-array med tre stadier: 0 for et tomt felt, 1 for hvid brik og 2 for sort brik. En række metoder vil blive implementerede til at placere og vende brikker og kontrollere om et træk er lovligt. Reglerne afvikles også af \emph{bræt og brik} klassen. Reglerne og umiddelbare løsninger er beskrevet i \cref{tbl:logic}:
 \begin{table}[H]
     \centering
     \caption{Regelsættets logiske implementering}\label{tbl:logic}
@@ -214,28 +210,44 @@ I forhold til regelsættet, vil et træks lovlighed kunne afgøres af klassen me
         Startende spiller  & Spillere tildeles navne som tilfældigt tildeles farver. Hvid starter hver gang.         \\
         Startkonfiguration & Hvid farve får lov til at sætte to brikker. Sort placeres i de resterende midterfelter. \\
         Turbaseret spil    & Klasse med metoder der afgør om man skal melde pas,                                     \\
-                           & om et træk skal gøres om jf. brætklassen samt om spillet er slut.                       \\
-        Afsluttet spil     & Metodekald til brætklassen tæller vundet TN.                                            \\
+                           & om et træk skal gøres om samt om spillet er slut.                                       \\
+        Afsluttet spil     & Metodekald til brætklassen, tæller vundet TN og afgør vinder.                           \\
         Uafgjort           & Spillet initialiseres igen med ny startende spiller.                                    \\
-        Genstart           & Metodekald konstruere bræt objektet igen og nye farver tildeles.                        \\
+        Genstart           & Metodekald konstruere bræt-objektet igen og nye farver tildeles.                        \\
         \bottomrule
     \end{tabular}
 \end{table}
 Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvindue der guider spillerne (hvis tur, skal der meldes pas, etc.), en pas knap og en genstart knap.
 \section{Skitse over problemet}
+I \cref{fig:logik} ses et flowchart der beskriver den interne logik, ud fra et spils gennemførsel. Diamandform viser brugervalg.
+\begin{figure}[h]
+    \centering
+    \caption{Flowchart over programmets forløb}\label{fig:logik}
+    \begin{tikzpicture}[font={\sf \small}]
+        \node (start) at (0,0) [draw, terminal] {START};
+        \node (construct) [right = .5 of start, draw, process] {Konstruer bræt};
+        \node (view) [right = .5 of construct, draw, process] {Vis GUI};
+        \node (colour) [right = .5 of view, draw, process] {Tildel farve};
+        \node (initplace) [below right = .5 of colour, draw, decision] {Hvid: 2 brikker};
+        \node (initplace2) [below left = .5 of initplace, draw, process] {Sort: 2 brikker};
+        \node (logik1) [right = .5 of initplace, draw, process] {Ulovligt træk};
+        % \node (pas) [left = .5 of logik1, draw, process] {}
+    \end{tikzpicture}
+\end{figure}
 \section{Tilvalg af avancerede tilføjelser}
-\cref{tbl:avanceret} viser mulige tilføjelser til den avancerede version.
+\cref{tbl:avanceret} viser mulige tilføjelser til den avancerede version i prioriteret rækkefølge.
 \begin{table}[H]
     \centering
     \caption{Mulige avancerede tilvalg}\label{tbl:avanceret}
     \begin{tabular}{lllll}
         \toprule
-        Brikker vendes automatisk & Visning af mulige træk & Visning af tid & High-score     & Gemme/Hente spil \\
-        Visuelle effekter og lyd  & Speed-Reversi          & Fullscreen     & Valg af farver & Spillernavne     \\
+        1: Brikker vendes automatisk & 3: Visning af mulige træk & 5: Spillernavne & 7: Gemme/Hente spil & 9: Visning af tid \\
+        2: Visuelle effekter og lyd  & 4: Fullscreen             & 6: High-score   & 8: Valg af farver   & 10: Speed-Reversi \\
         \bottomrule
     \end{tabular}
 \end{table}
 \section{Delopgaver \& Tidsplan}
+\cref{fig:gantt} viser den indledningsvise plan.
 \begin{figure}[H]
     \centering
     \caption{Ganttdiagram over projektet}\label{fig:gantt}
