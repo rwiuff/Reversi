@@ -207,18 +207,18 @@ I forhold til regelsættet, vil et træks lovlighed kunne afgøres af klassen me
 \begin{table}[H]
     \centering
     \caption{Regelsættets logiske implementering}\label{tbl:logic}
-        \begin{tabular}{ll}
+    \begin{tabular}{ll}
         \toprule
-        Problem & Løsning \\
+        Problem            & Løsning                                                                                 \\
         \midrule
-        Startende spiller & Spillere tildeles navne som tilfældigt tildeles farver. Hvid starter hver gang. \\
+        Startende spiller  & Spillere tildeles navne som tilfældigt tildeles farver. Hvid starter hver gang.         \\
         Startkonfiguration & Hvid farve får lov til at sætte to brikker. Sort placeres i de resterende midterfelter. \\
-        Turbaseret spil & Klasse med metoder der afgør om man skal melde pas, \\
-         & om et træk skal gøres om jf. brætklassen samt om spillet er slut. \\
-        Afsluttet spil & Metodekald til brætklassen tæller vundet TN. \\
-        Uafgjort & Spillet initialiseres igen med ny startende spiller. \\
-        Genstart & Metodekald konstruere bræt objektet igen og nye farver tildeles. \\
-         \bottomrule
+        Turbaseret spil    & Klasse med metoder der afgør om man skal melde pas,                                     \\
+                           & om et træk skal gøres om jf. brætklassen samt om spillet er slut.                       \\
+        Afsluttet spil     & Metodekald til brætklassen tæller vundet TN.                                            \\
+        Uafgjort           & Spillet initialiseres igen med ny startende spiller.                                    \\
+        Genstart           & Metodekald konstruere bræt objektet igen og nye farver tildeles.                        \\
+        \bottomrule
     \end{tabular}
 \end{table}
 Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvindue der guider spillerne (hvis tur, skal der meldes pas, etc.), en pas knap og en genstart knap.
@@ -229,10 +229,10 @@ Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvind
     \centering
     \caption{Mulige avancerede tilvalg}\label{tbl:avanceret}
     \begin{tabular}{lllll}
-    \toprule
-       Brikker vendes automatisk  & Visning af mulige træk & Visning af tid & High-score & Gemme/Hente spil\\
-       Visuelle effekter og lyd & Speed-Reversi & Fullscreen & Valg af farver & Spillernavne \\
-    \bottomrule
+        \toprule
+        Brikker vendes automatisk & Visning af mulige træk & Visning af tid & High-score     & Gemme/Hente spil \\
+        Visuelle effekter og lyd  & Speed-Reversi          & Fullscreen     & Valg af farver & Spillernavne     \\
+        \bottomrule
     \end{tabular}
 \end{table}
 \section{Delopgaver \& Tidsplan}
@@ -240,10 +240,10 @@ Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvind
     \centering
     \caption{Ganttdiagram over projektet}\label{fig:gantt}
     \begin{ganttchart}[
-hgrid,
-vgrid,
-time slot format = isodate]{2023-01-04}{2023-01-20}
-\gantttitlecalendar{month=shortname, day} \\
-\end{ganttchart}
+            hgrid,
+            vgrid,
+            time slot format = isodate]{2023-01-04}{2023-01-20}
+        \gantttitlecalendar{month=shortname, day} \\
+    \end{ganttchart}
 \end{figure}
 \end{document}
