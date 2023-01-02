@@ -1,5 +1,5 @@
 %Author(s), Course variables
-\newcommand{\titl}{Projektbeskrivelse}
+\newcommand{\titl}{Projektplan}
 \newcommand{\courseno}{02121}
 \newcommand{\course}{Indtroduktion til Softwareteknologi}
 \newcommand{\lb}{\\}
@@ -187,7 +187,7 @@
     \normalfont\scshape\color{FMNgrey}}
 {\thesubsection.}{.5em}{}
 
-\title{\includegraphics[width=.15\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
+\title{\vspace{-3cm}\includegraphics[width=.10\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
 \author{af \textbf{s224819} \ Aslan Dalhoff Behbahani, \ \textbf{s224739} \ Yahya Alwan,\\\textbf{s224786} \ Abinav Reddy Aleti \ og \ \textbf{s163977} \ Rasmus Wiuff \\ \textbf{Gruppe 16}}
 \date{4. januar 2023}
 \maketitle
@@ -197,7 +197,7 @@
 \thispagestyle{empty}
 
 \section{Problemanalyse}
-Modelen deles op i to:
+Projektet tager udgangspunkt i Model-View-Controller. Modelen deles op i to:
 \begin{enumerate}
     \item Brættet og brikker
     \item Regelsættet
@@ -240,10 +240,26 @@ Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvind
     \centering
     \caption{Ganttdiagram over projektet}\label{fig:gantt}
     \begin{ganttchart}[
+            expand chart = \textwidth,
             hgrid,
             vgrid,
-            time slot format = isodate]{2023-01-04}{2023-01-20}
+            time slot format = isodate,
+            % inline,
+            % milestone inline label node/.append style={left=5mm},
+            % milestone/.append style={xscale=.5},
+            ]{2023-01-04}{2023-01-20}
         \gantttitlecalendar{month=shortname, day} \\
+        \ganttgroup{BasicReversi}{2023-01-04}{2023-01-11} \\
+        \ganttbar{Logisk model}{2023-01-04}{2023-01-06} \\
+        \ganttbar{GUI implementering}{2023-01-04}{2023-01-10} \\
+        \ganttbar{Test af BasicReversi}{2023-01-11}{2023-01-11}\\
+        \ganttmilestone{BasicReversi færdig}{2023-01-11}\\
+        \ganttgroup{AdvancedReversi}{2023-01-11}{2023-01-16}\\
+        \ganttbar{Test af AdvancedReversi}{2023-01-17}{2023-01-18}\\
+        \ganttmilestone{AdvancedReversi færdig}{2023-01-18}\\
+        \ganttgroup{Rapportskriving}{2023-01-04}{2023-01-20}\\
+        \ganttbar{Rapportafslutning}{2023-01-19}{2023-01-20}\\
+        \ganttmilestone{Aflevering}{2023-01-20}
     \end{ganttchart}
 \end{figure}
 \end{document}
