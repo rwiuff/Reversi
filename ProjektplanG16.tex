@@ -32,7 +32,7 @@
 
 %Appendix, TOC and Bibliography
 \usepackage{appendix}
-\renewcommand\appendixtocname{Appendices}
+\renewcommand\appendixtocname{Bilag}
 \usepackage[nottoc]{tocbibind}
 \setcounter{tocdepth}{2}
 \usepackage{lastpage}
@@ -198,59 +198,56 @@
 \thispagestyle{empty}
 
 \section{Problemanalyse}
-Projektet tager udgangspunkt i Model-View-Controller. Modelen deles udgør en klasse med en konstruktør for brættet og intern logik for placering og vending af brikker.
-Vi benytter et heltals-array med tre stadier: 0 for et tomt felt, 1 for hvid brik og 2 for sort brik. En række metoder vil blive implementerede til at placere og vende brikker og kontrollere om et træk er lovligt. Reglerne afvikles også af \emph{bræt og brik} klassen. Reglerne og umiddelbare løsninger er beskrevet i \cref{tbl:logic}:
+Projektet deles i to problemstillinger: \emph{1}: Repræsentation af spillet i en GUI, og \emph{2}: Logik som følger reglerne i spillet. Vi benytter os af Model-View-Controller. Hvor Logikken varetages af Model og View.
+\subsection{Model}
+En klasse som indeholder et \emph{bræt}-objekt med tilhørende logik for kontrol af spil-tilstande og lovlighed af brikkers placering/vending. Brættet er et heltals array med tilstande for tom, hvid og sort.
+Til brættet findes metoder som kan placere, vende og kontrollere for lovlighed af placering, optælling af vundet terræn, etc.
+\subsection{View}
+View varetages af en klasse som konstruere GUI'en og opdateres af Controller klassen. Lytter efter events fra museklik og viser beskeder som guider spillerne.
+\subsection{Controller}
+Controller varetages af en klasse der holder styr på metodekald til brætspilklassen ud fra brugerinput og progression i spillet.
+\subsection{Reversi regler}
+Regler realiseres jf. \cref{tbl:logik}.
 \begin{table}[H]
     \centering
-    \caption{Regelsættets logiske implementering}\label{tbl:logic}
+    \caption{Reglerne for Reversi og deres implementering.}\label{tbl:logik}
     \begin{tabular}{ll}
         \toprule
-        Problem            & Løsning                                                                                 \\
+        Problem             & Løsning                                                                  \\
         \midrule
-        Startende spiller  & Spillere tildeles navne som tilfældigt tildeles farver. Hvid starter hver gang.         \\
-        Startkonfiguration & Hvid farve får lov til at sætte to brikker. Sort placeres i de resterende midterfelter. \\
-        Turbaseret spil    & Klasse med metoder der afgør om man skal melde pas,                                     \\
-                           & om et træk skal gøres om samt om spillet er slut.                                       \\
-        Afsluttet spil     & Metodekald til brætklassen, tæller vundet TN og afgør vinder.                           \\
-        Uafgjort           & Spillet initialiseres igen med ny startende spiller.                                    \\
-        Genstart           & Metodekald konstruere bræt-objektet igen og nye farver tildeles.                        \\
+        Startende spiller   & Controller tildeler en tilfældig farve til spiller 1 og 2.               \\
+        Startkonfiguration  & Hvid starter med 2 brikker. Sort udfylder de resterende felter i midten. \\
+        Placering af brik   & Metodekald til bræt-klassen afgør lovlighed.                             \\
+                            & Besked til brugeren om evt. at prøve igen.                               \\
+        Vending af brikker  & Metodekald til bræt-klassen afgør lovlighed.                             \\
+                            & Besked til brugeren om evt. at prøve igen.                               \\
+        Spillets afslutning & Hvis brættet er fyldt eller begge melder pas.                            \\
+        Vinder              & Ved afslutning optælles vundet terræn.                                   \\
+                            & Ved uafgjort genstartes spillet med ny startspiller.                     \\
+        Genstart af spillet & Initialisere spillet med samme spillerfarver (ikke ligesom uafgjort).    \\
         \bottomrule
     \end{tabular}
 \end{table}
-Brugerfladen vil være et vindue indeholdende brættet med brikker, et tekstvindue der guider spillerne (hvis tur, skal der meldes pas, etc.), en pas knap og en genstart knap.
-\section{Skitse over problemet}
-I \cref{fig:logik} ses et flowchart der beskriver den interne logik, ud fra et spils gennemførsel. Diamandform viser brugervalg.
-\begin{figure}[h]
-    \centering
-    \caption{Flowchart over programmets forløb}\label{fig:logik}
-    \begin{tikzpicture}[font={\sf \small}]
-        \node (start) at (0,0) [draw, terminal] {START};
-        \node (construct) [right = .5 of start, draw, process] {Konstruer bræt};
-        \node (view) [right = .5 of construct, draw, process] {Vis GUI};
-        \node (colour) [right = .5 of view, draw, process] {Tildel farve};
-        \node (initplace) [below right = .5 of colour, draw, decision] {Hvid: 2 brikker};
-        \node (initplace2) [below left = .5 of initplace, draw, process] {Sort: 2 brikker};
-        \node (logik1) [right = .5 of initplace, draw, process] {Ulovligt træk};
-        % \node (pas) [left = .5 of logik1, draw, process] {}
-    \end{tikzpicture}
-\end{figure}
 \section{Tilvalg af avancerede tilføjelser}
 \cref{tbl:avanceret} viser mulige tilføjelser til den avancerede version i prioriteret rækkefølge.
 \begin{table}[H]
     \centering
     \caption{Mulige avancerede tilvalg}\label{tbl:avanceret}
-    \begin{tabular}{lllll}
+    \begin{tabular}{llll}
         \toprule
-        1: Brikker vendes automatisk & 3: Visning af mulige træk & 5: Spillernavne & 7: Gemme/Hente spil & 9: Visning af tid \\
-        2: Visuelle effekter og lyd  & 4: Fullscreen             & 6: High-score   & 8: Valg af farver   & 10: Speed-Reversi \\
+        \emph{1:} Ikon                      & \emph{4:} Spillernavne           & \emph{7:} Visning af tid    & \emph{10:} Lyd              \\
+        \emph{2:} Brikker vender automatisk & \emph{5:} Visning af mulige træk & \emph{8:} Speed-reversi     & \emph{11:} Highscore       \\
+        \emph{3:} Fullscreen                & \emph{6:} Valg af farver         & \emph{9:} Visuelle effekter & \emph{12:} Gemme/hente spil \\
         \bottomrule
     \end{tabular}
 \end{table}
-\section{Delopgaver \& Tidsplan}
+\section{Ansvar, kvalitetskontrol \& Tidsplan}
+Vi laver løbende arbejdsfordelinger og laver daglig status. Efter \textbf{BasicReversi} og \textbf{AdvancedReversi} er der indlagt tid til uddybende kvalitetskontrol. Til udviklingen af \textbf{BasicReversi} vil de logiske komponenter udvikles sideløbende med GUI, indtil fokus bliver overført til GUI. Delopgaver under hele forløbet inkludere: test, Gradle behandling og rapportskrivning. Under implementering af \textbf{AdvancedReversi} kan forskellige branches af projektet fokusere på forskellige tilføjelser.
+\subsection{Tidsplan}
 \cref{fig:gantt} viser den indledningsvise plan.
 \begin{figure}[H]
     \centering
-    \caption{Ganttdiagram over projektet}\label{fig:gantt}
+    \caption{Gantt diagram over projektet}\label{fig:gantt}
     \begin{ganttchart}[
             expand chart = \textwidth,
             hgrid,
@@ -269,7 +266,7 @@ I \cref{fig:logik} ses et flowchart der beskriver den interne logik, ud fra et s
         \ganttgroup{AdvancedReversi}{2023-01-11}{2023-01-16} \\
         \ganttbar{Test af AdvancedReversi}{2023-01-17}{2023-01-18} \\
         \ganttmilestone{AdvancedReversi færdig}{2023-01-18} \\
-        \ganttgroup{Rapportskriving}{2023-01-04}{2023-01-20} \\
+        \ganttgroup{Rapportskrivning}{2023-01-04}{2023-01-20} \\
         \ganttbar{Rapportafslutning}{2023-01-19}{2023-01-20} \\
         \ganttmilestone{Aflevering}{2023-01-20}
     \end{ganttchart}
