@@ -10,7 +10,7 @@ public class Board {
     public int[][] getBoard() {
         return board;
     }
-inuiubnnu
+    
     public String flip(int i, int j, int colour){
         String message = "Godt arbejde!";
         if(board[i][j] == 0) message = "Du skal vende brikker";
