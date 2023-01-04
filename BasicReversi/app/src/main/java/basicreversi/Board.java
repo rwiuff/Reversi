@@ -6,8 +6,10 @@ public class Board {
     public Board(){
         board = new int[8][8];
     }
-   
-   public static boolean positionOK
+
+    public int[][] getBoard() {
+        return board;
+    }
 
     public String flip(int i, int j, int colour){
         String message = "Godt arbejde!";
