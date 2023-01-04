@@ -32,7 +32,7 @@ javafx {
 
 application {
     // Define the main class for the application.
-    mainClass = 'basicreversi.App'
+    mainClass = 'basicreversi.Main'
 }
 
 tasks.named('test') {
@@ -40,7 +40,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-mainClassName = 'basicreversi.App'
+mainClassName = 'basicreversi.Main'
 jar {
     manifest {
         attributes 'Main-Class': 'basicreversi.launcher'
