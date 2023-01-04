@@ -8,6 +8,8 @@ public class BoardDriver {
     public static void main(String[] args) {
         Board b = new Board();
         printBoard(b.getBoard());
+        b.flip(4, 4, 1);
+        printBoard(b.getBoard());
     }
 
     private static void printBoard(int[][] b) {
