@@ -8,22 +8,22 @@
  *  legality of moves.              *
  *                                  *
  *                                  *
- * Return codes for controller:     *
- * 11: Tile placed                  *
- * 12: Field occupied               *
- * 13: Illegal placement            *
+ *   Return codes for controller:   *
+ *   11: Tile placed                *
+ *   12: Field occupied             *
+ *   13: Illegal placement          *
  *                                  *
- * 21: Tile flipped                 *
- * 22: Trying to flip own tile      *
- * 23: No tile on field             *
+ *   21: Tile flipped               *
+ *   22: Trying to flip own tile    *
+ *   23: No tile on field           *
  *                                  *
- * 31: End of turn                  *
- * 32: You have to forfeit turn     *
- * 33: Tiles left to flip           *
+ *   31: End of turn                *
+ *   32: You have to forfeit turn   *
+ *   33: Tiles left to flip         *
  *                                  *
- * 41: White wins                   *
- * 42: Black wins                   *
- * 43: Draw                         *
+ *   41: White wins                 *
+ *   42: Black wins                 *
+ *   43: Draw                       *
  *                                  *
  * -------------------------------- */
 package basicreversi;
