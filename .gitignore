@@ -318,5 +318,6 @@ ltex.dictionary.da-DK.txt
 .project
 
 *.DS_Store
+*.eclipse.jdt.core.prefs
 
 # End of https://www.toptal.com/developers/gitignore/api/latex
