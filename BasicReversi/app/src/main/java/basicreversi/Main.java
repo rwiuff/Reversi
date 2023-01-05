@@ -18,7 +18,6 @@ public class Main extends Application {
 			Image icon = new Image("Screenshot 2023-01-03 at 17.49.19.png");
 			primaryStage.getIcons().add(icon);
 			primaryStage.setTitle("Reversi");
-			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
