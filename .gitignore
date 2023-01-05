@@ -314,7 +314,6 @@ ltex.dictionary.da-DK.txt
 *.vscode
 
 # Eclipse
-.classpath
 .project
 
 *.DS_Store
