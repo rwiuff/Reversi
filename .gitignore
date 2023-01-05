@@ -313,4 +313,8 @@ TSWLatexianTemp*
 ltex.dictionary.da-DK.txt
 *.vscode
 
+# Eclipse
+.classpath
+.project
+
 # End of https://www.toptal.com/developers/gitignore/api/latex
