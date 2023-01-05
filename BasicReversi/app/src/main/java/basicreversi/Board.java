@@ -39,6 +39,17 @@ public class Board {
         return board; // Returns board array
     }
 
+    public boolean placePoint(int row, int column, int value) {
+        // Check if the position is already occupied
+        if (board.get(row).get(column) != null) {
+          return false;
+        }
+    
+        // Place the point
+        board.get(row).set(column, value);
+        return true;
+
+
     public int flip(int row, int column, int colour) {
         int code; // Return code declared
         if (board[row][column] == 0) { // If board element is 'empty'
