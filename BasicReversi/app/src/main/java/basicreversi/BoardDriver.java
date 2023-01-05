@@ -1,7 +1,6 @@
 package basicreversi;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
 public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
