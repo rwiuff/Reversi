@@ -1,7 +1,6 @@
 package basicreversi;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

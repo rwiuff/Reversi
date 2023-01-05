@@ -1,6 +1,7 @@
 package basicreversi;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
@@ -8,8 +9,9 @@ public class BoardDriver {
     public static void main(String[] args) {
         Board b = new Board();
         printBoard(b.getBoard());
-        b.flip(4, 4, 1);
+        b.flip(4, 4, 'w');
         printBoard(b.getBoard());
+        System.out.println("Player 1: " + b.getPlayers().get("Player 1"));
     }
 
     private static void printBoard(int[][] b) {
