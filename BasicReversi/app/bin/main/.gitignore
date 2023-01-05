@@ -3,4 +3,13 @@
 
 # Ignore Gradle build output directory
 build
+/.classpath
+/.gitattributes
+/.gitignore
+/.settings/
+/basicreversi/
+/gradle/
+/gradlew
+/gradlew.bat
+/settings.gradle
 /app/
