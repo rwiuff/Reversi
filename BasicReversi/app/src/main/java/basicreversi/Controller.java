@@ -1,4 +1,4 @@
-package application;
+package basicreversi;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
