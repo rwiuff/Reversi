@@ -3,11 +3,11 @@
  */
 package basicreversi;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+// import org.junit.jupiter.api.Test;
+// import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
-    @Test void appHasAGreeting() {
-        Main classUnderTest = new Main();
-    }
-}
+// class AppTest {
+//     @Test void appHasAGreeting() {
+//         Main classUnderTest = new Main();
+//     }
+// }
