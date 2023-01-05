@@ -12,10 +12,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 			Scene scene = new Scene(root);
 			
-			Image icon = new Image("Screenshot 2023-01-03 at 17.49.19.png");
+			Image icon = new Image(getClass().getResourceAsStream("icon.png"));
 			primaryStage.getIcons().add(icon);
 			primaryStage.setTitle("Reversi");
 			primaryStage.setScene(scene);

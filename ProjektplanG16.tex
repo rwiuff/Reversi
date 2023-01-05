@@ -200,12 +200,12 @@
 \section{Problemanalyse}
 Projektet deles i to problemstillinger: \emph{1}: Repræsentation af spillet i en GUI, og \emph{2}: Logik som følger reglerne i spillet. Vi benytter os af Model-View-Controller. Hvor Logikken varetages af Model og View.
 \subsection{Model}
-En klasse som indeholder et \emph{bræt}-objekt med tilhørende logik for kontrol af spil-tilstande og lovlighed af brikkers placering/vending. Brættet er et heltals array med tilstande for tom, hvid og sort.
+En klasse som indeholder et \emph{Board}-objekt med tilhørende logik for kontrol af spil-tilstande og lovlighed af brikkers placering/vending. Brættet er et heltals array med tilstande for tom, hvid og sort.
 Til brættet findes metoder som kan placere, vende og kontrollere for lovlighed af placering, optælling af vundet terræn, etc.
 \subsection{View}
 View varetages af en klasse som konstruere GUI'en og opdateres af Controller klassen. Lytter efter events fra museklik og viser beskeder som guider spillerne.
 \subsection{Controller}
-Controller varetages af en klasse der holder styr på metodekald til brætspilklassen ud fra brugerinput og progression i spillet.
+Controller varetages af en klasse der holder styr på metodekald til brætspilklassen ud fra events og progression i spillet.
 \subsection{Reversi regler}
 Regler realiseres jf. \cref{tbl:logik}.
 \begin{table}[H]

@@ -317,4 +317,6 @@ ltex.dictionary.da-DK.txt
 .classpath
 .project
 
+*.DS_Store
+
 # End of https://www.toptal.com/developers/gitignore/api/latex
