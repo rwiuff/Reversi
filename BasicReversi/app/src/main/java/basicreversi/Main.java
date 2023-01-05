@@ -15,8 +15,11 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 			Scene scene = new Scene(root);
 			
-			Image icon = new Image(getClass().getResourceAsStream("icon.png"));
-			primaryStage.getIcons().add(icon);
+			primaryStage.getIcons().addAll(
+				new Image(getClass().getResourceAsStream("icon16.png")),
+				new Image(getClass().getResourceAsStream("icon32.png")),
+				new Image(getClass().getResourceAsStream("icon64.png"))
+			);
 			primaryStage.setTitle("Reversi");
 			primaryStage.setScene(scene);
 			primaryStage.show();
