@@ -86,6 +86,23 @@ public class Board {
 
     // }
 
+
+    //hasEmptyPositions() iterates through the elements of the board array and checks if any of them have the value 0.
+    //If it finds an empty position, it returns true. 
+    //If it finishes iterating through the board and doesn't find any empty positions, it returns false.
+
+    public boolean hasEmptyPositions() {
+        for (int i = 0; i < 8; i++) {
+          for (int j = 0; j < 8; j++) {
+            if (board[i][j] == 0) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+
     public int flip(int row, int column, char coulour) {
         int colourint = colourConvert(coulour);
 
