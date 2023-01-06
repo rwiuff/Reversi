@@ -112,7 +112,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3418bf" height="75.0" stroke="BLACK" strokeType="INSIDE" width="75.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3418bf" height="75.0" stroke="BLACK" strokeType="INSIDE" width="75.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3418bf" height="75.0" stroke="BLACK" strokeType="INSIDE" width="75.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-            <Circle fx:id="myCircle" fill="WHITE" onMousePressed="#confirmation" onMouseReleased="#confirmation" onTouchPressed="#confirmation" radius="37.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowIndex="4" />
          </children>
          <effect>
             <InnerShadow />
