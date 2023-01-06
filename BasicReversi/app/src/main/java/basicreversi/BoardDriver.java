@@ -15,14 +15,8 @@ public class BoardDriver {
         System.out.println(b.place(4, 3, 2));
         printBoard(b.getBoard());
         b.legality(1);
-        System.out.println(b.hasEmptyPositions());
-        // for(int i = 0; i < 8; i++){
-        //     for(int j = 0; j < 8; j++){
-        //         b.place(i, j, 1);
-        //     }
-        // }
-        // printBoard(b.getBoard());
-        // System.out.println(b.hasEmptyPositions());
+        
+        System.out.println(b.checkWinner());
     }
 
     private static void printBoard(int[][] b) {
@@ -37,4 +31,12 @@ public class BoardDriver {
         }
         System.out.println("#" + "---".repeat(size) + "#");
     }
+
+//if (winner == 1) {
+//System.out.println("White has won the game!");
+//} else if (winner == 2) {
+//System.out.println("Black has won the game!");
+//} else {
+//System.out.println("The game is a tie! 1/2 ");
+
 }

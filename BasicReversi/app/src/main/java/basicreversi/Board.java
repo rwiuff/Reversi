@@ -110,16 +110,16 @@ public class Board {
         int Black = 0;
         int White = 0;
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                int value = board[i][j];
-                if (value == 1) {
-                    Black++;
-                } else if (value == 2) {
-                    White++;
-                }
-            }
-        }
+	    for (int i = 0; i < 8; i++) {
+	      for (int j = 0; j < 8; j++) {
+	        int value = board[i][j];
+	        if (value == 1) {
+	          White++;
+	        } else if (value == 2) {
+	          Black++;
+	        }
+	      }
+	    }
 
         if (Black > White) {
             return 42;
