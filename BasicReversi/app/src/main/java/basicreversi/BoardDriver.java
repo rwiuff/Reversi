@@ -39,10 +39,10 @@ public class BoardDriver {
     }
 
 //if (winner == 1) {
-//System.out.println("Black has won the game!");
-//} else if (winner == 2) {
 //System.out.println("White has won the game!");
+//} else if (winner == 2) {
+//System.out.println("Black has won the game!");
 //} else {
-//System.out.println("The game is a tie!");
+//System.out.println("The game is a tie! 1/2 ");
 
 }
