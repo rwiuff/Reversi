@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -18,14 +19,15 @@ import javafx.stage.Stage;
 public class Controller {
 
 	@FXML
-
 	public TextArea textArea;
 	public Circle circle1 = new Circle();
 	public Circle circle2 = new Circle();
-	public Circle circle = new Circle();
+	Circle myCircle = new Circle();
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	public Pane pane = new Pane();
+	
 
 	public void changeColorToBlack(MouseEvent e) {
 		textArea.appendText("Circle painted blacc\n");
@@ -52,21 +54,15 @@ public class Controller {
 
 	@FXML
 	public void onPaneClicked(MouseEvent event) {
-		// Get the x and y coordinates of the mouse click
-		double x = event.getX();
-		double y = event.getY();
-
 		// Create a new circle with its center at (x, y)
-		circle.setRadius(36);
-		circle.setCenterX(x);
-		circle.setCenterY(y);
+		Circle circle = new Circle(event.getX(),event.getY(),36);
 		circle.setStroke(Color.BLACK);
 		circle.setFill(Color.WHITE);
 
 		// Add the circle to the pane
-		GridPane pane = (GridPane) event.getSource();
+		Pane pane = (Pane) event.getSource();
 		pane.getChildren().add(circle);
-		System.out.println(x);
-		System.out.println(y);
+		System.out.println(circle);
+		System.out.println();
 	}
 }
