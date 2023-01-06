@@ -27,7 +27,10 @@
  * -------------------------------- */
 package basicreversi;
 
+import java.util.ArrayList;
+import java.awt.Point;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Random;
 
 public class Board {
@@ -79,8 +82,8 @@ public class Board {
         // Check if the position is already occupied
         if (board[row][column] != 0) {
             return 12;
-        } else if (legality(row, column, colour) == 13) {
-            return 13;
+            // } else if (legality(row, column, colour) == 13) {
+            // return 13;
         } else {
             board[row][column] = colour;
             return 11;
@@ -94,8 +97,8 @@ public class Board {
     // positions, it returns false.
 
     public boolean hasEmptyPositions() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < boardsize; i++) {
+            for (int j = 0; j < boardsize; j++) {
                 if (board[i][j] == 0) {
                     return true;
                 }
@@ -133,8 +136,26 @@ public class Board {
         return 31;
     }
 
-    public int legality(int row, int column, int colour) {
-        
+    public int legality(int colour) {
+        ArrayList<Point> validMoves = new ArrayList<>();
+        int opponent;
+        boolean test;
+        opponent = (colour == 1) ? 2 : 1;
+        for (int i = 0; i < boardsize; i++) {
+            for (int j = 0; j < boardsize; j++) {
+                if (board[i][j] == 0)
+                    validMoves.add(new Point(i, j));
+            }
+        }
+        ListIterator<Point> moveIterator = validMoves.listIterator();
+        while(moveIterator.hasNext()){
+            if((int) moveIterator.next().getX() == 0){
+                if((int) moveIterator.next().getY() == 0){
+                    
+                }
+            }
+        }
         return 0;
     }
+
 }
