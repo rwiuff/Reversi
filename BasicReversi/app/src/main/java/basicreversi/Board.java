@@ -30,7 +30,6 @@ package basicreversi;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Random;
 
 public class Board {
@@ -48,11 +47,11 @@ public class Board {
     public void setPlayers() {
         Random rand = new Random();
         if (rand.nextInt(0, 2) == 0) {
-            players.put("Player 1", "white");
-            players.put("Player 2", "black");
+            players.put("White", "Player 1");
+            players.put("Black", "Player 2");
         } else {
-            players.put("Player 1", "black");
-            players.put("Player 2", "white");
+            players.put("White", "Player 2");
+            players.put("Black", "Player 1");
         }
     }
 
@@ -108,28 +107,28 @@ public class Board {
     }
 
     public int checkWinner() {
-	    int Black = 0;
-	    int White = 0;
+        int Black = 0;
+        int White = 0;
 
-	    for (int i = 0; i < 8; i++) {
-	      for (int j = 0; j < 8; j++) {
-	        int value = board.get(i).get(j);
-	        if (value == 1) {
-	          Black++;
-	        } else if (value == 2) {
-	          White++;
-	        }
-	      }
-	    }
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int value = board[i][j];
+                if (value == 1) {
+                    Black++;
+                } else if (value == 2) {
+                    White++;
+                }
+            }
+        }
 
-	    if (Black > White) {
-	      return 42;
-	    } else if (White > Black) {
-	      return 41;
-	    } else {
-	      return 43;
-	    }
-	  }
+        if (Black > White) {
+            return 42;
+        } else if (White > Black) {
+            return 41;
+        } else {
+            return 43;
+        }
+    }
 
     public int flip(int row, int column, char coulour) {
         int colourint = colourConvert(coulour);
@@ -139,19 +138,19 @@ public class Board {
     public int legality(int colour) {
         ArrayList<Point> validMoves = new ArrayList<>();
         int opponent;
-        boolean test;
+        int[][] checkboard = new int[10][10];
+        int neighbour = 0;
         opponent = (colour == 1) ? 2 : 1;
+        System.out.println(opponent);
         for (int i = 0; i < boardsize; i++) {
             for (int j = 0; j < boardsize; j++) {
-                if (board[i][j] == 0)
-                    validMoves.add(new Point(i, j));
+                checkboard[i + 1][j + 1] = board[i][j];
             }
         }
-        ListIterator<Point> moveIterator = validMoves.listIterator();
-        while(moveIterator.hasNext()){
-            if((int) moveIterator.next().getX() == 0){
-                if((int) moveIterator.next().getY() == 0){
-                    
+        for (int i = 1; i <= boardsize; i++) {
+            for (int j = 0; j <= boardsize; j++) {
+                if(checkboard[i][j] == 0){
+                    // if(checkboard[i][j])
                 }
             }
         }

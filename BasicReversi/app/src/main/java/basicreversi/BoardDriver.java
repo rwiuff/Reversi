@@ -8,19 +8,21 @@ public class BoardDriver {
     public static void main(String[] args) {
         Board b = new Board();
         printBoard(b.getBoard());
-        System.out.println("Player 1: " + b.getPlayers().get("Player 1"));
+        System.out.println("White: " + b.getPlayers().get("White"));
+        System.out.println(b.place(3, 3, 1));
         System.out.println(b.place(4, 4, 1));
+        System.out.println(b.place(3, 4, 2));
+        System.out.println(b.place(4, 3, 2));
         printBoard(b.getBoard());
-        System.out.println(b.place(4, 4, 1));
-        System.out.println(b.hasEmptyPositions());
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                b.place(i, j, 1);
-            }
-        }
-        printBoard(b.getBoard());
-        System.out.println(b.hasEmptyPositions());
         b.legality(1);
+        System.out.println(b.hasEmptyPositions());
+        // for(int i = 0; i < 8; i++){
+        //     for(int j = 0; j < 8; j++){
+        //         b.place(i, j, 1);
+        //     }
+        // }
+        // printBoard(b.getBoard());
+        // System.out.println(b.hasEmptyPositions());
     }
 
     private static void printBoard(int[][] b) {
