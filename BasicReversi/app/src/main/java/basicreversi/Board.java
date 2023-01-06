@@ -30,6 +30,7 @@ package basicreversi;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Random;
 
 public class Board {
@@ -110,16 +111,16 @@ public class Board {
         int Black = 0;
         int White = 0;
 
-	    for (int i = 0; i < 8; i++) {
-	      for (int j = 0; j < 8; j++) {
-	        int value = board[i][j];
-	        if (value == 1) {
-	          White++;
-	        } else if (value == 2) {
-	          Black++;
-	        }
-	      }
-	    }
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int value = board[i][j];
+                if (value == 1) {
+                    White++;
+                } else if (value == 2) {
+                    Black++;
+                }
+            }
+        }
 
         if (Black > White) {
             return 42;
@@ -148,12 +149,37 @@ public class Board {
             }
         }
         for (int i = 1; i <= boardsize; i++) {
-            for (int j = 0; j <= boardsize; j++) {
-                if(checkboard[i][j] == 0){
-                    // if(checkboard[i][j])
+            for (int j = 1; j <= boardsize; j++) {
+                if (checkboard[i][j] == 0) {
+                    if (checkboard[i - 1][j - 1] == opponent)
+                        neighbour++;
+                    if (checkboard[i][j - 1] == opponent)
+                        neighbour++;
+                    if (checkboard[i + 1][j - 1] == opponent)
+                        neighbour++;
+                    if (checkboard[i - 1][j] == opponent)
+                        neighbour++;
+                    if (checkboard[i + 1][j] == opponent)
+                        neighbour++;
+                    if (checkboard[i - 1][j + 1] == opponent)
+                        neighbour++;
+                    if (checkboard[i][j + 1] == opponent)
+                        neighbour++;
+                    if (checkboard[i + 1][j + 1] == opponent)
+                        neighbour++;
+                    if (neighbour > 0)
+                        validMoves.add(new Point(i, j));
+                    neighbour = 0;
                 }
             }
         }
+        System.out.println(validMoves.size());
+        ListIterator<Point> moveIterator = validMoves.listIterator();
+        
+        while(moveIterator.hasNext()){
+            
+        }
+
         return 0;
     }
 
