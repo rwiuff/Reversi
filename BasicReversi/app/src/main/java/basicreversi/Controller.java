@@ -22,7 +22,7 @@ public class Controller {
 	public TextArea textArea;
 	public Circle circle1 = new Circle();
 	public Circle circle2 = new Circle();
-	Circle myCircle = new Circle();
+	public Circle circle = new Circle();
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -39,9 +39,10 @@ public class Controller {
 		circle2 = circle1;
 	}
 
-	public void Restart(ActionEvent e ) throws IOException {
-
-		root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+	public void Restart(ActionEvent e) throws IOException {
+		
+		textArea.appendText("Game has been restarted\n");
+		root = FXMLLoader.load(getClass().getResource("main.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -56,7 +57,9 @@ public class Controller {
 		double y = event.getY();
 
 		// Create a new circle with its center at (x, y)
-		Circle circle = new Circle(x, y, 36);
+		circle.setRadius(36);
+		circle.setCenterX(x);
+		circle.setCenterY(y);
 		circle.setStroke(Color.BLACK);
 		circle.setFill(Color.WHITE);
 
