@@ -39,7 +39,7 @@ public class Controller {
 		circle2 = circle1;
 	}
 
-	public void Restart(ActionEvent e) throws IOException {
+	public void Restart(ActionEvent e ) throws IOException {
 
 		root = FXMLLoader.load(getClass().getResource("Main.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
