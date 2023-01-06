@@ -1,6 +1,7 @@
 package basicreversi;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -21,49 +23,90 @@ public class Controller {
 
 	@FXML
 	public TextArea textArea;
-	public Circle circle1 = new Circle();
-	public Circle circle2 = new Circle();
-	Circle myCircle = new Circle();
+	
+	@FXML
+	private Button st;
+	
+	@FXML
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private boolean Player1;
 	public Pane pane = new Pane();
 	
+	
 
-	public void changeColorToBlack(MouseEvent e) {
-		textArea.appendText("Circle painted blacc\n");
-		circle1.setFill(Color.BLACK);
-		circle1 = circle2;
-	}
-
-	public void changeColorToWhite(MouseEvent e) {
-		textArea.appendText("Circle painted WHITE\n");
-		circle1.setFill(Color.WHITE);
-		circle2 = circle1;
-	}
-
-	public void Restart(ActionEvent e) throws IOException {
+	
+	@FXML
+	public void Restart()  {
 		
-		textArea.appendText("Game has been restarted\n");
-		root = FXMLLoader.load(getClass().getResource("main.fxml"));
+		st.setOnAction(e -> {
+		
+		try {
+			root = FXMLLoader.load(getClass().getResource("main.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		
+		textArea.appendText("The game has been restarted \n");
+		
+		});
+		
+		
 
 	}
 
 	@FXML
-	public void onPaneClicked(MouseEvent event) {
+		public void onPaneClicked(MouseEvent event) {
+			Random rand = new Random();
+			
+			
+			if (rand.nextInt(2)==0) {
+				Player1 = true;
+				DrawBlackCircle(event);
+				textArea.appendText(" Player 2 turn \n");
+				textArea.appendText("\n");
+			
+			 
+		}
+			else {
+				Player1 = false;
+				DrawWhiteCircle(event);
+				textArea.appendText(" Player 1 turn\n");
+				textArea.appendText("\n");
+				
+			}
+	}
+	
+	public void DrawBlackCircle(MouseEvent event) {
 		// Create a new circle with its center at (x, y)
-		Circle circle = new Circle(event.getX(),event.getY(),36);
-		circle.setStroke(Color.BLACK);
-		circle.setFill(Color.WHITE);
-
-		// Add the circle to the pane
-		Pane pane = (Pane) event.getSource();
-		pane.getChildren().add(circle);
-		System.out.println(circle);
-		System.out.println();
+					Circle circle = new Circle(event.getX(),event.getY(),30);
+					circle.setStroke(Color.BLACK);
+					circle.setFill(Color.BLACK);
+			
+					// Add the circle to the pane
+					Pane pane = (Pane) event.getSource();
+					pane.getChildren().add(circle);
+					
+		
+	}
+	
+	public void DrawWhiteCircle(MouseEvent event) {
+		// Create a new circle with its center at (x, y)
+		
+					Circle circle = new Circle(event.getX(),event.getY(),30);
+					circle.setStroke(Color.BLACK);
+					circle.setFill(Color.WHITE);
+			
+					// Add the circle to the pane
+					Pane pane = (Pane) event.getSource();
+					pane.getChildren().add(circle);
+				
+		
 	}
 }
