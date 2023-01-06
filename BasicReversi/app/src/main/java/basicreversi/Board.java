@@ -113,11 +113,11 @@ public class Board {
 
 	    for (int i = 0; i < 8; i++) {
 	      for (int j = 0; j < 8; j++) {
-	        int value = board.get(i).get(j);
+	        int value = board[i][j];
 	        if (value == 1) {
-	          Black++;
-	        } else if (value == 2) {
 	          White++;
+	        } else if (value == 2) {
+	          Black++;
 	        }
 	      }
 	    }
