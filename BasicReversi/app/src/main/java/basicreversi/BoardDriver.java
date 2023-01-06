@@ -20,6 +20,7 @@ public class BoardDriver {
         }
         printBoard(b.getBoard());
         System.out.println(b.hasEmptyPositions());
+        b.legality(1);
     }
 
     private static void printBoard(int[][] b) {
