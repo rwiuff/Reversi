@@ -5,12 +5,14 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -66,7 +68,7 @@ public class Controller {
 		// Add the circle to the pane
 		GridPane pane = (GridPane) event.getSource();
 		pane.getChildren().add(circle);
-		System.out.println(x);
-		System.out.println(y);
+		System.out.println(circle);
+		System.out.println();
 	}
 }
