@@ -27,10 +27,7 @@
  * -------------------------------- */
 package basicreversi;
 
-import java.util.ArrayList;
-import java.awt.Point;
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Random;
 
 public class Board {
@@ -39,6 +36,7 @@ public class Board {
     int boardsize = 8; // n in n x n dimensional board
     HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
     HashMap<Integer, Integer> codeLog = new HashMap<Integer, Integer>(); // Log of codes for turns
+    HashMap<String, HashMap<String, int[]>> validMoves = new HashMap<>(); //
 
     public Board() { // Constructor for board
         board = new int[boardsize][boardsize]; // Initialises with 0 values
@@ -68,14 +66,8 @@ public class Board {
         return players;
     }
 
-    public int colourConvert(char colour) {
-        int colourint;
-        if (colour == 'a') {
-            colourint = 1;
-        } else {
-            colourint = 2;
-        }
-        return colourint;
+    public HashMap<String, HashMap<String, int[]>> getValidMoves() {
+        return validMoves;
     }
 
     public int place(int row, int column, int colour) {
@@ -132,15 +124,16 @@ public class Board {
     }
 
     public int flip(int row, int column, char coulour) {
-        int colourint = colourConvert(coulour);
+
         return 31;
     }
 
     public int legality(int colour) {
-        ArrayList<Point> validMoves = new ArrayList<>();
+
         int opponent;
-        int[][] checkboard = new int[10][10];
-        int neighbour = 0;
+        int[][] checkboard = new int[boardsize + 2][boardsize + 2];
+        int[] saveflip;
+
         opponent = (colour == 1) ? 2 : 1;
         System.out.println(opponent);
         for (int i = 0; i < boardsize; i++) {
@@ -151,36 +144,223 @@ public class Board {
         for (int i = 1; i <= boardsize; i++) {
             for (int j = 1; j <= boardsize; j++) {
                 if (checkboard[i][j] == 0) {
-                    if (checkboard[i - 1][j - 1] == opponent)
-                        neighbour++;
-                    if (checkboard[i][j - 1] == opponent)
-                        neighbour++;
-                    if (checkboard[i + 1][j - 1] == opponent)
-                        neighbour++;
-                    if (checkboard[i - 1][j] == opponent)
-                        neighbour++;
-                    if (checkboard[i + 1][j] == opponent)
-                        neighbour++;
-                    if (checkboard[i - 1][j + 1] == opponent)
-                        neighbour++;
-                    if (checkboard[i][j + 1] == opponent)
-                        neighbour++;
-                    if (checkboard[i + 1][j + 1] == opponent)
-                        neighbour++;
-                    if (neighbour > 0)
-                        validMoves.add(new Point(i, j));
-                    neighbour = 0;
+                    saveflip = new int[] { boardsize + 2, boardsize + 2 };
+                    if (checkboard[i - 1][j - 1] == opponent) {
+                        int k = i - 1;
+                        int l = j - 1;
+                        while (k > 0 || l > 0) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k--;
+                                l--;
+                            }
+                        }
+                        k = i - 1;
+                        l = j - 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k--;
+                                l--;
+                            }
+                            // HashMap<String, int[]> position = new HashMap<>();
+                            // position.put("Position", new int[] { i, j });
+                            // HashMap<String, HashMap<String, int[]>> container = new HashMap<>();
+                            // container.put("Position", position);
+                            // container.put("Flips", flips);
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i][j - 1] == opponent) {
+                        int k = i;
+                        int l = j - 1;
+                        while (l > 0) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                l--;
+                            }
+                        }
+                        k = i;
+                        l = j - 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (l > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                l--;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i + 1][j - 1] == opponent) {
+                        int k = i + 1;
+                        int l = j - 1;
+                        while (k <= boardsize || l > 0) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k++;
+                                l--;
+                            }
+                        }
+                        k = i + 1;
+                        l = j - 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (j > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k++;
+                                l--;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i - 1][j] == opponent) {
+                        int k = i - 1;
+                        int l = j;
+                        while (k > 0) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k--;
+                            }
+                        }
+                        k = i - 1;
+                        l = j;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k--;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i + 1][j] == opponent) {
+                        int k = i + 1;
+                        int l = j;
+                        while (k <= boardsize) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k++;
+                            }
+                        }
+                        k = i + 1;
+                        l = j;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k++;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i - 1][j + 1] == opponent) {
+                        int k = i - 1;
+                        int l = j + 1;
+                        while (k > 0 || l <= boardsize) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k--;
+                                l++;
+                            }
+                        }
+                        k = i - 1;
+                        l = j + 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k--;
+                                l++;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i][j + 1] == opponent) {
+                        int k = i;
+                        int l = j + 1;
+                        while (l <= boardsize) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                l++;
+                            }
+                        }
+                        k = i;
+                        l = j + 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                l++;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
+                    if (checkboard[i + 1][j + 1] == opponent) {
+                        int k = i + 1;
+                        int l = j + 1;
+                        while (k <= boardsize || l <= boardsize) {
+                            if (checkboard[k][l] == colour) {
+                                saveflip[0] = k;
+                                saveflip[1] = l;
+                                break;
+                            } else {
+                                k++;
+                                l++;
+                            }
+                        }
+                        k = i + 1;
+                        l = j + 1;
+                        if (saveflip[0] < boardsize + 2) {
+                            HashMap<String, int[]> flips = new HashMap<>();
+                            int count = 0;
+                            while (k > saveflip[0]) {
+                                flips.put("" + count, new int[] { k, l });
+                                count++;
+                                k++;
+                                l++;
+                            }
+                            validMoves.put("" + i + "," + j, flips);
+                        }
+                    }
                 }
             }
         }
-        System.out.println(validMoves.size());
-        ListIterator<Point> moveIterator = validMoves.listIterator();
-        
-        while(moveIterator.hasNext()){
-            
-        }
-
         return 0;
     }
-
 }

@@ -1,6 +1,7 @@
 package basicreversi;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
@@ -13,6 +14,8 @@ public class BoardDriver {
         System.out.println(b.place(4, 4, 1));
         System.out.println(b.place(3, 4, 2));
         System.out.println(b.place(4, 3, 2));
+        b.legality(1);
+        HashMap<String, HashMap<String, int[]>> moves = b.getValidMoves();
         printBoard(b.getBoard());
         b.legality(1);
         
