@@ -13,12 +13,11 @@
  *   12: Field occupied             *
  *   13: Illegal placement          *
  *                                  *
- *   21: End of turn                *
- *   22: You have to forfeit turn   *
+ *   21: Legal move on board        *
+ *   22: Forfeit                    *
  *                                  *
- *   31: Game continues             *
- *   32: 2 x forfeits               *
- *   33: Board filled               *
+ *   31: End of game                *
+ *   32: Game continues             *
  *                                  *
  *   41: White wins                 *
  *   42: Black wins                 *
@@ -31,16 +30,36 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Board {
-    int[][] board; // Board field integer array
-    int turnCount; // Counts the turn number
-    int boardsize = 8; // n in n x n dimensional board
-    HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
-    HashMap<Integer, Integer> codeLog = new HashMap<Integer, Integer>(); // Log of codes for turns
-    HashMap<String, HashMap<String, int[]>> validMoves = new HashMap<>(); //
+    private int[][] board; // Board field integer array
+    private int turnCount = 1; // Counts the turn number
+    private int boardsize = 8; // n in n x n dimensional board
+    private int forfeitCounter = 0;
+    private HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
+    private HashMap<int[], HashMap<Integer, int[]>> validMoves; //
 
     public Board() { // Constructor for board
         board = new int[boardsize][boardsize]; // Initialises with 0 values
         setPlayers();
+    }
+
+    public int[][] getBoard() {
+        return board; // Returns board array
+    }
+
+    public int getTurn() {
+        return turnCount;
+    }
+
+    public void turnClock() {
+        turnCount++;
+    }
+
+    public HashMap<String, String> getPlayers() {
+        return players;
+    }
+
+    public HashMap<int[], HashMap<Integer, int[]>> getValidMoves() {
+        return validMoves;
     }
 
     public void setPlayers() {
@@ -54,49 +73,78 @@ public class Board {
         }
     }
 
-    public int[][] getBoard() {
-        return board; // Returns board array
+    public int turnState(int colour) {
+        moveAnalyser(colour);
+        if (validMoves.size() == 0) {
+            forfeitCounter++;
+            return 22;
+        }
+        return 21;
     }
 
-    public int getTurn() {
-        return turnCount;
+    public int gameState() {
+        if (forfeitCounter == 2) {
+            return 31;
+        } else if (Filled()) {
+            return 31;
+        } else {
+            return 32;
+        }
     }
 
-    public HashMap<String, String> getPlayers() {
-        return players;
-    }
-
-    public HashMap<String, HashMap<String, int[]>> getValidMoves() {
-        return validMoves;
+    public int initplace(int row, int column, int colour) {
+        if (board[row][column] != 0)
+            return 12;
+        if (row > 2 && row < 5) {
+            if (column > 2 && column < 5) {
+                if (turnCount == 1) {
+                    board[row][column] = colour;
+                    turnClock();
+                } else if (turnCount == 2) {
+                    board[row][column] = colour;
+                    for (int i = 3; i < 5; i++) {
+                        for (int j = 3; j < 5; j++) {
+                            int opponent = (colour == 1) ? 2 : 1;
+                            if (board[i][j] == 0)
+                                board[i][j] = opponent;
+                        }
+                    }
+                    turnClock();
+                }
+            }
+            return 11;
+        } else {
+            return 13;
+        }
     }
 
     public int place(int row, int column, int colour) {
         // Check if the position is already occupied
+        forfeitCounter = 0;
         if (board[row][column] != 0) {
             return 12;
-            // } else if (legality(row, column, colour) == 13) {
-            // return 13;
         } else {
             board[row][column] = colour;
+            turnCount++;
             return 11;
         }
     }
 
-    // hasEmptyPositions() iterates through the elements of the board array and
+    // Filled() iterates through the elements of the board array and
     // checks if any of them have the value 0.
-    // If it finds an empty position, it returns true.
+    // If it finds an empty position, it returns false.
     // If it finishes iterating through the board and doesn't find any empty
-    // positions, it returns false.
+    // positions, it returns true.
 
-    public boolean hasEmptyPositions() {
+    public boolean Filled() {
         for (int i = 0; i < boardsize; i++) {
             for (int j = 0; j < boardsize; j++) {
                 if (board[i][j] == 0) {
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public int checkWinner() {
@@ -123,239 +171,97 @@ public class Board {
         }
     }
 
-    public int flip(int row, int column, char coulour) {
-
-        return 31;
-    }
-
-    public int legality(int colour) {
-
-        int opponent;
+    public int moveAnalyser(int colour) {
+        validMoves = new HashMap<>(); //
+        HashMap<Integer, int[]> flips;
+        int direction;
+        int[] ownTile;
         int[][] checkboard = new int[boardsize + 2][boardsize + 2];
-        int[] saveflip;
+        int opponent = (colour == 1) ? 2 : 1;
 
-        opponent = (colour == 1) ? 2 : 1;
-        System.out.println(opponent);
         for (int i = 0; i < boardsize; i++) {
             for (int j = 0; j < boardsize; j++) {
                 checkboard[i + 1][j + 1] = board[i][j];
             }
         }
+
+        /*
+         * Direction indices:
+         * Up Left: 1
+         * Left: 2
+         * Down Left: 3
+         * Up: 4
+         * Down: 5
+         * Up Right: 6
+         * Right: 7
+         * Down Right: 8
+         */
+
         for (int i = 1; i <= boardsize; i++) {
             for (int j = 1; j <= boardsize; j++) {
                 if (checkboard[i][j] == 0) {
-                    saveflip = new int[] { boardsize + 2, boardsize + 2 };
                     if (checkboard[i - 1][j - 1] == opponent) {
-                        int k = i - 1;
-                        int l = j - 1;
-                        while (k > 0 || l > 0) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k--;
-                                l--;
-                            }
-                        }
-                        k = i - 1;
-                        l = j - 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k--;
-                                l--;
-                            }
-                            // HashMap<String, int[]> position = new HashMap<>();
-                            // position.put("Position", new int[] { i, j });
-                            // HashMap<String, HashMap<String, int[]>> container = new HashMap<>();
-                            // container.put("Position", position);
-                            // container.put("Flips", flips);
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 1;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i][j - 1] == opponent) {
-                        int k = i;
-                        int l = j - 1;
-                        while (l > 0) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                l--;
-                            }
-                        }
-                        k = i;
-                        l = j - 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (l > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                l--;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 2;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i + 1][j - 1] == opponent) {
-                        int k = i + 1;
-                        int l = j - 1;
-                        while (k <= boardsize || l > 0) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k++;
-                                l--;
-                            }
-                        }
-                        k = i + 1;
-                        l = j - 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (j > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k++;
-                                l--;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 3;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i - 1][j] == opponent) {
-                        int k = i - 1;
-                        int l = j;
-                        while (k > 0) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k--;
-                            }
-                        }
-                        k = i - 1;
-                        l = j;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k--;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 4;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i + 1][j] == opponent) {
-                        int k = i + 1;
-                        int l = j;
-                        while (k <= boardsize) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k++;
-                            }
-                        }
-                        k = i + 1;
-                        l = j;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k++;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 5;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i - 1][j + 1] == opponent) {
-                        int k = i - 1;
-                        int l = j + 1;
-                        while (k > 0 || l <= boardsize) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k--;
-                                l++;
-                            }
-                        }
-                        k = i - 1;
-                        l = j + 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k--;
-                                l++;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 6;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i][j + 1] == opponent) {
-                        int k = i;
-                        int l = j + 1;
-                        while (l <= boardsize) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                l++;
-                            }
-                        }
-                        k = i;
-                        l = j + 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                l++;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 7;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                     if (checkboard[i + 1][j + 1] == opponent) {
-                        int k = i + 1;
-                        int l = j + 1;
-                        while (k <= boardsize || l <= boardsize) {
-                            if (checkboard[k][l] == colour) {
-                                saveflip[0] = k;
-                                saveflip[1] = l;
-                                break;
-                            } else {
-                                k++;
-                                l++;
-                            }
-                        }
-                        k = i + 1;
-                        l = j + 1;
-                        if (saveflip[0] < boardsize + 2) {
-                            HashMap<String, int[]> flips = new HashMap<>();
-                            int count = 0;
-                            while (k > saveflip[0]) {
-                                flips.put("" + count, new int[] { k, l });
-                                count++;
-                                k++;
-                                l++;
-                            }
-                            validMoves.put("" + i + "," + j, flips);
+                        direction = 8;
+                        ownTile = findOwn(checkboard, i, j, direction, colour);
+                        if (ownTile[0] < boardsize + 2) {
+                            flips = saveFlips(ownTile, i, j, direction);
+                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
                         }
                     }
                 }
@@ -363,4 +269,178 @@ public class Board {
         }
         return 0;
     }
+
+    public int[] findOwn(int[][] checkboard, int i, int j, int direction, int colour) {
+        int[] ownTile = new int[] { boardsize + 2, boardsize + 2 };
+        if (direction == 1) {
+            i--;
+            j--;
+            while (i > 0 && j > 0) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i--;
+                    j--;
+                }
+            }
+        } else if (direction == 2) {
+            j--;
+            while (j > 0) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    j--;
+                }
+            }
+        } else if (direction == 3) {
+            i++;
+            j--;
+            while (i < checkboard[0].length && j > 0) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i++;
+                    j--;
+                }
+            }
+        } else if (direction == 4) {
+            i--;
+            while (i > 0) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i--;
+                }
+            }
+        } else if (direction == 5) {
+            i++;
+            while (i < checkboard[0].length) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i++;
+                }
+            }
+        } else if (direction == 6) {
+            i--;
+            j++;
+            while (i > 0 && j < checkboard[0].length) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i--;
+                    j++;
+                }
+            }
+        } else if (direction == 7) {
+            j++;
+            while (j < checkboard[0].length) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    j++;
+                }
+            }
+        } else if (direction == 8) {
+            i++;
+            j++;
+            while (i < checkboard[0].length && j < checkboard[0].length) {
+                if (checkboard[i][j] == colour) {
+                    ownTile[0] = i;
+                    ownTile[1] = j;
+                    break;
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+        }
+        return ownTile;
+    }
+
+    public HashMap<Integer, int[]> saveFlips(int[] ownTile, int i, int j, int direction) {
+        HashMap<Integer, int[]> flips = new HashMap<>();
+        int count = 0;
+        if (direction == 1) {
+            i--;
+            j--;
+            while (i > ownTile[0]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i--;
+                j--;
+            }
+        } else if (direction == 2) {
+            j--;
+            while (j > ownTile[1]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                j--;
+            }
+        } else if (direction == 3) {
+            i++;
+            j--;
+            while (j > ownTile[1]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i++;
+                j--;
+            }
+        } else if (direction == 4) {
+            i--;
+            while (i > ownTile[0]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i--;
+            }
+        } else if (direction == 5) {
+            i++;
+            while (i < ownTile[0]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i++;
+            }
+        } else if (direction == 6) {
+            i--;
+            j++;
+            while (i > ownTile[0]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i--;
+                j++;
+            }
+        } else if (direction == 7) {
+            j++;
+            while (j < ownTile[1]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                j++;
+            }
+        } else if (direction == 8) {
+            i++;
+            j++;
+            while (i < ownTile[0]) {
+                flips.put(count, new int[] { i, j });
+                count++;
+                i++;
+                j++;
+            }
+        }
+        return flips;
+    }
+
 }
