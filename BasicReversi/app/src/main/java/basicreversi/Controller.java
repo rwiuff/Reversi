@@ -53,16 +53,23 @@ public class Controller {
 			
 			 Random rand = new Random();
 				
+			
+				
 				if (rand.nextInt(2)==0) {
 					Player1 = true;
 					DrawBlackCircle(event);
 					label.setText("Player 2 turn");
+					
+				
+				 
 			}
 				else {
 					Player1 = false;
 					DrawWhiteCircle(event);
 					label.setText("Player 1 turn");
-			}
+					
+					
+				}
 		}
 		
 		public void DrawBlackCircle(MouseEvent event) {
