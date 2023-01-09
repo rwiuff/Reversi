@@ -1,0 +1,220 @@
+%Author(s), Course variables
+\newcommand{\titl}{Januarprojekt}
+\newcommand{\authone}{Abinav Aleti}
+\newcommand{\SIDone}{s224786}
+\newcommand{\authtwo}{Yahya Alwan}
+\newcommand{\SIDtwo}{s224739}
+\newcommand{\auththree}{Aslan Behbahani}
+\newcommand{\SIDthree}{s224819}
+\newcommand{\authfour}{Rasmus Wiuff}
+\newcommand{\SIDfour}{s163977}
+\newcommand{\courseno}{02121}
+\newcommand{\course}{Introduktion til Softwareteknologi}
+\newcommand{\lb}{\\}
+%Basics
+\documentclass[a4paper, danish]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[moderate]{savetrees}
+%Symbols and scientifics
+\usepackage{amsmath, amsfonts, amssymb, bm}
+\numberwithin{equation}{section}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\sisetup{
+    per-mode = power ,
+    round-mode = figures ,
+    round-precision = 3 ,
+    scientific-notation = false ,
+    output-decimal-marker = {.} ,
+    exponent-product = \times ,
+    separate-uncertainty = true ,
+    uncertainty-separator = \ ,
+    range-phrase = - ,
+    range-units =  single ,
+    inter-unit-product = \ensuremath{{\cdot{}}} ,
+    number-unit-product = \ ,
+    multi-part-units = single ,
+}
+
+%Appendix, TOC and Bibliography
+\usepackage{appendix}
+\renewcommand\appendixtocname{Appendices}
+\usepackage[nottoc]{tocbibind}
+\setcounter{tocdepth}{2}
+\usepackage{lastpage}
+
+%Figures
+\usepackage[svgnames]{xcolor} % Required to specify font color
+\usepackage{float}
+\usepackage{graphicx}
+    \graphicspath{{/Graphics}}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage[format=plain,
+    labelfont={bf,it,footnotesize},
+    textfont={it,footnotesize}]{caption}
+% \captionsetup[table]{name=Huskeord}
+\captionsetup{font={stretch=0.9}}
+\usepackage{wrapfig}
+\usepackage[a4paper, centering, rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=3.5cm]{geometry}
+\usepackage{etoolbox}
+\usepackage{verbatim}
+\usepackage[space]{grffile}
+\usepackage[final]{pdfpages}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{fontawesome}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\F}{\mathtt{F}}
+\newcommand{\T}{\mathtt{T}}
+
+\newcommand{\lorf}{\ensuremath{\lor\F}}
+\newcommand{\lort}{\ensuremath{\lor\T}}
+\newcommand{\landf}{\ensuremath{\land\F}}
+\newcommand{\landt}{\ensuremath{\land\T}}
+\newcommand{\tof}{\ensuremath{\to\!\F}}
+\newcommand{\tot}{\ensuremath{\to\!\T}}
+\newcommand{\lrf}{\ensuremath{\leftrightarrow\!\F}}
+\newcommand{\lrt}{\ensuremath{\leftrightarrow\!\T}}
+\newcommand{\negf}{\ensuremath{\neg\F}}
+\newcommand{\negt}{\ensuremath{\neg\T}}
+\newcommand{\allf}{\ensuremath{\forall\F}}
+\newcommand{\allt}{\ensuremath{\forall\T}}
+\newcommand{\exf}{\ensuremath{\exists\F}}
+\newcommand{\ext}{\ensuremath{\exists\T}}
+
+\newcommand{\first}[2]{\node (root) {\textcolor{red}{\scriptsize 1} \(#1\) : \texttt{#2}};}
+\newcommand{\formula}[4]{\node (#1) [#2] {\textcolor{red}{\scriptsize #1} \(#3\) : \texttt{#4}};}
+\newcommand{\branch}[2]{\path (#1) edge[-] (#2);}
+\newcommand{\rbranch}[4]{\path (#3) edge[-] node [midway, right, blue] {\(#1\) på \(#2\)} (#4);}
+\newcommand{\closed}[2]{\node (#1) [below = .1em of #2] {\(\times\)};}
+\newcommand{\open}[2]{\node (#1) [below = .1em of #2] {\(\bigcirc\)};}
+\newenvironment{tableau}{\begin{tikzpicture}[node distance = .5pt]}{\end{tikzpicture}}
+
+%Header footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\titl \lb Kursus \courseno \lb \course \lb 20. januar 2023}
+\chead{\includegraphics[height=42.5pt]{DTU}}
+\rhead{\authone \ \textbf{\SIDone} \lb \authtwo \ \textbf{\SIDtwo} \lb \auththree \ \textbf{\SIDthree} \lb \authfour \ \textbf{\SIDfour}}
+\cfoot{Side \thepage\, af \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{46.54448pt}
+\addtolength{\topmargin}{-9.79414pt}
+
+%Text tools
+\usepackage{parcolumns}
+\usepackage[super]{nth}
+\usepackage[normalem]{ulem}
+\usepackage{import}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+\hypersetup{
+    colorlinks   = true, %Colours links instead of ugly boxes
+    urlcolor     = blue, %Colour for external hyperlinks
+    linkcolor    = blue, %Colour of internal links
+    citecolor   = red %Colour of citations
+}
+\usepackage[capitalise]{cleveref}
+% \crefname{table}{Huskeord}{Huskeord}
+\usepackage{enumitem}
+\newlist{arrowlist}{itemize}{1}
+\setlist[arrowlist]{label={\(\rightarrow\)}}
+\usepackage{booktabs}
+\usepackage{todonotes}
+\usepackage{silence}
+\usepackage[square, longnamesfirst, numbers]{natbib}
+\usepackage{empheq}
+\usepackage{minted}
+\setminted{fontsize=\small,
+           linenos=true}
+\usemintedstyle{tango}
+\renewcommand{\listoflistingscaption}{Listings}
+\newcommand{\im}[3]{\inputminted[linenos=true, python3=true, firstline=#2, lastline=#3]{python}{#1}}
+\newcommand{\java}[3]{\inputminted[linenos=true, firstline=#2, lastline=#3]{java}{#1}}
+\usepackage{tabularx}
+
+%Definitions and new commands
+\newcommand{\degr}{^{\circ}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\mathinhead[2]{\texorpdfstring{\(\boldsymbol{#1}\)}{#2}}
+
+%Title and sectioning
+\def\Vhrulefill{\leavevmode\leaders\hrule height 0.7ex depth \dimexpr0.4pt-0.7ex\hfill\kern0pt}
+\usepackage{titlesec}
+\definecolor{DTUred}{cmyk}{0, .91, .72, .23}
+\definecolor{FMNgrey}{cmyk}{.73,.43,.53,.38}
+\newcolumntype{a}{>{\columncolor{gray}}c}
+%Use letters insted of numbers in section numbering
+% \renewcommand{\thesection}{\Alph{section}}
+% \renewcommand{\thesubsection}{\Alph{subsection}}
+\usepackage{titling}
+
+\begin{document}
+
+\titleformat{\section}[block]
+{\normalfont\Large\scshape\filright\color{DTUred}}{\fbox{\thesection}}{1em}{}
+
+\titleformat{\subsection}
+{\titlerule
+    \vspace{.8ex}%
+    \normalfont\scshape\color{FMNgrey}}
+{\thesubsection.}{.5em}{}
+
+\title{\includegraphics[width=.15\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
+\preauthor{\begin{center}
+    \large \lineskip 0.5em%
+    \begin{tabular}[t]{r}}
+\author{\textbf{Afleveringsgruppe 16:} \lb \lb \authone \ \textbf{\SIDone} \lb \authtwo \ \textbf{\SIDtwo} \lb \auththree \ \textbf{\SIDthree} \lb \authfour \ \textbf{\SIDfour}}
+\postauthor{\end{tabular}\par\end{center}}
+\date{20. januar 2023}
+\maketitle
+
+\pagenumbering{arabic}
+
+\tableofcontents
+\addtocontents{toc}{~\hfill\textbf{Side}\par}
+\thispagestyle{empty}
+\setcounter{page}{0}
+\newpage
+\setcounter{page}{1}
+
+\section{Introduktion \& Problemanalyse}
+\subsection{Opgaven}
+\subsection{Specifikationer}
+\subsection{Målsætninger}
+\section{Design}
+\section{Implementation}
+\section{Test}
+\section{Project Management}
+\section{Konklusion}
+%Bibliography herunder:
+%\newpage
+
+%\bibliographystyle{unsrtnat}
+%\bibliography{Bibliography}
+
+\newpage
+\listoflistings
+\addcontentsline{toc}{section}{Listings}
+\newpage
+\listoffigures
+%\newpage
+%\renewcommand{\listtablename}{Liste over huskeord}
+\listoftables
+%\newpage
+
+%Appendicer herunder:
+
+%\input{Appendix.tex}
+
+\end{document}
