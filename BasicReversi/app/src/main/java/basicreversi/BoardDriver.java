@@ -1,6 +1,7 @@
 package basicreversi;
 
 import java.text.DecimalFormat;
+import java.util.Set;
 
 public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
@@ -8,11 +9,20 @@ public class BoardDriver {
     public static void main(String[] args) {
         Board b = new Board();
         printBoard(b.getBoard());
-        System.out.println("Player 1: " + b.getPlayers().get("Player 1"));
-        System.out.println(b.place(4, 4, 1));
+        System.out.println("White: " + b.getPlayers().get("White"));
+        System.out.println("Turn " + b.getTurn());
+        b.initplace(3, 3, 1);
         printBoard(b.getBoard());
-        System.out.println(b.place(4, 4, 1));
-        
+        System.out.println("Turn " + b.getTurn());
+        b.initplace(4, 4, 1);
+        printBoard(b.getBoard());
+        b.moveAnalyser(1);
+        System.out.println("Turn " + b.getTurn());
+        Set<int[]> moves = b.getValidMoves().keySet();
+        for (int[] key : moves) {
+            b.place(key[0], key[1], 1);
+        }
+        printBoard(b.getBoard());
     }
 
     private static void printBoard(int[][] b) {
@@ -27,4 +37,12 @@ public class BoardDriver {
         }
         System.out.println("#" + "---".repeat(size) + "#");
     }
+
+    // if (winner == 1) {
+    // System.out.println("White has won the game!");
+    // } else if (winner == 2) {
+    // System.out.println("Black has won the game!");
+    // } else {
+    // System.out.println("The game is a tie! 1/2 ");
+
 }
