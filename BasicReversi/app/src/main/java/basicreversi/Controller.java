@@ -18,26 +18,55 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class Controller {
+public class Controller{
 	
 		@FXML
 		public Label label;
 		private Stage stage;
 		private Scene scene;
 		private Parent root;
-		private boolean Player1;
+		
+		private String Player1;
+		private String Player2;
 		public Pane pane = new Pane();
 		
 		
-		@FXML
-		public void intialize() {
-			this.label.setText("hell");
-		}
-	    
-	    
 		
+	    Board b = new Board();
+	    
+	   
+	    
+	    @FXML
+	    public void in(Label label) {
+	    
+	    	if(b.getPlayers().get("White")== Player2) {
+	    		label.setText("Player2 is White and Player 1 is Black");
+	    		
+	    		try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+	    		label.setText("Player2 Starts first");
+	    		
+	    		}
+	    		
+	    	else {
+		    		label.setText("Player1 is White and Player2 is Black");
+		    		
+		    		try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+		    		label.setText("Player1 Starts first");
+	    		
+	    	}
+	    }
+	    
+
 		@FXML
-		public void Restart(ActionEvent e) throws IOException  {
+		public  void Restart(ActionEvent e) throws IOException  {
 			
 				root = FXMLLoader.load(getClass().getResource("main.fxml"));
 			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -51,25 +80,8 @@ public class Controller {
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
 			
-			 Random rand = new Random();
-				
 			
-				
-				if (rand.nextInt(2)==0) {
-					Player1 = true;
-					DrawBlackCircle(event);
-					label.setText("Player 2 turn");
-					
-				
-				 
-			}
-				else {
-					Player1 = false;
-					DrawWhiteCircle(event);
-					label.setText("Player 1 turn");
-					
-					
-				}
+			
 		}
 		
 		public void DrawBlackCircle(MouseEvent event) {
@@ -80,6 +92,7 @@ public class Controller {
 			c.setCenterY(pane.getHeight()/2);
 			
 			pane.getChildren().add(c);
+			//
 			
 		}
 		
