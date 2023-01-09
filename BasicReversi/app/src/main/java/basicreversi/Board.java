@@ -28,14 +28,15 @@ package basicreversi;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
 public class Board {
     private int[][] board; // Board field integer array
-    private int turnCount = 1; // Counts the turn number
+    private int turnCount = 0; // Counts the turn number
     private int boardsize = 8; // n in n x n dimensional board
     private int forfeitCounter = 0;
     private HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
-    private HashMap<int[], HashMap<Integer, int[]>> validMoves; //
+    private HashMap<String, HashMap<Integer, Integer[]>> validMoves; //
 
     public Board() { // Constructor for board
         board = new int[boardsize][boardsize]; // Initialises with 0 values
@@ -58,7 +59,7 @@ public class Board {
         return players;
     }
 
-    public HashMap<int[], HashMap<Integer, int[]>> getValidMoves() {
+    public HashMap<String, HashMap<Integer, Integer[]>> getValidMoves() {
         return validMoves;
     }
 
@@ -85,7 +86,7 @@ public class Board {
     public int gameState() {
         if (forfeitCounter == 2) {
             return 31;
-        } else if (Filled()) {
+        } else if (filled()) {
             return 31;
         } else {
             return 32;
@@ -97,10 +98,10 @@ public class Board {
             return 12;
         if (row > 2 && row < 5) {
             if (column > 2 && column < 5) {
-                if (turnCount == 1) {
+                if (turnCount == 0) {
                     board[row][column] = colour;
                     turnClock();
-                } else if (turnCount == 2) {
+                } else if (turnCount == 1) {
                     board[row][column] = colour;
                     for (int i = 3; i < 5; i++) {
                         for (int j = 3; j < 5; j++) {
@@ -120,13 +121,28 @@ public class Board {
 
     public int place(int row, int column, int colour) {
         // Check if the position is already occupied
+        String move = "" + row + "," + column;
         forfeitCounter = 0;
         if (board[row][column] != 0) {
             return 12;
-        } else {
+        } else if (validMoves.containsKey(move)) {
             board[row][column] = colour;
-            turnCount++;
+            turnClock();
+            flip(move, colour);
             return 11;
+        } else {
+            return 13;
+        }
+
+    }
+
+    public void flip(String move, int colour) {
+        HashMap<Integer, Integer[]> flipsSet = validMoves.get(move);
+        Set<Integer> flips = flipsSet.keySet();
+        for (Integer key : flips) {
+            Integer[] k = flipsSet.get(key);
+            board[k[0]][k[1]] = colour;
+            System.out.println(k);
         }
     }
 
@@ -136,7 +152,7 @@ public class Board {
     // If it finishes iterating through the board and doesn't find any empty
     // positions, it returns true.
 
-    public boolean Filled() {
+    public boolean filled() {
         for (int i = 0; i < boardsize; i++) {
             for (int j = 0; j < boardsize; j++) {
                 if (board[i][j] == 0) {
@@ -171,9 +187,9 @@ public class Board {
         }
     }
 
-    public int moveAnalyser(int colour) {
+    public void moveAnalyser(int colour) {
         validMoves = new HashMap<>(); //
-        HashMap<Integer, int[]> flips;
+        HashMap<Integer, Integer[]> flips;
         int direction;
         int[] ownTile;
         int[][] checkboard = new int[boardsize + 2][boardsize + 2];
@@ -205,7 +221,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i][j - 1] == opponent) {
@@ -213,7 +229,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i + 1][j - 1] == opponent) {
@@ -221,7 +237,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i - 1][j] == opponent) {
@@ -229,7 +245,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i + 1][j] == opponent) {
@@ -237,7 +253,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i - 1][j + 1] == opponent) {
@@ -245,7 +261,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i][j + 1] == opponent) {
@@ -253,7 +269,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                     if (checkboard[i + 1][j + 1] == opponent) {
@@ -261,13 +277,12 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put(new int[] { i - 1, j - 1 }, flips);
+                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
                         }
                     }
                 }
             }
         }
-        return 0;
     }
 
     public int[] findOwn(int[][] checkboard, int i, int j, int direction, int colour) {
@@ -372,14 +387,14 @@ public class Board {
         return ownTile;
     }
 
-    public HashMap<Integer, int[]> saveFlips(int[] ownTile, int i, int j, int direction) {
-        HashMap<Integer, int[]> flips = new HashMap<>();
-        int count = 0;
+    public HashMap<Integer, Integer[]> saveFlips(int[] ownTile, int i, int j, int direction) {
+        HashMap<Integer, Integer[]> flips = new HashMap<>();
+        Integer count = 0;
         if (direction == 1) {
             i--;
             j--;
             while (i > ownTile[0]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i--;
                 j--;
@@ -387,7 +402,7 @@ public class Board {
         } else if (direction == 2) {
             j--;
             while (j > ownTile[1]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 j--;
             }
@@ -395,7 +410,7 @@ public class Board {
             i++;
             j--;
             while (j > ownTile[1]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i++;
                 j--;
@@ -403,14 +418,14 @@ public class Board {
         } else if (direction == 4) {
             i--;
             while (i > ownTile[0]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i--;
             }
         } else if (direction == 5) {
             i++;
             while (i < ownTile[0]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i++;
             }
@@ -418,7 +433,7 @@ public class Board {
             i--;
             j++;
             while (i > ownTile[0]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i--;
                 j++;
@@ -426,7 +441,7 @@ public class Board {
         } else if (direction == 7) {
             j++;
             while (j < ownTile[1]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 j++;
             }
@@ -434,7 +449,7 @@ public class Board {
             i++;
             j++;
             while (i < ownTile[0]) {
-                flips.put(count, new int[] { i, j });
+                flips.put(count, new Integer[] { i - 1, j - 1 });
                 count++;
                 i++;
                 j++;

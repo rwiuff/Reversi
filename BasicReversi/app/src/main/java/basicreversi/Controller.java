@@ -10,103 +10,90 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class Controller {
-
-	@FXML
-	public TextArea textArea;
 	
-	@FXML
-	private Button st;
-	
-	@FXML
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
-	private boolean Player1;
-	public Pane pane = new Pane();
-	
-	
-
-	
-	@FXML
-	public void Restart()  {
+		@FXML
+		public Label label;
+		private Stage stage;
+		private Scene scene;
+		private Parent root;
+		private boolean Player1;
+		public Pane pane = new Pane();
 		
-		st.setOnAction(e -> {
 		
-		try {
-			root = FXMLLoader.load(getClass().getResource("main.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		@FXML
+		public void intialize() {
+			this.label.setText("hell");
 		}
-		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+	    
+	    
 		
-		textArea.appendText("The game has been restarted \n");
-		
-		});
-		
-		
-
-	}
-
-	@FXML
-		public void onPaneClicked(MouseEvent event) {
-			Random rand = new Random();
+		@FXML
+		public void Restart(ActionEvent e) throws IOException  {
 			
+				root = FXMLLoader.load(getClass().getResource("main.fxml"));
+			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 			
-			if (rand.nextInt(2)==0) {
-				Player1 = true;
-				DrawBlackCircle(event);
-				textArea.appendText(" Player 2 turn \n");
-				textArea.appendText("\n");
-			
-			 
-		}
-			else {
-				Player1 = false;
-				DrawWhiteCircle(event);
-				textArea.appendText(" Player 1 turn\n");
-				textArea.appendText("\n");
-				
 			}
-	}
-	
-	public void DrawBlackCircle(MouseEvent event) {
-		// Create a new circle with its center at (x, y)
-					Circle circle = new Circle(event.getX(),event.getY(),30);
-					circle.setStroke(Color.BLACK);
-					circle.setFill(Color.BLACK);
 			
-					// Add the circle to the pane
-					Pane pane = (Pane) event.getSource();
-					pane.getChildren().add(circle);
-					
 		
-	}
-	
-	public void DrawWhiteCircle(MouseEvent event) {
-		// Create a new circle with its center at (x, y)
-		
-					Circle circle = new Circle(event.getX(),event.getY(),30);
-					circle.setStroke(Color.BLACK);
-					circle.setFill(Color.WHITE);
+		@FXML
+			public void onPaneClicked(MouseEvent event) {
 			
-					// Add the circle to the pane
-					Pane pane = (Pane) event.getSource();
-					pane.getChildren().add(circle);
+			 Random rand = new Random();
 				
+			
+				
+				if (rand.nextInt(2)==0) {
+					Player1 = true;
+					DrawBlackCircle(event);
+					label.setText("Player 2 turn");
+					
+				
+				 
+			}
+				else {
+					Player1 = false;
+					DrawWhiteCircle(event);
+					label.setText("Player 1 turn");
+					
+					
+				}
+		}
 		
-	}
+		public void DrawBlackCircle(MouseEvent event) {
+			
+			Pane pane = (Pane) event.getSource();
+			Circle c = new Circle(30, Color.BLACK);
+			c.setCenterX(pane.getWidth()/2);
+			c.setCenterY(pane.getHeight()/2);
+			
+			pane.getChildren().add(c);
+			
+		}
+		
+		public void DrawWhiteCircle(MouseEvent event) {
+			
+			Pane pane = (Pane) event.getSource();
+			Circle c = new Circle(30, Color.WHITE);
+			c.setCenterX(pane.getWidth()/2);
+			c.setCenterY(pane.getHeight()/2);
+			
+			pane.getChildren().add(c);
+					
+			
+		}
+		
+	
 }

@@ -16,13 +16,42 @@ public class BoardDriver {
         System.out.println("Turn " + b.getTurn());
         b.initplace(4, 4, 1);
         printBoard(b.getBoard());
-        b.moveAnalyser(1);
+        b.turnState(1);
         System.out.println("Turn " + b.getTurn());
-        Set<int[]> moves = b.getValidMoves().keySet();
-        for (int[] key : moves) {
-            b.place(key[0], key[1], 1);
-        }
+        b.place(3, 5, 1);
         printBoard(b.getBoard());
+        b.turnState(2);
+        System.out.println("Turn " + b.getTurn());
+        b.place(2, 3, 2);
+        printBoard(b.getBoard());
+        b.turnState(1);
+        System.out.println("Turn " + b.getTurn());
+        b.place(1, 2, 1);
+        printBoard(b.getBoard());
+        b.turnState(2);
+        System.out.println("Turn " + b.getTurn());
+        b.place(3, 6, 2);
+        printBoard(b.getBoard());
+
+        b.turnState(1);
+        System.out.println("Turn " + b.getTurn());
+        b.place(4, 2, 1);
+        printBoard(b.getBoard());
+        b.turnState(2);
+        System.out.println("Turn " + b.getTurn());
+        b.place(5, 1, 2);
+        printBoard(b.getBoard());
+
+        b.turnState(1);
+        System.out.println("Turn " + b.getTurn());
+        b.place(2, 2, 1);
+        printBoard(b.getBoard());
+        b.turnState(2);
+        System.out.println("Turn " + b.getTurn());
+        b.place(4, 5, 2);
+        printBoard(b.getBoard());
+
+        
     }
 
     private static void printBoard(int[][] b) {

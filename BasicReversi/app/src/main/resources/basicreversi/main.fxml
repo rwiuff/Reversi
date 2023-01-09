@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,15 +10,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basicreversi.Controller">
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="textArea" prefHeight="100.0" prefWidth="300.0" />
+            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: Black;" textAlignment="CENTER" textFill="#f6f2f2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <Pane prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="st" alignment="CENTER" layoutX="59.0" layoutY="27.0" mnemonicParsing="false" onAction="#Restart" prefHeight="47.0" prefWidth="91.0" text="Restart" />
+                  <Button alignment="CENTER" layoutX="83.0" layoutY="27.0" mnemonicParsing="false" onAction="#Restart" prefHeight="47.0" prefWidth="91.0" text="Restart" />
                </children>
             </Pane>
          </children>
@@ -50,7 +55,6 @@
             <InnerShadow />
          </effect>
          <children>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
@@ -114,6 +118,7 @@
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </GridPane>
    </center>
