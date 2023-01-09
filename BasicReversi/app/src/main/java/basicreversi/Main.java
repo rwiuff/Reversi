@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	private Controller controller;
+	
 	
 	
 	@Override
@@ -29,6 +29,8 @@ public class Main extends Application {
 				new Image(getClass().getResourceAsStream("icon64.png"))
 			);
 			
+			Controller controller = new Controller();
+	       
 			primaryStage.setTitle("Reversi");
 			primaryStage.setScene(scene);
 			primaryStage.show();
