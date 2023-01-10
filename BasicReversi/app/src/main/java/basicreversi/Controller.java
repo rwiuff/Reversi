@@ -34,7 +34,7 @@ public class Controller{
 		
 		
 	    Board b = new Board();
-	   
+	    private boolean gameStarted = false;
 	    @FXML
 	    public void in() {
 	    
@@ -43,17 +43,21 @@ public class Controller{
 	    	        label.setText("Player2 is White and Player 1 is Black");
 	    	        
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player2 Starts first")));
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player2 Starts first");
+	    	        gameStarted = true;
+	    	    }));
 	    	        timeline.play();
 	    	    } else {
 	    	        label.setText("Player1 is White and Player2 is Black");
 	    	        
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player1 Starts first")));
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player1 Starts first");
+	    	        gameStarted = true;
+	    	    }));
 	    	        timeline.play();
-	    	    }
-	    	}
-
+}
+	    }
+	    
 		@FXML
 		public  void Restart(ActionEvent e) throws IOException  {
 			
@@ -69,10 +73,16 @@ public class Controller{
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
 			
-			
-			DrawBlackCircle(event);
-			
+			if (gameStarted) {
+				
+		        DrawBlackCircle(event);
+		        
+		    } else {
+		        // Show a message to the user indicating that they need to wait
+		        // for the game to start
+		    }
 		}
+		
 		
 		public void DrawBlackCircle(MouseEvent event) {
 			
