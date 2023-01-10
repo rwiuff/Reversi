@@ -1,14 +1,11 @@
 package basicreversi;
 import javafx.animation.KeyFrame;
 import java.io.IOException;
-import java.util.Random;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,7 +33,7 @@ public class Controller{
 		
 		
 	    Board b = new Board();
-	   
+	    private boolean gameStarted = false;
 	    @FXML
 	    public void in() {
 	    
@@ -45,17 +42,21 @@ public class Controller{
 	    	        label.setText("Player2 is White and Player 1 is Black");
 	    	        
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player2 Starts first")));
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player2 Starts first");
+	    	        gameStarted = true;
+	    	    }));
 	    	        timeline.play();
 	    	    } else {
 	    	        label.setText("Player1 is White and Player2 is Black");
 	    	        
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player1 Starts first")));
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player1 Starts first");
+	    	        gameStarted = true;
+	    	    }));
 	    	        timeline.play();
-	    	    }
-	    	}
-
+}
+	    }
+	    
 		@FXML
 		public  void Restart(ActionEvent e) throws IOException  {
 			
@@ -71,10 +72,16 @@ public class Controller{
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
 			
-			
-			DrawBlackCircle(event);
-			
+			if (gameStarted) {
+				
+		        DrawBlackCircle(event);
+		        
+		    } else {
+		        // Show a message to the user indicating that they need to wait
+		        // for the game to start
+		    }
 		}
+		
 		
 		public void DrawBlackCircle(MouseEvent event) {
 			
