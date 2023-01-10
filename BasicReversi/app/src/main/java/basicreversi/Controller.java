@@ -1,8 +1,11 @@
 package basicreversi;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Random;
 
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,36 +31,25 @@ public class Controller {
 
 	private String Player2;
 	public Pane pane = new Pane();
-	private Board board;
-	private Main view;
-
+	
 	Board b = new Board();
 
 	@FXML
 	public void in() {
-		label = new Label("Velkommen til Reversi");
+		
+
 		if (b.getPlayers().get("White") == Player2) {
 			label.setText("Player2 is White and Player 1 is Black");
-
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			label.setText("Player2 Starts first");
-
+			
+			
 		}
 
 		else {
-			label.setText("Player1 is White and Player2 is Black");
-
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			label.setText("Player1 Starts first");
-
+			label.setText("Hi");
+		    
+		       
+			
+			
 		}
 	}
 
