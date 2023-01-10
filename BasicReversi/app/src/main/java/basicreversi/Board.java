@@ -47,6 +47,10 @@ public class Board {
         return board; // Returns board array
     }
 
+    public void setPiece(int row, int column, int colour){
+        board[row][column] = colour;
+    }
+
     public int getTurn() {   //Return Turn number
         return turnCount;
     }
