@@ -26,7 +26,7 @@ public class Controller{
 		private Scene scene;
 		private Parent root;
 		
-		private String Player1;
+	
 		private String Player2;
 		public Pane pane = new Pane();
 		
@@ -92,7 +92,7 @@ public class Controller{
 			c.setCenterY(pane.getHeight()/2);
 			
 			pane.getChildren().add(c);
-			//
+			
 			
 		}
 		
@@ -109,4 +109,5 @@ public class Controller{
 		}
 		
 	
+
 }
