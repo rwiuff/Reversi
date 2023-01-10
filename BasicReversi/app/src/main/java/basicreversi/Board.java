@@ -36,22 +36,26 @@ public class Board {
     private int boardsize = 8; // n in n x n dimensional board
     private int forfeitCounter = 0;
     private HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
-    private HashMap<String, HashMap<Integer, Integer[]>> validMoves; //
+    private HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> validMoves; //
 
     public Board() { // Constructor for board
         board = new int[boardsize][boardsize]; // Initialises with 0 values
         setPlayers();
     }
 
+    public String getGreeting() {
+        return "Kilroy was here";
+    }
+
     public int[][] getBoard() {
         return board; // Returns board array
     }
 
-    public void setPiece(int row, int column, int colour){
+    public void setPiece(int row, int column, int colour) {
         board[row][column] = colour;
     }
 
-    public int getTurn() {   //Return Turn number
+    public int getTurn() { // Return Turn number
         return turnCount;
     }
 
@@ -63,7 +67,7 @@ public class Board {
         return players;
     }
 
-    public HashMap<String, HashMap<Integer, Integer[]>> getValidMoves() {
+    public HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> getValidMoves() {
         return validMoves;
     }
 
@@ -112,9 +116,9 @@ public class Board {
                             int opponent = (colour == 1) ? 2 : 1;
                             if (board[i][j] == 0)
                                 board[i][j] = opponent;
+                                turnClock();
                         }
                     }
-                    turnClock();
                 }
             }
             return 11;
@@ -133,7 +137,7 @@ public class Board {
             board[row][column] = colour;
             turnClock();
             flip(move, colour);
-            return 11; //false , You can't place a point here
+            return 11; // false , You can't place a point here
         } else {
             return 13; // true, it's OK to place point.
         }
@@ -141,11 +145,16 @@ public class Board {
     }
 
     public void flip(String move, int colour) {
-        HashMap<Integer, Integer[]> flipsSet = validMoves.get(move);
-        Set<Integer> flips = flipsSet.keySet();
-        for (Integer key : flips) {
-            Integer[] k = flipsSet.get(key);
-            board[k[0]][k[1]] = colour;
+        HashMap<Integer, HashMap<Integer, Integer[]>> directionSet = validMoves.get(move);
+        Set<Integer> directions = directionSet.keySet();
+        for (Integer direction : directions) {
+            HashMap<Integer, Integer[]> flipSet = directionSet.get(direction);
+            Set<Integer> flips = flipSet.keySet();
+            for (Integer flip : flips) {
+                Integer[] k = flipSet.get(flip);
+                board[k[0]][k[1]] = colour;
+            }
+
         }
     }
 
@@ -219,12 +228,13 @@ public class Board {
         for (int i = 1; i <= boardsize; i++) {
             for (int j = 1; j <= boardsize; j++) {
                 if (checkboard[i][j] == 0) {
+                    HashMap<Integer, HashMap<Integer, Integer[]>> directionFlips = new HashMap<>();
                     if (checkboard[i - 1][j - 1] == opponent) {
                         direction = 1;
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i][j - 1] == opponent) {
@@ -232,7 +242,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i + 1][j - 1] == opponent) {
@@ -240,7 +250,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i - 1][j] == opponent) {
@@ -248,7 +258,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i + 1][j] == opponent) {
@@ -256,7 +266,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i - 1][j + 1] == opponent) {
@@ -264,7 +274,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i][j + 1] == opponent) {
@@ -272,7 +282,7 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
                     if (checkboard[i + 1][j + 1] == opponent) {
@@ -280,9 +290,11 @@ public class Board {
                         ownTile = findOwn(checkboard, i, j, direction, colour);
                         if (ownTile[0] < boardsize + 2) {
                             flips = saveFlips(ownTile, i, j, direction);
-                            validMoves.put("" + (i - 1) + "," + (j - 1), flips);
+                            directionFlips.put(direction, flips);
                         }
                     }
+                    if (directionFlips.size() > 0)
+                        validMoves.put("" + (i - 1) + "," + (j - 1), directionFlips);
                 }
             }
         }
