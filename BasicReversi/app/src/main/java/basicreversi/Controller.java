@@ -1,10 +1,13 @@
 package basicreversi;
 import javafx.animation.KeyFrame;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Random;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,26 +38,37 @@ public class Controller{
 		private Main view;
 		
 		
+		
 	    Board b = new Board();
 	   
 	    @FXML
 	    public void in() {
 	    
-	    
-	    	    if(b.getPlayers().get("White") == Player2) {
-	    	        label.setText("Player2 is White and Player 1 is Black");
-	    	        
-	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player2 Starts first")));
-	    	        timeline.play();
-	    	    } else {
-	    	        label.setText("Player1 is White and Player2 is Black");
-	    	        
-	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> label.setText("Player1 Starts first")));
-	    	        timeline.play();
-	    	    }
+	    	if(b.getPlayers().get("White")== Player2) {
+	    		 label.setText("Player2 is White and Player 1 is Black");
+	    		
+	    		try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+	    		label.setText("Player2 Starts first");
+	    		
+	    		}
+	    		
+	    	else {
+		    		label.setText("Player1 is White and Player2 is Black");
+		    		
+		    		try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+		    		label.setText("Player1 Starts first");
+	    		
 	    	}
+	    }
+	    
 
 		@FXML
 		public  void Restart(ActionEvent e) throws IOException  {
@@ -65,9 +79,9 @@ public class Controller{
 			stage.setScene(scene);
 			stage.show();
 			
-			
 			}
 			
+		
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
 			

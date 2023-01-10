@@ -15,7 +15,7 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: Black;" textAlignment="CENTER" textFill="#f6f2f2">
+            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: White;" textAlignment="CENTER" textFill="#140101">
                <font>
                   <Font size="20.0" />
                </font>
