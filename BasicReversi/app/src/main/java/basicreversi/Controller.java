@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class Controller{
 	
 		@FXML
-		public Label label;
+		public Label label = new Label(" ");
 		private Stage stage;
 		private Scene scene;
 		private Parent root;
@@ -29,18 +29,18 @@ public class Controller{
 		private String Player1;
 		private String Player2;
 		public Pane pane = new Pane();
+		private Board board;
+		private Main view;
 		
 		
 		
 	    Board b = new Board();
-	    
 	   
-	    
 	    @FXML
-	    public void in(Label label) {
+	    public void in() {
 	    
 	    	if(b.getPlayers().get("White")== Player2) {
-	    		label.setText("Player2 is White and Player 1 is Black");
+	    		 label.setText("Player2 is White and Player 1 is Black");
 	    		
 	    		try {
 					Thread.sleep(2000);
@@ -81,6 +81,7 @@ public class Controller{
 			public void onPaneClicked(MouseEvent event) {
 			
 			
+			DrawBlackCircle(event);
 			
 		}
 		
@@ -109,4 +110,12 @@ public class Controller{
 		}
 		
 	
+		
+		public void setModelAndView(Board board, Main view)
+		{
+		this.board = board;
+		this.view = view;
+		}
+		
+
 }

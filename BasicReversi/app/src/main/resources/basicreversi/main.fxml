@@ -15,10 +15,14 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="textArea" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: black;" />
+            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: Black;" textAlignment="CENTER" textFill="#f6f2f2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <Pane prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button alignment="CENTER" layoutX="31.0" layoutY="36.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
+                  <Button alignment="CENTER" layoutX="83.0" layoutY="27.0" mnemonicParsing="false" onAction="#Restart" prefHeight="47.0" prefWidth="91.0" text="Restart" />
                </children>
             </Pane>
          </children>
@@ -50,262 +54,70 @@
             <InnerShadow />
          </effect>
          <children>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Pane>
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </GridPane>
    </center>
