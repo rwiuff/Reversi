@@ -40,7 +40,7 @@
 
 %Appendix, TOC and Bibliography
 \usepackage{appendix}
-\renewcommand\appendixtocname{Appendices}
+\renewcommand\appendixtocname{Appendicer}
 \usepackage[nottoc]{tocbibind}
 \setcounter{tocdepth}{2}
 \usepackage{lastpage}
@@ -159,6 +159,12 @@
 % \renewcommand{\thesubsection}{\Alph{subsection}}
 \usepackage{titling}
 
+\makeatletter
+\newcommand{\github}[1]{%
+   \href{#1}{\color{DTUred}\faGithub}%
+}
+\makeatother
+
 \begin{document}
 
 \titleformat{\section}[block]
@@ -174,7 +180,7 @@
 \preauthor{\begin{center}
     \large \lineskip 0.5em%
     \begin{tabular}[t]{r}}
-\author{\textbf{Afleveringsgruppe 16:} \lb \lb \authone \ \textbf{\SIDone} \lb \authtwo \ \textbf{\SIDtwo} \lb \auththree \ \textbf{\SIDthree} \lb \authfour \ \textbf{\SIDfour}}
+\author{\textbf{Afleveringsgruppe 16:} \lb \lb \authone \ \textbf{\SIDone} \lb \authtwo \ \textbf{\SIDtwo} \lb \auththree \ \textbf{\SIDthree} \lb \authfour \ \textbf{\SIDfour} \lb \href{https://github.com/rwiuff/Reversi}{\color{DTUred}github.com/rwiuff/Reversi} \github{https://github.com/rwiuff/Reversi}}
 \postauthor{\end{tabular}\par\end{center}}
 \date{20. januar 2023}
 \maketitle
@@ -189,6 +195,8 @@
 \setcounter{page}{1}
 
 \section{Introduktion \& Problemanalyse}
+\subsection{Arbejdsfordeling}
+Arbejdsfordelingen under projektet kan ses i \cref{sec:arbejde}.
 \subsection{Opgaven}
 \subsection{Specifikationer}
 \subsection{Målsætninger}
@@ -211,10 +219,10 @@
 %\newpage
 %\renewcommand{\listtablename}{Liste over huskeord}
 \listoftables
-%\newpage
+\newpage
 
-%Appendicer herunder:
+% Appendicer herunder:
 
-%\input{Appendix.tex}
+\input{Appendix.tex}
 
 \end{document}
