@@ -35,7 +35,7 @@ public class Controller {
 
 	@FXML
 	public void in() {
-		label = new Label(" ");
+		label = new Label("Velkommen til Reversi");
 		if (b.getPlayers().get("White") == Player2) {
 			label.setText("Player2 is White and Player 1 is Black");
 
