@@ -66,11 +66,11 @@ public class Board {
     public void setPlayers() {
         Random rand = new Random();
         if (rand.nextInt(0, 2) == 0) {
-            players.put("White", "Player 1");
-            players.put("Black", "Player 2");
+            players.put("White", "Player1");
+            players.put("Black", "Player2");
         } else {
-            players.put("White", "Player 2");
-            players.put("Black", "Player 1");
+            players.put("White", "Player2");
+            players.put("Black", "Player1");
         }
     }
 
