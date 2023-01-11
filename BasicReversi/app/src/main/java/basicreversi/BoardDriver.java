@@ -67,7 +67,6 @@ public class BoardDriver {
         System.out.println("");
         // ------------ setPlayers test ------------ //
 
-        
         // ---------- Switch player test ----------- //
         System.out.println("---------- Switch player test -----------");
         Board b = new Board();
@@ -84,7 +83,7 @@ public class BoardDriver {
         System.out.println("---------- Switch player test -----------");
         System.out.println("");
         // ---------- Switch player test ----------- //
-        
+
         // -------------- Console game: ------------- //
         // consoleReversi();
         // -------------- Console game: ------------- //
@@ -148,7 +147,7 @@ public class BoardDriver {
         }
     }
 
-    private static void testSetPlayers(Board board, int colour1, String player1, int colour2, String player2){
+    private static void testSetPlayers(Board board, int colour1, String player1, int colour2, String player2) {
         board.setPlayers();
         System.out.println("Players random assignment:");
         System.out.println("White: " + board.getPlayers().get("White"));
