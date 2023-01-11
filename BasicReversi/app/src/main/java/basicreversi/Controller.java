@@ -93,24 +93,28 @@ public class Controller{
 			pane.getChildren().add(c);
 		}
 		
-		public void getCoordinates(MouseEvent event) {
+		public void getRowIndex(MouseEvent event) {
 			try {
-				int column = GridPane.getColumnIndex((Node) event.getSource());
 				int row = GridPane.getRowIndex((Node) event.getSource());
-				
-				
-				System.out.println(column);
 				System.out.println(row);	
 				} catch (Exception e) {
-					if (GridPane.getColumnIndex(pane)==null) {
-						GridPane.setColumnIndex(pane, 0);
-					}
 					if (GridPane.getRowIndex(pane)==null) {
 						GridPane.setRowIndex(pane, 0);
 					}
-					System.out.println(GridPane.getColumnIndex(pane));
 					System.out.println(GridPane.getRowIndex(pane));
 				}
+		}
+		
+		public void getColumnIndex(MouseEvent event) {
+			try {
+				int column = GridPane.getColumnIndex((Node) event.getSource());
+				System.out.println(column);
+			} catch (Exception e) {
+				if (GridPane.getColumnIndex(pane)==null) {
+					GridPane.setColumnIndex(pane, 0);
+				}
+				System.out.println(GridPane.getColumnIndex(pane));
+			}
 		}
 		
 		public void DrawWhiteCircle(MouseEvent event) {
