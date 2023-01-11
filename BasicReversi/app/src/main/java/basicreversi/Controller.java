@@ -142,8 +142,7 @@ public class Controller {
 
 		if (color == 1) {
 			Color stroke = Color.rgb(153, 153, 153);
-			Color fill = Color.rgb(204, 204, 204);
-			Circle c = new Circle(30, fill);
+			Circle c = new Circle(30, Color.rgb(204, 204, 204));
 			c.setStroke(stroke);
 			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth() / 2);
