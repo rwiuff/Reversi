@@ -15,7 +15,7 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: White;" textAlignment="CENTER" textFill="#140101">
+            <Label fx:id="label" alignment="CENTER" prefHeight="100.0" prefWidth="388.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#190101">
                <font>
                   <Font size="20.0" />
                </font>
@@ -29,7 +29,7 @@
       </HBox>
    </bottom>
    <center>
-      <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-background-color: GREEN;" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" style="-fx-background-color: GREEN;" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -54,6 +54,7 @@
             <InnerShadow />
          </effect>
          <children>
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
@@ -112,12 +113,11 @@
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
             <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Pane onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </GridPane>
    </center>

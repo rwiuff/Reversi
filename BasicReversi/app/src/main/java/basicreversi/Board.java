@@ -178,7 +178,7 @@ public class Board {
             flip(move, colour);
             return 11; // false , You can't place a point here
         } else {
-            return 13; // true, it's OK to place point.
+            return 13;
         }
 
     }
@@ -513,5 +513,6 @@ public class Board {
         }
         return flips;
     }
-
+    
 }
+	
