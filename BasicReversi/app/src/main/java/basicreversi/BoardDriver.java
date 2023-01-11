@@ -67,6 +67,24 @@ public class BoardDriver {
         System.out.println("");
         // ------------ setPlayers test ------------ //
 
+        
+        // ---------- Switch player test ----------- //
+        System.out.println("---------- Switch player test -----------");
+        Board b = new Board();
+        String oldWhite = b.getPlayers().get("White");
+        String oldBlack = b.getPlayers().get("Black");
+        System.out.println("White: " + b.getPlayers().get("White"));
+        System.out.println("Black: " + b.getPlayers().get("Black"));
+        b.resetBoard();
+        String newWhite = oldBlack;
+        String newBlack = oldWhite;
+        b.setPlayers(1, newWhite, 2, newBlack);
+        System.out.println("White: " + b.getPlayers().get("White"));
+        System.out.println("Black: " + b.getPlayers().get("Black"));
+        System.out.println("---------- Switch player test -----------");
+        System.out.println("");
+        // ---------- Switch player test ----------- //
+        
         // -------------- Console game: ------------- //
         // consoleReversi();
         // -------------- Console game: ------------- //
