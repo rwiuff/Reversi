@@ -106,15 +106,11 @@ public class Controller {
 							case 11:
 								label.setText("Good Job");
 								DrawCircle(event, color);
-
 						}
 				}
-
 			}
 			Winner();
-
 		}
-
 	}
 
 	public int getRowIndex(MouseEvent event) {
@@ -191,7 +187,6 @@ public class Controller {
 	}
 
 	public void First4(int r, int c, int color, MouseEvent e) {
-
 		if (color == 1) {
 			while (b.getTurn() < 2) {
 				int returnvalue = b.initplace(r, c, color);
@@ -205,7 +200,6 @@ public class Controller {
 				}
 			}
 		} else {
-
 			while (b.getTurn() < 2) {
 				int returnvalue = b.initplace(r, c, color);
 				if (returnvalue == 11) {
