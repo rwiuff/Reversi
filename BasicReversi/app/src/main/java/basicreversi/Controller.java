@@ -1,38 +1,26 @@
 package basicreversi;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 public class Controller {
 
 	@FXML
 	public Label label = new Label(" ");
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
 
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
-	private String Player2;
 	public Pane pane = new Pane();
-	private boolean player1 = true;
 	int color = 1;
 
 	int player1counter = 0;
@@ -42,23 +30,13 @@ public class Controller {
 
 	@FXML
 	public void in() {
-		if (b.getPlayers().get("White") == Player2) {
-			label.setText("Player 2 is White and Player 1 is Black");
-			// Schedule an event after 2 seconds
-			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-				label.setText("Player 2 Starts first");
-				gameStarted = true;
-			}));
-			timeline.play();
-		} else {
-			label.setText("Player 1 is White and Player 2 is Black");
-			// Schedule an event after 2 seconds
-			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-				label.setText("Player 1 starts!");
-				gameStarted = true;
-			}));
-			timeline.play();
-		}
+		label.setText(b.getPlayers().get("White") + " is White and " + b.getPlayers().get("Black") + " is Black");
+		// Schedule an event after 2 seconds
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+			label.setText(b.getPlayers().get("White") + " Starts first");
+			gameStarted = true;
+		}));
+		timeline.play();
 	}
 
 	@FXML
@@ -66,11 +44,18 @@ public class Controller {
 		String oldWhite = b.getPlayers().get("White");
 		String oldBlack = b.getPlayers().get("Black");
 		b.resetBoard();
-		update();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				String paneID = "#" + i + j;
+				Pane pane = (Pane) gridPane.lookup(paneID);
+				pane.getChildren().clear();
+			}
+		}
 		color = (color == 1) ? 2 : 1;
 		String newWhite = oldBlack;
 		String newBlack = oldWhite;
 		b.setPlayers(1, newWhite, 2, newBlack);
+		b.getPlayers();
 		gameStarted = false;
 		in();
 	}
