@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -24,16 +25,17 @@ public class Controller{
 		private Stage stage;
 		private Scene scene;
 		private Parent root;
-		
-	
+		private boolean gameStarted = false;
+		public GridPane gridpane = new GridPane();
 		private String Player2;
 		public Pane pane = new Pane();
-		private Board board;
-		private Main view;
+		private boolean player1 = true ;
 		
+		int player1counter = 0;
+		int player2counter = 0;
 		
 	    Board b = new Board();
-	    private boolean gameStarted = false;
+	    
 	    @FXML
 	    public void in() {
 	    
@@ -41,45 +43,47 @@ public class Controller{
 	    	    if(b.getPlayers().get("White") == Player2) {
 	    	        label.setText("Player2 is White and Player 1 is Black");
 	    	        
+	    	        // set white = 1 and black = 2
+	    	        int player2 = 1;
+	    	        int player1 = 2;
+	    	        
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player2 Starts first");
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("White Starts first");
 	    	        gameStarted = true;
 	    	    }));
 	    	        timeline.play();
+	    	        
 	    	    } else {
 	    	        label.setText("Player1 is White and Player2 is Black");
 	    	        
+	    	        // set white = 1 and black = 2
+	    	        int player1 = 1;
+	    	        int player2 = 2;
 	    	        // Schedule an event after 2 seconds
-	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("Player1 Starts first");
+	    	        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> { label.setText("White Starts first");
 	    	        gameStarted = true;
 	    	    }));
 	    	        timeline.play();
 }
 	    }
 	    
-		@FXML
-		public  void Restart(ActionEvent e) throws IOException  {
-			
-				root = FXMLLoader.load(getClass().getResource("main.fxml"));
-			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-			
-			
-			}
+		
 			
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
 			
 			if (gameStarted) {
 				
-		        DrawBlackCircle(event);
+				int col = GridPane.getColumnIndex( (Node) event.getSource());
+		    	int row = GridPane.getRowIndex((Node) event.getSource());
+		    	
+		    	First4(row, col, 1, event);
+				
+		       
+		    	   
+		       }
 		        
-		    } else {
-		        // Show a message to the user indicating that they need to wait
-		        // for the game to start
-		    }
+		  
 		}
 		
 		
@@ -103,11 +107,159 @@ public class Controller{
 			c.setCenterY(pane.getHeight()/2);
 			
 			pane.getChildren().add(c);
-					
 			
+			
+		
 		}
 		
+		@FXML
+		public  void Restart(ActionEvent e) throws IOException  {
+			
+			
+				root = FXMLLoader.load(getClass().getResource("main.fxml"));
+			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 	
-
-
+			}
+		
+		
+		// checks if a peice can be placed 
+				public void checkmove(int r, int c, int color, MouseEvent e) {
+					
+					if (b.getTurn()%2==0) { // if white turn
+					if (b.place(r, c, color)==11) {
+						DrawWhiteCircle(e);
+						label.setText("Player2´s turn");
+						
+					}
+					else if(b.place(r, c, color)==12) {
+						label.setText("Cannot place here");
+						
+					}
+					else {
+						label.setText("Illegal Placement");
+					}
+				}	
+					else { // if black turn
+						if (b.place(r, c, color)==11) {
+							DrawBlackCircle(e);
+							label.setText("Player2´s turn");
+							
+						}
+						else if(b.place(r, c, color)==12) {
+							label.setText("Cannot Place here");
+							
+					}
+						else {
+							label.setText("Illegal Placement");
+						}
+					}	
+						
+				}
+		
+						// whether to pass or not
+				public void PassOrNot(int r, int c, int color, MouseEvent e) {
+					if (b.getTurn()%2==0) { // if white turn
+						if(b.turnState(color)== 21) {
+						checkmove(r, c, color, e);
+					}
+						else {
+							label.setText("Pass");
+							
+						}
+					}
+					
+					else { // if black turn
+						if(b.turnState(color)== 21) {
+							checkmove(r, c, color, e);
+						}
+							else {
+								label.setText("Pass");
+								
+							}
+					}	
+			}
+				
+				
+					public void Winner() {
+						 if(b.getPlayers().get("White") == Player2) {
+						if(b.checkWinner()==41) {
+							// white wins
+							label.setText("Player1 Wins!");
+						}
+						
+						else if (b.checkWinner()==42) {
+							// black wins
+							label.setText("Player2 Wins!");					
+					}
+					else{
+						label.setText("It is a Draw!");
+					     }
+			         }
+					
+						 else {
+							 if(b.checkWinner()==41) {
+									// white wins
+									label.setText("Player2 Wins!");
+								}
+								
+								else if (b.checkWinner()==42) {
+									// black wins
+									label.setText("Player1 Wins!");					
+							}
+							else{
+								label.setText("It is a Draw!");
+							}
+					 }
+		}
+					
+					public void First4(int r, int c, int color, MouseEvent e) {
+						
+						if (player1 == true) {
+							int returnvalue = b.initplace(r, c, color);
+							if (returnvalue == 11) {
+								DrawWhiteCircle(e);
+								label.setText("White Turn again");
+								player1counter++;
+								if(player1counter >=2) {
+									player1 = false;
+									player1counter = 0;
+									label.setText("White Turn again");
+								}
+							}
+							if(returnvalue == 13) {
+								label.setText("Illegal Placement, try again");
+								First4(r,c,color,e);
+							}
+							
+							else {
+								
+								if (returnvalue == 11) {
+									DrawBlackCircle(e);
+									label.setText("Black Turn again");
+									player2counter++;
+									if(player2counter >=2) {
+										player1 = false;
+										player1counter = 0;
+										label.setText("White Turn again");
+									}
+								}
+								if(returnvalue == 13) {
+									label.setText("Illegal Placement, try again");
+									First4(r,c,color,e);
+								}
+								
+							}
+						}
+					
+		}
+					
+						
+						
+					
+				
 }
+
+	
