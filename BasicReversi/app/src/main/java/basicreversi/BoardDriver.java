@@ -1,6 +1,7 @@
 package basicreversi;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardDriver {
@@ -25,6 +26,10 @@ public class BoardDriver {
         a.turnState(1);
         a.place(2, 2, 1);
         printBoard(a);
+        ArrayList<int[]> flipped = a.getFlipped();
+        for (int i = 0; i < flipped.size(); i++) {
+            System.out.println("Flipped tiles: " + flipped.get(i)[0] + "," + flipped.get(i)[1]);
+        }
         System.out.println("--------- Multi-directional test ---------");
         System.out.println("");
         // --------- Multi-directional test --------- //

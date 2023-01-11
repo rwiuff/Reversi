@@ -26,6 +26,7 @@
  * -------------------------------- */
 package basicreversi;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
@@ -35,6 +36,7 @@ public class Board {
     private int turnCount = 0; // Counts the turn number
     private int boardsize = 8; // n in n x n dimensional board
     private int forfeitCounter = 0;
+    private ArrayList<int[]> flipped = new ArrayList<int[]>();
     private HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
     private HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> validMoves; //
 
@@ -57,6 +59,10 @@ public class Board {
 
     public int getTurn() { // Return Turn number
         return turnCount;
+    }
+
+    public ArrayList<int[]> getFlipped() {
+        return flipped;
     }
 
     public void turnClock() {
@@ -178,6 +184,7 @@ public class Board {
     }
 
     public void flip(String move, int colour) {
+        if(flipped.size() < 0) flipped.clear();
         HashMap<Integer, HashMap<Integer, Integer[]>> directionSet = validMoves.get(move);
         Set<Integer> directions = directionSet.keySet();
         for (Integer direction : directions) {
@@ -186,6 +193,7 @@ public class Board {
             for (Integer flip : flips) {
                 Integer[] k = flipSet.get(flip);
                 board[k[0]][k[1]] = colour;
+                flipped.add(new int[] { k[0], k[1] });
             }
 
         }
