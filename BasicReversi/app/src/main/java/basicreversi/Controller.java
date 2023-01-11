@@ -92,7 +92,6 @@ public class Controller{
 			Pane pane = (Pane) event.getSource();
 			try {
 				int row = GridPane.getRowIndex((Node) event.getSource());
-				System.out.println(row);	
 				} catch (Exception e) {
 					if (GridPane.getRowIndex(pane)==null) {
 						GridPane.setRowIndex(pane, 0);
@@ -105,7 +104,6 @@ public class Controller{
 			Pane pane = (Pane) event.getSource();
 			try {
 				int column = GridPane.getColumnIndex((Node) event.getSource());
-				System.out.println(column);
 			} catch (Exception e) {
 				if (GridPane.getColumnIndex(pane)==null) {
 					GridPane.setColumnIndex(pane, 0);
