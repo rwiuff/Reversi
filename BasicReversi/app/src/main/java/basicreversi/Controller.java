@@ -1,24 +1,22 @@
 package basicreversi;
-import javafx.animation.KeyFrame;
 import java.io.IOException;
-import java.util.Random;
-import javafx.util.Duration;
+
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Controller{
 	
@@ -27,15 +25,25 @@ public class Controller{
 		private Stage stage;
 		private Scene scene;
 		private Parent root;
+		public GridPane gridPane = new GridPane();
 		
-	
 		private String Player2;
-		public Pane pane = new Pane();
+		public Pane pane;
 		private Board board;
 		private Main view;
 		
 		
 	    Board b = new Board();
+	    
+	    
+	    
+	    
+	    public void initializeGame() {
+	    	in();
+	    	DrawWhiteCircle(null);
+	    }
+	    
+	    
 	   
 	    @FXML
 	    public void in() {
@@ -82,10 +90,27 @@ public class Controller{
 			Circle c = new Circle(30, Color.BLACK);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
-			
 			pane.getChildren().add(c);
-			
-			
+		}
+		
+		public void getCoordinates(MouseEvent event) {
+			try {
+				int column = GridPane.getColumnIndex((Node) event.getSource());
+				int row = GridPane.getRowIndex((Node) event.getSource());
+				
+				
+				System.out.println(column);
+				System.out.println(row);	
+				} catch (Exception e) {
+					if (GridPane.getColumnIndex(pane)==null) {
+						GridPane.setColumnIndex(pane, 0);
+					}
+					if (GridPane.getRowIndex(pane)==null) {
+						GridPane.setRowIndex(pane, 0);
+					}
+					System.out.println(GridPane.getColumnIndex(pane));
+					System.out.println(GridPane.getRowIndex(pane));
+				}
 		}
 		
 		public void DrawWhiteCircle(MouseEvent event) {
@@ -96,9 +121,11 @@ public class Controller{
 			c.setCenterY(pane.getHeight()/2);
 			
 			pane.getChildren().add(c);
+			
 					
 			
 		}
+		
 		
 	
 

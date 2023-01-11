@@ -47,7 +47,7 @@ public class Board {
         return board; // Returns board array
     }
 
-    public int getTurn() {   //Return Turn number
+    public int getTurn() {
         return turnCount;
     }
 
@@ -129,9 +129,9 @@ public class Board {
             board[row][column] = colour;
             turnClock();
             flip(move, colour);
-            return 11; //false , You can't place a point here
+            return 11;
         } else {
-            return 13; // true, it's OK to place point.
+            return 13;
         }
 
     }
@@ -457,5 +457,6 @@ public class Board {
         }
         return flips;
     }
-
+    
 }
+	
