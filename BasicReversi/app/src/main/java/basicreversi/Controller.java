@@ -86,7 +86,9 @@ public class Controller {
 		int color = 0;
 		if (gameStarted) {
 			System.out.println("(" + getRowIndex(event) + "," + getColumnIndex(event) + ")");
-			First4(getRowIndex(event), getColumnIndex(event), 1, event);
+			if(b.getTurn() < 2) {
+				First4(getRowIndex(event), getColumnIndex(event), 1, event);
+			}
 			while (b.gameState() == 32) {
 				switch (b.getTurn() % 2) {
 					case 0:
@@ -185,10 +187,8 @@ public class Controller {
 					label.setText("White Turn again");
 				} else if (returnvalue == 12) {
 					label.setText("Cannot place here");
-					First4(r, c, color, e);
 				} else {
 					label.setText("Illegal Placement, try again");
-					First4(r, c, color, e);
 				}
 			}
 		} else {
@@ -199,10 +199,8 @@ public class Controller {
 					label.setText("Black Turn again");
 				} else if (returnvalue == 12) {
 					label.setText("Cannot place here");
-					First4(r, c, color, e);
 				} else {
 					label.setText("Illegal Placement, try again");
-					First4(r, c, color, e);
 				}
 			}
 		}
