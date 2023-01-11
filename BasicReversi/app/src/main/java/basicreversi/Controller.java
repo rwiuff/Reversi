@@ -89,9 +89,11 @@ public class Controller{
 		
 		
 		public void DrawBlackCircle(MouseEvent event) {
-			
+			Color stroke = Color.rgb(179, 179, 179);
 			Pane pane = (Pane) event.getSource();
 			Circle c = new Circle(30, Color.BLACK);
+			c.setStroke(stroke);
+			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
 			
@@ -101,9 +103,13 @@ public class Controller{
 		}
 		
 		public void DrawWhiteCircle(MouseEvent event) {
-			
+			Color stroke = Color.rgb(153, 153, 153);
+			Color fill = Color.rgb(204, 204, 204);
 			Pane pane = (Pane) event.getSource();
 			Circle c = new Circle(30, Color.WHITE);
+			c.setFill(fill);
+			c.setStroke(stroke);
+			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
 			
