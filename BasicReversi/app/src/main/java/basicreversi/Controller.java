@@ -98,7 +98,7 @@ public class Controller{
 			pane.getChildren().add(c);
 		}
 		
-		public void getRowIndex(MouseEvent event) {
+		public int getRowIndex(MouseEvent event) {
 			try {
 				int row = GridPane.getRowIndex((Node) event.getSource());
 				System.out.println(row);	
@@ -106,11 +106,11 @@ public class Controller{
 					if (GridPane.getRowIndex(pane)==null) {
 						GridPane.setRowIndex(pane, 0);
 					}
-					System.out.println(GridPane.getRowIndex(pane));
 				}
+			return GridPane.getRowIndex(pane);
 		}
 		
-		public void getColumnIndex(MouseEvent event) {
+		public int getColumnIndex(MouseEvent event) {
 			try {
 				int column = GridPane.getColumnIndex((Node) event.getSource());
 				System.out.println(column);
@@ -118,8 +118,8 @@ public class Controller{
 				if (GridPane.getColumnIndex(pane)==null) {
 					GridPane.setColumnIndex(pane, 0);
 				}
-				System.out.println(GridPane.getColumnIndex(pane));
 			}
+			return GridPane.getColumnIndex(pane);
 		}
 		
 		public void DrawWhiteCircle(MouseEvent event) {
