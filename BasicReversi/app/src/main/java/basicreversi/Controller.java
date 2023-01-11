@@ -37,6 +37,7 @@ public class Controller{
 		
 	    Board b = new Board();
 	    
+	    
 
 	    @FXML
 	    public void in() {
@@ -79,7 +80,6 @@ public class Controller{
 				System.out.println("("+getRowIndex(event)+","+getColumnIndex(event)+")");
 		    	First4(getRowIndex(event), getColumnIndex(event), 1, event);
 				
-		       
 		    	   
 		       }
 		        
@@ -136,7 +136,6 @@ public class Controller{
 			}
 		}
 		
-
 		@FXML
 		public  void Restart(ActionEvent e) throws IOException  {
 			
@@ -151,7 +150,6 @@ public class Controller{
 		
 		
 		
-				
 					public void Winner() {
 						 if(b.getPlayers().get("White") == Player2) {
 						if(b.checkWinner()==41) {
@@ -187,50 +185,46 @@ public class Controller{
 				
 					public void First4(int r, int c, int color, MouseEvent e) {
 						
-						if (color == 1) {
+						if(color == 1 ) {
+						while(b.getTurn()< 2) {
 							int returnvalue = b.initplace(r, c, color);
-							if (returnvalue == 11) {
+							if(returnvalue == 11) {
 								DrawCircle(e, color);
 								label.setText("White Turn again");
-								player1counter++;
-								
-								if(player1counter >=2) {
-									player1 = false;
-									player1counter = 0;
-									label.setText("White Turn again");
-								}
-							}
-							if(returnvalue == 13) {
-								label.setText("Illegal Placement, try again");
-								First4(r,c,color,e);
-							}
 							
-					else {
-								
-						if (returnvalue == 11) {
-							DrawCircle(e, color);
-							label.setText("Black Turn again");
-							player2counter++;
-
-							if(player2counter >=2) {
-										player1 = false;
-										player1counter = 0;
-										label.setText("White Turn again");
-									}
-								}
-								if(returnvalue == 13) {
-									label.setText("Illegal Placement, try again");
+							}
+							 else {
+								 label.setText("Illegal Placement, try again");
 									First4(r,c,color,e);
-								}
+							 	}
+							}
+						}
+					
+						
+						else {
+							
+							while(b.getTurn()< 2) {
+								int returnvalue = b.initplace(r, c, color);
+								if(returnvalue == 11) {
+									DrawCircle(e, color);
+									label.setText("Black Turn again");
 								
+								}
+								 else {
+									 label.setText("Illegal Placement, try again");
+											First4(r,c,color,e);
 							}
 						}
 					}
+				}
+}
+						
+					
 					
 				
 						
 					
 				
-}
+
 
 	
