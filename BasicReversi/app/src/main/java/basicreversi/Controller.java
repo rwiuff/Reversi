@@ -1,4 +1,5 @@
 package basicreversi;
+
 import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
@@ -18,13 +19,13 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Controller{
-	
-		@FXML
-		public Label label = new Label(" ");
-		private Stage stage;
-		private Scene scene;
-		private Parent root;
+public class Controller {
+
+	@FXML
+	public Label label = new Label(" ");
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
@@ -129,21 +130,22 @@ public class Controller{
 		try {
 			int column = GridPane.getColumnIndex((Node) event.getSource());
 		} catch (Exception e) {
-			if (GridPane.getColumnIndex(pane) == null) {
+			if (GridPane.getColumnIndex(pane) == null)
 				GridPane.setColumnIndex(pane, 0);
-			}
 		}
-		
-		public void DrawCircle(MouseEvent event, int color) {
-			
-			Pane pane = (Pane) event.getSource();
-			
-			if(color == 1) {
-			
+		return GridPane.getColumnIndex(pane);
+	}
+
+	public void DrawCircle(MouseEvent event, int color) {
+
+		Pane pane = (Pane) event.getSource();
+
+		if (color == 1) {
+
 			Circle c = new Circle(30, Color.WHITE);
-			c.setCenterX(pane.getWidth()/2);
-			c.setCenterY(pane.getHeight()/2);
-			
+			c.setCenterX(pane.getWidth() / 2);
+			c.setCenterY(pane.getHeight() / 2);
+
 			pane.getChildren().add(c);
 		} else {
 			Color stroke = Color.rgb(179, 179, 179);
@@ -188,7 +190,9 @@ public class Controller{
 				if (returnvalue == 11) {
 					DrawCircle(e, color);
 					label.setText("White Turn again");
-
+				} else if (returnvalue == 12) {
+					label.setText("Cannot place here");
+					First4(r, c, color, e);
 				} else {
 					label.setText("Illegal Placement, try again");
 					First4(r, c, color, e);
@@ -200,7 +204,9 @@ public class Controller{
 				if (returnvalue == 11) {
 					DrawCircle(e, color);
 					label.setText("Black Turn again");
-
+				} else if (returnvalue == 12) {
+					label.setText("Cannot place here");
+					First4(r, c, color, e);
 				} else {
 					label.setText("Illegal Placement, try again");
 					First4(r, c, color, e);
@@ -209,13 +215,3 @@ public class Controller{
 		}
 	}
 }
-						
-					
-					
-				
-						
-					
-				
-
-
-	
