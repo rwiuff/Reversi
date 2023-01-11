@@ -78,6 +78,7 @@ public class Board {
         moveAnalyser(colour);
         if (validMoves.size() == 0) {
             forfeitCounter++;
+            turnClock();
             return 22;
         }
         return 21;

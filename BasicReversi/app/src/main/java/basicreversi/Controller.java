@@ -75,11 +75,9 @@ public class Controller{
 			public void onPaneClicked(MouseEvent event) {
 			
 			if (gameStarted) {
-				
-				int col = GridPane.getColumnIndex( (Node) event.getSource());
-		    	int row = GridPane.getRowIndex((Node) event.getSource());
 		    	
-		    	First4(row, col, 1, event);
+				System.out.println("the row index is "+getRowIndex(event)+" and the column index is "+getColumnIndex(event));
+		    	First4(getRowIndex(event), getColumnIndex(event), 1, event);
 				
 		       
 		    	   
@@ -99,6 +97,7 @@ public class Controller{
 		}
 		
 		public int getRowIndex(MouseEvent event) {
+			Pane pane = (Pane) event.getSource();
 			try {
 				int row = GridPane.getRowIndex((Node) event.getSource());
 				System.out.println(row);	
@@ -111,6 +110,7 @@ public class Controller{
 		}
 		
 		public int getColumnIndex(MouseEvent event) {
+			Pane pane = (Pane) event.getSource();
 			try {
 				int column = GridPane.getColumnIndex((Node) event.getSource());
 				System.out.println(column);
