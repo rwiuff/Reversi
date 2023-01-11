@@ -165,20 +165,10 @@ public class Controller {
 		if (b.getPlayers().get("White") == Player2) {
 			if (b.checkWinner() == 41) {
 				// white wins
-				label.setText("Player1 Wins!");
+				label.setText("White Wins!");
 			} else if (b.checkWinner() == 42) {
 				// black wins
-				label.setText("Player2 Wins!");
-			} else {
-				label.setText("It is a Draw!");
-			}
-		} else {
-			if (b.checkWinner() == 41) {
-				// white wins
-				label.setText("Player2 Wins!");
-			} else if (b.checkWinner() == 42) {
-				// black wins
-				label.setText("Player1 Wins!");
+				label.setText("Black Wins!");
 			} else {
 				label.setText("It is a Draw!");
 			}
