@@ -239,9 +239,10 @@ public class Controller{
 					 }
 		}
 					
+				
 					public void First4(int r, int c, int color, MouseEvent e) {
 						
-						if (player1 == true) {
+						if (color == 1) {
 							int returnvalue = b.initplace(r, c, color);
 							if (returnvalue == 11) {
 								DrawWhiteCircle(e);
@@ -258,13 +259,14 @@ public class Controller{
 								First4(r,c,color,e);
 							}
 							
-							else {
+					else {
 								
-								if (returnvalue == 11) {
-									DrawBlackCircle(e);
-									label.setText("Black Turn again");
-									player2counter++;
-									if(player2counter >=2) {
+						if (returnvalue == 11) {
+							DrawBlackCircle(e);
+							label.setText("Black Turn again");
+							player2counter++;
+
+							if(player2counter >=2) {
 										player1 = false;
 										player1counter = 0;
 										label.setText("White Turn again");
@@ -277,10 +279,9 @@ public class Controller{
 								
 							}
 						}
+					}
 					
-		}
-					
-						
+				
 						
 					
 				
