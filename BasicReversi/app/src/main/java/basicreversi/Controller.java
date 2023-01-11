@@ -141,8 +141,11 @@ public class Controller {
 		Pane pane = (Pane) event.getSource();
 
 		if (color == 1) {
-
-			Circle c = new Circle(30, Color.WHITE);
+			Color stroke = Color.rgb(153, 153, 153);
+			Color fill = Color.rgb(204, 204, 204);
+			Circle c = new Circle(30, fill);
+			c.setStroke(stroke);
+			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth() / 2);
 			c.setCenterY(pane.getHeight() / 2);
 
