@@ -150,63 +150,7 @@ public class Controller{
 			}
 		
 		
-		// checks if a peice can be placed 
-				public void checkmove(int r, int c, int color, MouseEvent e) {
-					
-					if (b.getTurn()%2==0) { // if white turn
-					if (b.place(r, c, color)==11) {
-						DrawCircle(e, color);
-						label.setText("Player2´s turn");
-						
-					}
-					else if(b.place(r, c, color)==12) {
-						label.setText("Cannot place here");
-						
-					}
-					else {
-						label.setText("Illegal Placement");
-					}
-				}	
-					else { // if black turn
-						if (b.place(r, c, color)==11) {
-							DrawCircle(e, color);
-							label.setText("Player2´s turn");
-							
-						}
-						else if(b.place(r, c, color)==12) {
-							label.setText("Cannot Place here");
-							
-					}
-						else {
-							label.setText("Illegal Placement");
-						}
-					}	
-						
-				}
 		
-						// whether to pass or not
-				public void PassOrNot(int r, int c, int color, MouseEvent e) {
-					if (b.getTurn()%2==0) { // if white turn
-						if(b.turnState(color)== 21) {
-						checkmove(r, c, color, e);
-					}
-						else {
-							label.setText("Pass");
-							
-						}
-					}
-					
-					else { // if black turn
-						if(b.turnState(color)== 21) {
-							checkmove(r, c, color, e);
-						}
-							else {
-								label.setText("Pass");
-								
-							}
-					}	
-			}
-				
 				
 					public void Winner() {
 						 if(b.getPlayers().get("White") == Player2) {
@@ -249,6 +193,7 @@ public class Controller{
 								DrawCircle(e, color);
 								label.setText("White Turn again");
 								player1counter++;
+								
 								if(player1counter >=2) {
 									player1 = false;
 									player1counter = 0;
