@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-
 public class Controller{
 	
 		@FXML
@@ -58,17 +57,22 @@ public class Controller{
 }
 	    }
 	    
-		@FXML
-		public  void Restart(ActionEvent e) throws IOException  {
-			
-				root = FXMLLoader.load(getClass().getResource("main.fxml"));
-			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-			
-			
-			}
+	    @FXML
+	    public void Restart(ActionEvent e) throws IOException  {
+	        root = FXMLLoader.load(getClass().getResource("main.fxml"));
+	        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+	        scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+	        String oldWhite = b.getPlayers().get("White");
+	        String oldBlack = b.getPlayers().get("Black");
+	        b.resetBoard();
+	        String newWhite = oldBlack;
+	        String newBlack = oldWhite;
+	        b.setPlayers(1, newWhite, 2, newBlack);
+	        gameStarted = false;
+	    }
+
 			
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
@@ -85,11 +89,9 @@ public class Controller{
 		
 		
 		public void DrawBlackCircle(MouseEvent event) {
-			Color stroke = Color.rgb(179, 179, 179);
+			
 			Pane pane = (Pane) event.getSource();
 			Circle c = new Circle(30, Color.BLACK);
-			c.setStroke(stroke);
-			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
 			
@@ -99,13 +101,9 @@ public class Controller{
 		}
 		
 		public void DrawWhiteCircle(MouseEvent event) {
-			Color stroke = Color.rgb(153, 153, 153);
-			Color fill = Color.rgb(204, 204, 204);
+			
 			Pane pane = (Pane) event.getSource();
 			Circle c = new Circle(30, Color.WHITE);
-			c.setFill(fill);
-			c.setStroke(stroke);
-			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
 			
@@ -113,5 +111,8 @@ public class Controller{
 					
 			
 		}
+		
+	
+
 
 }
