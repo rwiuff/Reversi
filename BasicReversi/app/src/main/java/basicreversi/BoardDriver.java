@@ -169,11 +169,9 @@ public class BoardDriver {
         while (b.gameState() == 32) {
             if (b.getTurn() % 2 == 0) {
                 colour = 2;
-                opponent = (colour == 2) ? 1 : 2;
                 playastring = b.getPlayers().get("Black");
             } else {
                 colour = 1;
-                opponent = (colour == 1) ? 2 : 1;
                 playastring = b.getPlayers().get("White");
             }
             switch (b.turnState(colour)) {

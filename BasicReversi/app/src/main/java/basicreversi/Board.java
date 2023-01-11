@@ -118,6 +118,7 @@ public class Board {
         moveAnalyser(colour);
         if (validMoves.keySet().isEmpty()) {
             forfeitCounter++;
+            turnClock();
             return 22;
         }
         return 21;
