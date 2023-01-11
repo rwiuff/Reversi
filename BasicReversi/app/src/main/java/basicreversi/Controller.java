@@ -78,7 +78,9 @@ public class Controller{
 		    	
 				System.out.println("("+getRowIndex(event)+","+getColumnIndex(event)+")");
 		    	First4(getRowIndex(event), getColumnIndex(event), 1, event);
-				
+				while (gameState==32) {
+					
+				}
 		       
 		    	   
 		       }
