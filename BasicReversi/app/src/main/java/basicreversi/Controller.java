@@ -76,7 +76,7 @@ public class Controller{
 			
 			if (gameStarted) {
 		    	
-				System.out.println("the row index is "+getRowIndex(event)+" and the column index is "+getColumnIndex(event));
+				System.out.println("("+getRowIndex(event)+","+getColumnIndex(event)+")");
 		    	First4(getRowIndex(event), getColumnIndex(event), 1, event);
 				
 		       
