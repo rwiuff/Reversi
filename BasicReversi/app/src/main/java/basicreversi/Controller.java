@@ -1,6 +1,8 @@
 package basicreversi;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
@@ -31,6 +33,7 @@ public class Controller {
 	private String Player2;
 	public Pane pane = new Pane();
 	private boolean player1 = true;
+	int color = 1;
 
 	int player1counter = 0;
 	int player2counter = 0;
@@ -40,24 +43,18 @@ public class Controller {
 	@FXML
 	public void in() {
 		if (b.getPlayers().get("White") == Player2) {
-			label.setText("Player2 is White and Player 1 is Black");
-			// set white = 1 and black = 2
-			int player2 = 1;
-			int player1 = 2;
+			label.setText("Player 2 is White and Player 1 is Black");
 			// Schedule an event after 2 seconds
-			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-				label.setText("White Starts first");
+			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+				label.setText("Player 2 Starts first");
 				gameStarted = true;
 			}));
 			timeline.play();
 		} else {
-			label.setText("Player1 is White and Player2 is Black");
-			// set white = 1 and black = 2
-			int player1 = 1;
-			int player2 = 2;
+			label.setText("Player 1 is White and Player 2 is Black");
 			// Schedule an event after 2 seconds
-			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-				label.setText("White Starts first");
+			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+				label.setText("Player 1 starts!");
 				gameStarted = true;
 			}));
 			timeline.play();
@@ -66,80 +63,95 @@ public class Controller {
 
 	@FXML
 	public void Restart(ActionEvent e) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("main.fxml"));
-		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
 		String oldWhite = b.getPlayers().get("White");
 		String oldBlack = b.getPlayers().get("Black");
 		b.resetBoard();
+		update();
+		color = (color == 1) ? 2 : 1;
 		String newWhite = oldBlack;
 		String newBlack = oldWhite;
 		b.setPlayers(1, newWhite, 2, newBlack);
 		gameStarted = false;
+		in();
 	}
 
 	@FXML
 	public void onPaneClicked(MouseEvent event) {
-		int color = 0;
+		int row = getRowIndex(event);
+		int column = getColumnIndex(event);
+		Pane pane = (Pane) event.getSource();
 		if (gameStarted) {
-			System.out.println("(" + getRowIndex(event) + "," + getColumnIndex(event) + ")");
-			if(b.getTurn() < 2) {
-				First4(getRowIndex(event), getColumnIndex(event), 1, event);
-				event.consume();
-			}
-			while (b.gameState() == 32) {
-				switch (b.getTurn() % 2) {
-					case 0:
-						color = 1;
-					case 1:
-						color = 2;
-				}
+			System.out.println("(" + row + "," + column + ")");
+			if (b.getTurn() < 2) {
+				firstFour(row, column, color, pane);
+			} else {
+				color = (b.getTurn() % 2 == 0) ? 2 : 1;
+				String ownString = (color == 1) ? b.getPlayers().get("White") : b.getPlayers().get("Black");
+				String opponentString = (color == 1) ? b.getPlayers().get("Black") : b.getPlayers().get("White");
 				switch (b.turnState(color)) {
 					case 22:
-						label.setText("Melder Pas");
+						label.setText("No legal moves. " + opponentString + "'s turn");
+						break;
 					case 21:
-						switch (b.place(getRowIndex(event), getColumnIndex(event), color)) {
-							case 12:
-								label.setText("Occupied");
-							case 13:
-								label.setText("Illegal name");
+						label.setText(ownString + "s turn");
+						switch (b.place(row, column, color)) {
 							case 11:
-								label.setText("Good Job");
-								DrawCircle(event, color);
+								update();
+								label.setText("Good job!");
+								break;
+							case 12:
+								label.setText("Field already occupied");
+								break;
+							case 13:
+								label.setText("Illegal move");
+								break;
 						}
 				}
+				switch (b.gameState()) {
+					case 31:
+						String outcome = "";
+						switch (b.checkWinner()) {
+							case 41:
+								outcome = b.getPlayers().get("White") + " wins!";
+								break;
+							case 42:
+								outcome = b.getPlayers().get("Black") + " wins!";
+								break;
+							case 43:
+								outcome = "It's a draw!";
+								break;
+						}
+						label.setText("Game is over!\n" + outcome);
+						break;
+					case 32:
+						label.setText(opponentString + "'s turn");
+				}
 			}
-			Winner();
+		}
+	}
+
+	public void update() {
+		int[][] board = b.getBoard();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				String paneID = "#" + i + j;
+				Pane pane = (Pane) gridPane.lookup(paneID);
+				DrawCircle(board[i][j], pane);
+			}
 		}
 	}
 
 	public int getRowIndex(MouseEvent event) {
 		Pane pane = (Pane) event.getSource();
-		try {
-			int row = GridPane.getRowIndex((Node) event.getSource());
-		} catch (Exception e) {
-			if (GridPane.getRowIndex(pane) == null) {
-				GridPane.setRowIndex(pane, 0);
-			}
-		}
 		return GridPane.getRowIndex(pane);
 	}
 
 	public int getColumnIndex(MouseEvent event) {
 		Pane pane = (Pane) event.getSource();
-		try {
-			int column = GridPane.getColumnIndex((Node) event.getSource());
-		} catch (Exception e) {
-			if (GridPane.getColumnIndex(pane) == null)
-				GridPane.setColumnIndex(pane, 0);
-		}
 		return GridPane.getColumnIndex(pane);
 	}
 
-	public void DrawCircle(MouseEvent event, int color) {
-		Pane pane = (Pane) event.getSource();
+	public void DrawCircle(int color, Pane pane) {
 		if (color == 1) {
 			Color stroke = Color.rgb(153, 153, 153);
 			Circle c = new Circle(30, Color.rgb(204, 204, 204));
@@ -147,58 +159,34 @@ public class Controller {
 			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth() / 2);
 			c.setCenterY(pane.getHeight() / 2);
-
 			pane.getChildren().add(c);
-		} else {
+		} else if (color == 2) {
 			Color stroke = Color.rgb(179, 179, 179);
 			Circle c = new Circle(30, Color.BLACK);
 			c.setStroke(stroke);
 			c.setStrokeWidth(3);
 			c.setCenterX(pane.getWidth() / 2);
 			c.setCenterY(pane.getHeight() / 2);
-
 			pane.getChildren().add(c);
 		}
 	}
-	public void Winner() {
-		if (b.getPlayers().get("White") == Player2) {
-			if (b.checkWinner() == 41) {
-				// white wins
-				label.setText("White Wins!");
-			} else if (b.checkWinner() == 42) {
-				// black wins
-				label.setText("Black Wins!");
-			} else {
-				label.setText("It is a Draw!");
-			}
-		}
-	}
 
-	public void First4(int r, int c, int color, MouseEvent e) {
-		if (color == 1) {
-			while (b.getTurn() < 2) {
-				int returnvalue = b.initplace(r, c, color);
-				if (returnvalue == 11) {
-					DrawCircle(e, color);
-					label.setText("White Turn again");
-				} else if (returnvalue == 12) {
-					label.setText("Cannot place here");
-				} else {
-					label.setText("Illegal Placement, try again");
-				}
-			}
-		} else {
-			while (b.getTurn() < 2) {
-				int returnvalue = b.initplace(r, c, color);
-				if (returnvalue == 11) {
-					DrawCircle(e, color);
-					label.setText("Black Turn again");
-				} else if (returnvalue == 12) {
-					label.setText("Cannot place here");
-				} else {
-					label.setText("Illegal Placement, try again");
-				}
-			}
+	public void firstFour(int row, int column, int color, Pane pane) {
+		String playerTurn = b.getPlayers().get("White");
+		switch (b.initplace(row, column, color)) {
+			case 11:
+				update();
+				if (b.getTurn() == 1)
+					label.setText(playerTurn + ": Place second tile");
+				if (b.getTurn() > 1)
+					label.setText(playerTurn + ": Your move!");
+				break;
+			case 12:
+				label.setText("Cannot place here");
+				break;
+			case 13:
+				label.setText("Illegal Placement, try again");
+				break;
 		}
 	}
 }

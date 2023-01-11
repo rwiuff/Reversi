@@ -80,11 +80,11 @@ public class Board {
     public void setPlayers() {
         Random rand = new Random();
         if (rand.nextInt(0, 2) == 0) {
-            players.put("White", "Player1");
-            players.put("Black", "Player2");
+            players.put("White", "Player 1");
+            players.put("Black", "Player 2");
         } else {
-            players.put("White", "Player2");
-            players.put("Black", "Player1");
+            players.put("White", "Player 2");
+            players.put("Black", "Player 1");
         }
     }
 
@@ -156,16 +156,17 @@ public class Board {
                             if (board[i][j] == 0) {
                                 board[i][j] = opponent;
                                 flipped.add(new int[] { i, j });
+                                turnClock();
                             }
-                            turnClock();
                         }
                     }
                 }
+                return 11;
+            } else {
+                return 13;
             }
-            return 11;
-        } else {
-            return 13;
         }
+        return 0;
     }
 
     public int place(int row, int column, int colour) {
