@@ -71,15 +71,42 @@ public class Controller{
 	    }
 	    
 		
-			
+		
+	   
+	    
+	    
 		@FXML
 			public void onPaneClicked(MouseEvent event) {
+			
+			int color;
 			
 			if (gameStarted) {
 		    	
 				System.out.println("("+getRowIndex(event)+","+getColumnIndex(event)+")");
 		    	First4(getRowIndex(event), getColumnIndex(event), 1, event);
-				
+	    	
+				while (b.gameState()==32) {
+					switch(b.getTurn()%2) {
+					 
+					case 0: color=1;
+					case 1: color=2;
+					}
+					
+					switch(b.turnState(color)) {
+					case 22: label.setText("Melder Pas");
+					case 21: switch(b.place(getRowIndex(event),getColumnIndex(event),color)) {
+						case 12: label.setText("Occupied");
+						case 13: label.setText("Illegal name");
+						case 11: label.setText("Good Job");
+							DrawCircle(event, color);
+					
+					}
+					}
+					
+					
+				}
+		       Winner();
+
 		    	   
 		       }
 		        
