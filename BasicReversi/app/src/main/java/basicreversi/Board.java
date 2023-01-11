@@ -142,7 +142,6 @@ public class Board {
         for (Integer key : flips) {
             Integer[] k = flipsSet.get(key);
             board[k[0]][k[1]] = colour;
-            System.out.println(k);
         }
     }
 
