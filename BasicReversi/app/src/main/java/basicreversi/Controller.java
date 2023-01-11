@@ -1,5 +1,4 @@
 package basicreversi;
-
 import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
@@ -19,13 +18,13 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Controller {
-
-	@FXML
-	public Label label = new Label(" ");
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+public class Controller{
+	
+		@FXML
+		public Label label = new Label(" ");
+		private Stage stage;
+		private Scene scene;
+		private Parent root;
 
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
@@ -134,21 +133,17 @@ public class Controller {
 				GridPane.setColumnIndex(pane, 0);
 			}
 		}
-		return GridPane.getColumnIndex(pane);
-	}
-
-	public void DrawCircle(MouseEvent event, int color) {
-		Pane pane = (Pane) event.getSource();
-		if (color == 1) {
-			Color stroke = Color.rgb(153, 153, 153);
-			Color fill = Color.rgb(204, 204, 204);
+		
+		public void DrawCircle(MouseEvent event, int color) {
+			
+			Pane pane = (Pane) event.getSource();
+			
+			if(color == 1) {
+			
 			Circle c = new Circle(30, Color.WHITE);
-			c.setFill(fill);
-			c.setStroke(stroke);
-			c.setStrokeWidth(3);
-			c.setCenterX(pane.getWidth() / 2);
-			c.setCenterY(pane.getHeight() / 2);
-
+			c.setCenterX(pane.getWidth()/2);
+			c.setCenterY(pane.getHeight()/2);
+			
 			pane.getChildren().add(c);
 		} else {
 			Color stroke = Color.rgb(179, 179, 179);
@@ -214,3 +209,13 @@ public class Controller {
 		}
 	}
 }
+						
+					
+					
+				
+						
+					
+				
+
+
+	
