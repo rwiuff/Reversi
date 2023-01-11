@@ -11,6 +11,7 @@ public class BoardDriver {
         // --------- Multi-directional test --------- //
         System.out.println("--------- Multi-directional test ---------");
         Board a = new Board();
+        a.turnState(1);
         System.out.println(a.getGreeting());
         a.setPiece(2, 3, 2);
         a.setPiece(2, 4, 1);
@@ -20,47 +21,141 @@ public class BoardDriver {
         a.setPiece(4, 2, 1);
         a.setPiece(4, 3, 1);
         a.setPiece(4, 4, 2);
-        printBoard(a.getBoard());
+        printBoard(a);
         a.turnState(1);
         a.place(2, 2, 1);
-        printBoard(a.getBoard());
+        printBoard(a);
         System.out.println("--------- Multi-directional test ---------");
         System.out.println("");
         // --------- Multi-directional test --------- //
 
         // ------------ turnState test ------------- //
         System.out.println("------------ turnState test -------------");
+        a.resetBoard();
+        printBoard(a);
+        testTurnState(a, 1);
         a.setPiece(4, 4, 1);
         a.setPiece(3, 3, 1);
-        printBoard(a.getBoard());
-        System.out.println(a.turnState(1));
+        a.setPiece(3, 4, 2);
+        a.setPiece(4, 3, 2);
+        printBoard(a);
+        testTurnState(a, 2);
         System.out.println("------------ turnState test -------------");
         System.out.println("");
         // ------------ turnState test ------------- //
 
-        // --------- Multi-directional test --------- //
-        System.out.println("--------- Multi-directional test ---------");
-        System.out.println(a.gameState());
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
+        // ---- gameState and checkWinner test ---- //
+        System.out.println("---- gameState and checkWinner test ----");
+        testGameState(a);
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 a.setPiece(i, j, 1);
             }
         }
-        printBoard(a.getBoard());
-        System.out.println(a.gameState());
-        System.out.println(a.checkWinner());
-        System.out.println("--------- Multi-directional test ---------");
+        printBoard(a);
+        testGameState(a);
+        testCheckWinner(a);
+        System.out.println("---- gameState and checkWinner test ----");
         System.out.println("");
-        // --------- Multi-directional test --------- //
+        // ---- gameState and checkWinner test ---- //
 
+        // ------------ setPlayers test ------------ //
+        System.out.println("------------ setPlayers test ------------");
+        a.resetBoard();
+        testSetPlayers(a, 1, "Spiller 1", 2, "Spiller 2");
+        System.out.println("------------ setPlayers test ------------");
+        System.out.println("");
+        // ------------ setPlayers test ------------ //
 
+        // -------------- Console game: ------------- //
+        // consoleReversi();
+        // -------------- Console game: ------------- //
+    }
+
+    private static void printBoard(Board board) {
+        int[][] b = board.getBoard();
+        int size = b.length;
+        System.out.print("    ");
+        for (int col = 0; col < size; col++) {
+            System.out.print(col + "  ");
+        }
+        System.out.println();
+        System.out.println("  #" + "---".repeat(size) + "#");
+        for (int row = 0; row < size; row++) {
+            System.out.print(row + " |");
+            for (int col = 0; col < size; col++) {
+                System.out.print(df.format(b[row][col]) + " ");
+            }
+            System.out.println("|");
+        }
+        System.out.println("  #" + "---".repeat(size) + "#");
+    }
+
+    private static void testTurnState(Board board, int colour) {
+        switch (board.turnState(colour)) {
+            case 21:
+                System.out.println("Legal move on board");
+                break;
+            case 22:
+                System.out.println("Forfeit");
+                break;
+            default:
+                System.out.println("Unexpected code " + board.turnState(colour));
+        }
+    }
+
+    private static void testGameState(Board board) {
+        switch (board.gameState()) {
+            case 31:
+                System.out.println("End of game");
+                break;
+            case 32:
+                System.out.println("Game continues");
+                break;
+            default:
+                System.out.println("Unexpected code " + board.gameState());
+        }
+    }
+
+    private static void testCheckWinner(Board board) {
+        switch (board.checkWinner()) {
+            case 41:
+                System.out.println("White wins");
+                break;
+            case 42:
+                System.out.println("Black wins");
+                break;
+            default:
+                System.out.println("Unexpected code " + board.checkWinner());
+        }
+    }
+
+    private static void testSetPlayers(Board board, int colour1, String player1, int colour2, String player2){
+        board.setPlayers();
+        System.out.println("Players random assignment:");
+        System.out.println("White: " + board.getPlayers().get("White"));
+        System.out.println("Black: " + board.getPlayers().get("Black"));
+        board.setPlayers(0, "Spiller 1", 0, "Spiller 2");
+        System.out.println("Players random assignment, custom names:");
+        System.out.println("White: " + board.getPlayers().get("White"));
+        System.out.println("Black: " + board.getPlayers().get("Black"));
+        board.setPlayers(1, "Spiller 1", 2, "Spiller 2");
+        System.out.println("Players custom assignment, custom names:");
+        System.out.println("White: " + board.getPlayers().get("White"));
+        System.out.println("Black: " + board.getPlayers().get("Black"));
+        board.setPlayers(2, "Spiller 1", 1, "Spiller 2");
+        System.out.println("White: " + board.getPlayers().get("White"));
+        System.out.println("Black: " + board.getPlayers().get("Black"));
+    }
+
+    private static void consoleReversi() {
         Board b = new Board();
         Scanner console = new Scanner(System.in);
         System.out.println("Hvid: " + b.getPlayers().get("White"));
         int colour;
         int opponent;
         String playastring;
-        printBoard(b.getBoard());
+        printBoard(b);
         while (b.getTurn() < 2) {
             System.out.println(b.getPlayers().get("White") + ", placer dine startbrikker: x,y");
             String moveStr;
@@ -69,7 +164,7 @@ public class BoardDriver {
             move[0] = Integer.parseInt(moveStr.split(",")[0]);
             move[1] = Integer.parseInt(moveStr.split(",")[1]);
             b.initplace(move[0], move[1], 1);
-            printBoard(b.getBoard());
+            printBoard(b);
         }
         while (b.gameState() == 32) {
             if (b.getTurn() % 2 == 0) {
@@ -90,7 +185,7 @@ public class BoardDriver {
                     move[0] = Integer.parseInt(moveStr.split(",")[0]);
                     move[1] = Integer.parseInt(moveStr.split(",")[1]);
                     System.out.println(b.place(move[0], move[1], colour));
-                    printBoard(b.getBoard());
+                    printBoard(b);
                     break;
                 case 22:
                     System.out.println("No legal moves. Fofeit turn.");
@@ -98,23 +193,4 @@ public class BoardDriver {
         }
         System.out.println(b.checkWinner());
     }
-
-    private static void printBoard(int[][] b) {
-        int size = b.length;
-        System.out.print("    ");
-        for (int col = 0; col < size; col++) {
-            System.out.print(col + "  ");
-        }
-        System.out.println();
-        System.out.println("  #" + "---".repeat(size) + "#");
-        for (int row = 0; row < size; row++) {
-            System.out.print(row + " |");
-            for (int col = 0; col < size; col++) {
-                System.out.print(df.format(b[row][col]) + " ");
-            }
-            System.out.println("|");
-        }
-        System.out.println("  #" + "---".repeat(size) + "#");
-    }
-
 }

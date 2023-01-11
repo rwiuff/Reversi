@@ -82,9 +82,41 @@ public class Board {
         }
     }
 
+    public void setPlayers(int colour1, String player1, int colour2, String player2) {
+        switch (colour1) {
+            case 1:
+                players.put("White", player1);
+                players.put("Black", player2);
+                break;
+            case 2:
+                players.put("White", player2);
+                players.put("Black", player1);
+                break;
+            default:
+                Random rand = new Random();
+                if (rand.nextInt(0, 2) == 0) {
+                    players.put("White", player1);
+                    players.put("Black", player2);
+                } else {
+                    players.put("White", player2);
+                    players.put("Black", player1);
+                }
+        }
+    }
+
+    public void resetBoard() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = 0;
+            }
+        }
+        turnCount = 0;
+        forfeitCounter = 0;
+    }
+
     public int turnState(int colour) {
         moveAnalyser(colour);
-        if (validMoves.size() == 0) {
+        if (validMoves.keySet().isEmpty()) {
             forfeitCounter++;
             return 22;
         }
@@ -116,7 +148,7 @@ public class Board {
                             int opponent = (colour == 1) ? 2 : 1;
                             if (board[i][j] == 0)
                                 board[i][j] = opponent;
-                                turnClock();
+                            turnClock();
                         }
                     }
                 }
