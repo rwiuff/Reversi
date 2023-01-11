@@ -153,8 +153,10 @@ public class Board {
                     for (int i = 3; i < 5; i++) {
                         for (int j = 3; j < 5; j++) {
                             int opponent = (colour == 1) ? 2 : 1;
-                            if (board[i][j] == 0)
+                            if (board[i][j] == 0) {
                                 board[i][j] = opponent;
+                                flipped.add(new int[] { i, j });
+                            }
                             turnClock();
                         }
                     }
@@ -184,7 +186,8 @@ public class Board {
     }
 
     public void flip(String move, int colour) {
-        if(flipped.size() < 0) flipped.clear();
+        if (flipped.size() < 0)
+            flipped.clear();
         HashMap<Integer, HashMap<Integer, Integer[]>> directionSet = validMoves.get(move);
         Set<Integer> directions = directionSet.keySet();
         for (Integer direction : directions) {
@@ -513,6 +516,5 @@ public class Board {
         }
         return flips;
     }
-    
+
 }
-	

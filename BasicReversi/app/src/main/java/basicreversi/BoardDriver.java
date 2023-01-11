@@ -175,7 +175,6 @@ public class BoardDriver {
         Scanner console = new Scanner(System.in);
         System.out.println("Hvid: " + b.getPlayers().get("White"));
         int colour;
-        int opponent;
         String playastring;
         printBoard(b);
         while (b.getTurn() < 2) {

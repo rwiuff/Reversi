@@ -17,7 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Controller {
 
@@ -88,6 +87,7 @@ public class Controller {
 			System.out.println("(" + getRowIndex(event) + "," + getColumnIndex(event) + ")");
 			if(b.getTurn() < 2) {
 				First4(getRowIndex(event), getColumnIndex(event), 1, event);
+				event.consume();
 			}
 			while (b.gameState() == 32) {
 				switch (b.getTurn() % 2) {
@@ -139,9 +139,7 @@ public class Controller {
 	}
 
 	public void DrawCircle(MouseEvent event, int color) {
-
 		Pane pane = (Pane) event.getSource();
-
 		if (color == 1) {
 			Color stroke = Color.rgb(153, 153, 153);
 			Circle c = new Circle(30, Color.rgb(204, 204, 204));
@@ -162,7 +160,6 @@ public class Controller {
 			pane.getChildren().add(c);
 		}
 	}
-
 	public void Winner() {
 		if (b.getPlayers().get("White") == Player2) {
 			if (b.checkWinner() == 41) {
