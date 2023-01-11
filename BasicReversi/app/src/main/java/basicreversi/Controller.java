@@ -87,14 +87,6 @@ public class Controller{
 		}
 		
 		
-		public void DrawBlackCircle(MouseEvent event) {
-			
-			Pane pane = (Pane) event.getSource();
-			Circle c = new Circle(30, Color.BLACK);
-			c.setCenterX(pane.getWidth()/2);
-			c.setCenterY(pane.getHeight()/2);
-			pane.getChildren().add(c);
-		}
 		
 		public int getRowIndex(MouseEvent event) {
 			Pane pane = (Pane) event.getSource();
@@ -122,17 +114,28 @@ public class Controller{
 			return GridPane.getColumnIndex(pane);
 		}
 		
-		public void DrawWhiteCircle(MouseEvent event) {
+		public void DrawCircle(MouseEvent event, int color) {
 			
 			Pane pane = (Pane) event.getSource();
+			
+			if(color == 1) {
+			
 			Circle c = new Circle(30, Color.WHITE);
 			c.setCenterX(pane.getWidth()/2);
 			c.setCenterY(pane.getHeight()/2);
 			
 			pane.getChildren().add(c);
 			
-			
+		}
 		
+			else {
+				
+				Circle c = new Circle(30, Color.BLACK);
+				c.setCenterX(pane.getWidth()/2);
+				c.setCenterY(pane.getHeight()/2);
+				
+				pane.getChildren().add(c);
+			}
 		}
 		
 
@@ -154,7 +157,7 @@ public class Controller{
 					
 					if (b.getTurn()%2==0) { // if white turn
 					if (b.place(r, c, color)==11) {
-						DrawWhiteCircle(e);
+						DrawCircle(e, color);
 						label.setText("Player2´s turn");
 						
 					}
@@ -168,7 +171,7 @@ public class Controller{
 				}	
 					else { // if black turn
 						if (b.place(r, c, color)==11) {
-							DrawBlackCircle(e);
+							DrawCircle(e, color);
 							label.setText("Player2´s turn");
 							
 						}
@@ -245,7 +248,7 @@ public class Controller{
 						if (color == 1) {
 							int returnvalue = b.initplace(r, c, color);
 							if (returnvalue == 11) {
-								DrawWhiteCircle(e);
+								DrawCircle(e, color);
 								label.setText("White Turn again");
 								player1counter++;
 								if(player1counter >=2) {
@@ -262,7 +265,7 @@ public class Controller{
 					else {
 								
 						if (returnvalue == 11) {
-							DrawBlackCircle(e);
+							DrawCircle(e, color);
 							label.setText("Black Turn again");
 							player2counter++;
 
