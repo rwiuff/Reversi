@@ -32,7 +32,7 @@ javafx {
 
 application {
     // Define the main class for the application.
-    mainClass = 'basicreversi.Main'
+    mainClass = 'advancedreversi.Main'
 }
 
 tasks.named('test') {
@@ -40,12 +40,12 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-mainClassName = 'basicreversi.Main'
+mainClassName = 'advancedreversi.Main'
 jar {
-    archiveBaseName = 'BasicReversi'
-    archiveVersion =  '1.0.0-beta'
+    archiveBaseName = 'AdvancedReversi'
+    archiveVersion =  '1.1.0-beta'
     manifest {
-        attributes 'Main-Class': 'basicreversi.launcher'
+        attributes 'Main-Class': 'advancedreversi.launcher'
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }

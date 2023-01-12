@@ -1,4 +1,4 @@
-package basicreversi;
+package advancedreversi;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -7,7 +7,6 @@ public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
 
     public static void main(String[] args) {
-
         // -------------- Console game: ------------- //
         consoleReversi();
         // -------------- Console game: ------------- //

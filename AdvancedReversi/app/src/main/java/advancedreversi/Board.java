@@ -24,7 +24,7 @@
  *   43: Draw                       *
  *                                  *
  * -------------------------------- */
-package basicreversi;
+package advancedreversi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
