@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="550.0" maxWidth="525.0" minHeight="300.0" minWidth="400.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basicreversi.Controller">
+<BorderPane maxHeight="597.0" maxWidth="525.0" minHeight="300.0" minWidth="400.0" prefHeight="597.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basicreversi.Controller">
    <bottom>
-      <HBox prefHeight="90.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="105.0" prefWidth="526.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="label" alignment="CENTER" prefHeight="90.0" prefWidth="414.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#190101">
+            <Label fx:id="label" alignment="CENTER" prefHeight="110.0" prefWidth="331.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#190101">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Pane prefHeight="90.0" prefWidth="281.0">
+            <Pane prefHeight="106.0" prefWidth="193.0">
                <children>
-                  <Button alignment="CENTER" layoutX="56.0" layoutY="25.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button alignment="CENTER" layoutX="55.0" layoutY="32.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
                </children>
             </Pane>
          </children>
