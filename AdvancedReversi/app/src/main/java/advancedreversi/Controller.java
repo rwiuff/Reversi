@@ -2,7 +2,6 @@ package advancedreversi;
 
 import java.io.IOException;
 import java.util.Set;
-
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
