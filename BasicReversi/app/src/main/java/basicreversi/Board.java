@@ -37,7 +37,7 @@ public class Board {
     private int boardsize = 8; // n in n x n dimensional board
     private int forfeitCounter = 0;
     private ArrayList<int[]> flipped = new ArrayList<int[]>();
-    private HashMap<String, String> players = new HashMap<String, String>(); // Player's colour assignment
+    private HashMap<Integer, String> players = new HashMap<Integer, String>(); // Player's colour assignment
     private HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> validMoves; //
 
     public Board() { // Constructor for board
@@ -69,7 +69,7 @@ public class Board {
         turnCount++;
     }
 
-    public HashMap<String, String> getPlayers() {
+    public HashMap<Integer, String> getPlayers() {
         return players;
     }
 
@@ -80,32 +80,32 @@ public class Board {
     public void setPlayers() {
         Random rand = new Random();
         if (rand.nextInt(0, 2) == 0) {
-            players.put("White", "Player 1");
-            players.put("Black", "Player 2");
+            players.put(1, "Player 1");
+            players.put(2, "Player 2");
         } else {
-            players.put("White", "Player 2");
-            players.put("Black", "Player 1");
+            players.put(1, "Player 2");
+            players.put(2, "Player 1");
         }
     }
 
-    public void setPlayers(int colour1, String player1, int colour2, String player2) {
-        switch (colour1) {
+    public void setPlayers(int identifier1, String player1, int identifier2, String player2) {
+        switch (identifier1) {
             case 1:
-                players.put("White", player1);
-                players.put("Black", player2);
+                players.put(1, player1);
+                players.put(2, player2);
                 break;
             case 2:
-                players.put("White", player2);
-                players.put("Black", player1);
+                players.put(1, player2);
+                players.put(2, player1);
                 break;
             default:
                 Random rand = new Random();
                 if (rand.nextInt(0, 2) == 0) {
-                    players.put("White", player1);
-                    players.put("Black", player2);
+                    players.put(1, player1);
+                    players.put(2, player2);
                 } else {
-                    players.put("White", player2);
-                    players.put("Black", player1);
+                    players.put(1, player2);
+                    players.put(2, player1);
                 }
         }
     }

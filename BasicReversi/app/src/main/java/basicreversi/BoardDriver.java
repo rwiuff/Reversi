@@ -75,16 +75,16 @@ public class BoardDriver {
         // ---------- Switch player test ----------- //
         System.out.println("---------- Switch player test -----------");
         Board b = new Board();
-        String oldWhite = b.getPlayers().get("White");
-        String oldBlack = b.getPlayers().get("Black");
-        System.out.println("White: " + b.getPlayers().get("White"));
-        System.out.println("Black: " + b.getPlayers().get("Black"));
+        String oldWhite = b.getPlayers().get(1);
+        String oldBlack = b.getPlayers().get(2);
+        System.out.println("White: " + b.getPlayers().get(1));
+        System.out.println("Black: " + b.getPlayers().get(2));
         b.resetBoard();
         String newWhite = oldBlack;
         String newBlack = oldWhite;
         b.setPlayers(1, newWhite, 2, newBlack);
-        System.out.println("White: " + b.getPlayers().get("White"));
-        System.out.println("Black: " + b.getPlayers().get("Black"));
+        System.out.println("White: " + b.getPlayers().get(1));
+        System.out.println("Black: " + b.getPlayers().get(2));
         System.out.println("---------- Switch player test -----------");
         System.out.println("");
         // ---------- Switch player test ----------- //
@@ -148,30 +148,30 @@ public class BoardDriver {
     private static void testSetPlayers(Board board, int colour1, String player1, int colour2, String player2) {
         board.setPlayers();
         System.out.println("Players random assignment:");
-        System.out.println("White: " + board.getPlayers().get("White"));
-        System.out.println("Black: " + board.getPlayers().get("Black"));
+        System.out.println("White: " + board.getPlayers().get(1));
+        System.out.println("Black: " + board.getPlayers().get(2));
         board.setPlayers(0, "Spiller 1", 0, "Spiller 2");
         System.out.println("Players random assignment, custom names:");
-        System.out.println("White: " + board.getPlayers().get("White"));
-        System.out.println("Black: " + board.getPlayers().get("Black"));
+        System.out.println("White: " + board.getPlayers().get(1));
+        System.out.println("Black: " + board.getPlayers().get(2));
         board.setPlayers(1, "Spiller 1", 2, "Spiller 2");
         System.out.println("Players custom assignment, custom names:");
-        System.out.println("White: " + board.getPlayers().get("White"));
-        System.out.println("Black: " + board.getPlayers().get("Black"));
+        System.out.println("White: " + board.getPlayers().get(1));
+        System.out.println("Black: " + board.getPlayers().get(2));
         board.setPlayers(2, "Spiller 1", 1, "Spiller 2");
-        System.out.println("White: " + board.getPlayers().get("White"));
-        System.out.println("Black: " + board.getPlayers().get("Black"));
+        System.out.println("White: " + board.getPlayers().get(1));
+        System.out.println("Black: " + board.getPlayers().get(2));
     }
 
     private static void consoleReversi() {
         Board b = new Board();
         Scanner console = new Scanner(System.in);
-        System.out.println("Hvid: " + b.getPlayers().get("White"));
+        System.out.println("Hvid: " + b.getPlayers().get(1));
         int colour;
         String playastring;
         printBoard(b);
         while (b.getTurn() < 2) {
-            System.out.println(b.getPlayers().get("White") + ", placer dine startbrikker: x,y");
+            System.out.println(b.getPlayers().get(1) + ", placer dine startbrikker: x,y");
             String moveStr;
             moveStr = console.next();
             int[] move = new int[2];
@@ -183,10 +183,10 @@ public class BoardDriver {
         while (b.gameOver() == false) {
             if (b.getTurn() % 2 == 0) {
                 colour = 2;
-                playastring = b.getPlayers().get("Black");
+                playastring = b.getPlayers().get(2);
             } else {
                 colour = 1;
-                playastring = b.getPlayers().get("White");
+                playastring = b.getPlayers().get(1);
             }
             switch (b.turnState(colour)) {
                 case 21:

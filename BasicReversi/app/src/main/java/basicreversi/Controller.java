@@ -21,19 +21,20 @@ public class Controller {
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
 	public Pane pane = new Pane();
-	int color = 1;
-
-	int player1counter = 0;
-	int player2counter = 0;
+	int playerID1 = 1;
+	int playerID2 = 2;
+	int startID = 1;
+	int secondViolin = 2;
+	boolean restart = false;
 
 	Board b = new Board();
 
 	@FXML
 	public void in() {
-		label.setText(b.getPlayers().get("White") + " is White and " + b.getPlayers().get("Black") + " is Black");
+		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 		// Schedule an event after 2 seconds
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-			label.setText(b.getPlayers().get("White") + " Starts first");
+			label.setText(b.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
 		}));
 		timeline.play();
@@ -41,13 +42,15 @@ public class Controller {
 
 	@FXML
 	public void Restart(ActionEvent e) throws IOException {
-		String White = b.getPlayers().get("White");
-		String Black = b.getPlayers().get("Black");
+		String player1 = b.getPlayers().get(1);
+		String player2 = b.getPlayers().get(2);
 		reset();
-		color = (color == 1) ? 2 : 1;
-		b.setPlayers(1, White, 2, Black);
-		b.getPlayers();
+		playerID1 = 1;
+		playerID2 = 2;
+		b.setPlayers(playerID1, player1, playerID2, player2);
 		gameStarted = false;
+		startID = (startID == 1) ? 2 : 1;
+		secondViolin = (secondViolin == 2) ? 1 : 2;
 		in();
 	}
 
@@ -56,14 +59,17 @@ public class Controller {
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
+		int color = startID;
+		String ownString;
+		String opponentString;
 		if (gameStarted) {
 			System.out.println("(" + row + "," + column + ")");
 			if (b.getTurn() < 2) {
 				firstFour(row, column, color, pane);
 			} else {
-				color = (b.getTurn() % 2 == 0) ? 2 : 1;
-				String ownString = (color == 1) ? b.getPlayers().get("White") : b.getPlayers().get("Black");
-				String opponentString = (color == 1) ? b.getPlayers().get("Black") : b.getPlayers().get("White");
+				color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+				ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+				opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
 				switch (b.turnState(color)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
@@ -87,10 +93,10 @@ public class Controller {
 					String outcome = "";
 					switch (b.checkWinner()) {
 						case 41:
-							outcome = b.getPlayers().get("White") + " wins!";
+							outcome = b.getPlayers().get(1) + " wins!";
 							break;
 						case 42:
-							outcome = b.getPlayers().get("Black") + " wins!";
+							outcome = b.getPlayers().get(2) + " wins!";
 							break;
 						case 43:
 							outcome = "It's a draw!";
@@ -124,28 +130,29 @@ public class Controller {
 	}
 
 	public void DrawCircle(int color, Pane pane) {
+		Color stroke;
+		Color fill;
+		Circle c = new Circle();
 		if (color == 1) {
-			Color stroke = Color.rgb(153, 153, 153);
-			Circle c = new Circle(30, Color.rgb(204, 204, 204));
+			stroke = Color.rgb(153, 153, 153);
+			fill = Color.rgb(204, 204, 204);
+			c = new Circle(30, fill);
 			c.setStroke(stroke);
-			c.setStrokeWidth(3);
-			c.setCenterX(pane.getWidth() / 2);
-			c.setCenterY(pane.getHeight() / 2);
-			pane.getChildren().add(c);
 		} else if (color == 2) {
-			Color stroke = Color.rgb(179, 179, 179);
-			Circle c = new Circle(30, Color.BLACK);
+			stroke = Color.rgb(179, 179, 179);
+			fill = Color.rgb(0, 0, 0);
+			c = new Circle(30, fill);
 			c.setStroke(stroke);
-			c.setStrokeWidth(3);
-			c.setCenterX(pane.getWidth() / 2);
-			c.setCenterY(pane.getHeight() / 2);
-			pane.getChildren().add(c);
 		}
+		c.setStrokeWidth(3);
+		c.setCenterX(pane.getWidth() / 2);
+		c.setCenterY(pane.getHeight() / 2);
+		pane.getChildren().add(c);
 	}
 
-	public void firstFour(int row, int column, int color, Pane pane) {
-		String playerTurn = b.getPlayers().get("White");
-		switch (b.initplace(row, column, color)) {
+	public void firstFour(int row, int column, int startID, Pane pane) {
+		String playerTurn = (startID == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+		switch (b.initplace(row, column, startID)) {
 			case 11:
 				update();
 				if (b.getTurn() == 1)
