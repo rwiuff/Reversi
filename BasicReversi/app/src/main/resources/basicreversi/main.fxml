@@ -20,16 +20,16 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Pane prefHeight="100.0" prefWidth="300.0">
+            <Pane prefHeight="90.0" prefWidth="281.0">
                <children>
-                  <Button alignment="CENTER" layoutX="67.0" layoutY="25.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button alignment="CENTER" layoutX="56.0" layoutY="25.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
                </children>
             </Pane>
          </children>
       </HBox>
    </bottom>
    <center>
-      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" maxHeight="550.0" maxWidth="525.0" minHeight="450.0" minWidth="450.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: GREEN;" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" maxHeight="540.0" maxWidth="525.0" minHeight="450.0" minWidth="450.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: GREEN;" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
