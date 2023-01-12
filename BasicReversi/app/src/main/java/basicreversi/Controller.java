@@ -179,4 +179,20 @@ public class Controller {
 			}
 		}
 	}
+	
+	@FXML
+	public void surrender(ActionEvent e) {
+		int color = startID;
+		String ownString;
+		String opponentString;
+		color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+		ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+		opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);		
+		label.setText(ownString+" has surrendered! \n"+opponentString+" wins!");
+		gameStarted=false;
+		
+		
+		
+
+	}
 }

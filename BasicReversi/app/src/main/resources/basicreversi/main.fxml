@@ -22,7 +22,8 @@
             </Label>
             <Pane prefHeight="106.0" prefWidth="193.0">
                <children>
-                  <Button alignment="CENTER" layoutX="55.0" layoutY="32.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button layoutX="14.0" layoutY="40.0" mnemonicParsing="false" onAction="#surrender" text="Surrender" />
                </children>
             </Pane>
          </children>
