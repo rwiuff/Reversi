@@ -59,24 +59,23 @@ public class Controller {
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
-		int color = startID;
+		int id;
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
 			System.out.println("(" + row + "," + column + ")");
 			if (b.getTurn() < 2) {
-				firstFour(row, column, color, pane);
+				firstFour(row, column, pane);
 			} else {
-				color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
-				ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-				opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
-				switch (b.turnState(color)) {
+				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+				ownString = (id == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+				opponentString = (id == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+				switch (b.turnState(id)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
 						break;
 					case 21:
-						label.setText(ownString + "s turn");
-						switch (b.place(row, column, color)) {
+						switch (b.place(row, column, id)) {
 							case 11:
 								update();
 								label.setText("Good job!\n" + opponentString + "'s turn");
@@ -129,16 +128,16 @@ public class Controller {
 		return GridPane.getColumnIndex(pane);
 	}
 
-	public void drawCircle(int color, Pane pane) {
+	public void drawCircle(int id, Pane pane) {
 		Color stroke;
 		Color fill;
 		Circle c = new Circle();
-		if (color == 1) {
+		if (id == 1) {
 			stroke = Color.rgb(153, 153, 153);
 			fill = Color.rgb(204, 204, 204);
 			c = new Circle(23, fill);
 			c.setStroke(stroke);
-		} else if (color == 2) {
+		} else if (id == 2) {
 			stroke = Color.rgb(179, 179, 179);
 			fill = Color.rgb(0, 0, 0);
 			c = new Circle(23, fill);
@@ -150,7 +149,7 @@ public class Controller {
 		pane.getChildren().add(c);
 	}
 
-	public void firstFour(int row, int column, int startID, Pane pane) {
+	public void firstFour(int row, int column, Pane pane) {
 		String playerTurn = (startID == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
 		switch (b.initPlace(row, column, startID)) {
 			case 11:

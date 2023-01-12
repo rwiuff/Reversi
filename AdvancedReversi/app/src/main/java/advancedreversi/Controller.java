@@ -61,7 +61,7 @@ public class Controller {
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
-		int color;
+		int id;
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
@@ -70,27 +70,27 @@ public class Controller {
 				firstFour(row, column, pane);
 			} else {
 				hideLegalMoves();
-				color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
-				ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-				opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
-				switch (b.turnState(color)) {
+				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+				ownString = (id == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+				opponentString = (id == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+				switch (b.turnState(id)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
 						break;
 					case 21:
-						switch (b.place(row, column, color)) {
+						switch (b.place(row, column, id)) {
 							case 11:
 								update();
 								label.setText("Good job!\n" + opponentString + "'s turn");
-								showLegalMoves((color == 1) ? 2 : 1);
+								showLegalMoves((id == 1) ? 2 : 1);
 								break;
 							case 12:
 								label.setText("Field already occupied\n" + ownString + "'s turn");
-								showLegalMoves(color);
+								showLegalMoves(id);
 								break;
 							case 13:
 								label.setText("Illegal move\n" + ownString + "'s turn");
-								showLegalMoves(color);
+								showLegalMoves(id);
 								break;
 						}
 				}
@@ -134,26 +134,26 @@ public class Controller {
 		return GridPane.getColumnIndex(pane);
 	}
 
-	public void drawCircle(int color, Pane pane) {
+	public void drawCircle(int id, Pane pane) {
 		Color stroke;
 		Color fill;
 		Circle c = new Circle();
-		if (color == 1) {
+		if (id == 1) {
 			stroke = Color.rgb(153, 153, 153);
 			fill = Color.rgb(204, 204, 204);
 			c = new Circle(23, fill);
 			c.setStroke(stroke);
-		} else if (color == 2) {
+		} else if (id == 2) {
 			stroke = Color.rgb(179, 179, 179);
 			fill = Color.rgb(0, 0, 0);
 			c = new Circle(23, fill);
 			c.setStroke(stroke);
-		} else if (color == 3) {
+		} else if (id == 3) {
 			stroke = Color.rgb(153, 153, 153);
 			fill = Color.rgb(204, 204, 204, 0.5);
 			c = new Circle(23, fill);
 			c.setStroke(stroke);
-		} else if (color == 4) {
+		} else if (id == 4) {
 			stroke = Color.rgb(179, 179, 179);
 			fill = Color.rgb(0, 0, 0, 0.5);
 			c = new Circle(23, fill);
