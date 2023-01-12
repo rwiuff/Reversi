@@ -41,7 +41,7 @@ public class Controller {
 	}
 
 	@FXML
-	public void Restart(ActionEvent e) throws IOException {
+	public void restart(ActionEvent e) throws IOException {
 		String player1 = b.getPlayers().get(1);
 		String player2 = b.getPlayers().get(2);
 		reset();
@@ -114,7 +114,7 @@ public class Controller {
 			for (int j = 0; j < 8; j++) {
 				String paneID = "#" + i + j;
 				Pane pane = (Pane) gridPane.lookup(paneID);
-				DrawCircle(board[i][j], pane);
+				drawCircle(board[i][j], pane);
 			}
 		}
 	}
@@ -129,7 +129,7 @@ public class Controller {
 		return GridPane.getColumnIndex(pane);
 	}
 
-	public void DrawCircle(int color, Pane pane) {
+	public void drawCircle(int color, Pane pane) {
 		Color stroke;
 		Color fill;
 		Circle c = new Circle();
@@ -152,7 +152,7 @@ public class Controller {
 
 	public void firstFour(int row, int column, int startID, Pane pane) {
 		String playerTurn = (startID == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-		switch (b.initplace(row, column, startID)) {
+		switch (b.initPlace(row, column, startID)) {
 			case 11:
 				update();
 				if (b.getTurn() == 1)
