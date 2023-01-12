@@ -19,6 +19,7 @@ public class Main extends Application {
 				new Image(getClass().getResourceAsStream("icon32.png")),
 				new Image(getClass().getResourceAsStream("icon64.png"))
 			);
+            primaryStage.setResizable(false);
             Controller controller = loader.getController();
             controller.in();
             primaryStage.setTitle("Reversi");

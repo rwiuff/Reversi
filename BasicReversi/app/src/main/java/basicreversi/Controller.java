@@ -33,7 +33,7 @@ public class Controller {
 	public void in() {
 		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 		// Schedule an event after 2 seconds
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
 			label.setText(b.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
 		}));
@@ -136,12 +136,12 @@ public class Controller {
 		if (color == 1) {
 			stroke = Color.rgb(153, 153, 153);
 			fill = Color.rgb(204, 204, 204);
-			c = new Circle(30, fill);
+			c = new Circle(23, fill);
 			c.setStroke(stroke);
 		} else if (color == 2) {
 			stroke = Color.rgb(179, 179, 179);
 			fill = Color.rgb(0, 0, 0);
-			c = new Circle(30, fill);
+			c = new Circle(23, fill);
 			c.setStroke(stroke);
 		}
 		c.setStrokeWidth(3);
