@@ -90,7 +90,7 @@ public class BoardDriver {
         // ---------- Switch player test ----------- //
 
         // -------------- Console game: ------------- //
-        // consoleReversi();
+        consoleReversi();
         // -------------- Console game: ------------- //
     }
 
@@ -204,5 +204,6 @@ public class BoardDriver {
             }
         }
         System.out.println(b.checkWinner());
+        console.close();
     }
 }
