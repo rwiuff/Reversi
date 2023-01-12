@@ -130,13 +130,13 @@ public class Board {
         return 21;
     }
 
-    public int gameState() {
+    public boolean gameOver() {
         if (forfeitCounter == 2) {
-            return 31;
+            return true;
         } else if (filled()) {
-            return 31;
+            return true;
         } else {
-            return 32;
+            return false;
         }
     }
 

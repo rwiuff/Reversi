@@ -127,15 +127,8 @@ public class BoardDriver {
     }
 
     private static void testGameState(Board board) {
-        switch (board.gameState()) {
-            case 31:
+        if (board.gameOver()) {
                 System.out.println("End of game");
-                break;
-            case 32:
-                System.out.println("Game continues");
-                break;
-            default:
-                System.out.println("Unexpected code " + board.gameState());
         }
     }
 
@@ -187,7 +180,7 @@ public class BoardDriver {
             b.initplace(move[0], move[1], 1);
             printBoard(b);
         }
-        while (b.gameState() == 32) {
+        while (b.gameOver() == false) {
             if (b.getTurn() % 2 == 0) {
                 colour = 2;
                 playastring = b.getPlayers().get("Black");

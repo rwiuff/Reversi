@@ -41,20 +41,11 @@ public class Controller {
 
 	@FXML
 	public void Restart(ActionEvent e) throws IOException {
-		String oldWhite = b.getPlayers().get("White");
-		String oldBlack = b.getPlayers().get("Black");
-		b.resetBoard();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				String paneID = "#" + i + j;
-				Pane pane = (Pane) gridPane.lookup(paneID);
-				pane.getChildren().clear();
-			}
-		}
+		String White = b.getPlayers().get("White");
+		String Black = b.getPlayers().get("Black");
+		reset();
 		color = (color == 1) ? 2 : 1;
-		String newWhite = oldBlack;
-		String newBlack = oldWhite;
-		b.setPlayers(1, newWhite, 2, newBlack);
+		b.setPlayers(1, White, 2, Black);
 		b.getPlayers();
 		gameStarted = false;
 		in();
@@ -82,34 +73,30 @@ public class Controller {
 						switch (b.place(row, column, color)) {
 							case 11:
 								update();
-								label.setText("Good job!");
+								label.setText("Good job!\n" + opponentString + "'s turn");
 								break;
 							case 12:
-								label.setText("Field already occupied");
+								label.setText("Field already occupied\n" + ownString + "'s turn");
 								break;
 							case 13:
-								label.setText("Illegal move");
+								label.setText("Illegal move\n" + ownString + "'s turn");
 								break;
 						}
 				}
-				switch (b.gameState()) {
-					case 31:
-						String outcome = "";
-						switch (b.checkWinner()) {
-							case 41:
-								outcome = b.getPlayers().get("White") + " wins!";
-								break;
-							case 42:
-								outcome = b.getPlayers().get("Black") + " wins!";
-								break;
-							case 43:
-								outcome = "It's a draw!";
-								break;
-						}
-						label.setText("Game is over!\n" + outcome);
-						break;
-					case 32:
-						label.setText(opponentString + "'s turn");
+				if (b.gameOver()) {
+					String outcome = "";
+					switch (b.checkWinner()) {
+						case 41:
+							outcome = b.getPlayers().get("White") + " wins!";
+							break;
+						case 42:
+							outcome = b.getPlayers().get("Black") + " wins!";
+							break;
+						case 43:
+							outcome = "It's a draw!";
+							break;
+					}
+					label.setText("Game is over!\n" + outcome);
 				}
 			}
 		}
@@ -172,6 +159,17 @@ public class Controller {
 			case 13:
 				label.setText("Illegal Placement, try again");
 				break;
+		}
+	}
+
+	public void reset() {
+		b.resetBoard();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				String paneID = "#" + i + j;
+				Pane pane = (Pane) gridPane.lookup(paneID);
+				pane.getChildren().clear();
+			}
 		}
 	}
 }
