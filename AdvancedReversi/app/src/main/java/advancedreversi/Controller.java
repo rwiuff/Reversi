@@ -17,7 +17,6 @@ public class Controller {
 
 	@FXML
 	public Label label = new Label(" ");
-
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
 	public Pane pane = new Pane();
@@ -91,6 +90,7 @@ public class Controller {
 				}
 				if (b.gameOver()) {
 					String outcome = "";
+					b.peicesCount();
 					switch (b.checkWinner()) {
 						case 41:
 							outcome = b.getPlayers().get(1) + " wins!";
@@ -179,4 +179,26 @@ public class Controller {
 			}
 		}
 	}
+	
+	
+	
+	
+	public void Start() {
+		
+	}
+	
+	public void Highscore() {
+		
+	}
+	
+	public void Rules() {
+		
+	}
+	
+	public void Exit() {
+		
+	}
+	
+	
+
 }

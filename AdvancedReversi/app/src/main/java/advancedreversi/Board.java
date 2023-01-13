@@ -223,6 +223,7 @@ public class Board {
     public int checkWinner() {
         int Black = 0;
         int White = 0;
+        
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -236,14 +237,49 @@ public class Board {
         }
 
         if (Black > White) {
+        	
             return 42;
+            
         } else if (White > Black) {
+        	
             return 41;
         } else {
             return 43;
         }
     }
 
+    public int peicesCount() {
+    	
+    	int Black = 0;
+        int White = 0;
+        
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int value = board[i][j];
+                if (value == 1) {
+                    White++;
+                } else if (value == 2) {
+                    Black++;
+                }
+            }
+        }
+
+        if (Black > White) {
+        	
+            return Black;
+            
+        } else if (White > Black) {
+        	
+            return White;
+        } else {
+            return 0;
+        }
+    }
+    	
+    
+    	
+    
     public void moveAnalyser(int colour) {
         validMoves = new HashMap<>(); //
         HashMap<Integer, Integer[]> flips;
