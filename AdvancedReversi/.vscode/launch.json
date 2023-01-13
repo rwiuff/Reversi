@@ -11,7 +11,7 @@
             "request": "launch",
             "mainClass": "advancedreversi.BoardDriver",
             "projectName": "app",
-            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml,javafx.media"
         },
         {
             "type": "java",
@@ -19,14 +19,14 @@
             "request": "launch",
             "mainClass": "advancedreversi.Main",
             "projectName": "app",
-            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml,javafx.media"
         },
         {
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path C:/Users/rwiuf/javafx-sdk-19/lib  --add-modules javafx.controls,javafx.fxml,javafx.media"
         }
     ]
 }
