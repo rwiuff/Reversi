@@ -13,7 +13,7 @@ class BoardTest {
     }
     @Test void testSetPlayers(){
         Board b = new Board();
-        b.setPlayers();
+        b.setPlayers(1, "Player 1", 2, "Player 2");
         assertEquals("Player 1", b.getPlayers().get(1));
     }
 

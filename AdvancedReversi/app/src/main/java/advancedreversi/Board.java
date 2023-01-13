@@ -140,7 +140,7 @@ public class Board {
         }
     }
 
-    public int initplace(int row, int column, int colour) {
+    public int initPlace(int row, int column, int colour) {
         if (board[row][column] != 0)
             return 12;
         if (row > 2 && row < 5) {

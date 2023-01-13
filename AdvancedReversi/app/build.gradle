@@ -9,7 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 repositories {
@@ -27,7 +27,7 @@ dependencies {
 
 javafx {
     version = "19"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
 }
 
 application {
@@ -43,7 +43,7 @@ tasks.named('test') {
 mainClassName = 'advancedreversi.Main'
 jar {
     archiveBaseName = 'AdvancedReversi'
-    archiveVersion =  '0.9.0-beta'
+    archiveVersion =  '1.1.0-beta'
     manifest {
         attributes 'Main-Class': 'advancedreversi.launcher'
     }
