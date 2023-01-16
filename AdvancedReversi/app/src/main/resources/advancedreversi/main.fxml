@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -22,7 +23,8 @@
             </Label>
             <Pane prefHeight="106.0" prefWidth="193.0">
                <children>
-                  <Button alignment="CENTER" layoutX="55.0" layoutY="32.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button alignment="CENTER" layoutY="29.0" mnemonicParsing="false" onAction="#Restart" prefHeight="30.0" prefWidth="84.0" text="Restart" />
+                  <Button layoutY="59.0" mnemonicParsing="false" onAction="#surrender" prefHeight="30.0" prefWidth="85.0" text="Surrender" />
                </children>
             </Pane>
          </children>
@@ -121,4 +123,16 @@
          </children>
       </GridPane>
    </center>
+   <top>
+      <Pane fx:id="topPane" prefHeight="100.0" prefWidth="525.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="name1" layoutX="14.0" layoutY="13.0" prefHeight="26.0" prefWidth="148.0" promptText="Player  1's name" />
+            <TextField fx:id="name2" layoutX="14.0" layoutY="39.0" prefHeight="26.0" prefWidth="148.0" promptText="Player 2's name" />
+            <Label layoutX="205.0" layoutY="30.0" text="Score:" />
+            <Button fx:id="okBtn" layoutX="162.0" layoutY="26.0" mnemonicParsing="false" onAction="#setNameBtn" prefHeight="26.0" prefWidth="33.0" text="ok" />
+            <Label fx:id="score1" layoutX="247.0" layoutY="21.0" prefHeight="17.0" prefWidth="161.0" text="Label" />
+            <Label fx:id="score2" layoutX="247.0" layoutY="42.0" prefHeight="17.0" prefWidth="163.0" text="Label" />
+         </children>
+      </Pane>
+   </top>
 </BorderPane>
