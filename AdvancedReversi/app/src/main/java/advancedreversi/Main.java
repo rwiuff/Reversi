@@ -24,7 +24,7 @@ public class Main extends Application {
 			);
             primaryStage.setResizable(false);
             Controller controller = loader.getController();
-            controller.in();
+            controller.setName();
             primaryStage.setTitle("Reversi");
             primaryStage.setScene(scene);
             primaryStage.setFullScreenExitHint("Press F11 to exit fullscreen");

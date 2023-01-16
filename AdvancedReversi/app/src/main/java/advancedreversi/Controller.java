@@ -1,24 +1,30 @@
 package advancedreversi;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Set;
 import javafx.animation.KeyFrame;
-import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class Controller {
 
 	@FXML
 	public Label label = new Label(" ");
-
+	public TextField name1 = new TextField();
+	public TextField name2 = new TextField();
+	public Label score1 = new Label();
+	public Label score2 = new Label();
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
 	public Pane pane = new Pane();
@@ -27,9 +33,13 @@ public class Controller {
 	int startID = 1;
 	int secondViolin = 2;
 	boolean restart = false;
+	public Button okBtn = new Button();
+	public Pane topPane = new Pane();
 
 	Board b = new Board();
-
+	
+	
+	
 	@FXML
 	public void in() {
 		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
@@ -52,7 +62,12 @@ public class Controller {
 		gameStarted = false;
 		startID = (startID == 1) ? 2 : 1;
 		secondViolin = (secondViolin == 2) ? 1 : 2;
-		in();
+		
+		okBtn.setVisible(true);
+		name1.setVisible(true);
+		name2.setVisible(true);
+		setName();
+		
 	}
 
 	@FXML
@@ -64,14 +79,12 @@ public class Controller {
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
-			System.out.println("(" + row + "," + column + ")");
 			if (b.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
-				hideLegalMoves();
 				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
-				ownString = (id == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-				opponentString = (id == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+				ownString = (id == 1) ? name1.getText() : name2.getText();
+				opponentString = (id == 1) ? name2.getText() : name1.getText();
 				switch (b.turnState(id)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
@@ -80,6 +93,7 @@ public class Controller {
 						switch (b.place(row, column, id)) {
 							case 11:
 								update();
+								checkScore();
 								label.setText("Good job!\n" + opponentString + "'s turn");
 								showLegalMoves((id == 1) ? 2 : 1);
 								break;
@@ -174,6 +188,7 @@ public class Controller {
 				showLegalMoves(startID);
 				if (b.getTurn() > 1)
 					label.setText(playerTurn + ": Your move!");
+				checkScore();
 				break;
 			case 12:
 				label.setText("Cannot place here");
@@ -195,6 +210,49 @@ public class Controller {
 		}
 	}
 
+	@FXML
+	public void surrender(ActionEvent e) {
+		int color = startID;
+		String ownString;
+		String opponentString;
+		color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+		ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
+		opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);		
+		label.setText(ownString+" has surrendered! \n"+opponentString+" wins!");
+
+		gameStarted=false;
+	}
+	
+	@FXML
+	public void checkScore() {
+		score1.setText("white score = "+b.checkWhiteScore());
+		score2.setText("Black score = "+b.checkBlackScore());
+	}
+	
+	
+	@FXML
+	public void setName() {
+		label.setText("Please enter your names\n in the textfields above:");	
+		checkScore();
+	}
+	
+	@FXML
+	public void setNameBtn(ActionEvent e) {	
+		
+		if (name1.getText().isEmpty()) {
+			name1.setText("Player 1");
+		}
+		if (name2.getText().isEmpty()) {
+			name2.setText("Player 2");
+		}
+		b.setPlayerName(playerID1, name1.getText());
+		b.setPlayerName(playerID2, name2.getText());
+		okBtn.setVisible(false);
+		name1.setVisible(false);
+		name2.setVisible(false);
+		in();
+	}
+  
 	public void showLegalMoves(int colour) {
 		b.moveAnalyser(colour);
 		int circleColour = (colour == 1) ? 3 : 4;
