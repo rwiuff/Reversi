@@ -52,7 +52,7 @@ public class Controller {
 	}
 
 	@FXML
-	public void Restart(ActionEvent e) throws IOException {
+	public void restart(ActionEvent e) throws IOException {
 		String player1 = b.getPlayers().get(1);
 		String player2 = b.getPlayers().get(2);
 		reset();
@@ -75,23 +75,22 @@ public class Controller {
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
-		int color = startID;
+		int id;
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
 			if (b.getTurn() < 2) {
-				firstFour(row, column, color, pane);
+				firstFour(row, column, pane);
 			} else {
-				color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
-				ownString = (color == 1) ? name1.getText() : name2.getText();
-				opponentString = (color == 1) ? name2.getText() : name1.getText();
-				switch (b.turnState(color)) {
+				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+				ownString = (id == 1) ? name1.getText() : name2.getText();
+				opponentString = (id == 1) ? name2.getText() : name1.getText();
+				switch (b.turnState(id)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
 						break;
 					case 21:
-						label.setText(ownString + "s turn");
-						switch (b.place(row, column, color)) {
+						switch (b.place(row, column, id)) {
 							case 11:
 								update();
 								checkScore();
@@ -130,7 +129,7 @@ public class Controller {
 			for (int j = 0; j < 8; j++) {
 				String paneID = "#" + i + j;
 				Pane pane = (Pane) gridPane.lookup(paneID);
-				DrawCircle(board[i][j], pane);
+				drawCircle(board[i][j], pane);
 			}
 		}
 	}
@@ -145,16 +144,16 @@ public class Controller {
 		return GridPane.getColumnIndex(pane);
 	}
 
-	public void DrawCircle(int color, Pane pane) {
+	public void drawCircle(int id, Pane pane) {
 		Color stroke;
 		Color fill;
 		Circle c = new Circle();
-		if (color == 1) {
+		if (id == 1) {
 			stroke = Color.rgb(153, 153, 153);
 			fill = Color.rgb(204, 204, 204);
 			c = new Circle(23, fill);
 			c.setStroke(stroke);
-		} else if (color == 2) {
+		} else if (id == 2) {
 			stroke = Color.rgb(179, 179, 179);
 			fill = Color.rgb(0, 0, 0);
 			c = new Circle(23, fill);
@@ -166,9 +165,9 @@ public class Controller {
 		pane.getChildren().add(c);
 	}
 
-	public void firstFour(int row, int column, int startID, Pane pane) {
+	public void firstFour(int row, int column, Pane pane) {
 		String playerTurn = (startID == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-		switch (b.initplace(row, column, startID)) {
+		switch (b.initPlace(row, column, startID)) {
 			case 11:
 				update();
 				if (b.getTurn() == 1)

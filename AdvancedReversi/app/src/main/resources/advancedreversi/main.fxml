@@ -11,25 +11,29 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="597.0" maxWidth="525.0" minHeight="300.0" minWidth="400.0" prefHeight="597.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advancedreversi.Controller">
+<BorderPane maxHeight="715.0" maxWidth="685.0" minHeight="300.0" minWidth="400.0" prefHeight="714.0" prefWidth="604.0" style="-fx-background-color: #344e41;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advancedreversi.Controller">
    <bottom>
-      <HBox prefHeight="105.0" prefWidth="526.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="91.0" prefWidth="451.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="label" alignment="CENTER" prefHeight="110.0" prefWidth="331.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#190101">
+            <Label fx:id="label" alignment="TOP_CENTER" prefHeight="90.0" prefWidth="317.0" style="-fx-background-color: #344e41;" textAlignment="CENTER" textFill="#e4d2ac">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Book Antiqua Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Pane prefHeight="106.0" prefWidth="193.0">
+            <Label fx:id="timerLabel" prefHeight="91.0" prefWidth="155.0" />
+            <Pane prefHeight="91.0" prefWidth="133.0" style="-fx-background-color: #344e41;">
                <children>
-                  <Button alignment="CENTER" layoutX="55.0" layoutY="32.0" mnemonicParsing="false" onAction="#Restart" prefHeight="41.0" prefWidth="84.0" text="Restart" />
+                  <Button alignment="CENTER" layoutX="6.0" layoutY="14.0" mnemonicParsing="false" onAction="#restart" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #e4d2a7;" text="Restart">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Button>
                </children>
             </Pane>
          </children>
       </HBox>
    </bottom>
    <center>
-      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" maxHeight="540.0" maxWidth="525.0" minHeight="450.0" minWidth="450.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: GREEN;" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" maxHeight="562.0" maxWidth="551.0" minHeight="300.0" minWidth="300.0" prefHeight="562.0" prefWidth="551.0" style="-fx-background-color: #588157;" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -117,7 +121,7 @@
             <Pane fx:id="74" onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
             <Pane fx:id="75" onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
             <Pane fx:id="76" onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-            <Pane fx:id="77" onMouseClicked="#onPaneClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <Pane fx:id="77" onMouseClicked="#onPaneClicked" prefHeight="63.0" prefWidth="82.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
          </children>
       </GridPane>
    </center>
