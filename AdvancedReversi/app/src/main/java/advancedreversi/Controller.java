@@ -275,7 +275,8 @@ public class Controller {
 	}
 	
 	public void showHighScore(ActionEvent e ) {
-		Alert b = new Alert(AlertType.INFORMATION,"Highscore");
+		Alert b = new Alert(AlertType.INFORMATION);
+		b.setTitle("Highscore");
 		b.setContentText("The HighScore is : " + loadHighScore() + "!");
 		b.setHeaderText(null);
 		b.setX(420);
@@ -292,8 +293,18 @@ public class Controller {
 		public void saveHighScore(int score) {
 		     if( highscore < score) {
 		    	 highscore = score;
-		         try {
-		                    
+		         
+		    	File f = new File("HighScore.txt");
+		    	if(!f.exists())
+		    	try {
+		    		f.createNewFile();
+		    	}
+		    	
+		      catch(IOException e) {
+		    	  e.printStackTrace();
+		     }
+		    	 
+		    	 try { 	 
 		     FileWriter hsfw = new FileWriter("HighScore.txt", true);
 		     BufferedWriter hsbw = new BufferedWriter(hsfw);
 		     hsbw.write(Integer.toString(highscore));
@@ -324,7 +335,13 @@ public class Controller {
 		
 		
 		public void mainMenu(ActionEvent event) throws IOException {
-			Parent root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//ad.fxml"));
+			Alert mm = new Alert(AlertType.CONFIRMATION);
+			mm.setTitle("Main Menu");
+			mm.setContentText("Are you sure you want to go back to main menu?");
+			mm.setHeaderText(" By doing this, you cannot continue the game again!");
+			
+			if(mm.showAndWait().get()==ButtonType.OK)
+			 root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//ad.fxml"));
 			stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		    scene = new Scene(root);
 		    stage.setScene(scene);
