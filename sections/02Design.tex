@@ -1,3 +1,9 @@
 % !TeX root = ..\G16.tex
 \section{Design}
-For at løse opgaven, delte
+Vi har som løsning til opgaven valgt at lave 3 klasser. Disse klasser er skabt efter "model-view-controller" - mønsteret. Derudover har vi også en .fxml fil, der indeholder al information om vores stage og scene. Denne fil er blevet redigeret igennem scene-builder. Alle vores klasser skrev vi i JDE'en Eclipse, 
+
+En main-klasse, der fungerer som view; altså alt det, som spilleren kan se. Den sætter altså programmet igang, viser stage, scene, nodes osv. 
+
+En board-klasse, der fungerer som model; den står for alt al logik, der bruges til at implementerer de forskellige regler og funktioner ved spillet, som f.eks. at vende brikker, der er indeklemte, eller at afgøre, om hvorvidt man kan stille en brik på et bestemt felt. 
+
+En controller-klasse, der fungerer controller; denne klasse binder board og .fxml-filen sammen. Dette gør den ved at lave en masse metoder, der responderer på et klik med musen eller et klik på en knap på "scene", således at der sker nogle ændringer visuelt, og disse ændringer har forklaring med rod i logikken (board-klassen).
