@@ -123,7 +123,7 @@ public class Controller {
 					saveHighScore(z);
 					switch (b.checkWinner()) {
 						case 41:
-							outcome = b.getPlayers().get(1) + " wins!";
+							outcome = b.getPlayers().get(1) + " wins!";  
 							break;
 						case 42:
 							outcome = b.getPlayers().get(2) + " wins!";
@@ -265,7 +265,7 @@ public class Controller {
 		Alert a = new Alert(AlertType.CONFIRMATION);
 		a.setTitle("Exit Reversi");
 		a.setContentText("Are you sure you want to exit Reversi?");
-		a.setHeaderText("You are exiting Reversi ");
+		a.setHeaderText("You are about to Reversi ");
 		
 		
 		if(a.showAndWait().get()==ButtonType.OK)

@@ -50,7 +50,7 @@ public class Main extends Application {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION,"Exit Reversi");
 		alert.setContentText("Are you sure you want to exit Reversi?");
-		alert.setHeaderText("You are exiting Reversi ");
+		alert.setHeaderText("You are about to Reversi");
 		alert.setTitle("Exit Reversi");
 		alert.setX(450);
 		alert.setY(200);
