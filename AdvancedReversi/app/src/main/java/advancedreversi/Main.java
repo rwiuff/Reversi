@@ -35,13 +35,7 @@ public class Main extends Application {
             
             primaryStage.setTitle("Reversi");
            
-/*
-            File file = new File("C:\\Users\\seshu\\OneDrive\\onedrive\\Documents\\GitHub\\Reversi\\AdvancedReversi\\app\\src\\main\\resources\\Klik & Play Reversi music.mp3");
-            String filePath = file.toURI().toString();
-            Media media = new Media(filePath);
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
-  */
+
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setOnCloseRequest(event -> {
