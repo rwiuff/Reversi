@@ -480,4 +480,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+### AdvancedReversi ###
+*HighScore.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/latex,java,eclipse,visualstudiocode,gradle,macos
