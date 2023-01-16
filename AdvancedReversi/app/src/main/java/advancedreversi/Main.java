@@ -3,6 +3,7 @@ package advancedreversi;
 import java.io.File;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,11 +29,21 @@ public class Main extends Application {
 			);
            
             primaryStage.setResizable(false);
-            
-            primaryStage.setTitle("Reversi");
-            primaryStage.setScene(scene);
             File f = new File("HighScore.txt");
 		    	if(!f.exists())	f.createNewFile();
+            Controller controller = loader.getController();
+            controller.setName();
+            primaryStage.setTitle("Reversi");
+            primaryStage.setScene(scene);
+            primaryStage.setFullScreenExitHint("Press F11 to exit fullscreen");
+            scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent e) {
+                    if(e.getCode() == KeyCode.F11) {
+                        primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                    }
+                }
+                });
             primaryStage.show();
             primaryStage.setOnCloseRequest(event -> {
             	event.consume();
@@ -39,7 +52,6 @@ public class Main extends Application {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
  
 	public static void main(String[] args) {
