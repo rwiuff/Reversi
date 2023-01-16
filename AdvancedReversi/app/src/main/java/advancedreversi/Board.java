@@ -28,12 +28,7 @@ package advancedreversi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Set;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
 public class Board {
     private int[][] board; // Board field integer array
