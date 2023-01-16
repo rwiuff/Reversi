@@ -1,23 +1,42 @@
 package advancedreversi;
 
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
 
 public class Controller {
 
 	@FXML
 	public Label label = new Label(" ");
+	
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
 	public Pane pane = new Pane();
@@ -26,6 +45,12 @@ public class Controller {
 	int startID = 1;
 	int secondViolin = 2;
 	boolean restart = false;
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
+	private Button genstart;
+	int highscore = 0;
+	
 
 	Board b = new Board();
 
@@ -93,8 +118,10 @@ public class Controller {
 						}
 				}
 				if (b.gameOver()) {
+					
 					String outcome = "";
-					b.peicesCount();
+					int z = b.peicesCount();
+					saveHighScore(z);
 					switch (b.checkWinner()) {
 						case 41:
 							outcome = b.getPlayers().get(1) + " wins!";
@@ -216,26 +243,103 @@ public class Controller {
 			pane.getChildren().clear();
 		}
 	}
-	
-	
-	
-	
-	public void Start() {
-		
-	}
-	
-	public void Highscore() {
-		
-	}
-	
-	public void Rules() {
-		
-	}
-	
-	public void Exit() {
-		
-	}
-	
-	
 
+	
+	public void start(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//main.fxml"));
+		stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.getIcons().addAll(
+					new Image(getClass().getResourceAsStream("icon16.png")),
+					new Image(getClass().getResourceAsStream("icon32.png")),
+					new Image(getClass().getResourceAsStream("icon64.png"))
+				);
+	  // showing null error have to fix it.
+		   genstart.fire();
+		   
+		   stage.show();
+	   }
+	
+	
+	public void exit(ActionEvent event) {
+		
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		a.setTitle("Exit Reversi");
+		a.setContentText("Are you sure you want to exit Reversi?");
+		a.setHeaderText("You are exiting Reversi ");
+		
+		
+		if(a.showAndWait().get()==ButtonType.OK)
+		Platform.exit();
+	}
+	
+	public void showHighScore(ActionEvent e ) {
+		Alert b = new Alert(AlertType.INFORMATION,"Highscore");
+		b.setContentText("The HighScore is : " + loadHighScore() + "!");
+		b.setHeaderText(null);
+		b.setX(420);
+		b.setY(200);
+		
+		ButtonType response = b.showAndWait().orElse(ButtonType.CANCEL);
+		if(response == ButtonType.OK){
+		    b.close();
+		}
+		b.close();
+
+	}
+	
+		public void saveHighScore(int score) {
+		     if( highscore < score) {
+		    	 highscore = score;
+		         try {
+		                    
+		     FileWriter hsfw = new FileWriter("HighScore.txt", true);
+		     BufferedWriter hsbw = new BufferedWriter(hsfw);
+		     hsbw.write(Integer.toString(highscore));
+		     hsbw.newLine();
+		      hsbw.close();
+		       hsfw.close();
+
+		        } catch (IOException e) {
+		          e.printStackTrace();
+		      }
+           }
+	   }
+		
+		public int loadHighScore() {
+			try {
+				FileReader hsfr = new FileReader("HighScore.txt");
+				BufferedReader hsbr = new BufferedReader(hsfr);
+				highscore = Integer.parseInt(hsbr.readLine());
+				hsbr.close();
+				hsfr.close();
+				return highscore;
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+		
+		
+		public void mainMenu(ActionEvent event) throws IOException {
+			Parent root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//ad.fxml"));
+			stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		    scene = new Scene(root);
+		    stage.setScene(scene);
+		    stage.getIcons().addAll(
+						new Image(getClass().getResourceAsStream("icon16.png")),
+						new Image(getClass().getResourceAsStream("icon32.png")),
+						new Image(getClass().getResourceAsStream("icon64.png"))
+					);
+			   
+			   stage.show();
+		   }
+		
+		
 }
+		   
+
+
+
