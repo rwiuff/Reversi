@@ -3,7 +3,6 @@ package advancedreversi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -246,7 +245,7 @@ public class Controller {
 
 	
 	public void start(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 		stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);
 	    stage.setScene(scene);
@@ -257,7 +256,6 @@ public class Controller {
 				);
 	  // showing null error have to fix it.
 		   genstart.fire();
-		   
 		   stage.show();
 	   }
 	
@@ -293,16 +291,6 @@ public class Controller {
 		public void saveHighScore(int score) {
 		     if( highscore < score) {
 		    	 highscore = score;
-		         
-		    	File f = new File("HighScore.txt");
-		    	if(!f.exists())
-		    	try {
-		    		f.createNewFile();
-		    	}
-		    	
-		      catch(IOException e) {
-		    	  e.printStackTrace();
-		     }
 		    	 
 		    	 try { 	 
 		     FileWriter hsfw = new FileWriter("HighScore.txt", true);
@@ -327,8 +315,7 @@ public class Controller {
 				hsfr.close();
 				return highscore;
 			}
-			catch(Exception e) {
-				e.printStackTrace();
+			catch(Exception numberForException) {
 				return 0;
 			}
 		}
@@ -341,7 +328,7 @@ public class Controller {
 			mm.setHeaderText(" By doing this, you cannot continue the game again!");
 			
 			if(mm.showAndWait().get()==ButtonType.OK)
-			 root = FXMLLoader.load(ClassLoader.getSystemResource("advancedreversi//ad.fxml"));
+			root = FXMLLoader.load(getClass().getResource("start.fxml"));
 			stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		    scene = new Scene(root);
 		    stage.setScene(scene);

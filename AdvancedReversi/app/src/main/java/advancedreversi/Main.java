@@ -1,28 +1,22 @@
 package advancedreversi;
 
 import java.io.File;
-import java.net.URL;
-
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ad.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.getIcons().addAll(
@@ -34,15 +28,14 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             
             primaryStage.setTitle("Reversi");
-           
-
             primaryStage.setScene(scene);
+            File f = new File("HighScore.txt");
+		    	if(!f.exists())	f.createNewFile();
             primaryStage.show();
             primaryStage.setOnCloseRequest(event -> {
             	event.consume();
             exit(primaryStage);
             });
-            
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +46,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public void exit(Stage PrimaryStage) {
+	public void exit(Stage primaryStage) {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION,"Exit Reversi");
 		alert.setContentText("Are you sure you want to exit Reversi?");
