@@ -105,27 +105,25 @@ public class Controller {
 				id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
 				ownString = (id == 1) ? name1.getText() : name2.getText();
 				opponentString = (id == 1) ? name2.getText() : name1.getText();
-				switch (board.turnState(id)) {
-					case 22:
-						label.setText("No legal moves. " + opponentString + "'s turn");
-						break;
-					case 21:
-						switch (board.place(row, column, id)) {
-							case 11:
-								update();
-								checkScore();
-								label.setText("Good job!\n" + opponentString + "'s turn");
-								showLegalMoves((id == 1) ? 2 : 1);
-								break;
-							case 12:
-								label.setText("Field already occupied\n" + ownString + "'s turn");
-								showLegalMoves(id);
-								break;
-							case 13:
-								label.setText("Illegal move\n" + ownString + "'s turn");
-								showLegalMoves(id);
-								break;
-						}
+				if (board.turnState(id) == 22) {
+					label.setText("No legal moves. " + opponentString + "'s turn");
+				} else {
+					switch (board.place(row, column, id)) {
+						case 11:
+							update();
+							checkScore();
+							label.setText("Good job!\n" + opponentString + "'s turn");
+							showLegalMoves((id == 1) ? 2 : 1);
+							break;
+						case 12:
+							label.setText("Field already occupied\n" + ownString + "'s turn");
+							showLegalMoves(id);
+							break;
+						case 13:
+							label.setText("Illegal move\n" + ownString + "'s turn");
+							showLegalMoves(id);
+							break;
+					}
 				}
 				if (board.gameOver()) {
 					String outcome = "";
