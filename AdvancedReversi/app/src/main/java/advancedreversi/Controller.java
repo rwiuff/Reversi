@@ -27,6 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -57,7 +58,7 @@ public class Controller {
 	@FXML
 	public void in() {
 		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
-		// Schedule an event after 2 seconds
+		// Schedule an event after 3 seconds
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
 			label.setText(b.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
@@ -124,8 +125,9 @@ public class Controller {
 				if (b.gameOver()) {
 					
 					String outcome = "";
+					String n = b.getWinnerNameforhs();
 					int z = b.peicesCount();
-					saveHighScore(z);
+					saveHighScore(z, n);
 					switch (b.checkWinner()) {
 						case 41:
 							outcome = b.getPlayers().get(1) + " wins!";  
@@ -322,10 +324,11 @@ public class Controller {
 	public void showHighScore(ActionEvent e ) {
 		Alert b = new Alert(AlertType.INFORMATION);
 		b.setTitle("Highscore");
-		b.setContentText("The HighScore is : " + loadHighScore() + "!");
+		b.setContentText("The HighScore is : " + loadHighScore());
 		b.setHeaderText(null);
 		b.setX(420);
 		b.setY(200);
+		
 		
 		ButtonType response = b.showAndWait().orElse(ButtonType.CANCEL);
 		if(response == ButtonType.OK){
@@ -335,15 +338,14 @@ public class Controller {
 
 	}
 	
-		public void saveHighScore(int score) {
+		public void saveHighScore(int score, String name) {
 		     if( highscore < score) {
 		    	 highscore = score;
 		    	 
 		    	 try { 	 
-		     FileWriter hsfw = new FileWriter("HighScore.txt", true);
+		     FileWriter hsfw = new FileWriter("HighScore.txt", false);
 		     BufferedWriter hsbw = new BufferedWriter(hsfw);
-		     hsbw.write(Integer.toString(highscore));
-		     hsbw.newLine();
+		     hsbw.write(highscore + " , " + name);
 		      hsbw.close();
 		       hsfw.close();
 
@@ -353,17 +355,21 @@ public class Controller {
            }
 	   }
 		
-		public int loadHighScore() {
+		public String loadHighScore() {
 			try {
 				FileReader hsfr = new FileReader("HighScore.txt");
 				BufferedReader hsbr = new BufferedReader(hsfr);
-				highscore = Integer.parseInt(hsbr.readLine());
+				String l = hsbr.readLine();
+				String[] p = l.split(",");
+				String navn = p[1];
+				String score = p[0];
+				String points = score + "set by" + navn;
 				hsbr.close();
 				hsfr.close();
-				return highscore;
+				return points;
 			}
 			catch(Exception numberForException) {
-				return 0;
+				return "0";
 			}
 		}
 		
