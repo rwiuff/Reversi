@@ -16,7 +16,7 @@ import javafx.scene.shape.Circle;
 public class Controller {
 
 	@FXML
-	private BorderPane stopwatchpane;	
+	private BorderPane ReversiTimerpane;	
 	@FXML
 	public Label label = new Label(" ");
     
@@ -58,8 +58,8 @@ public class Controller {
 	public void in() {
 	label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 	
-	stopwatchpane.setTop(time1);
-	stopwatchpane.setBottom(time2);
+	ReversiTimerpane.setTop(time1);
+	ReversiTimerpane.setBottom(time2);
 	
 	time1.start();time1.pause();
 	time2.start();time2.pause();
