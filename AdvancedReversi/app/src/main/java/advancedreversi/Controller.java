@@ -1,19 +1,34 @@
 package advancedreversi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Controller {
@@ -36,9 +51,7 @@ public class Controller {
 	public Pane topPane = new Pane();
 
 	Board b = new Board();
-	
-	
-	
+
 	@FXML
 	public void in() {
 		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
@@ -48,6 +61,15 @@ public class Controller {
 			gameStarted = true;
 		}));
 		timeline.play();
+		int startsquare = (startID == 1) ? 3 : 4;
+		for (int i = 3; i < 5; i++) {
+			for (int j = 3; j < 5; j++) {
+				String paneID = "#" + i + j;
+				Pane pane = (Pane) gridPane.lookup(paneID);
+				if (b.getBoard()[i][j] == 0)
+					drawCircle(startsquare, pane);
+			}
+		}
 	}
 
 	@FXML
@@ -61,16 +83,16 @@ public class Controller {
 		gameStarted = false;
 		startID = (startID == 1) ? 2 : 1;
 		secondViolin = (secondViolin == 2) ? 1 : 2;
-		
+
 		okBtn.setVisible(true);
 		name1.setVisible(true);
 		name2.setVisible(true);
 		setName();
-		
+
 	}
 
 	@FXML
-	public void onPaneClicked(MouseEvent event) {
+	public void onPaneClicked(MouseEvent event) throws IOException {
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
@@ -109,12 +131,20 @@ public class Controller {
 				}
 				if (b.gameOver()) {
 					String outcome = "";
+					int score;
+					String winner;
 					switch (b.checkWinner()) {
 						case 41:
-							outcome = b.getPlayers().get(1) + " wins!";
+							winner = b.getPlayers().get(1);
+							score = b.checkWhiteScore();
+							saveHighScore(score, winner);
+							outcome = winner + " wins!";
 							break;
 						case 42:
-							outcome = b.getPlayers().get(2) + " wins!";
+							winner = b.getPlayers().get(2);
+							score = b.checkBlackScore();
+							saveHighScore(score, winner);
+							outcome = winner + " wins!";
 							break;
 						case 43:
 							outcome = "It's a draw!";
@@ -217,28 +247,27 @@ public class Controller {
 		String opponentString;
 		color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
 		ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-		opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);		
-		label.setText(ownString+" has surrendered! \n"+opponentString+" wins!");
+		opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+		label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
 
-		gameStarted=false;
+		gameStarted = false;
 	}
-	
+
 	@FXML
 	public void checkScore() {
-		score1.setText(b.getPlayers().get(1) + " = "+b.checkWhiteScore());
-		score2.setText(b.getPlayers().get(2) + " = "+b.checkBlackScore());
+		score1.setText(b.getPlayers().get(1) + " = " + b.checkWhiteScore());
+		score2.setText(b.getPlayers().get(2) + " = " + b.checkBlackScore());
 	}
-	
-	
+
 	@FXML
 	public void setName() {
-		label.setText("Please enter your names\n in the textfields above:");	
+		label.setText("Please enter your names\n in the textfields above:");
 		checkScore();
 	}
-	
+
 	@FXML
-	public void setNameBtn(ActionEvent e) {	
-		
+	public void setNameBtn(ActionEvent e) {
+
 		if (name1.getText().isEmpty()) {
 			name1.setText("Player 1");
 		}
@@ -253,7 +282,7 @@ public class Controller {
 		name2.setVisible(false);
 		in();
 	}
-  
+
 	public void showLegalMoves(int colour) {
 		b.moveAnalyser(colour);
 		int circleColour = (colour == 1) ? 3 : 4;
@@ -273,6 +302,54 @@ public class Controller {
 			String paneID = "#" + validMoves[i].replace(",", "");
 			Pane pane = (Pane) gridPane.lookup(paneID);
 			pane.getChildren().clear();
+		}
+	}
+
+	public void saveHighScore(int score, String name) throws IOException {
+		FileReader hsfr;
+		int highscore = 0;
+		try {
+			hsfr = new FileReader("HighScore.txt");
+			BufferedReader hsbr = new BufferedReader(hsfr);
+			String l = hsbr.readLine();
+			if(l == null) l = "0,0";
+			String[] p = l.split(",");
+			highscore = Integer.parseInt(p[0]);
+			hsbr.close();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		if (highscore < score) {
+			highscore = score;
+
+			try {
+				FileWriter hsfw = new FileWriter("HighScore.txt", false);
+				BufferedWriter hsbw = new BufferedWriter(hsfw);
+				hsbw.write(highscore + "," + name);
+				hsbw.close();
+				hsfw.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void mainMenu(ActionEvent event) throws IOException {
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		a.setTitle("Main Menu");
+		a.setContentText("Are you sure you want to go back to main menu?");
+		a.setHeaderText(" By doing this, you cannot continue the game again!");
+		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
+		a.setGraphic(graphic);
+
+		if (a.showAndWait().get() == ButtonType.OK) {
+			FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+			Parent menuRoot = menuLoader.load();
+			Scene menuScene = new Scene(menuRoot);
+			Node node = (Node) event.getSource();
+			Stage primaryStage = (Stage) node.getScene().getWindow();
+			primaryStage.setScene(menuScene);
 		}
 	}
 }
