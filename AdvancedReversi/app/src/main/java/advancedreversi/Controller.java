@@ -2,7 +2,6 @@ package advancedreversi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,14 +49,14 @@ public class Controller {
 	public Button okBtn = new Button();
 	public Pane topPane = new Pane();
 
-	Board b = new Board();
+	Board board = new Board();
 
 	@FXML
 	public void in() {
-		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
+		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
 		// Schedule an event after 2 seconds
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
-			label.setText(b.getPlayers().get(startID) + " Starts first");
+			label.setText(board.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
 		}));
 		timeline.play();
@@ -66,20 +65,20 @@ public class Controller {
 			for (int j = 3; j < 5; j++) {
 				String paneID = "#" + i + j;
 				Pane pane = (Pane) gridPane.lookup(paneID);
-				if (b.getBoard()[i][j] == 0)
+				if (board.getBoard()[i][j] == 0)
 					drawCircle(startsquare, pane);
 			}
 		}
 	}
 
 	@FXML
-	public void restart(ActionEvent e) throws IOException {
-		String player1 = b.getPlayers().get(1);
-		String player2 = b.getPlayers().get(2);
+	public void restart(ActionEvent event) throws IOException {
+		String player1 = board.getPlayers().get(1);
+		String player2 = board.getPlayers().get(2);
 		reset();
 		playerID1 = 1;
 		playerID2 = 2;
-		b.setPlayers(playerID1, player1, playerID2, player2);
+		board.setPlayers(playerID1, player1, playerID2, player2);
 		gameStarted = false;
 		startID = (startID == 1) ? 2 : 1;
 		secondViolin = (secondViolin == 2) ? 1 : 2;
@@ -88,7 +87,6 @@ public class Controller {
 		name1.setVisible(true);
 		name2.setVisible(true);
 		setName();
-
 	}
 
 	@FXML
@@ -100,19 +98,19 @@ public class Controller {
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
-			if (b.getTurn() < 2) {
+			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
 				hideLegalMoves();
-				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
+				id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
 				ownString = (id == 1) ? name1.getText() : name2.getText();
 				opponentString = (id == 1) ? name2.getText() : name1.getText();
-				switch (b.turnState(id)) {
+				switch (board.turnState(id)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
 						break;
 					case 21:
-						switch (b.place(row, column, id)) {
+						switch (board.place(row, column, id)) {
 							case 11:
 								update();
 								checkScore();
@@ -129,20 +127,20 @@ public class Controller {
 								break;
 						}
 				}
-				if (b.gameOver()) {
+				if (board.gameOver()) {
 					String outcome = "";
 					int score;
 					String winner;
-					switch (b.checkWinner()) {
+					switch (board.checkWinner()) {
 						case 41:
-							winner = b.getPlayers().get(1);
-							score = b.checkWhiteScore();
+							winner = board.getPlayers().get(1);
+							score = board.checkWhiteScore();
 							saveHighScore(score, winner);
 							outcome = winner + " wins!";
 							break;
 						case 42:
-							winner = b.getPlayers().get(2);
-							score = b.checkBlackScore();
+							winner = board.getPlayers().get(2);
+							score = board.checkBlackScore();
 							saveHighScore(score, winner);
 							outcome = winner + " wins!";
 							break;
@@ -157,12 +155,12 @@ public class Controller {
 	}
 
 	public void update() {
-		int[][] board = b.getBoard();
+		int[][] arr = board.getBoard();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				String paneID = "#" + i + j;
 				Pane pane = (Pane) gridPane.lookup(paneID);
-				drawCircle(board[i][j], pane);
+				drawCircle(arr[i][j], pane);
 			}
 		}
 	}
@@ -209,14 +207,14 @@ public class Controller {
 	}
 
 	public void firstFour(int row, int column, Pane pane) {
-		String playerTurn = (startID == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-		switch (b.initPlace(row, column, startID)) {
+		String playerTurn = (startID == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
+		switch (board.initPlace(row, column, startID)) {
 			case 11:
 				update();
-				if (b.getTurn() == 1)
+				if (board.getTurn() == 1)
 					label.setText(playerTurn + ": Place second tile");
 				showLegalMoves(startID);
-				if (b.getTurn() > 1)
+				if (board.getTurn() > 1)
 					label.setText(playerTurn + ": Your move!");
 				checkScore();
 				break;
@@ -230,7 +228,7 @@ public class Controller {
 	}
 
 	public void reset() {
-		b.resetBoard();
+		board.resetBoard();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				String paneID = "#" + i + j;
@@ -241,22 +239,21 @@ public class Controller {
 	}
 
 	@FXML
-	public void surrender(ActionEvent e) {
+	public void surrender(ActionEvent event) {
 		int color = startID;
 		String ownString;
 		String opponentString;
-		color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
-		ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
-		opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+		color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+		ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
+		opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
 		label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
-
 		gameStarted = false;
 	}
 
 	@FXML
 	public void checkScore() {
-		score1.setText(b.getPlayers().get(1) + " = " + b.checkWhiteScore());
-		score2.setText(b.getPlayers().get(2) + " = " + b.checkBlackScore());
+		score1.setText(board.getPlayers().get(1) + " = " + board.checkWhiteScore());
+		score2.setText(board.getPlayers().get(2) + " = " + board.checkBlackScore());
 	}
 
 	@FXML
@@ -266,16 +263,15 @@ public class Controller {
 	}
 
 	@FXML
-	public void setNameBtn(ActionEvent e) {
-
+	public void setNameBtn(ActionEvent event) {
 		if (name1.getText().isEmpty()) {
 			name1.setText("Player 1");
 		}
 		if (name2.getText().isEmpty()) {
 			name2.setText("Player 2");
 		}
-		b.setPlayerName(playerID1, name1.getText());
-		b.setPlayerName(playerID2, name2.getText());
+		board.setPlayerName(playerID1, name1.getText());
+		board.setPlayerName(playerID2, name2.getText());
 		checkScore();
 		okBtn.setVisible(false);
 		name1.setVisible(false);
@@ -284,9 +280,9 @@ public class Controller {
 	}
 
 	public void showLegalMoves(int colour) {
-		b.moveAnalyser(colour);
+		board.moveAnalyser(colour);
 		int circleColour = (colour == 1) ? 3 : 4;
-		Set<String> validMovesSet = b.getValidMoves().keySet();
+		Set<String> validMovesSet = board.getValidMoves().keySet();
 		String[] validMoves = validMovesSet.toArray(new String[validMovesSet.size()]);
 		for (int i = 0; i < validMoves.length; i++) {
 			String paneID = "#" + validMoves[i].replace(",", "");
@@ -296,7 +292,7 @@ public class Controller {
 	}
 
 	public void hideLegalMoves() {
-		Set<String> validMovesSet = b.getValidMoves().keySet();
+		Set<String> validMovesSet = board.getValidMoves().keySet();
 		String[] validMoves = validMovesSet.toArray(new String[validMovesSet.size()]);
 		for (int i = 0; i < validMoves.length; i++) {
 			String paneID = "#" + validMoves[i].replace(",", "");
@@ -305,27 +301,29 @@ public class Controller {
 		}
 	}
 
-	public void saveHighScore(int score, String name) throws IOException {
-		FileReader hsfr;
-		int highscore = 0;
+	public static Object[] loadHighScore() {
 		try {
-			hsfr = new FileReader("HighScore.txt");
+			FileReader hsfr = new FileReader("HighScore.txt");
 			BufferedReader hsbr = new BufferedReader(hsfr);
 			String l = hsbr.readLine();
-			if(l == null) l = "0,0";
 			String[] p = l.split(",");
-			highscore = Integer.parseInt(p[0]);
+			String name = p[1];
+			int score = Integer.parseInt(p[0]);
 			hsbr.close();
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+			hsfr.close();
+			return new Object[] { name, score };
+		} catch (Exception numberForException) {
+			return new Object[] { "", 0 };
 		}
-		if (highscore < score) {
-			highscore = score;
+	}
 
+	public void saveHighScore(int score, String name) {
+		int highScore = (int) loadHighScore()[0];
+		if (highScore < score) {
 			try {
 				FileWriter hsfw = new FileWriter("HighScore.txt", false);
 				BufferedWriter hsbw = new BufferedWriter(hsfw);
-				hsbw.write(highscore + "," + name);
+				hsbw.write(score + "," + name);
 				hsbw.close();
 				hsfw.close();
 
@@ -336,14 +334,14 @@ public class Controller {
 	}
 
 	public void mainMenu(ActionEvent event) throws IOException {
-		Alert a = new Alert(AlertType.CONFIRMATION);
-		a.setTitle("Main Menu");
-		a.setContentText("Are you sure you want to go back to main menu?");
-		a.setHeaderText(" By doing this, you cannot continue the game again!");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Main Menu");
+		alert.setContentText("Are you sure you want to go back to main menu?");
+		alert.setHeaderText(" By doing this, you cannot continue the game again!");
 		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
-		a.setGraphic(graphic);
+		alert.setGraphic(graphic);
 
-		if (a.showAndWait().get() == ButtonType.OK) {
+		if (alert.showAndWait().get() == ButtonType.OK) {
 			FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
 			Parent menuRoot = menuLoader.load();
 			Scene menuScene = new Scene(menuRoot);

@@ -55,4 +55,15 @@ class BoardTest {
         assertEquals(1, b.getBoard()[2][3]);
         assertEquals(1, b.getBoard()[3][2]);
     }
+
+    @Test void stopAtEmptyTest(){
+        Board b = new Board();
+        b.setPiece(3, 3, 1);
+        b.setPiece(4, 4, 1);
+        b.setPiece(3, 4, 2);
+        b.setPiece(4, 3, 1);
+        b.setPiece(6, 4, 2);
+        b.moveAnalyser(1);
+        assertEquals(13, b.place(7, 4, 1));
+    }
 }

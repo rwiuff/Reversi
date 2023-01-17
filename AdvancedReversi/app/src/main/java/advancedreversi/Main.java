@@ -1,8 +1,6 @@
 package advancedreversi;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -75,35 +73,18 @@ public class Main extends Application {
     }
 
     public void showHighScore(ActionEvent event){
-        Alert b = new Alert(AlertType.INFORMATION);
-		b.setTitle("Highscore");
-		b.setContentText("The HighScore is : " + loadHighScore());
-		b.setHeaderText(null);
+        Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Highscore");
+        String highScore = Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
+		alert.setContentText("The HighScore is : " + highScore);
+		alert.setHeaderText(null);
 		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
-        b.setGraphic(graphic);
-		ButtonType response = b.showAndWait().orElse(ButtonType.CANCEL);
+        alert.setGraphic(graphic);
+		ButtonType response = alert.showAndWait().orElse(ButtonType.CANCEL);
 		if(response == ButtonType.OK){
-		    b.close();
+		    alert.close();
 		}
-		b.close();
-    }
-
-    public String loadHighScore() {
-        try {
-            FileReader hsfr = new FileReader("HighScore.txt");
-            BufferedReader hsbr = new BufferedReader(hsfr);
-            String l = hsbr.readLine();
-            String[] p = l.split(",");
-            String navn = p[1];
-            String score = p[0];
-            String points = score + " set by " + navn;
-            hsbr.close();
-            hsfr.close();
-            return points;
-        }
-        catch(Exception numberForException) {
-            return "0";
-        }
+		alert.close();
     }
 
     public void exitGame(ActionEvent event){
