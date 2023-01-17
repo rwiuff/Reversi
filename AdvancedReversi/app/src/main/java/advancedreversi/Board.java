@@ -305,11 +305,11 @@ public class Board {
 
         if (Black > White) {
         	
-            return getPlayers().get(1) ;
+            return getPlayers().get(2) ;
             
         } else if (White > Black) {
         	
-            return getPlayers().get(2);
+            return getPlayers().get(1);
         } else {
         	
             return null;
