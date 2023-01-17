@@ -81,6 +81,7 @@ public class Controller {
 			if (b.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
+				hideLegalMoves();
 				id = (b.getTurn() % 2 == 1) ? startID : secondViolin;
 				ownString = (id == 1) ? name1.getText() : name2.getText();
 				opponentString = (id == 1) ? name2.getText() : name1.getText();
@@ -224,8 +225,8 @@ public class Controller {
 	
 	@FXML
 	public void checkScore() {
-		score1.setText("white score = "+b.checkWhiteScore());
-		score2.setText("Black score = "+b.checkBlackScore());
+		score1.setText(b.getPlayers().get(1) + " = "+b.checkWhiteScore());
+		score2.setText(b.getPlayers().get(2) + " = "+b.checkBlackScore());
 	}
 	
 	
@@ -246,6 +247,7 @@ public class Controller {
 		}
 		b.setPlayerName(playerID1, name1.getText());
 		b.setPlayerName(playerID2, name2.getText());
+		checkScore();
 		okBtn.setVisible(false);
 		name1.setVisible(false);
 		name2.setVisible(false);
