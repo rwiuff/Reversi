@@ -21,7 +21,7 @@ public class Main extends Application {
 			);
             primaryStage.setResizable(false);
             Controller controller = loader.getController();
-            controller.setName();
+            controller.in();
             primaryStage.setTitle("Reversi");
             primaryStage.setScene(scene);
             primaryStage.show();

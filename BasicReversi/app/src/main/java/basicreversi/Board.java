@@ -30,11 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-
 public class Board {
     private int[][] board; // Board field integer array
     private int turnCount = 0; // Counts the turn number
@@ -84,13 +79,36 @@ public class Board {
     }
 
     public void setPlayers() {
+        Random rand = new Random();
+        if (rand.nextInt(0, 2) == 0) {
             players.put(1, "Player 1");
             players.put(2, "Player 2");
+        } else {
+            players.put(1, "Player 2");
+            players.put(2, "Player 1");
+        }
     }
     
     public void setPlayers(int identifier1, String player1, int identifier2, String player2) {
-    	players.put(1, player1);
-    	players.put(2, player2);
+        switch (identifier1) {
+            case 1:
+                players.put(1, player1);
+                players.put(2, player2);
+                break;
+            case 2:
+                players.put(1, player2);
+                players.put(2, player1);
+                break;
+            default:
+                Random rand = new Random();
+                if (rand.nextInt(0, 2) == 0) {
+                    players.put(1, player1);
+                    players.put(2, player2);
+                } else {
+                    players.put(1, player2);
+                    players.put(2, player1);
+                }
+        }
     }
     
     public void setPlayerName(int indentifier, String playerName){
@@ -229,32 +247,6 @@ public class Board {
         } else {
             return 43;
         }
-    }
-    
-    public int checkWhiteScore() {
-    	int White = 0;
-    	for (int i = 0; i < 8; i++) {
-    		for (int j = 0; j < 8; j++) {
-    			int value = board[i][j];
-    			if (value == 1) {
-    				White++;
-    			}
-    		}
-    	}
-		return White;
-    }
-    
-    public int checkBlackScore() {
-    	int Black = 0;
-    	for (int i = 0; i < 8; i++) {
-    		for (int j = 0; j < 8; j++) {
-    			int value = board[i][j];
-    			if (value == 2) {
-    				Black++;
-    			}
-    		}
-    	}
-		return Black;
     }
 
     public void moveAnalyser(int colour) {
