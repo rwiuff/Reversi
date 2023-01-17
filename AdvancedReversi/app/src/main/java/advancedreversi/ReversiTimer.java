@@ -9,19 +9,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-
-//conclusion 
-//step 1 I try to use Thread to manipulate the Timer with the game but the problem is 
-//Thread.sleep will take more time then 1 seconds
-//wI try to slove the round trip time of Thread,sleep using Systeme.nanoTime
-//but the problem is the same as the first one
-
-//step 2 I try to use Animationtimer but we can't find how to change the player
-//
-
-//final step I use TimeLine to manipulate the Timer with the game
-//
-
 class ReversiTimer extends BorderPane {
 	   private Text tTime;
 	 
