@@ -38,9 +38,7 @@ public class Board {
     private ArrayList<int[]> flipped = new ArrayList<int[]>();
     private HashMap<Integer, String> players = new HashMap<Integer, String>(); // Player's colour assignment
     private HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> validMoves; //
-    
-    
-   
+
     public Board() { // Constructor for board
         board = new int[boardsize][boardsize]; // Initialises with 0 values
         setPlayers();
@@ -79,17 +77,17 @@ public class Board {
     }
 
     public void setPlayers() {
-            players.put(1, "Player 1");
-            players.put(2, "Player 2");
+        players.put(1, "Player 1");
+        players.put(2, "Player 2");
     }
-    
+
     public void setPlayers(int identifier1, String player1, int identifier2, String player2) {
-    	players.put(1, player1);
-    	players.put(2, player2);
+        players.put(1, player1);
+        players.put(2, player2);
     }
-    
-    public void setPlayerName(int indentifier, String playerName){
-    	players.put(indentifier, playerName);
+
+    public void setPlayerName(int indentifier, String playerName) {
+        players.put(indentifier, playerName);
     }
 
     public void resetBoard() {
@@ -225,31 +223,31 @@ public class Board {
             return 43;
         }
     }
-    
+
     public int checkWhiteScore() {
-    	int White = 0;
-    	for (int i = 0; i < 8; i++) {
-    		for (int j = 0; j < 8; j++) {
-    			int value = board[i][j];
-    			if (value == 1) {
-    				White++;
-    			}
-    		}
-    	}
-		return White;
+        int White = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int value = board[i][j];
+                if (value == 1) {
+                    White++;
+                }
+            }
+        }
+        return White;
     }
-    
+
     public int checkBlackScore() {
-    	int Black = 0;
-    	for (int i = 0; i < 8; i++) {
-    		for (int j = 0; j < 8; j++) {
-    			int value = board[i][j];
-    			if (value == 2) {
-    				Black++;
-    			}
-    		}
-    	}
-		return Black;
+        int Black = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int value = board[i][j];
+                if (value == 2) {
+                    Black++;
+                }
+            }
+        }
+        return Black;
     }
 
     public void moveAnalyser(int colour) {
@@ -359,7 +357,9 @@ public class Board {
             i--;
             j--;
             while (i > 0 && j > 0) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -371,7 +371,9 @@ public class Board {
         } else if (direction == 2) {
             j--;
             while (j > 0) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -383,7 +385,9 @@ public class Board {
             i++;
             j--;
             while (i < checkboard[0].length && j > 0) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -395,7 +399,9 @@ public class Board {
         } else if (direction == 4) {
             i--;
             while (i > 0) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -406,7 +412,9 @@ public class Board {
         } else if (direction == 5) {
             i++;
             while (i < checkboard[0].length) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -418,7 +426,9 @@ public class Board {
             i--;
             j++;
             while (i > 0 && j < checkboard[0].length) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -430,7 +440,9 @@ public class Board {
         } else if (direction == 7) {
             j++;
             while (j < checkboard[0].length) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;
@@ -442,7 +454,9 @@ public class Board {
             i++;
             j++;
             while (i < checkboard[0].length && j < checkboard[0].length) {
-                if (checkboard[i][j] == colour) {
+                if (checkboard[i][j] == 0) {
+                    break;
+                } else if (checkboard[i][j] == colour) {
                     ownTile[0] = i;
                     ownTile[1] = j;
                     break;

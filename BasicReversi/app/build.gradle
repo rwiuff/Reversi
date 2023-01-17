@@ -43,7 +43,7 @@ tasks.named('test') {
 mainClassName = 'basicreversi.Main'
 jar {
     archiveBaseName = 'BasicReversi'
-    archiveVersion =  '1.0.0'
+    archiveVersion =  '1.0.1'
     manifest {
         attributes 'Main-Class': 'basicreversi.launcher'
     }

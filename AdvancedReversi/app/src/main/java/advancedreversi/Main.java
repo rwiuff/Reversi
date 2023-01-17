@@ -79,8 +79,8 @@ public class Main extends Application {
 		b.setTitle("Highscore");
 		b.setContentText("The HighScore is : " + loadHighScore());
 		b.setHeaderText(null);
-		b.setX(420);
-		b.setY(200);
+		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
+        b.setGraphic(graphic);
 		ButtonType response = b.showAndWait().orElse(ButtonType.CANCEL);
 		if(response == ButtonType.OK){
 		    b.close();
