@@ -57,8 +57,13 @@ public class Controller {
 	
 	@FXML
 	public void in() {
+<<<<<<< Updated upstream
 		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 		// Schedule an event after 3 seconds
+=======
+		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
+		
+>>>>>>> Stashed changes
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
 			label.setText(b.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
@@ -83,8 +88,9 @@ public class Controller {
 		name2.setVisible(true);
 		setName();
 <<<<<<< Updated upstream
-		
+
 =======
+		
 >>>>>>> Stashed changes
 	}
 
@@ -128,20 +134,9 @@ public class Controller {
 				if (b.gameOver()) {
 					
 					String outcome = "";
-<<<<<<< Updated upstream
-					String n = b.getWinnerNameforhs();
-					int z = b.peicesCount();
-					saveHighScore(z, n);
-					switch (b.checkWinner()) {
-						case 41:
-							outcome = b.getPlayers().get(1) + " wins!";  
-							break;
-						case 42:
-							outcome = b.getPlayers().get(2) + " wins!";
-							break;
-=======
 					int score;
 					String winner;
+<<<<<<< Updated upstream
 					
 					switch (b.checkWinner()) {
 						case 41:
@@ -163,9 +158,30 @@ public class Controller {
 								outcome = winner + " wins & sets the highscore!";
 								break;
 							} else {
+=======
+					int hs = (int) loadHighScore()[0];
+					switch (board.checkWinner()) {
+						case 41:
+							winner = board.getPlayers().get(1);
+							score = board.checkWhiteScore();
+							if(hs < score) {
+							saveHighScore(score, winner);
+							outcome = winner + " wins & sets the HighScore! ";
+							break;
+					}else {
+						outcome = winner + " wins!";
+						break;}
+						case 42:
+							winner = board.getPlayers().get(2);
+							score = board.checkBlackScore();
+							if(hs < score) {
+								saveHighScore(score, winner);
+								outcome = winner + " wins & sets the HighScore! ";
+								break;
+						}else {
+>>>>>>> Stashed changes
 							outcome = winner + " wins!";
 							break;}
->>>>>>> Stashed changes
 						case 43:
 							outcome = "It's a draw!";
 							break;
@@ -406,33 +422,11 @@ public class Controller {
 		
 		
 		public void mainMenu(ActionEvent event) throws IOException {
-			Alert mm = new Alert(AlertType.CONFIRMATION);
-			mm.setTitle("Main Menu");
-			mm.setContentText("Are you sure you want to go back to main menu?");
-			mm.setHeaderText(" By doing this, you cannot continue the game again!");
-			
-			if(mm.showAndWait().get()==ButtonType.OK)
-			root = FXMLLoader.load(getClass().getResource("start.fxml"));
-			stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		    scene = new Scene(root);
-		    stage.setScene(scene);
-		    stage.getIcons().addAll(
-						new Image(getClass().getResourceAsStream("icon16.png")),
-						new Image(getClass().getResourceAsStream("icon32.png")),
-						new Image(getClass().getResourceAsStream("icon64.png"))
-					);
-			   
-			   stage.show();
-		   }
-		
-		
-}
-		   
-
-
-
-<<<<<<< Updated upstream
-=======
+			Alert a = new Alert(AlertType.CONFIRMATION);
+			a.setTitle("Main Menu");
+			a.setContentText("Are you sure you want to go back to main menu?");
+			a.setHeaderText(" By doing this, you cannot continue the game again!");
+	
 		if (a.showAndWait().get() == ButtonType.OK) {
 			FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
 			Parent menuRoot = menuLoader.load();
@@ -459,4 +453,3 @@ public class Controller {
 	        }
 	 }
 }
->>>>>>> Stashed changes
