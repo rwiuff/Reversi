@@ -23,12 +23,19 @@ public class Main extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.getIcons().addAll(
+<<<<<<< Updated upstream
 				new Image(getClass().getResourceAsStream("icon16.png")),
 				new Image(getClass().getResourceAsStream("icon32.png")),
 				new Image(getClass().getResourceAsStream("icon64.png"))
 			);
            
             primaryStage.setResizable(false);
+=======
+                    new Image(getClass().getResourceAsStream("icon16.png")),
+                    new Image(getClass().getResourceAsStream("icon32.png")),
+                    new Image(getClass().getResourceAsStream("icon64.png")));
+            primaryStage.setResizable(true);
+>>>>>>> Stashed changes
             File f = new File("HighScore.txt");
 		    	if(!f.exists())	f.createNewFile();
             Controller controller = loader.getController();

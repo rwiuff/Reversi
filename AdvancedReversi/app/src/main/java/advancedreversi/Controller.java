@@ -82,7 +82,10 @@ public class Controller {
 		name1.setVisible(true);
 		name2.setVisible(true);
 		setName();
+<<<<<<< Updated upstream
 		
+=======
+>>>>>>> Stashed changes
 	}
 
 	@FXML
@@ -125,6 +128,7 @@ public class Controller {
 				if (b.gameOver()) {
 					
 					String outcome = "";
+<<<<<<< Updated upstream
 					String n = b.getWinnerNameforhs();
 					int z = b.peicesCount();
 					saveHighScore(z, n);
@@ -135,6 +139,33 @@ public class Controller {
 						case 42:
 							outcome = b.getPlayers().get(2) + " wins!";
 							break;
+=======
+					int score;
+					String winner;
+					
+					switch (b.checkWinner()) {
+						case 41:
+							winner = b.getPlayers().get(1);
+							score = b.checkWhiteScore();
+							if(score > hS()) {
+							saveHighScore(score, winner);
+								outcome = winner + " wins & sets the highscore!";
+								break;
+							}
+							else {
+							outcome = winner + " wins!"; 
+							break; }
+						case 42:
+							winner = b.getPlayers().get(2);
+							score = b.checkBlackScore();
+							if(score > hS()) {
+								saveHighScore(score, winner);
+								outcome = winner + " wins & sets the highscore!";
+								break;
+							} else {
+							outcome = winner + " wins!";
+							break;}
+>>>>>>> Stashed changes
 						case 43:
 							outcome = "It's a draw!";
 							break;
@@ -400,3 +431,32 @@ public class Controller {
 
 
 
+<<<<<<< Updated upstream
+=======
+		if (a.showAndWait().get() == ButtonType.OK) {
+			FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+			Parent menuRoot = menuLoader.load();
+			Scene menuScene = new Scene(menuRoot);
+			Node node = (Node) event.getSource();
+			Stage primaryStage = (Stage) node.getScene().getWindow();
+			primaryStage.setScene(menuScene);
+		}
+	}
+	
+	 public int hS() {
+	        try {
+	        	FileReader hsfr = new FileReader("HighScore.txt");
+	            BufferedReader hsbr = new BufferedReader(hsfr);
+	            String linje = hsbr.readLine();
+	            String[] part = linje.split(",");
+	            int hs = Integer.parseInt(part[0]);
+	            hsbr.close();
+	            hsfr.close();
+	            return hs;
+	        }
+	        catch(Exception numberForException) {
+	            return 0;
+	        }
+	 }
+}
+>>>>>>> Stashed changes
