@@ -73,10 +73,15 @@ public class Main extends Application {
     }
 
     public void showHighScore(ActionEvent event){
+        String highScoreText;
         Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Highscore");
-        String highScore = Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
-		alert.setContentText("The HighScore is : " + highScore);
+        switch ((int) Controller.loadHighScore()[0]){
+            case -1: highScoreText = "No highscore set";
+            break;
+            default: highScoreText = "The HighScore is : " + Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
+        }
+		alert.setContentText(highScoreText);
 		alert.setHeaderText(null);
 		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
         alert.setGraphic(graphic);

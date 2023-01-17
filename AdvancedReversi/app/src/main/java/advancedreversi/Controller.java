@@ -313,7 +313,7 @@ public class Controller {
 			hsfr.close();
 			return new Object[] { name, score };
 		} catch (Exception numberForException) {
-			return new Object[] { "", 0 };
+			return new Object[] { -1, "" };
 		}
 	}
 
