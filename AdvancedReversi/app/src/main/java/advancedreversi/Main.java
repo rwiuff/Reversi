@@ -79,7 +79,7 @@ public class Main extends Application {
         switch ((int) Controller.loadHighScore()[0]){
             case -1: highScoreText = "No highscore set";
             break;
-            default: highScoreText = "The HighScore is : " + Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
+            default: highScoreText = "The HighScore is " + Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
         }
 		alert.setContentText(highScoreText);
 		alert.setHeaderText(null);
