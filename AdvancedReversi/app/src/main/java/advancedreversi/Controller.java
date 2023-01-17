@@ -311,7 +311,7 @@ public class Controller {
 			int score = Integer.parseInt(p[0]);
 			hsbr.close();
 			hsfr.close();
-			return new Object[] { name, score };
+			return new Object[] { score, name };
 		} catch (Exception numberForException) {
 			return new Object[] { -1, "" };
 		}
