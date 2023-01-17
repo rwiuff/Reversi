@@ -1,5 +1,4 @@
 package advancedreversi;
-
 import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
@@ -8,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,8 +16,10 @@ import javafx.scene.shape.Circle;
 public class Controller {
 
 	@FXML
+	private BorderPane stopwatchpane;	
+	@FXML
 	public Label label = new Label(" ");
-
+    
 	private boolean gameStarted = false;
 	public GridPane gridPane = new GridPane();
 	public Pane pane = new Pane();
@@ -30,20 +32,17 @@ public class Controller {
 	Board b = new Board();
 
 	@FXML
-	public void in() {
-		label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
-		// Schedule an event after 2 seconds
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
-			label.setText(b.getPlayers().get(startID) + " Starts first");
-			gameStarted = true;
-		}));
-		timeline.play();
-	}
-
-	@FXML
 	public void Restart(ActionEvent e) throws IOException {
 		String player1 = b.getPlayers().get(1);
 		String player2 = b.getPlayers().get(2);
+		
+		time1.clear();
+		time2.clear();
+		
+		/*
+		setText(String.format("%d:%02d %d", 5, 0,1));
+		setText2(String.format("%d:%02d %d", 5, 0,2));
+		*/
 		reset();
 		playerID1 = 1;
 		playerID2 = 2;
@@ -51,25 +50,73 @@ public class Controller {
 		gameStarted = false;
 		startID = (startID == 1) ? 2 : 1;
 		secondViolin = (secondViolin == 2) ? 1 : 2;
-		in();
+		in();	
 	}
+	
+	int currentplayer;
+	@FXML
+	public void in() {
+	label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
+	
+	stopwatchpane.setTop(time1);
+	stopwatchpane.setBottom(time2);
+	
+	time1.start();time1.pause();
+	time2.start();time2.pause();
+	
+	/*
+	setText(String.format("%d:%02d %d", 5, 0,1));
+	setText2(String.format("%d:%02d %d", 5, 0,2));
+	*/
+	if (b.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
+	else currentplayer = 2;
+	
+	// Schedule an event after 2 seconds
+	Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+	label.setText(b.getPlayers().get(startID) + " Starts first");
+	gameStarted = true;
+	}));
+	
+	timeline.play(); 
+	
+	}
+
+	ReversiTimer time1 = new ReversiTimer(1,this);
+	ReversiTimer time2 = new ReversiTimer(2,this);
 
 	@FXML
 	public void onPaneClicked(MouseEvent event) {
+		
 		int row = getRowIndex(event);
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
 		int color = startID;
 		String ownString;
 		String opponentString;
-		if (gameStarted) {
+		
+		if (gameStarted && !time1.timeout() && !time2.timeout()) { 
 			System.out.println("(" + row + "," + column + ")");
 			if (b.getTurn() < 2) {
 				firstFour(row, column, color, pane);
 			} else {
+				
+				
+				if (currentplayer == 2) {
+					
+					time2.pause();
+					time1.resume();
+
+				}   else {
+					
+					time1.pause();
+					time2.resume();
+					
+				}
+				
 				color = (b.getTurn() % 2 == 1) ? startID : secondViolin;
 				ownString = (color == 1) ? b.getPlayers().get(1) : b.getPlayers().get(2);
 				opponentString = (color == 1) ? b.getPlayers().get(2) : b.getPlayers().get(1);
+	
 				switch (b.turnState(color)) {
 					case 22:
 						label.setText("No legal moves. " + opponentString + "'s turn");
@@ -90,6 +137,7 @@ public class Controller {
 						}
 				}
 				if (b.gameOver()) {
+					
 					String outcome = "";
 					switch (b.checkWinner()) {
 						case 41:
@@ -104,9 +152,43 @@ public class Controller {
 					}
 					label.setText("Game is over!\n" + outcome);
 				}
+				
+			}
+		}else {
+			if (time1.timeout()) {
+				
+				time1.pause();	
+				time2.pause();
+				
+				String outcome = "Player 2  wins!";
+				label.setText("Game is over!\n" + outcome);
+				gameStarted = false;
+				
+			}else if (time2.timeout()) {
+				
+				time1.pause();	
+				time2.pause();
+				
+				String outcome = "Player 1  wins!";
+				label.setText("Game is over!\n" + outcome);
+				gameStarted = false;
 			}
 		}
+		
+		if (currentplayer == 2) currentplayer = 1;
+		else currentplayer = 2;
+		
 	}
+
+	public int getCurrentplayer() {
+		return currentplayer;
+	}
+
+
+	public void setCurrentplayer(int currentplayer) {
+		this.currentplayer = currentplayer;
+	}
+
 
 	public void update() {
 		int[][] board = b.getBoard();

@@ -76,7 +76,7 @@ public class Board {
     public HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> getValidMoves() {
         return validMoves;
     }
-
+    
     public void setPlayers() {
         Random rand = new Random();
         if (rand.nextInt(0, 2) == 0) {
@@ -87,7 +87,8 @@ public class Board {
             players.put(2, "Player 1");
         }
     }
-
+    
+   
     public void setPlayers(int identifier1, String player1, int identifier2, String player2) {
         switch (identifier1) {
             case 1:
