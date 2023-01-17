@@ -43,7 +43,7 @@ tasks.named('test') {
 mainClassName = 'basicreversi.Main'
 jar {
     archiveBaseName = 'BasicReversi'
-    archiveVersion =  '1.0.0-beta'
+    archiveVersion =  '1.0.0'
     manifest {
         attributes 'Main-Class': 'basicreversi.launcher'
     }
@@ -51,4 +51,10 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.register('copyJarToRelease', Copy){
+    from layout.buildDirectory.dir("libs")
+    include "*.jar"
+    into "$rootDir/releases"
 }
