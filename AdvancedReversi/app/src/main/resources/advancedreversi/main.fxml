@@ -14,9 +14,9 @@
 
 <BorderPane maxHeight="715.0" maxWidth="685.0" minHeight="300.0" minWidth="400.0" prefHeight="714.0" prefWidth="604.0" style="-fx-background-color: #344e41;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advancedreversi.Controller">
    <bottom>
-      <HBox prefHeight="91.0" prefWidth="451.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="91.0" prefWidth="451.0" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label fx:id="label" alignment="TOP_CENTER" prefHeight="90.0" prefWidth="317.0" style="-fx-background-color: #344e41;" textAlignment="CENTER" textFill="#e4d2ac">
+            <Label fx:id="label" alignment="CENTER" prefHeight="90.0" prefWidth="317.0" style="-fx-background-color: #344e41;" textAlignment="CENTER" textFill="#e4d2ac">
                <font>
                   <Font name="Book Antiqua Bold Italic" size="20.0" />
                </font>
@@ -24,8 +24,8 @@
             <Label fx:id="timerLabel" prefHeight="91.0" prefWidth="155.0" />
             <Pane prefHeight="91.0" prefWidth="133.0" style="-fx-background-color: #344e41;">
                <children>
-                  <Button alignment="CENTER" layoutY="29.0" mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="84.0" text="Restart" />
-                  <Button layoutY="59.0" mnemonicParsing="false" onAction="#surrender" prefHeight="30.0" prefWidth="85.0" text="Surrender" />
+                  <Button alignment="CENTER" layoutY="15.0" mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="84.0" text="Restart" />
+                  <Button layoutY="50.0" mnemonicParsing="false" onAction="#surrender" prefHeight="30.0" prefWidth="85.0" text="Surrender" />
                </children>
             </Pane>
          </children>
@@ -127,12 +127,21 @@
    <top>
       <Pane fx:id="topPane" prefHeight="100.0" prefWidth="525.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="name1" layoutX="14.0" layoutY="13.0" prefHeight="26.0" prefWidth="148.0" promptText="Player  1's name" />
-            <TextField fx:id="name2" layoutX="14.0" layoutY="39.0" prefHeight="26.0" prefWidth="148.0" promptText="Player 2's name" />
-            <Label layoutX="205.0" layoutY="30.0" text="Score:" />
-            <Button fx:id="okBtn" layoutX="162.0" layoutY="26.0" mnemonicParsing="false" onAction="#setNameBtn" prefHeight="26.0" prefWidth="33.0" text="ok" />
-            <Label fx:id="score1" layoutX="247.0" layoutY="21.0" prefHeight="17.0" prefWidth="161.0" text="Label" />
-            <Label fx:id="score2" layoutX="247.0" layoutY="42.0" prefHeight="17.0" prefWidth="163.0" text="Label" />
+            <TextField fx:id="name1" layoutX="38.0" layoutY="20.0" prefHeight="26.0" prefWidth="148.0" promptText="Player  1's name" />
+            <TextField fx:id="name2" layoutX="38.0" layoutY="60.0" prefHeight="26.0" prefWidth="148.0" promptText="Player 2's name" />
+            <Label layoutX="280.0" layoutY="37.0" text="Score:" textFill="#e4d2ac">
+               <font>
+                  <Font name="Fira Code Regular" size="18.0" />
+               </font></Label>
+            <Button fx:id="okBtn" layoutX="220.0" layoutY="37.0" mnemonicParsing="false" onAction="#setNameBtn" prefHeight="26.0" prefWidth="33.0" text="ok" />
+            <Label fx:id="score1" layoutX="360.0" layoutY="25.0" prefHeight="17.0" prefWidth="161.0" text="Label" textFill="#e4d2ac">
+               <font>
+                  <Font name="Fira Code Regular" size="18.0" />
+               </font></Label>
+            <Label fx:id="score2" layoutX="360.0" layoutY="50.0" prefHeight="17.0" prefWidth="163.0" text="Label" textFill="#e4d2ac">
+               <font>
+                  <Font name="Fira Code Regular" size="18.0" />
+               </font></Label>
          </children>
       </Pane>
    </top>
