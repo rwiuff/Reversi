@@ -28,6 +28,7 @@ public class Controller {
 	int startID = 1;
 	int secondViolin = 2;
 	boolean restart = false;
+	public boolean speedReversi = false;
 
 	Board b = new Board();
 
@@ -36,8 +37,11 @@ public class Controller {
 		String player1 = b.getPlayers().get(1);
 		String player2 = b.getPlayers().get(2);
 		
+		if (speedReversi == true) {
 		time1.clear();
 		time2.clear();
+		}
+		
 		reset();
 		playerID1 = 1;
 		playerID2 = 2;
@@ -53,17 +57,12 @@ public class Controller {
 	public void in() {
 	label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 	
-	//System.out.println(ReversiTimerpane);
 	ReversiTimerpane.setTop(time1);
 	ReversiTimerpane.setBottom(time2);
-	
 	time1.start();time1.pause();
 	time2.start();time2.pause();
 	
-	/*
-	setText(String.format("%d:%02d %d", 5, 0,1));
-	setText2(String.format("%d:%02d %d", 5, 0,2));
-	*/
+
 	if (b.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
 	else currentplayer = 2;
 	
