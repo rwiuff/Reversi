@@ -357,7 +357,7 @@ public class Controller {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Main Menu");
 		alert.setContentText("Are you sure you want to go back to main menu?");
-		alert.setHeaderText(" By doing this, you cannot continue the game again!");
+		alert.setHeaderText(" By doing this, you will lose all progress!");
 		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
 		alert.setGraphic(graphic);
 
