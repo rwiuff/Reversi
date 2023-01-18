@@ -136,23 +136,25 @@ public class Controller {
 						case 41:
 							winner = board.getPlayers().get(1);
 							score = board.checkWhiteScore();
-							if(hs < score) {
-							saveHighScore(score, winner);
-							outcome = winner + " wins & sets\n the HighScore! ";
-							break;
-					}else {
-						outcome = winner + " wins!";
-						break;}
-						case 42:
-							winner = board.getPlayers().get(2);
-							score = board.checkBlackScore();
-							if(hs < score) {
+							if (hs < score) {
 								saveHighScore(score, winner);
 								outcome = winner + " wins & sets\n the HighScore! ";
 								break;
-						}else {
-							outcome = winner + " wins!";
-							break;}
+							} else {
+								outcome = winner + " wins!";
+								break;
+							}
+						case 42:
+							winner = board.getPlayers().get(2);
+							score = board.checkBlackScore();
+							if (hs < score) {
+								saveHighScore(score, winner);
+								outcome = winner + " wins & sets\n the HighScore! ";
+								break;
+							} else {
+								outcome = winner + " wins!";
+								break;
+							}
 						case 43:
 							outcome = "It's a draw!";
 							break;
@@ -284,19 +286,19 @@ public class Controller {
 		if (name2.getText().isEmpty()) {
 			name2.setText("Player 2");
 		}
-		
-		if (name1.getText().length()>10) {
+
+		if (name1.getText().length() > 10) {
 			label.setText("Player1\n Please enter a shorter name:");
-		} else if (name2.getText().length()>10) {
+		} else if (name2.getText().length() > 10) {
 			label.setText("Player2\n Please enter a shorter name:");
 		} else {
-		board.setPlayerName(playerID1, name1.getText());
-		board.setPlayerName(playerID2, name2.getText());
-		checkScore();
-		okBtn.setVisible(false);
-		name1.setVisible(false);
-		name2.setVisible(false);
-		in();
+			board.setPlayerName(playerID1, name1.getText());
+			board.setPlayerName(playerID2, name2.getText());
+			checkScore();
+			okBtn.setVisible(false);
+			name1.setVisible(false);
+			name2.setVisible(false);
+			in();
 		}
 	}
 
@@ -339,18 +341,18 @@ public class Controller {
 	}
 
 	public void saveHighScore(int score, String name) {
-		
-			try {
-				FileWriter hsfw = new FileWriter("HighScore.txt", false);
-				BufferedWriter hsbw = new BufferedWriter(hsfw);
-				hsbw.write(score + "," + name);
-				hsbw.close();
-				hsfw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
+		try {
+			FileWriter hsfw = new FileWriter("HighScore.txt", false);
+			BufferedWriter hsbw = new BufferedWriter(hsfw);
+			hsbw.write(score + "," + name);
+			hsbw.close();
+			hsfw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void mainMenu(ActionEvent event) throws IOException {
