@@ -28,7 +28,7 @@
                      </font></Button>
                </children>
             </Pane>
-            <BorderPane fx:id="stopwatchpane" prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane fx:id="ReversiTimerpane" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
    </bottom>

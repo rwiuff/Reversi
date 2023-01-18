@@ -38,11 +38,6 @@ public class Controller {
 		
 		time1.clear();
 		time2.clear();
-		
-		/*
-		setText(String.format("%d:%02d %d", 5, 0,1));
-		setText2(String.format("%d:%02d %d", 5, 0,2));
-		*/
 		reset();
 		playerID1 = 1;
 		playerID2 = 2;
@@ -58,6 +53,7 @@ public class Controller {
 	public void in() {
 	label.setText(b.getPlayers().get(1) + " is White\n" + b.getPlayers().get(2) + " is Black");
 	
+	//System.out.println(ReversiTimerpane);
 	ReversiTimerpane.setTop(time1);
 	ReversiTimerpane.setBottom(time2);
 	

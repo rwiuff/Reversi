@@ -74,11 +74,7 @@ class ReversiTimer extends BorderPane {
 	   }
 
 	   public void setTime() {
-	      // flip 60 seconds over to a minute
-		 
 	    
-	      // ensure that values < 10 are padded with a 0
-
 	      tTime.setText( String.format("%d:%02d Player %d", time / 60, time % 60,player));
 	   }
 	   
