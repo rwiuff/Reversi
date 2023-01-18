@@ -48,6 +48,7 @@ public class Controller {
 	boolean restart = false;
 	public Button okBtn = new Button();
 	public Pane topPane = new Pane();
+	public boolean first4 = false;
 
 	Board board = new Board();
 
@@ -101,6 +102,7 @@ public class Controller {
 			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
+				first4 = true;
 				hideLegalMoves();
 				id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
 				ownString = (id == 1) ? name1.getText() : name2.getText();
@@ -247,6 +249,8 @@ public class Controller {
 
 	@FXML
 	public void surrender(ActionEvent event) {
+		System.out.println(first4);
+		if (first4==true) {
 		int color = startID;
 		String ownString;
 		String opponentString;
@@ -255,6 +259,9 @@ public class Controller {
 		opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
 		label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
 		gameStarted = false;
+		} else {
+			label.setText("That is just way too early!");
+		}
 	}
 
 	@FXML
