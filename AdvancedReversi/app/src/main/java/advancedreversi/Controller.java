@@ -54,7 +54,7 @@ public class Controller {
 	@FXML
 	public void in() {
 		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
-		// Schedule an event after 2 seconds
+		// Schedule an event after 3 seconds
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
 			label.setText(board.getPlayers().get(startID) + " Starts first");
 			gameStarted = true;
@@ -131,19 +131,28 @@ public class Controller {
 					String outcome = "";
 					int score;
 					String winner;
+					int hs = (int) loadHighScore()[0];
 					switch (board.checkWinner()) {
 						case 41:
 							winner = board.getPlayers().get(1);
 							score = board.checkWhiteScore();
+							if(hs < score) {
 							saveHighScore(score, winner);
-							outcome = winner + " wins!";
+							outcome = winner + " wins & sets the HighScore! ";
 							break;
+					}else {
+						outcome = winner + " wins!";
+						break;}
 						case 42:
 							winner = board.getPlayers().get(2);
 							score = board.checkBlackScore();
-							saveHighScore(score, winner);
+							if(hs < score) {
+								saveHighScore(score, winner);
+								outcome = winner + " wins & sets the HighScore! ";
+								break;
+						}else {
 							outcome = winner + " wins!";
-							break;
+							break;}
 						case 43:
 							outcome = "It's a draw!";
 							break;
@@ -318,8 +327,7 @@ public class Controller {
 	}
 
 	public void saveHighScore(int score, String name) {
-		int highScore = (int) loadHighScore()[0];
-		if (highScore < score) {
+		
 			try {
 				FileWriter hsfw = new FileWriter("HighScore.txt", false);
 				BufferedWriter hsbw = new BufferedWriter(hsfw);
@@ -330,7 +338,7 @@ public class Controller {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		
 	}
 
 	public void mainMenu(ActionEvent event) throws IOException {

@@ -19,7 +19,7 @@
          <children>
             <Label fx:id="label" alignment="CENTER" prefHeight="90.0" prefWidth="300.0" style="-fx-background-color: #344e41;" textAlignment="CENTER" textFill="#e4d2ac">
                <font>
-                  <Font name="Book Antiqua Bold Italic" size="20.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
                <HBox.margin>
                   <Insets />
