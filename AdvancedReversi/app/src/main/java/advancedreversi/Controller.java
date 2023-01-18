@@ -106,7 +106,7 @@ public class Controller {
 				ownString = (id == 1) ? name1.getText() : name2.getText();
 				opponentString = (id == 1) ? name2.getText() : name1.getText();
 				if (board.turnState(id) == 22) {
-					label.setText("No legal moves. " + opponentString + "'s turn");
+					label.setText("No legal moves. \n" + opponentString + "'s turn");
 				} else {
 					switch (board.place(row, column, id)) {
 						case 11:
@@ -136,7 +136,7 @@ public class Controller {
 							score = board.checkWhiteScore();
 							if(hs < score) {
 							saveHighScore(score, winner);
-							outcome = winner + " wins & sets the HighScore! ";
+							outcome = winner + " wins & sets\n the HighScore! ";
 							break;
 					}else {
 						outcome = winner + " wins!";
@@ -146,7 +146,7 @@ public class Controller {
 							score = board.checkBlackScore();
 							if(hs < score) {
 								saveHighScore(score, winner);
-								outcome = winner + " wins & sets the HighScore! ";
+								outcome = winner + " wins & sets\n the HighScore! ";
 								break;
 						}else {
 							outcome = winner + " wins!";
@@ -277,6 +277,12 @@ public class Controller {
 		if (name2.getText().isEmpty()) {
 			name2.setText("Player 2");
 		}
+		
+		if (name1.getText().length()>10) {
+			label.setText("Player1\n Please enter a shorter name:");
+		} else if (name2.getText().length()>10) {
+			label.setText("Player2\n Please enter a shorter name:");
+		} else {
 		board.setPlayerName(playerID1, name1.getText());
 		board.setPlayerName(playerID2, name2.getText());
 		checkScore();
@@ -284,6 +290,7 @@ public class Controller {
 		name1.setVisible(false);
 		name2.setVisible(false);
 		in();
+		}
 	}
 
 	public void showLegalMoves(int colour) {
