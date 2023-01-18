@@ -3,15 +3,24 @@
 \appendixpage
 \addappheadtotoc
 \section{Arbejdsfordeling}\label{sec:arbejde}
+\cref{tbl:arbejde} viser fordelingen af opgaver og metoder/klasser, og hvor i rapporten man kan læse om samme.
 \begin{table}[H]
     \centering
     \caption{Arbejdsfordeling i projektet}\label{tbl:arbejde}
-    \begin{tabular}{lll}
+    \begin{tabular}{p{.16\textwidth}p{.5\textwidth}p{.25\textwidth}}
         \toprule
-        Navn                          & Klasser/metoder                                   & Referencer i rapporten \\
+        Navn                        & Opgaver / klasser / metoder                                       & Referencer i rapporten \\
         \midrule
-        \multirow{2}{*}{Rasmus Wiuff} & \mintinline{java}|Board.moveAnalyser(int colour)| &                        \\
-                                      & \mintinline{java}|Board.getValidMoves()|          &                        \\
+        \multirow{1}{*}{\authone}   &                                                                   &                        \\
+        \midrule
+        \multirow{1}{*}{\authtwo}   &                                                                   &                        \\
+        \midrule
+        \multirow{1}{*}{\auththree} &                                                                   &                        \\
+        \midrule
+        \multirow{4}{*}{\authfour}  & Gradle (build-fil, mappestruktur, o.lign.)                        &                        \\
+                                    & \faGithub \ Versionsstyring (Sammenfletnnig af features, o.lign.) &                        \\
+                                    & \mintinline{java}|Board.moveAnalyser(int colour)|                 &                        \\
+                                    & \mintinline{java}|Board.getValidMoves()|                          &                        \\
         \bottomrule
     \end{tabular}
 \end{table}
