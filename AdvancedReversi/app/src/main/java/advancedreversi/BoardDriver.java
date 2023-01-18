@@ -7,9 +7,31 @@ public class BoardDriver {
     private static DecimalFormat df = new DecimalFormat(" 0");
 
     public static void main(String[] args) {
+        Board b = new Board();
+        int[][] pieces = new int[][] {
+                { 2, 2, 2, 2, 2, 2, 2, 2 },
+                { 2, 2, 2, 1, 1, 2, 1, 2 },
+                { 2, 1, 2, 1, 1, 2, 1, 2 },
+                { 1, 2, 1, 2, 2, 2, 1, 2 },
+                { 1, 1, 2, 1, 2, 2, 1, 2 },
+                { 1, 1, 2, 2, 2, 2, 2, 2 },
+                { 1, 1, 0, 2, 2, 2, 2, 2 },
+                { 1, 1, 0, 1, 0, 2, 2, 2 } };
+        setUpBoard(b, pieces);
+        printBoard(b);
+        System.out.println(b.turnState(1));
+        System.out.println(b.turnState(2));
         // -------------- Console game: ------------- //
-        consoleReversi();
+        // consoleReversi();
         // -------------- Console game: ------------- //
+    }
+
+    public static void setUpBoard(Board board, int[][] pieces) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board.setPiece(i, j, pieces[i][j]);
+            }
+        }
     }
 
     private static void printBoard(Board board) {
