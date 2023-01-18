@@ -309,7 +309,6 @@ public class Controller {
 
 	@FXML
 	public void surrender(ActionEvent event) {
-		System.out.println(first4);
 		if (first4==true) {
 		int color = startID;
 		String ownString;
