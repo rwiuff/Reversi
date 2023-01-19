@@ -295,12 +295,12 @@ public class Controller {
 	@FXML
 	public void surrender(ActionEvent event) {
 		if (first4 == true) {
-			int color = startID;
+			int colour = startID;
 			String ownString;
 			String opponentString;
-			color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
-			ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
-			opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
+			colour = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+			ownString = (colour == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
+			opponentString = (colour == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
 			label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
 			gameStarted = false;
 		} else {
