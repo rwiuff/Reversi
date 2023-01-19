@@ -67,6 +67,9 @@ public class Controller {
 		time1.start();time1.pause();
 		time2.start();time2.pause();
 		
+		
+		//if (board.getTurn() % 2 == 0) 
+			
 		if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
 		else currentplayer = 2;
 		
@@ -89,8 +92,8 @@ public class Controller {
 		}
 	}
 
-	ReversiTimer time1 = new ReversiTimer(1, this);
-	ReversiTimer time2 = new ReversiTimer(2,this);
+	ReversiTimer time1 = new ReversiTimer(2,this);
+	ReversiTimer time2 = new ReversiTimer(1,this);
 	
 	@FXML
 	public void restart(ActionEvent event) throws IOException {
