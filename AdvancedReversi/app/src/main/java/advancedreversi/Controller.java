@@ -98,6 +98,7 @@ public class Controller {
 		okBtn.setVisible(true);
 		name1.setVisible(true);
 		name2.setVisible(true);
+		surrenderBtn.setVisible(true);
 		setName();
 	}
 	
