@@ -9,6 +9,7 @@ import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -125,6 +128,7 @@ public class Controller {
 		int id;
 		String ownString;
 		String opponentString;
+		if(speedMode==true) {
 		if (gameStarted && !time1.timeout() && !time2.timeout()) {
 			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
@@ -138,8 +142,16 @@ public class Controller {
 					time1.pause();
 					time2.resume();
 				}
-				
-				
+			}
+		}
+	}
+			else {
+				if (gameStarted) {
+					if (board.getTurn() < 2) {
+						firstFour(row, column, pane);
+			}
+		}
+	}		
 				
 				first4 = true;
 				hideLegalMoves();
@@ -166,7 +178,9 @@ public class Controller {
 							break;
 					}
 				}
+				
 				if (board.gameOver()) {
+					if(speedMode==false) {
 					String outcome = "";
 					int score;
 					String winner;
@@ -199,20 +213,40 @@ public class Controller {
 							break;
 					}
 					label.setText("Game is over!\n" + outcome);
+				}	else {
+					if (time1.timeout()) {
+						
+						time1.pause();
+						time2.pause();
+						
+						String outcome = "Player 1 wins!";
+						label.setText("Game is over!\n"+outcome);
+						gameStarted = false;
+					}
+					else {
+			 String outcome = "";
+				String winner;
+				switch (board.checkWinner()) {
+					case 41:
+						winner = board.getPlayers().get(1);
+							outcome = winner + " wins!";
+							break;
+					case 42:
+						winner = board.getPlayers().get(2);
+							outcome = winner + " wins!";
+							break;
+					case 43:
+						outcome = "It's a draw!";
+						break;
 				}
-			}
-		} else {
-			if (time1.timeout()) {
-				
-				time1.pause();
-				time2.pause();
-				
-				String outcome = "Player 1 wins!";
-				label.setText("Game is over!\n"+outcome);
-				gameStarted = false;
-			}
-		}
-		
+				label.setText("Game is over!\n" + outcome);
+				 
+				}
+			}	
+			
+	}
+ 
+
 		if (currentplayer == 2) currentplayer = 1;
 		else currentplayer = 2;
 	}
@@ -416,6 +450,51 @@ public class Controller {
 
 	}
 
+    public void beginGame(ActionEvent event) throws IOException {
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+        Parent mainRoot = mainLoader.load();
+        Scene mainScene = new Scene(mainRoot);
+        Node node = (Node) event.getSource();
+        Stage primaryStage = (Stage) node.getScene().getWindow();
+        mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.F11) {
+                    primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                }
+            }
+        });
+        primaryStage.setScene(mainScene);
+        Controller controller = mainLoader.getController();
+        controller.setName();
+    }
+
+    public void showHighScore(ActionEvent event){
+        String highScoreText;
+        Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Highscore");
+        switch ((int) Controller.loadHighScore()[0]){
+            case -1: highScoreText = "No highscore set";
+            break;
+            default: highScoreText = "The HighScore is " + Controller.loadHighScore()[0] + " set by " + Controller.loadHighScore()[1];
+        }
+		alert.setContentText(highScoreText);
+		alert.setHeaderText(null);
+		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
+        alert.setGraphic(graphic);
+		ButtonType response = alert.showAndWait().orElse(ButtonType.CANCEL);
+		if(response == ButtonType.OK){
+		    alert.close();
+		}
+		alert.close();
+    }
+
+    public void exitGame(ActionEvent event){
+        Node node = (Node) event.getSource();
+        Stage primaryStage = (Stage) node.getScene().getWindow();
+        Main.exit(primaryStage);
+    }
+	
 	public void mainMenu(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Main Menu");
@@ -436,6 +515,10 @@ public class Controller {
 	
 	public void speedReversi(ActionEvent event) {
 		speedMode = true;
-		
+		try {
+			beginGame(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
