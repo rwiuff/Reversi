@@ -43,6 +43,8 @@ public class Controller {
 
 	@FXML
 	public Label label = new Label(" ");
+	@FXML
+	public BorderPane ReversiTimerpane;
 	public TextField name1 = new TextField();
 	public TextField name2 = new TextField();
 	public Label score1 = new Label();
@@ -59,8 +61,8 @@ public class Controller {
 	public Pane topPane = new Pane();
 	public boolean first4 = false;
 	int currentplayer;
-	public BorderPane ReversiTimerpane;
-	private boolean speedMode = true;
+	
+	private boolean speedMode = false;
 	
 	Board board = new Board();
 	ReversiTimer time1 = new ReversiTimer(2,this);
@@ -74,6 +76,7 @@ public class Controller {
 		
 		
 		if (speedMode == true) {
+			
 			ReversiTimerpane.setTop(time1);
 			ReversiTimerpane.setBottom(time2);
 			time1.start();time1.pause();
@@ -132,7 +135,8 @@ public class Controller {
 		int id;
 		String ownString;
 		String opponentString;
-		if (gameStarted && speedMode==true) {
+		if (gameStarted && !speedMode) {
+			//case of beginGame
 			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
@@ -197,8 +201,8 @@ public class Controller {
 				}
 			}
 
-		} else if 
-			((gameStarted && speedMode==false && !time1.timeout() && !time2.timeout() )) {
+		} else if //case of ReversiSpeedMode
+			((gameStarted && speedMode && !time1.timeout() && !time2.timeout() )) {
 				if (board.getTurn() < 2) {
 					firstFour(row, column, pane);
 				} else {
@@ -492,6 +496,7 @@ public class Controller {
 
 	}
 
+	@FXML
     public void beginGame(ActionEvent event) throws IOException {
     	
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main.fxml"));
@@ -508,17 +513,22 @@ public class Controller {
                 }
             }
         });
+        
         primaryStage.setScene(mainScene);
         Controller controller = mainLoader.getController();
         controller.setName();
+        controller.setSpeedMode(false);
+        controller.getReversiTimerpane().setVisible(false);
         
+        /*
         if(speedMode) {
         	time1.start();
             time2.start();
         }else { 
-            time1.pause();
-            time2.pause();
+         //   time1.pause();
+          //  time2.pause();
         }
+        */
         
     }
 
@@ -566,13 +576,73 @@ public class Controller {
 		}
 	}
 
+	
+	public BorderPane getReversiTimerpane() {
+		return ReversiTimerpane;
+	}
+
+	public void setReversiTimerpane(BorderPane reversiTimerpane) {
+		ReversiTimerpane = reversiTimerpane;
+	}
+	
+	
+
+	public boolean isSpeedMode() {
+		return speedMode;
+	}
+
+	public void setSpeedMode(boolean speedMode) {
+		this.speedMode = speedMode;
+	}
+
+	@FXML
 	public void speedReversi(ActionEvent event) {
+		
 		
 		speedMode = true;
         try {
-            beginGame(event);
+         //   beginGame(event);
+        	FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent mainRoot = mainLoader.load();
+            Scene mainScene = new Scene(mainRoot);
+            Node node = (Node) event.getSource();
+            Stage primaryStage = (Stage) node.getScene().getWindow();
+            
+            mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent e) {
+                    if (e.getCode() == KeyCode.F11) {
+                        primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                    }
+                }
+            });
+            primaryStage.setScene(mainScene);
+            Controller controller = mainLoader.getController();
+            controller.setName();
+           // speedMode = true; is diffrente with the new controller Speedmode
+            controller.setSpeedMode(true);
+            controller.getReversiTimerpane().setVisible(true);
+            
+            /* errors
+             *  
+            1-the main error is using attributes of anther controller instance speedMode of target controller is alywase the same value is true
+            1.2-changing the attribute from the controller runing only for Menu (change directlly)
+              solution of error 1 : get the instance of the target controller from mainLoader of the FXMLLoader
+                                    changing the attribute (SpeedMode,ReversiTimerpane) from the target controller (not dirrectlly)
+            2-showing the ReversiTimerpane in BeginGame solution is setVisibale(false) to ReversiTimerpane
+            */
+            /*
+            if(speedMode) {
+            	time1.start();
+                time2.start();
+            }else { 
+             //   time1.pause();
+              //  time2.pause();
+            }
+            */
             
         } catch (IOException e) {
+        	//this place for backup plan if main,fxml not found we can load it from anther path , so the game is still running 
             e.printStackTrace();
         }
     }
