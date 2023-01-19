@@ -6,9 +6,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
+
+import javax.swing.Action;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -46,6 +52,7 @@ public class Controller {
 	int startID = 1;
 	int secondViolin = 2;
 	boolean restart = false;
+	public Button continueBtn = new Button();
 	public Button okBtn = new Button();
 	public Pane topPane = new Pane();
 	public boolean first4 = false;
@@ -96,6 +103,7 @@ public class Controller {
 		int column = getColumnIndex(event);
 		Pane pane = (Pane) event.getSource();
 		int id;
+		int opId;
 		String ownString;
 		String opponentString;
 		if (gameStarted) {
@@ -103,19 +111,18 @@ public class Controller {
 				firstFour(row, column, pane);
 			} else {
 				first4 = true;
-				hideLegalMoves();
 				id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+				opId = (id == 1) ? 2 : 1;
 				ownString = (id == 1) ? name1.getText() : name2.getText();
 				opponentString = (id == 1) ? name2.getText() : name1.getText();
-				if (board.turnState(id) == 22) {
-					label.setText("No legal moves. \n" + opponentString + "'s turn");
-				} else {
+				if (board.turnState(id) == 21) {
+					hideLegalMoves();
 					switch (board.place(row, column, id)) {
 						case 11:
 							update();
 							checkScore();
 							label.setText("Good job!\n" + opponentString + "'s turn");
-							showLegalMoves((id == 1) ? 2 : 1);
+							showLegalMoves(opId);
 							break;
 						case 12:
 							label.setText("Field already occupied\n" + ownString + "'s turn");
@@ -127,39 +134,13 @@ public class Controller {
 							break;
 					}
 				}
-				if (board.gameOver()) {
-					String outcome = "";
-					int score;
-					String winner;
-					int hs = (int) loadHighScore()[0];
-					switch (board.checkWinner()) {
-						case 41:
-							winner = board.getPlayers().get(1);
-							score = board.checkWhiteScore();
-							if (hs < score) {
-								saveHighScore(score, winner);
-								outcome = winner + " wins & sets\n the HighScore! ";
-								break;
-							} else {
-								outcome = winner + " wins!";
-								break;
-							}
-						case 42:
-							winner = board.getPlayers().get(2);
-							score = board.checkBlackScore();
-							if (hs < score) {
-								saveHighScore(score, winner);
-								outcome = winner + " wins & sets\n the HighScore! ";
-								break;
-							} else {
-								outcome = winner + " wins!";
-								break;
-							}
-						case 43:
-							outcome = "It's a draw!";
-							break;
+				if (board.turnState(opId) == 22) {
+					label.setText(opponentString + " Has no legal moves. \n" + ownString + "'s turn");
+					if (board.turnState(id) == 22) {
+						label.setText("No legal moves. \n Game over");
+						continueBtn.setVisible(true);
 					}
-					label.setText("Game is over!\n" + outcome);
+					showLegalMoves(id);
 				}
 			}
 		}
@@ -249,18 +230,54 @@ public class Controller {
 		}
 	}
 
+	public void gameOver(ActionEvent event) {
+		String outcome = "";
+		int score;
+		String winner;
+		int hs = (int) loadHighScore()[0];
+		switch (board.checkWinner()) {
+			case 41:
+				winner = board.getPlayers().get(1);
+				score = board.checkWhiteScore();
+				if (hs < score) {
+					saveHighScore(score, winner);
+					outcome = winner + " wins & sets\n the HighScore! ";
+					break;
+				} else {
+					outcome = winner + " wins!";
+					break;
+				}
+			case 42:
+				winner = board.getPlayers().get(2);
+				score = board.checkBlackScore();
+				if (hs < score) {
+					saveHighScore(score, winner);
+					outcome = winner + " wins & sets\n the HighScore! ";
+					break;
+				} else {
+					outcome = winner + " wins!";
+					break;
+				}
+			case 43:
+				outcome = "It's a draw!";
+				break;
+		}
+		label.setText(outcome);
+		continueBtn.setVisible(false);
+	}
+
 	@FXML
 	public void surrender(ActionEvent event) {
 		System.out.println(first4);
-		if (first4==true) {
-		int color = startID;
-		String ownString;
-		String opponentString;
-		color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
-		ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
-		opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
-		label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
-		gameStarted = false;
+		if (first4 == true) {
+			int color = startID;
+			String ownString;
+			String opponentString;
+			color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+			ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
+			opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
+			label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
+			gameStarted = false;
 		} else {
 			label.setText("That is just way too early!");
 		}
@@ -274,6 +291,7 @@ public class Controller {
 
 	@FXML
 	public void setName() {
+		continueBtn.setVisible(false);
 		label.setText("Please enter your names\n in the textfields above:");
 		checkScore();
 	}
@@ -353,6 +371,54 @@ public class Controller {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void beginGame(ActionEvent event) throws IOException {
+		FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+		Parent mainRoot = mainLoader.load();
+		Scene mainScene = new Scene(mainRoot);
+		Node node = (Node) event.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+		mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.F11) {
+					primaryStage.setFullScreen(!primaryStage.isFullScreen());
+				}
+			}
+		});
+		primaryStage.setScene(mainScene);
+		Controller controller = mainLoader.getController();
+		controller.setName();
+	}
+
+	public void showHighScore(ActionEvent event) {
+		String highScoreText;
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Highscore");
+		switch ((int) Controller.loadHighScore()[0]) {
+			case -1:
+				highScoreText = "No highscore set";
+				break;
+			default:
+				highScoreText = "The HighScore is " + Controller.loadHighScore()[0] + " set by "
+						+ Controller.loadHighScore()[1];
+		}
+		alert.setContentText(highScoreText);
+		alert.setHeaderText(null);
+		ImageView graphic = new ImageView(new Image(getClass().getResourceAsStream("icon32.png")));
+		alert.setGraphic(graphic);
+		ButtonType response = alert.showAndWait().orElse(ButtonType.CANCEL);
+		if (response == ButtonType.OK) {
+			alert.close();
+		}
+		alert.close();
+	}
+
+	public void exitGame(ActionEvent event) {
+		Node node = (Node) event.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+		Main.exit(primaryStage);
 	}
 
 	public void mainMenu(ActionEvent event) throws IOException {

@@ -25,27 +25,31 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <Label fx:id="timerLabel" prefHeight="91.0" prefWidth="155.0" />
-            <Pane prefHeight="91.0" prefWidth="200.0" style="-fx-background-color: #344e41;">
+            <Pane prefHeight="91.0" prefWidth="275.0" style="-fx-background-color: #344e41;">
                <children>
-                  <Button alignment="CENTER" layoutY="15.0" mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="84.0" text="Restart">
+                  <Button fx:id="continueBtn" layoutY="15.0" mnemonicParsing="false" onAction="#gameOver" prefHeight="65.0" prefWidth="80.0" text="Continue">
                      <font>
                         <Font name="Fira Code Regular" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutY="50.0" mnemonicParsing="false" onAction="#surrender" prefHeight="30.0" prefWidth="85.0" text="Surrender">
+                  <Button alignment="CENTER" layoutX="87.0" layoutY="15.0" mnemonicParsing="false" onAction="#restart" prefHeight="30.0" prefWidth="84.0" text="Restart">
                      <font>
                         <Font name="Fira Code Regular" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="mainMenu" layoutX="92.0" layoutY="15.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="65.0" prefWidth="84.0" text="Main Menu">
+                  <Button layoutX="87.0" layoutY="50.0" mnemonicParsing="false" onAction="#surrender" prefHeight="30.0" prefWidth="85.0" text="Surrender">
+                     <font>
+                        <Font name="Fira Code Regular" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button id="mainMenu" layoutX="177.0" layoutY="15.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="65.0" prefWidth="84.0" text="Main Menu">
                      <font>
                         <Font name="Fira Code Regular" size="12.0" />
                      </font>
                   </Button>
                </children>
                <HBox.margin>
-                  <Insets right="26.0" />
+                  <Insets />
                </HBox.margin>
             </Pane>
          </children>

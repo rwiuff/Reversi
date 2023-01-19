@@ -22,7 +22,7 @@ public class BoardDriver {
         System.out.println(b.turnState(1));
         System.out.println(b.turnState(2));
         // -------------- Console game: ------------- //
-        // consoleReversi();
+        consoleReversi();
         // -------------- Console game: ------------- //
     }
 
@@ -70,7 +70,7 @@ public class BoardDriver {
             b.initPlace(move[0], move[1], 1);
             printBoard(b);
         }
-        while (b.gameOver() == false) {
+        while (gameOver(b) == false) {
             if (b.getTurn() % 2 == 0) {
                 colour = 2;
                 playastring = b.getPlayers().get(2);
@@ -95,5 +95,9 @@ public class BoardDriver {
         }
         System.out.println(b.checkWinner());
         console.close();
+    }
+
+    public static boolean gameOver(Board b){
+        return (false);
     }
 }

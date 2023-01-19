@@ -34,7 +34,6 @@ public class Board {
     private int[][] board; // Board field integer array
     private int turnCount = 0; // Counts the turn number
     private int boardsize = 8; // n in n x n dimensional board
-    private int forfeitCounter = 0;
     private ArrayList<int[]> flipped = new ArrayList<int[]>();
     private HashMap<Integer, String> players = new HashMap<Integer, String>(); // Player's colour assignment
     private HashMap<String, HashMap<Integer, HashMap<Integer, Integer[]>>> validMoves; //
@@ -97,27 +96,15 @@ public class Board {
             }
         }
         turnCount = 0;
-        forfeitCounter = 0;
     }
 
     public int turnState(int colour) {
         moveAnalyser(colour);
         if (validMoves.keySet().isEmpty()) {
-            forfeitCounter++;
             turnClock();
             return 22;
         }
         return 21;
-    }
-
-    public boolean gameOver() {
-        if (forfeitCounter == 2) {
-            return true;
-        } else if (filled()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public int initPlace(int row, int column, int colour) {
@@ -152,7 +139,6 @@ public class Board {
     public int place(int row, int column, int colour) {
         // Check if the position is already occupied
         String move = "" + row + "," + column;
-        forfeitCounter = 0;
         if (board[row][column] != 0) {
             return 12;
         } else if (validMoves.containsKey(move)) {

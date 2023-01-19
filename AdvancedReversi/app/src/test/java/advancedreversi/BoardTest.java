@@ -17,17 +17,6 @@ class BoardTest {
         assertEquals("Player 1", b.getPlayers().get(1));
     }
 
-    @Test void gameOverTest(){
-        Board b = new Board();
-        assertFalse(b.gameOver());
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                b.setPiece(i, j, 1);
-            }
-        }
-        assertTrue(b.gameOver());
-    }
-
     @Test void turnStateTest(){
         Board b = new Board();
         assertEquals(22, b.turnState(1));
