@@ -147,7 +147,7 @@
    <top>
       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="525.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Pane prefHeight="95.0" prefWidth="216.0">
+            <Pane>
                <children>
                   <TextField fx:id="name1" layoutY="20.0" prefHeight="26.0" prefWidth="148.0" promptText="Player  1's name" />
                   <TextField fx:id="name2" layoutY="55.0" prefHeight="26.0" prefWidth="148.0" promptText="Player 2's name" />
@@ -156,9 +156,10 @@
                         <Font name="Fira Code Regular" size="12.0" />
                      </font>
                   </Button>
+                  <BorderPane fx:id="ReversiTimerpane" layoutX="-26.0" layoutY="2.0" prefHeight="97.0" prefWidth="200.0" />
                </children>
             </Pane>
-            <Pane prefHeight="102.0" prefWidth="335.0">
+            <Pane>
                <children>
                   <Label layoutY="35.0" text="Score:" textFill="#e4d2ac">
                      <font>
@@ -175,7 +176,6 @@
                         <Font name="Fira Code Regular" size="18.0" />
                      </font>
                   </Label>
-                  <BorderPane fx:id="ReversiTimerpane" layoutX="181.0" layoutY="-1.0" prefHeight="72.0" prefWidth="140.0" />
                </children>
                <HBox.margin>
                   <Insets left="20.0" />

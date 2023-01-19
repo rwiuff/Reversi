@@ -67,7 +67,14 @@ public class Controller {
 	public void in() {
 		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
 		
+		ReversiTimerpane.setTop(time1);
+		ReversiTimerpane.setBottom(time2);
+		time1.start();time1.pause();
+		time2.start();time2.pause();
 		
+		if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
+		else currentplayer = 2;
+
 		if (speedMode == true) {
 			ReversiTimerpane.setTop(time1);
 			ReversiTimerpane.setBottom(time2);
@@ -96,6 +103,9 @@ public class Controller {
 		}
 	}
 
+	ReversiTimer time1 = new ReversiTimer(1, this);
+	ReversiTimer time2 = new ReversiTimer(2,this);
+	
 	@FXML
 	public void restart(ActionEvent event) throws IOException {
 		String player1 = board.getPlayers().get(1);
