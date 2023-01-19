@@ -72,6 +72,7 @@ public class Main extends Application {
         controller.setName();
     }
 
+   // Shows the user Highscore and player name who set it, upon presseing the "HighScore" button
     public void showHighScore(ActionEvent event){
         String highScoreText;
         Alert alert = new Alert(AlertType.INFORMATION);
