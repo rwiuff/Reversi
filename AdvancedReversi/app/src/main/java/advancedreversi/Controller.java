@@ -365,6 +365,8 @@ public class Controller {
 		}
 	}
 
+	// 	Loads the highscore(score & name of the player who has set it) from "HighScore.txt" file.
+	// File returns an object array that includes name as string and score as integer.
 	public static Object[] loadHighScore() {
 		try {
 			FileReader hsfr = new FileReader("HighScore.txt");
@@ -381,6 +383,7 @@ public class Controller {
 		}
 	}
 
+	// It stores score and name of the player seperated by comma in the file named "HighScore.txt".
 	public void saveHighScore(int score, String name) {
 
 		try {
@@ -396,6 +399,9 @@ public class Controller {
 
 	}
 
+	
+	//  Prompts the user to confirm their decision in returning to the main menu upon pressing the main-menu-button
+	// 	if the user presses "ok", the user returns to menu
 	public void mainMenu(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Main Menu");
