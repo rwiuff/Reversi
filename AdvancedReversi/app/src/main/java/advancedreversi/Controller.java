@@ -54,6 +54,7 @@ public class Controller {
 	public Button okBtn = new Button();
 	public Pane topPane = new Pane();
 	public boolean first4 = false;
+	public Button surrenderBtn = new Button();
 
 	Board board = new Board();
 
@@ -150,6 +151,7 @@ public class Controller {
 					if (board.turnState(id) == 22) {
 						label.setText("No legal moves. \n Game over");
 						continueBtn.setVisible(true);
+						surrenderBtn.setVisible(false);
 					}
 					showLegalMoves(id);
 				}
@@ -434,6 +436,7 @@ public class Controller {
 		controller.setName();
 	}
 
+	// Shows user Highscore and name of the player who set it, upon presseing the "HighScore" button
 	public void showHighScore(ActionEvent event) {
 		String highScoreText;
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -457,6 +460,7 @@ public class Controller {
 		alert.close();
 	}
 
+	 // Calls the "exit"-method upon pressing the standard exit-button in the upper corner.
 	public void exitGame(ActionEvent event) {
 		Node node = (Node) event.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
