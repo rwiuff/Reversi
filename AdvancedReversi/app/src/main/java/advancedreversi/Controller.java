@@ -400,6 +400,7 @@ public class Controller {
 		}
 	}
 
+	
 	public void saveHighScore(int score, String name) {
 
 		try {
@@ -431,5 +432,9 @@ public class Controller {
 			Stage primaryStage = (Stage) node.getScene().getWindow();
 			primaryStage.setScene(menuScene);
 		}
+	}
+	
+	public Boolean speedReversi(ActionEvent event) {
+		return true;
 	}
 }
