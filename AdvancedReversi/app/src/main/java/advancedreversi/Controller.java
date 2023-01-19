@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,9 +30,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -55,7 +60,7 @@ public class Controller {
 	public boolean first4 = false;
 	int currentplayer;
 	public BorderPane ReversiTimerpane;
-	public boolean speedMode = false;
+	public boolean speedMode = true;
 	
 	Board board = new Board();
 	ReversiTimer time1 = new ReversiTimer(2,this);
@@ -67,14 +72,7 @@ public class Controller {
 	public void in() {
 		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
 		
-		ReversiTimerpane.setTop(time1);
-		ReversiTimerpane.setBottom(time2);
-		time1.start();time1.pause();
-		time2.start();time2.pause();
 		
-		if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
-		else currentplayer = 2;
-
 		if (speedMode == true) {
 			ReversiTimerpane.setTop(time1);
 			ReversiTimerpane.setBottom(time2);
@@ -103,9 +101,6 @@ public class Controller {
 		}
 	}
 
-	ReversiTimer time1 = new ReversiTimer(1, this);
-	ReversiTimer time2 = new ReversiTimer(2,this);
-	
 	@FXML
 	public void restart(ActionEvent event) throws IOException {
 		String player1 = board.getPlayers().get(1);
@@ -138,31 +133,10 @@ public class Controller {
 		int id;
 		String ownString;
 		String opponentString;
-		if(speedMode==true) {
-		if (gameStarted && !time1.timeout() && !time2.timeout()) {
+		if (gameStarted && !speedMode==true) {
 			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
-				if (currentplayer == 2) {
-					
-					time2.pause();
-					time1.resume();
-				} else {
-					
-					time1.pause();
-					time2.resume();
-				}
-			}
-		}
-	}
-			else {
-				if (gameStarted) {
-					if (board.getTurn() < 2) {
-						firstFour(row, column, pane);
-			}
-		}
-	}		
-				
 				first4 = true;
 				hideLegalMoves();
 				id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
@@ -188,9 +162,7 @@ public class Controller {
 							break;
 					}
 				}
-				
 				if (board.gameOver()) {
-					if(speedMode==false) {
 					String outcome = "";
 					int score;
 					String winner;
@@ -223,43 +195,101 @@ public class Controller {
 							break;
 					}
 					label.setText("Game is over!\n" + outcome);
-				}	else {
-					if (time1.timeout()) {
-						
-						time1.pause();
+				}
+			}
+		} else if 
+			((speedMode==true) && gameStarted && !time1.timeout() && !time2.timeout() ) {
+				if (board.getTurn() < 2) {
+					firstFour(row, column, pane);
+				} else {
+					first4 = true;
+					if (currentplayer == 2) {
 						time2.pause();
-						
-						String outcome = "Player 1 wins!";
-						label.setText("Game is over!\n"+outcome);
-						gameStarted = false;
+						time1.resume();
+						} else {
+						time1.pause();
+						time2.resume();
+						}
+					hideLegalMoves();
+					id = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+					ownString = (id == 1) ? name1.getText() : name2.getText();
+					opponentString = (id == 1) ? name2.getText() : name1.getText();
+					if (board.turnState(id) == 22) {
+						label.setText("No legal moves. \n" + opponentString + "'s turn");
+					} else {
+						switch (board.place(row, column, id)) {
+							case 11:
+								update();
+								checkScore();
+								label.setText("Good job!\n" + opponentString + "'s turn");
+								showLegalMoves((id == 1) ? 2 : 1);
+								break;
+							case 12:
+								label.setText("Field already occupied\n" + ownString + "'s turn");
+								showLegalMoves(id);
+								break;
+							case 13:
+								label.setText("Illegal move\n" + ownString + "'s turn");
+								showLegalMoves(id);
+								break;
+						}
 					}
-					else {
-			 String outcome = "";
-				String winner;
-				switch (board.checkWinner()) {
-					case 41:
-						winner = board.getPlayers().get(1);
-							outcome = winner + " wins!";
-							break;
-					case 42:
-						winner = board.getPlayers().get(2);
-							outcome = winner + " wins!";
-							break;
-					case 43:
-						outcome = "It's a draw!";
-						break;
+					if (board.gameOver()) {
+						String outcome = "";
+						int score;
+						String winner;
+						int hs = (int) loadHighScore()[0];
+						switch (board.checkWinner()) {
+							case 41:
+								winner = board.getPlayers().get(1);
+								score = board.checkWhiteScore();
+								if (hs < score) {
+									saveHighScore(score, winner);
+									outcome = winner + " wins & sets\n the HighScore! ";
+									break;
+								} else {
+									outcome = winner + " wins!";
+									break;
+								}
+							case 42:
+								winner = board.getPlayers().get(2);
+								score = board.checkBlackScore();
+								if (hs < score) {
+									saveHighScore(score, winner);
+									outcome = winner + " wins & sets\n the HighScore! ";
+									break;
+								} else {
+									outcome = winner + " wins!";
+									break;
+								}
+							case 43:
+								outcome = "It's a draw!";
+								break;
+						}
+						label.setText("Game is over!\n" + outcome);
+					}
 				}
-				label.setText("Game is over!\n" + outcome);
-				 
+			} else { 
+				if (time1.timeout()) {
+					time1.pause(); 
+					time2.pause();
+					String outcome = "Player 2 wins!";
+					label.setText("Game is over!\n" + outcome);
+					gameStarted = false;
+					
+			}else if (time2.timeout()) {
+					time1.pause(); 
+					time2.pause();
+					String outcome = "Player 1 wins!";
+					label.setText("Game is over!\n" + outcome);
+					gameStarted = false;
 				}
-			}	
+			}
 			
+	if (currentplayer == 2) currentplayer = 1;
+	else currentplayer = 2;
 	}
- 
 
-		if (currentplayer == 2) currentplayer = 1;
-		else currentplayer = 2;
-	}
 	
 	public int getCurrentplayer() {
 		return currentplayer;
@@ -356,7 +386,6 @@ public class Controller {
 
 	@FXML
 	public void surrender(ActionEvent event) {
-		System.out.println(first4);
 		if (first4==true) {
 		int color = startID;
 		String ownString;
@@ -523,13 +552,16 @@ public class Controller {
 			primaryStage.setScene(menuScene);
 		}
 	}
-	
+
 	public void speedReversi(ActionEvent event) {
+		
 		speedMode = true;
 		try {
 			beginGame(event);
+
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		
 	}
+}
 }

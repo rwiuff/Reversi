@@ -75,7 +75,7 @@ class ReversiTimer extends BorderPane {
 
 	   public void setTime() {
 	    
-	      tTime.setText( String.format("%d:%02d Player %d", time / 60, time % 60,player));
+	      tTime.setText( String.format("%d:%02d", time / 60, time % 60));
 	   }
 	   
 	   public boolean timeout() {
