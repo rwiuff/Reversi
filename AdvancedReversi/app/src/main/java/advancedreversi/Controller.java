@@ -52,9 +52,11 @@ public class Controller {
 	public boolean first4 = false;
 	int currentplayer;
 	public BorderPane ReversiTimerpane;
+	public boolean speedMode = false;
 	
 	Board board = new Board();
-	
+	ReversiTimer time1 = new ReversiTimer(2,this);
+	ReversiTimer time2 = new ReversiTimer(1,this);
 	
 
 	
@@ -62,17 +64,16 @@ public class Controller {
 	public void in() {
 		label.setText(board.getPlayers().get(1) + " is White\n" + board.getPlayers().get(2) + " is Black");
 		
-		ReversiTimerpane.setTop(time1);
-		ReversiTimerpane.setBottom(time2);
-		time1.start();time1.pause();
-		time2.start();time2.pause();
 		
-		
-		//if (board.getTurn() % 2 == 0) 
-			
-		if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
-		else currentplayer = 2;
-		
+		if (speedMode == true) {
+			ReversiTimerpane.setTop(time1);
+			ReversiTimerpane.setBottom(time2);
+			time1.start();time1.pause();
+			time2.start();time2.pause();
+						
+			if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
+			else currentplayer = 2;
+			}
 		
 		
 		// Schedule an event after 3 seconds
@@ -92,16 +93,15 @@ public class Controller {
 		}
 	}
 
-	ReversiTimer time1 = new ReversiTimer(2,this);
-	ReversiTimer time2 = new ReversiTimer(1,this);
-	
 	@FXML
 	public void restart(ActionEvent event) throws IOException {
 		String player1 = board.getPlayers().get(1);
 		String player2 = board.getPlayers().get(2);
 		
-		time1.clear();
-		time2.clear();
+		if (speedMode == true) {
+			time1.clear();
+			time2.clear();
+			}
 		
 		reset();
 		playerID1 = 1;
@@ -434,7 +434,8 @@ public class Controller {
 		}
 	}
 	
-	public Boolean speedReversi(ActionEvent event) {
-		return true;
+	public void speedReversi(ActionEvent event) {
+		speedMode = true;
+		
 	}
 }
