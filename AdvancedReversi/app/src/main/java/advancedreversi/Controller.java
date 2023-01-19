@@ -145,12 +145,12 @@ public class Controller {
 				}
 				if (board.turnState(opId) == 22) {
 					label.setText(opponentString + " Has no legal moves. \n" + ownString + "'s turn");
+					showLegalMoves(id);
 					if (board.turnState(id) == 22) {
 						label.setText("No legal moves. \n Game over! \n Press Continue");
 						continueBtn.setVisible(true);
 						surrenderBtn.setVisible(false);
 					}
-					showLegalMoves(id);
 				}
 			}
 		}
