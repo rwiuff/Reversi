@@ -53,6 +53,7 @@ public class Controller {
 	public Button okBtn = new Button();
 	public Pane topPane = new Pane();
 	public boolean first4 = false;
+	public Button surrenderBtn = new Button();
 
 	Board board = new Board();
 
@@ -149,6 +150,7 @@ public class Controller {
 					if (board.turnState(id) == 22) {
 						label.setText("No legal moves. \n Game over");
 						continueBtn.setVisible(true);
+						surrenderBtn.setVisible(false);
 					}
 					showLegalMoves(id);
 				}
