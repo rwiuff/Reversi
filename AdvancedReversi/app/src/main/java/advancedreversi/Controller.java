@@ -58,7 +58,6 @@ public class Controller {
 
 	Board board = new Board();
 
-	
 	// Initiates the game, assigns the players their colours.
 	@FXML
 	public void in() {
@@ -79,10 +78,9 @@ public class Controller {
 			}
 		}
 	}
-	
-	
+
 	// Restarts the game, so that the board is cleaned,
-	// and the player may give themselves new names. 
+	// and the player may give themselves new names.
 	// The first to make a move last round is now second.
 	@FXML
 	public void restart(ActionEvent event) throws IOException {
@@ -95,21 +93,19 @@ public class Controller {
 		gameStarted = false;
 		startID = (startID == 1) ? 2 : 1;
 		secondViolin = (secondViolin == 2) ? 1 : 2;
-
 		okBtn.setVisible(true);
 		name1.setVisible(true);
 		name2.setVisible(true);
 		surrenderBtn.setVisible(true);
 		setName();
 	}
-	
-	
+
 	// This method controls what happens, when a pane is clicked, under different
 	// circumstances. It behaves differently depending on the situation,
 	// as in if the first four tiles have been placed or not, and will
 	// finally get the result of the match and announce the winner
 	// and saves the score, if it surpasses the previous high-score.
-	
+
 	@FXML
 	public void onPaneClicked(MouseEvent event) throws IOException {
 		int row = getRowIndex(event);
@@ -150,7 +146,7 @@ public class Controller {
 				if (board.turnState(opId) == 22) {
 					label.setText(opponentString + " Has no legal moves. \n" + ownString + "'s turn");
 					if (board.turnState(id) == 22) {
-						label.setText("No legal moves. \n Game over");
+						label.setText("No legal moves. \n Game over! \n Press Continue");
 						continueBtn.setVisible(true);
 						surrenderBtn.setVisible(false);
 					}
@@ -159,8 +155,7 @@ public class Controller {
 			}
 		}
 	}
-	
-	
+
 	// Updates the board and draws circles on the panes.
 	public void update() {
 		int[][] arr = board.getBoard();
@@ -171,20 +166,20 @@ public class Controller {
 				drawCircle(arr[i][j], pane);
 			}
 		}
-	} 
-	
+	}
+
 	// Gets the row index of a pane on the gridpane with a mouseclick.
 	public int getRowIndex(MouseEvent event) {
 		Pane pane = (Pane) event.getSource();
 		return GridPane.getRowIndex(pane);
 	}
-	
+
 	// Gets the column index of a pane on the gridpane with a mouseclick.
 	public int getColumnIndex(MouseEvent event) {
 		Pane pane = (Pane) event.getSource();
 		return GridPane.getColumnIndex(pane);
 	}
-	
+
 	// Draws a circle and adds it to the center of a pane.
 	// The circle's colour depends on the player-turn and on
 	// whether it is a placed circle or a circle indicating a valid move.
@@ -222,9 +217,8 @@ public class Controller {
 		c.setCenterY(pane.getHeight() / 2);
 		pane.getChildren().add(c);
 	}
-	
-	
-	// Commands the phase where players place the initial 
+
+	// Commands the phase where players place the initial
 	// four tiles in the center of the board.
 	public void firstFour(int row, int column, Pane pane) {
 		String playerTurn = (startID == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
@@ -246,8 +240,7 @@ public class Controller {
 				break;
 		}
 	}
-	
-	
+
 	// Clears the entire board of circles.
 	public void reset() {
 		board.resetBoard();
@@ -295,26 +288,26 @@ public class Controller {
 		label.setText(outcome);
 		continueBtn.setVisible(false);
 	}
-	
+
 	// Allows players to surrender after the first four tiles have been placed.
 	// the game will announce the surrender of the first player,
 	// and the victory of the second player.
 	@FXML
 	public void surrender(ActionEvent event) {
-		if (first4==true) {
-		int color = startID;
-		String ownString;
-		String opponentString;
-		color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
-		ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
-		opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
-		label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
-		gameStarted = false;
+		if (first4 == true) {
+			int color = startID;
+			String ownString;
+			String opponentString;
+			color = (board.getTurn() % 2 == 1) ? startID : secondViolin;
+			ownString = (color == 1) ? board.getPlayers().get(1) : board.getPlayers().get(2);
+			opponentString = (color == 1) ? board.getPlayers().get(2) : board.getPlayers().get(1);
+			label.setText(ownString + " has surrendered! \n" + opponentString + " wins!");
+			gameStarted = false;
 		} else {
 			label.setText("That is just way too early!");
 		}
 	}
-	
+
 	// Gets the current number of black tiles and white tiles from the board-class.
 	@FXML
 	public void checkScore() {
@@ -329,9 +322,9 @@ public class Controller {
 		label.setText("Please enter your names\n in the textfields above:");
 		checkScore();
 	}
-	
+
 	// Assigns the names written in the textfields to the players.
-	// If no names are written, the names will as default be set 
+	// If no names are written, the names will as default be set
 	// to "Player 1" and "Player 2". Names have a character
 	// limit of 10.
 	@FXML
@@ -357,8 +350,7 @@ public class Controller {
 			in();
 		}
 	}
-	
-	
+
 	// Draws circle on the panes where a player can place a circle.
 	public void showLegalMoves(int colour) {
 		board.moveAnalyser(colour);
@@ -371,7 +363,7 @@ public class Controller {
 			drawCircle(circleColour, pane);
 		}
 	}
-	
+
 	// Clears the board of circles indicating possible moves
 	// once the player places a circle.
 	public void hideLegalMoves() {
@@ -384,8 +376,10 @@ public class Controller {
 		}
 	}
 
-	// Loads the highscore(score & name of the player who has set it) from "HighScore.txt" file.
-	// File returns an object array that includes name as string and score as integer.
+	// Loads the highscore(score & name of the player who has set it) from
+	// "HighScore.txt" file.
+	// File returns an object array that includes name as string and score as
+	// integer.
 	public static Object[] loadHighScore() {
 		try {
 			FileReader hsfr = new FileReader("HighScore.txt");
@@ -402,7 +396,8 @@ public class Controller {
 		}
 	}
 
-	// It stores the score and the name of the player separated by comma in the file named "HighScore.txt".
+	// It stores the score and the name of the player separated by comma in the file
+	// named "HighScore.txt".
 	public void saveHighScore(int score, String name) {
 
 		try {
@@ -437,7 +432,8 @@ public class Controller {
 		controller.setName();
 	}
 
-	// Shows user Highscore and name of the player who set it, upon presseing the "HighScore" button
+	// Shows user Highscore and name of the player who set it, upon presseing the
+	// "HighScore" button
 	public void showHighScore(ActionEvent event) {
 		String highScoreText;
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -461,16 +457,17 @@ public class Controller {
 		alert.close();
 	}
 
-	 // Calls the "exit"-method upon pressing the standard exit-button in the upper corner.
+	// Calls the "exit"-method upon pressing the standard exit-button in the upper
+	// corner.
 	public void exitGame(ActionEvent event) {
 		Node node = (Node) event.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
 		Main.exit(primaryStage);
 	}
 
-	
-	//  Prompts the user to confirm their decision in returning to the main menu upon pressing the main-menu-button.
-	// 	If the user presses "ok", the user returns to menu.
+	// Prompts the user to confirm their decision in returning to the main menu upon
+	// pressing the main-menu-button.
+	// If the user presses "ok", the user returns to menu.
 	public void mainMenu(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Main Menu");
