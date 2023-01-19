@@ -46,7 +46,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+ 
+    // Prompts the player, upon pressing the "exit"-button, to confirm their choice.
+    // Should the player confirm the choice, the program will terminate.
     public static void exit(Stage primaryStage){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setContentText("Are you sure you want to exit Reversi?");
