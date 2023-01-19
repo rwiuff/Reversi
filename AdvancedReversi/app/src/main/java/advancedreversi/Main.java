@@ -91,13 +91,16 @@ public class Main extends Application {
 		}
 		alert.close();
     }
-
+    
+    // Calls the "exit"-method upon pressing the standard exit-button in the upper corner. 
     public void exitGame(ActionEvent event){
         Node node = (Node) event.getSource();
         Stage primaryStage = (Stage) node.getScene().getWindow();
         exit(primaryStage);
     }
-
+    
+    // Prompts the player, upon pressing the "exit"-button, to confirm their choice.
+    // Should the player confirm the choice, the program will terminate.
     public void exit(Stage primaryStage){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setContentText("Are you sure you want to exit Reversi?");
