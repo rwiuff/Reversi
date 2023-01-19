@@ -60,7 +60,7 @@ public class Controller {
 	public boolean first4 = false;
 	int currentplayer;
 	public BorderPane ReversiTimerpane;
-	public boolean speedMode = true;
+	private boolean speedMode = true;
 	
 	Board board = new Board();
 	ReversiTimer time1 = new ReversiTimer(2,this);
@@ -78,11 +78,10 @@ public class Controller {
 			ReversiTimerpane.setBottom(time2);
 			time1.start();time1.pause();
 			time2.start();time2.pause();
-						
 			if (board.getPlayers().get(startID).equals("Player 1")) currentplayer = 1;
 			else currentplayer = 2;
 			}
-		
+	
 		
 		// Schedule an event after 3 seconds
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
@@ -133,7 +132,7 @@ public class Controller {
 		int id;
 		String ownString;
 		String opponentString;
-		if (gameStarted && !speedMode==true) {
+		if (gameStarted && speedMode==true) {
 			if (board.getTurn() < 2) {
 				firstFour(row, column, pane);
 			} else {
@@ -197,8 +196,9 @@ public class Controller {
 					label.setText("Game is over!\n" + outcome);
 				}
 			}
+
 		} else if 
-			((speedMode==true) && gameStarted && !time1.timeout() && !time2.timeout() ) {
+			((gameStarted && speedMode==false && !time1.timeout() && !time2.timeout() )) {
 				if (board.getTurn() < 2) {
 					firstFour(row, column, pane);
 				} else {
@@ -235,6 +235,22 @@ public class Controller {
 						}
 					}
 					if (board.gameOver()) {
+						
+						if (time1.timeout()) {
+							time1.pause(); 
+							time2.pause();
+							String outcome = "Player 2 wins!";
+							label.setText("Game is over!\n" + outcome);
+							gameStarted = false;
+							
+					}else if (time2.timeout()) {
+							time1.pause(); 
+							time2.pause();
+							String outcome = "Player 1 wins!";
+							label.setText("Game is over!\n" + outcome);
+							gameStarted = false;
+					}	
+						
 						String outcome = "";
 						int score;
 						String winner;
@@ -269,22 +285,8 @@ public class Controller {
 						label.setText("Game is over!\n" + outcome);
 					}
 				}
-			} else { 
-				if (time1.timeout()) {
-					time1.pause(); 
-					time2.pause();
-					String outcome = "Player 2 wins!";
-					label.setText("Game is over!\n" + outcome);
-					gameStarted = false;
-					
-			}else if (time2.timeout()) {
-					time1.pause(); 
-					time2.pause();
-					String outcome = "Player 1 wins!";
-					label.setText("Game is over!\n" + outcome);
-					gameStarted = false;
-				}
 			}
+	
 			
 	if (currentplayer == 2) currentplayer = 1;
 	else currentplayer = 2;
@@ -491,11 +493,13 @@ public class Controller {
 	}
 
     public void beginGame(ActionEvent event) throws IOException {
+    	
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent mainRoot = mainLoader.load();
         Scene mainScene = new Scene(mainRoot);
         Node node = (Node) event.getSource();
         Stage primaryStage = (Stage) node.getScene().getWindow();
+        
         mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
@@ -507,6 +511,15 @@ public class Controller {
         primaryStage.setScene(mainScene);
         Controller controller = mainLoader.getController();
         controller.setName();
+        
+        if(speedMode) {
+        	time1.start();
+            time2.start();
+        }else { 
+            time1.pause();
+            time2.pause();
+        }
+        
     }
 
     public void showHighScore(ActionEvent event){
@@ -556,12 +569,11 @@ public class Controller {
 	public void speedReversi(ActionEvent event) {
 		
 		speedMode = true;
-		try {
-			beginGame(event);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		
-	}
-}
+        try {
+            beginGame(event);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
