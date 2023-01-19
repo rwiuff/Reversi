@@ -199,7 +199,8 @@ public class Board {
         }
         return true;
     }
-
+    
+    // Returns the result of the match, depending on who has more tiles on the board.
     public int checkWinner() {
         int Black = 0;
         int White = 0;
@@ -224,6 +225,7 @@ public class Board {
         }
     }
 
+    // Returns the number of white tiles on the board.
     public int checkWhiteScore() {
         int White = 0;
         for (int i = 0; i < 8; i++) {
@@ -236,7 +238,8 @@ public class Board {
         }
         return White;
     }
-
+    
+    // Returns the number of black tiles on the board.
     public int checkBlackScore() {
         int Black = 0;
         for (int i = 0; i < 8; i++) {
