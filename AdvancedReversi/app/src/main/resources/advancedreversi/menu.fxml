@@ -13,12 +13,12 @@
             <Font name="Fira Code Regular" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="193.0" layoutY="275.0" mnemonicParsing="false" onAction="#showHighScore" prefHeight="34.0" prefWidth="95.0" text="Highscore">
+      <Button layoutX="193.0" layoutY="334.0" mnemonicParsing="false" onAction="#showHighScore" prefHeight="34.0" prefWidth="95.0" text="Highscore">
          <font>
             <Font name="Fira Code Regular" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="193.0" layoutY="333.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="34.0" prefWidth="95.0" text="Exit">
+      <Button layoutX="193.0" layoutY="396.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="34.0" prefWidth="95.0" text="Exit">
          <font>
             <Font name="Fira Code Regular" size="12.0" />
          </font>
@@ -28,5 +28,6 @@
             <Image url="@icon64.png" />
          </image>
       </ImageView>
+      <Button layoutX="192.0" layoutY="276.0" mnemonicParsing="false" onAction="#speedReversi" prefHeight="34.0" prefWidth="95.0" text="Speed-Reversi" />
    </children>
 </AnchorPane>
