@@ -5,7 +5,6 @@ I følgende afsnit vil der blive diskuteret de valgte løsninger til at organise
 Indledningsvist blev gruppen enige om en række principper og en tidsplan for at optimere udviklingsplanen. Principperne lyder:
 \begin{enumerate}
     \item Nær-daglig status på underopgaver.
-    \item Overlap mellem test og implementation af funktioner.
     \item Alle planer er tentative.
     \item Fælles udvikling af logik og algoritmer i vigtige metoder.
 \end{enumerate}
@@ -50,7 +49,32 @@ I tredje fase bliver det oprindelige spil forgrenet via Git og hvert gruppemedle
 \subsection{Git, Github og Gradle}\label{sec:GGG}
 Som projektstyringsværktøjer er der valgt følgende løsninger:
 \begin{itemize}
-    \item \href{https://gradle.org/}{Gradle}: Projektstyringsværktøj til at automatisere \emph{dependencies} (JavaFX), mappestrukturer og pakning af jar-filer.
     \item \faGit \ \href{https://git-scm.com/}{Git}: Til at kommunikere mellem lokale maskiner og \href{https://www.overleaf.com/}{Overleaf}, hvor rapporten kan skrives i fællesskab.
     \item \faGithub \ \href{https://github.com/}{Github}: Til at håndtere versionskontrol mellem medlemmer i gruppen.
+    \item \href{https://gradle.org/}{Gradle}: Projektstyringsværktøj til at automatisere \emph{dependencies} (JavaFX), mappestrukturer og pakning af jar-filer.
 \end{itemize}
+\subsubsection{Git og Github}
+Som nævnt i \cref{sec:introtilg} er projektet på Github \href{https://github.com/rwiuff/Reversi}{https://github.com/rwiuff/Reversi} \github{https://github.com/rwiuff/Reversi}. Dette \emph{repository} (repo) er udgangspunkt for versionskontrol i projektet. Desuden bruges Overleafs Git integration til at synkronisere projektet med lokale maskiner. Git som versionstyringsprogram har været essentielt under projektet. Der har været meget læring i at bruge \emph{branch} og \emph{merge} funktionerne til at kunne arbejde på forskelige aspekter af kode i de samme klasser på samme tid. Det har mestendels været uden de største problemer, men der er til stadighed meget mere at lære om samarbejde med VCS.
+\subsubsection{Gradle}
+Via Gradle kan mappestrukturen i \cref{fig:tree} genereres. Mappestrukturen indeholder desuden også bin og build mapper som bruges under kompilering og pakning af jar-arkiver, men disse er kun midlertidige instanser af det program man kører.
+\begin{figure}[H]
+    \caption{Mappestrukturen i JavaFX projekterne BasicReversi og AdvancedReversi}\label{fig:tree}
+    \dirtree{%
+        .1 BasicReversi / AdvancedReversi \ldots{} \begin{minipage}[t]{6cm} Rodmappen indeholder \emph{gradlewrapper} og \emph{settings.gradle} \end{minipage}.
+        .2 app \ldots{} \begin{minipage}[t]{5cm} \emph{build.gradle} \end{minipage}.
+        .3 src.
+        .4 main.
+        .5 java.
+        .6 basicreversi / advancedreversi \ldots{} \begin{minipage}[t]{5cm} \mintinline{java}|.java| klasser \end{minipage}.
+        .5 resources.
+        .6 basicreversi / advancedreversi \ldots{} \begin{minipage}[t]{5cm} Billedfiler og \mintinline{java}|.fxml| filer \end{minipage}.
+        .4 test.
+        .5 java.
+        .6 basicreversi / advancedreversi \ldots{} \begin{minipage}[t]{5cm} Testklasser \end{minipage}.
+        .2 gradle.
+        .3 wrapper \ldots{} \begin{minipage}[t]{5cm} Indeholder wrapper filer \end{minipage}.
+        .2 releases \ldots{} \begin{minipage}[t]{10cm} Indeholde de færdige jar-arkiver \end{minipage}.
+        }
+\end{figure}
+
+Gradle tilgodeser automatisk udførsel af skrevne tests, håndtering af kompilerede .class filer og pakning af jar arkiver. Desuden tilgodeser Gradle at dependencies er tilgængelige for miljøet der åbner projektet, uden at man skal importere JavaFX moduler manuelt. Er der en fejl i den version af JavaFX der bruges, kan man blot opdatere versionsnummeret i \emph{build.gradle} og herefter opdateres JavaFX.

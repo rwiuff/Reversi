@@ -1,11 +1,67 @@
 % !TeX root = ..\G16.tex
 \section{Implementering}
 
-\subsection{Board}
-
-\subsubsection{Basic}
-
-\subsubsection{Avanceret}
+\subsection{Board}\label{sec:boardImplement}
+Modellen for brættet implementeres i \mintinline{java}|Board.java| klassen. \cref{tbl:boardfields} indeholder klassens felter.
+\begin{table}[H]
+    \centering
+    \caption{Felter i \mintinline{java}|Board.java|}\label{tbl:boardfields}
+    \begin{tabular}{ll}
+        \toprule
+        Felt                                                              & Formål                                           \\
+        \midrule
+        \mintinline{java}|int[][]board|                                   & Datastruktur der repræsenterer brættet.          \\
+        \mintinline{java}|int turnCount|                                  & Turnummeret i spillet                            \\
+        \mintinline{java}|int boardsize|                                  & Størrelsen \(n\) for et \(n\times n\) bræt.      \\
+        \mintinline{java}|int forfeitCounter|                             & Antal gange en spillerne har meldt pas           \\
+        \mintinline{java}|ArrayList<int[]> flipped|                       & Log over de sidste vendte brikker                \\
+        \mintinline{java}|HashMap<Integer, String> players|               & Spillernes interne ID og navne                   \\
+        \mintinline{java}|HashMap<String, HashMap<Integer,|               & Datastruktur for mulige træk for en given farve, \\
+        \quad \mintinline{java}|HashMap<Integer, Integer[]>>> validMoves| & en given tur.                                    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+Brættet repræsenteres af en heltalsmatrix med værdierne \(0\) for tomt felt, \(1\) for hvid placering og \(2\) for sort placering. Ved at gemme turnumre og antal gange spillere har meldt pas kan board klassen afgøre hvis tur det er og om spillet er slut.
+Loggen over vendte brikker endte med ikke at blive brugt, men formålet var at kontrollerklassen skulle vise hints om hvilke brikker der ville blive vendt ved et givent træk. Det blev stemt ned da det gør spillet for nemt.\newline
+\cref{tbl:boardmethods} indeholder klassens metoder.
+\begin{table}[H]
+    \centering
+    \caption{Metoder i \mintinline{java}|Board.java|}\label{tbl:boardmethods}
+    \begin{tabular}{ll}
+        \toprule
+        Metode                                                        & Formål                                                                               \\
+        \midrule
+        \mintinline{java}|Board()|                                    & Konstruktør for brættet. Kalder \mintinline{java}|setPlayers()|.                     \\
+        \mintinline{java}|getBoard()|                                 & Getter for board feltet.                                                             \\
+        \mintinline{java}|setPiece(int row, int column, int colour)|  & Sætter manuelt brik, uanset lovlighed.                                               \\
+                                                                      & Bruges til unit tests.                                                               \\
+        \mintinline{java}|getTurn()|                                  & Getter for turnCount.                                                                \\
+        \mintinline{java}|turnClock()|                                & Inrementere turnCount.                                                               \\
+        \mintinline{java}|getPlayers()|                               & Getter for spiller hashmap.                                                          \\
+        \mintinline{java}|getValidMoves()|                            & Getter for validMoves hashmap.                                                       \\
+        \mintinline{java}|setPlayers()|                               & Tildeler tilfældigt spillere en farve.                                               \\
+        \mintinline{java}|setPlayers(int id1, String player1,|        & Tildeler spillere specifikke farver.                                                 \\
+        \quad \mintinline{java}|int id2, String player2)|             &                                                                                      \\
+        \mintinline{java}|setPlayerName()|                            & Setter for specifikt spillernavn.                                                    \\
+        \mintinline{java}|resetBoard()|                               & Nulstiller brættet, turnummer og pastæller.                                          \\
+        \mintinline{java}|turnState(int colour)|                      & Kalder \mintinline{java}|moveAnalyser(colour)|,                                      \\
+                                                                      & og udregner om der er ledige træk.                                                   \\
+        \mintinline{java}|gameOver()|                                 & Afgør om spillet er slut hvis brættet er fyldt,                                      \\
+                                                                      & eller der er meldt pas to gange i træk.                                              \\
+        \mintinline{java}|initPlace(int row, int column, int colour)| & Indeholder logik for at udfylde startfelterne (midterste firkant).                   \\
+        \mintinline{java}|place(int row, int column, int colour)|     & Placere en brik hvis placeringen er tom og indeholdt i validMoves.                   \\
+                                                                      & Kalder \mintinline{java}|flip(move, colour)|.                                        \\
+        \mintinline{java}|flip(String move, int colour)|              & Vender brikker ved et lovligt træk.                                                  \\
+        \mintinline{java}|filled()|                                   & Afgører om brættet er fyldt.                                                         \\
+        \mintinline{java}|checkWinner()|                              & Tæller brikker og afgører vinderen.                                                  \\
+        \mintinline{java}|moveAnalyser(int colour)|                   & Gennemgår ledige felter og afgør og de er lovlige træk (se \cref{sec:moveAnalyser}). \\
+        \mintinline{java}|findOwn(int[][] checkboard, int i,|         & Afgører om et træk resulterer i indkapsling af modstanderen.                         \\
+        \quad \mintinline{java}|int j, int direction, int colour)|    &                                                                                      \\
+        \mintinline{java}|saveFlips(int[] ownPiece, int i,|           & Gemmer indkapslede brikker.                                                          \\
+        \quad \mintinline{java}|int j, int direction)|                &                                                                                      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \subsection{Main}
 
@@ -23,4 +79,4 @@ Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indehol
 
 
 \subsubsection{Avanceret}
-I den avancerede 
+I den avancerede
