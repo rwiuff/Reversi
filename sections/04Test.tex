@@ -1,3 +1,8 @@
 % !TeX root = ..\G16.tex
 \section{Test}
-Når vi skulle teste programmet, havde vi forskellige tilgange til det, alt efter hvad vi arbejdede med. Os, der arbejdede med det visuelle, skulle bare åbne programmet og se, om vi var tilfredse med overfladen, og om de diverse knapper gjorde som de skulle, når vi klikkede på dem. Vi skulle ikke arbejde med nogen kompliceret logik. 
+\subsection{Controller-klassen}\label{CKT}
+Når vi skulle teste programmet, havde vi forskellige tilgange til det, alt efter hvad vi arbejdede med. Os, der arbejdede med det visuelle, skulle bare åbne programmet og se, om vi var tilfredse med overfladen, og om de diverse knapper gjorde som de skulle, når vi klikkede på dem. Vi skulle ikke arbejde med nogen kompliceret logik. Vi testede konstant programmet, da detaljerne var vigtige, som f.eks. at cirklerne skulle placeres i midten af et felt, at der skulle skiftes farve mellem hvert klik osv. 
+\subsection{Board-driver klassen}\label{BDKT}
+Board-driver klasse, der vil være i stand til at kunne teste "board" klassens funktionsdygtighed. Dette gør vi, eftersom der ikke vil være mulighed for at teste logikken rent visuelt, før controller/scene-builder delen er færdig. Dette skyldes, at controller-klassen modtager og arbejder med data fra board, og hvis controllerklassen så ikke er færdig, er den ikke i stand til at gøre dette på en ordentlig måde.
+\subsection{Unit tests}\label{sec:unitTests}
+For at tilgodese at Board klassens logik virker efter ændringer blev en testklasse, \mintinline{java}|BoardTest.java| skrevet som kører hver gang et jar-arkiv kompileres eller klassen køres. Testen tester setter og getter metoder for player hashmappet, moveAnalyser og turnState metoderne.

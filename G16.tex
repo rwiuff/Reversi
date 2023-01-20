@@ -141,8 +141,9 @@
 \usemintedstyle{tango}
 \renewcommand{\listoflistingscaption}{Listings}
 \newcommand{\im}[3]{\inputminted[linenos=true, python3=true, firstline=#2, lastline=#3]{python}{#1}}
-\newcommand{\java}[3]{\inputminted[linenos=true, firstline=#2, lastline=#3]{java}{#1}}
+\newcommand{\java}[3]{\inputminted[breaklines, linenos=true, firstline=#2, lastline=#3]{java}{#1}}
 \usepackage{tabularx}
+\usepackage{dirtree}
 
 %Definitions and new commands
 \newcommand{\degr}{^{\circ}}
@@ -177,6 +178,12 @@
     \normalfont\scshape\color{FMNgrey}}
 {\thesubsection.}{.5em}{}
 
+\titleformat{\subsubsection}[wrap]
+{\normalfont\fontseries{b}\selectfont\filright}
+{\thesubsubsection.}{.5em}{}
+\titlespacing{\subsubsection}
+{12pc}{1.5ex plus .1ex minus .2ex}{1pc}
+
 \title{\includegraphics[width=.5\textwidth]{icon.eps}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
 \preauthor{\begin{center}
     \large \lineskip 0.5em%
@@ -208,9 +215,9 @@
 %\bibliographystyle{unsrtnat}
 %\bibliography{Bibliography}
 
-\newpage
-\listoflistings
-\addcontentsline{toc}{section}{Listings}
+% \newpage
+% \listoflistings
+% \addcontentsline{toc}{section}{Listings}
 \newpage
 \listoffigures
 %\newpage
