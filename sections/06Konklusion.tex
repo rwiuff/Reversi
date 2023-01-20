@@ -36,7 +36,7 @@ På den måde vil vi nemt kunne flette Timer-logikken ind med standard logik ude
 " if (speedMode == true) \{ " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så har vi sat 
 "speedReversi(ActionEvent event) \{	
 		speedMode = true; "
-\item Vi var meget tæt på at få det hele til at køre, men udfordringer var stadig til sted. Vi mødet en fejl der gør at enten timeren kan ses på begge Mode ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
+\item Vi var meget tætte på at få det hele til at køre, men udfordringer var stadig til sted. Vi mødet en fejl der gør at enten timeren kan ses på begge Mode ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
 Efter en lang analyse af "if" og "else" sætninger, fandt vi fejlen som var bag Controller, da vi få Loaded "main.fxml" med den standard Controller hver gang, derfor vil Value af SpeedMode være "True" altid. 
 
 \item Løsning: 
