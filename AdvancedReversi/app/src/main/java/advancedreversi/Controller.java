@@ -611,7 +611,6 @@ public class Controller {
             primaryStage.setScene(mainScene);
             Controller controller = mainLoader.getController();
             controller.setName();
-           // speedMode = true; is diffrente with the new controller Speedmode
             controller.setSpeedMode(true);
             controller.getReversiTimerpane().setVisible(true);
             
