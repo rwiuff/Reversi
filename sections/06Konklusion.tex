@@ -10,6 +10,7 @@ En pointe fremhævet i den avancerede del af Yahya, er, at give spillere mulighe
 \begin{itemize}
 \item Timeren er en vigtig del af de fleste strategispil (spil, der kræver en vis forhånds- planlægning til næste træk), fordi timeren øver spillernes tænkehastighed og tvinger dem til at tænke hurtigere og træffe beslutninger for næste træk under pres, hvilket kan føre til at man træffer en forkert beslutning, eller at man løber tør for tid. Denne tilføjelse til denne type spil gør spillet sjovere for nogle. 
 \end{itemize}
+
 I gruppen aftalte vi at Yahya starter med at implementere timer-metoden ind i vores standard logik og får den til at køre direkte, når spillet starter. Derefter vil vi så tilføje en Bottom til ”menu.fxml” kaldet: ” Speed-Reversi ”, der finder plads under ”BeginGame” (normal game).
 På den måde adskiller vi ”SpeedMode”, så det bliver et ekstra valg hvis man ønsker det. 
 Timer-Metoden tog ca. 2 dage at implementere, for der har været nogle udfordringer undervejs så som: 
@@ -29,10 +30,17 @@ På den måde vil vi nemt kunne flette Timer-logikken ind med standard logik ude
 \item Derfor havde vi tænkt os at få Timeren ind ved at tilføje en boolean som sætter \mintinline{java}|SpeedMode=false;| og så begyndte vi at tilføje \mintinline{java}|if (speedMode == true){} else {}| til metoderne \mintinline{java}|in(),restart(),onPaneClicked(),beginGame| og så satte vi \mintinline{java}|speedReversi(ActionEvent event){speedMode = true;|.
 \item Vi var meget tætte på at få det hele til at køre, men udfordringer var stadig til stede. Vi mødte en fejl, der gør at enten kan timeren ses på begge "modes", ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
 Efter en lang analyse af "if" og "else" sætninger fandt vi fejlen, som var bag 'Controller', da vi loadede "main.fxml" med standard Controller'en hver gang, derfor vil 'Value' af SpeedMode altid være "True". 
-\item Løsning: 
-implementere følgende i \mintinline{java}|speedReversi(ActionEvent event)|:
-\item kald metoderne fra \mintinline{java}|begingame()| med følgende tilføjelser 
-\mintinline{java}|controller.setSpeedMode(true); controller.getReversiTimerpane().setVisible(true);| sæt følgende metoder ind i ``begingame'' \mintinline{java}|controller.setSpeedMode(false); controller.getReversiTimerpane().setVisible(false);|
+\item Løsning: implementere følgende i \mintinline{java}|speedReversi(ActionEvent event)|:
+\item Kald metoderne fra \mintinline{java}|begingame()| med følgende tilføjelser
+\begin{itemize}
+        \item \mintinline{java}|controller.setSpeedMode(true);|
+        \item \mintinline{java}|controller.getReversiTimerpane().setVisible(true);|
+\end{itemize}
+\item Sæt følgende metoder ind i ``begingame''
+\begin{itemize}
+        \item\mintinline{java}|controller.setSpeedMode(false);|
+        \item \mintinline{java}|controller.getReversiTimerpane().setVisible(false);| 
+\end{itemize}
 \item De opnåede rettelser var desværre i utide til at kunne flette ind i hovedprojektet, da vi fik at vide at sene ændringer kan kost dyrt. Derfor valgte vi at levere den bedste version, vi kunne nå, til den tid vi har. 
 \end{itemize}
 \subsubsection{Antal Mulige vendinger}\label{AMV}
@@ -40,18 +48,12 @@ Aslan forsøgte sig med en udvidelse til udvidelsen, der gjorde spillerne i stan
 \subsubsection{Lyd}\label{lyd}
 Lyd er en af de andre avancerede funktioner, som Abinav forsøgte at implementere. Lyd ville forbedre brugeroplevelsen og hjælpe spillere med at fordybe sig i spillet, hvilket gør det til en fremragende funktion at inkludere. Efter hvert træk ville funktionen have ladet deltagerne vide, hvordan spillet forløb. Derudover ville det have givet spillerne feedback om, hvorvidt de havde placeret brikken korrekt på brættet. At inkludere lyd i spillet ville have mindsket behovet for, at spillere skulle læse teksten efter hvert træk, som f.eks. hvis de placerede brik på brættet.
 Musikfilerne blev importeret ved hjælp af JavaFX-værktøjer som mediaPlayer og media. Fejl som "fil kan ikke findes", og "fil kan ikke indlæses", blev stødt på under adgang til mediefiler. Try-catch-sætninger blev brugt til at rette op på disse problemer. Hver lyd- eller mediefil havde en separat metode, der indeholdt funktionerne mediaPlayer.play(), mediaPlayer.stop() og mediaPlayer.stop(). De nævnte teknikker gjorde det muligt at afspille, pause og stoppe musikken. Det vigtigste problem, der opstod under integration af lydkomponenten, var at musikfilerne af og til, når programmet kørte, ville blive korrupte. Musikfilerne fungerede korrekt, når de blev afspillet ved hjælp af 'VCL' eller 'groove'-musik på computeren. Det var umuligt at afgøre, hvad der fik musikfilerne til at blive korrupte, da programmet kørte. Et andet problem, der udviklede sig, var lydens manglende evne til altid at spille som reaktion på brugerens aktivitet. Sagt på en anden måde, lyden ville ikke synkronisere. Der var adskillige forsøg på at rette denne fejl, herunder at kontrollere, om ActionEvent's kode kaldte den relevante lydfil, men ingen af dem lykkedes. Til sidst blev det besluttet ikke at tilføje funktionen lyd til Reversi, da de fejl, der opstod ved at tilføje funktionen, ikke var i stand til at rettes med vores faglige kundskaber, og krævede et højt kendskab til 'javafx mediaplayer' og medieklasse.
-
-
 \subsection{Hvad har vi lært}
 \subsubsection{Aslan}\label{HHVLA}
 Dette projekt har bidraget meget til mit billede af, hvordan det er at arbejde inden for software/programmeringsfeltet. Jeg var i begyndelsen meget usikker på, hvordan man skulle arbejde som gruppe på ét projekt, da vi tidligere afleveringsopgaver ganske enkelt har delt de fire forskellige opgaver op imellem os. Jeg fandt dog hurtigt ud af, at systemet er det samme, og dog ikke. Man uddelegerer opgaver, men sparer også meget med hinanden, og kigger på tingene sammen. Man arbejder på at forbedre hinandens arbejde, så man i fællesskab kan komme frem til det bedst-mulige produkt. Derudover har dette forløb også bare været en god mulighed for at udvikle mine programmerings- og problemløsningskompetencer. Det har været fedt at kunne stå over for et problem, og have muligheden for at teste forskellige løsninger af døgnet rundt, frem for at skulle bekymre sig om andre fag. Jeg håber på flere forløb som dette i fremtiden, hvor vi alle er mere erfarne og kompetente programmører.  
 \subsubsection{Yahya}\label{YY}
-
 I starten af projektet var jeg lidt bekymret for, hvordan vi skulle lave dette projekt. Jeg har ikke rigtig arbejdet på et stort projekt i dette omfang før, bla. fordi der har været nogle nye værktøjer og funktioner i spil, som LaTex, JavaFX, Git, Gradle og SceneBuilder. Men mod slutningen af projektet lærte jeg meget om disse værktøjer, og det vigtigste er at jeg har styrket min evne til at arbejde som et team, og lært meget mere om hvordan man kan behandle de stor fejl, som man møder i sådan et projekt og være mere tålmodig med at analysere dem, indtil man finder en løsning.
 Diskussionen og planlægningen af de forskellig opgaver har også været en stor del af projektet som jeg også er blevet bedre til.
-
-
-
 \subsubsection{Rasmus}\label{RR}
 Under projektet har jeg fået stor indsigt i build tools, i dette tilfælde, Gradle. Jeg har også fået en indgående kendskab til JavaFX og Git. Specielt sidstenævnte har været interessant, da vi har arbejdet 4 mennesker i 3 java klasser, hvorfor der har været en del konflikthåndtering når klasser skulle flettes sammen. Vi har prøvet forskellige metoder til at fordele arbejde og opgaver og jeg glæder mig til at få dybere kendskab til de doktrinere tilgange som bruges i industrien, da jeg kun kan konkludere at vi ikke har fundet den mest optimale løsning. Og det koster både i tid og energi.
 \subsubsection{Abinav}\label{AA}

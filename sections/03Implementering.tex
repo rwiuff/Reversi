@@ -140,29 +140,30 @@ Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indehol
     \caption{Metoder brugt i BasicReversi \mintinline{java}|Controller.java|}\label{tbl:1}
     \begin{tabular}{lll}
         \toprule
-        Metode                                                       & Kalder metoderne:                   & Beskrivelse                                          \\
+        Metode                                              & Kalder metoderne:                   & Beskrivelse                                         \\
         \midrule
-        \mintinline{java}|in()|                                      &                                     & Tildeler spillerne deres farver                      \\
-        \mintinline{java}|firstFour(int row, int column, Pane pane)| &                                     & Spilleren kan sætte de første fire brikker           \\
-        \mintinline{java}|onPaneClicked(MouseEvent event)|           & \mintinline{java}|getRowIndex()|    & Tegner en cirkel i midten af pane't,                 \\
-                                                                     & \mintinline{java}|getColumnIndex()| & når der bliver klikket på et felt.                   \\
-                                                                     & \mintinline{java}|firstFour()|      & Giver spillerne besked, om                           \\
-                                                                     & \mintinline{java}|update()|         & hvorvidt deres træk er lovlige.                      \\
-                                                                     &                                     & Melder pas, når der                                  \\
-                                                                     &                                     & ikke er noget lovligt træk.                          \\
-                                                                     &                                     & Annoncerer spillets slutning,                        \\
-                                                                     &                                     & når der ikke er flere træk tilbage                   \\
-                                                                     &                                     & og erklærer vinderen                                 \\
-        \mintinline{java}|Restart()|                                 & \mintinline{java}|in()|             & Genstarter spillet.                                  \\
-                                                                     &                                     & Spilleren der lavede første træk i                   \\
-                                                                     &                                     & sidste runde, laver andet træk i den næste.          \\
-        \mintinline{java}|DrawCircle(int id, Pane pane)|             &                                     & Tegner hvide og sorte brikker på brættet,            \\
-                                                                     &                                     & baseret på spillertur.                               \\
-        \mintinline{java}|reset()|                                   &                                     & Itererer gennem brættet og rydder det.               \\
-        \mintinline{java}|update()|                                  & \mintinline{java}|drawCircle()|     & Opdaterer brættet og tegner circkler(brikker)        \\
-                                                                     &                                     & på brættet ifølge Board objektet.                    \\
-        \mintinline{java}|getRowIndex(MouseEvent event)|             &                                     & Returnerer rækkeindekset for pane't, der klikkes på. \\
-        \mintinline{java}|getColumnIndex(MouseEvent event)|          &                                     & Returnerer søjleindekset for pane't, der klikkes på. \\
+        \mintinline{java}|in()|                             &                                     & Tildeler spillerne deres farver                     \\
+        \mintinline{java}|firstFour(int row, int column,|   &                                     & Spilleren kan sætte de første fire brikker          \\
+        \quad \mintinline{java}| Pane pane)|                &                                     &                                                     \\
+        \mintinline{java}|onPaneClicked(MouseEvent event)|  & \mintinline{java}|getRowIndex()|    & Tegner en cirkel i midten af pane't,                \\
+                                                            & \mintinline{java}|getColumnIndex()| & når der bliver klikket på et felt.                  \\
+                                                            & \mintinline{java}|firstFour()|      & Giver spillerne besked, om                          \\
+                                                            & \mintinline{java}|update()|         & hvorvidt deres træk er lovlige.                     \\
+                                                            &                                     & Melder pas, når der                                 \\
+                                                            &                                     & ikke er noget lovligt træk.                         \\
+                                                            &                                     & Annoncerer spillets slutning,                       \\
+                                                            &                                     & når der ikke er flere træk tilbage                  \\
+                                                            &                                     & og erklærer vinderen                                \\
+        \mintinline{java}|Restart()|                        & \mintinline{java}|in()|             & Genstarter spillet.                                 \\
+                                                            &                                     & Spilleren der lavede første træk i                  \\
+                                                            &                                     & sidste runde, laver andet træk i den næste.         \\
+        \mintinline{java}|DrawCircle(int id, Pane pane)|    &                                     & Tegner hvide og sorte brikker på brættet,           \\
+                                                            &                                     & baseret på spillertur.                              \\
+        \mintinline{java}|reset()|                          &                                     & Itererer gennem brættet og rydder det.              \\
+        \mintinline{java}|update()|                         & \mintinline{java}|drawCircle()|     & Opdaterer brættet og tegner circkler (brikker)      \\
+                                                            &                                     & på brættet ifølge Board objektet.                   \\
+        \mintinline{java}|getRowIndex(MouseEvent event)|    &                                     & Returnerer rækkeindekset for panet, der klikkes på. \\
+        \mintinline{java}|getColumnIndex(MouseEvent event)| &                                     & Returnerer søjleindekset for panet, der klikkes på. \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -170,8 +171,9 @@ En alternativ model til at kortlægge de overordnede metoder i basis-versionen a
 \begin{figure}[H]
     \centering
     \caption{Basic Reversi: overordnede metoder}\label{BRF}
-    \includegraphics[width=1\textwidth]{Graphics/Basis.png}
+    \includegraphics[width=.5\textwidth]{Graphics/Basis.png}
 \end{figure}
+
 Den røde tråd er meget enkel: spillet igangsættes med metoden 'in()', hvor spillerne bliver tildelt deres farver. Derefter skal den første spiller sætte de første fire brikker ved 'firstFour()'. Nu kan spillerne vælge at genstarte spillet ved 'restart()', i hvilket tilfælde de føres tilbage til 'in()', eller de kan spille videre, hvilket vil føre dem videre til 'onPaneClicked'. Spillet fortsætter, indtil en af afslutningsbetingelserne er opfyldt, hvorefter spillet afsluttes, pointene optælles og vinderen kåres. Nu kan spillerne vælge at genstarte spillet, hvilket tager dem tilbage til 'in()'.
 \subsubsection{Avancerede overordnede metoder}\label{AOM}
 I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes. Nedenfor ses en tabel, der viser kronologien af de ``overordnede metoder'', samt de metoder, de kalder.
@@ -208,46 +210,47 @@ En alternativ repræsentation af metodernes rækkefølge kan vises ved figuren n
 \begin{figure}[H]
     \centering
     \caption{AdvancedReversi: overordnede metoder}\label{ARF}
-    \includegraphics[width=1\textwidth]{Graphics/Screenshot 2023-01-20 at 16.35.36.png}
+    \includegraphics[width=.5\textwidth]{Graphics/Screenshot 2023-01-20 at 16.35.36.png}
 \end{figure}
+
 Her man se, at det hele begynder ved 'beginGame()'. Skriver spillerne deres navne og fortsætter til 'firstFour', hvorefter de nu er i stand til- (men ikke tvunget) at overgive sig, ved at trykke på 'surrender'. Dette vil føre dem til at trykke på 'restart', hvorefter kredsløbet gentager sig. Hvis de ikke giver op, føres de videre til 'onPaneClicked()', som fungerer som spillets ``hovedfase'', hvor spiller sætter brikker og fylder brættet ud. I sidste ende, når der ikke er flere lovlige træk, sendes spillerne videre til 'gameOver()', hvor pointene tælles op og vinderen kåres.\newline
 En metode der er ganske bemærkelsesværdig under controller-klassen er 'beginGame()'. Denne metode, som kaldes ved et tryk på knappen ``Begin Game'' fra hovedmenuen, igangsætter hele spillet, viser brættet og kalder 'setName()'-metoden. Hvad der er usædvanligt ved denne metode er, at den fungerer ikke just som en controller-metode, der henter data fra 'Board' og bearbejder det. Den fungerer snarer som en metode inde fra 'Main'-klassen, altså klassen der fungerer som ``view'', hvis vi tager udgangspunkt i MVC konceptet. Den har til job at skulle ``vise'', men den befinder sig inde i 'controller'-klassen. Grunden til at den befinder sig her, er fordi den kaldes via. et ``ActionEvent event'', altså kaldes den, når spilleren interagerer manuelt med knappen i hovedmenuen.
 \subsubsection{Avancerede Underordnede Metoder}
-\cref{tbl:2}
+\cref{tbl:2} Indeholder metoder brugt i AdvancedReversi controller klasse.\newline
 \begin{table}[H]
     \centering
     \caption{Metoder brugt til avancerede funktioner og i overordnede metoder AdvancedReversi \mintinline{java}|Controller.java|}\label{tbl:2}
     \begin{tabular}{lll}
         \toprule
-        Metode                                                  & Kaldte metoder                     & Beskrivelse                                               \\
+        Metode                                              & Kaldte metoder                     & Beskrivelse                                               \\
         \midrule
-        \mintinline{java}|restart(ActionEvent event)|           & \mintinline{java}|reset()|         & Genstarter spillet og beder spillerene om                 \\
-                                                                & \mintinline{java}|setName()|       & at indtaste deres navne i tekstfelterne igen.             \\
-                                                                &                                    & Spiller der lavet første træk i                           \\
-                                                                &                                    & sidste runde, begynder anden                              \\
-        \mintinline{java}|reset()|                              &                                    & Itererer gennem brættet og rydder det                     \\
-        \mintinline{java}|update()|                             & \mintinline{java}|drawCircle()|    & Opdatere brættet og tegner cirkler (brikker)              \\
-                                                                &                                    & på brættet ifølge Board objektet                          \\
-        \mintinline{java}|exitGame(ActionEvent event)|          &                                    & lukker spille                                             \\
-        \mintinline{java}|checkScore()|                         &                                    & Opdaterer scoren for begge spillere                       \\
-        \mintinline{java}|saveHighScore(int score,String name)| &                                    & Gemmer vinderens score og navnet adskilt af               \\
-                                                                &                                    & komma inde i ``Highscore.txt'' file, hvis vinderens       \\
-                                                                &                                    & score er højre end nuværende highscore                    \\
-        \mintinline{java}|loadHighScore()|                      &                                    & Læser highscore og spillersnavne fra                      \\
-                                                                &                                    & ``Highscore.txt'' filen og retunere de som arrayet.       \\
-        \mintinline{java}|showHighScore(ActionEvent event)|     & \mintinline{java}|loadHighScore()| & Når man trykker på highscore-knappen,                     \\
-                                                                &                                    & vises en advarselsboks/-prompt, der viser highscore       \\
-                                                                &                                    & og spillerens navn, hvis highscore er indstillet.         \\
-        \mintinline{java}|surrender(ActionEvent event)|         &                                    & Annoncere overgivelsen af den spiller                     \\
-                                                                &                                    & der trykkede på knappen,                                  \\
-                                                                &                                    & og den anden spillers sejr                                \\
-        \mintinline{java}|getRowIndex(MouseEvent event)|        &                                    & Returnerer rækkeindekset for pane, der er klikket på      \\
-        \mintinline{java}|getColumnIndex(MouseEvent event)|     &                                    & Returnerer søjleindekset for pane, der er klikket på      \\
-        \mintinline{java}|showLegalMoves(int color)|            & \mintinline{java}|drawCircle()|    & Tegner en cirkel hvor spiller kan mulig placer en brik    \\
-        \mintinline{java}|hideLegalMoves()|                     &                                    & Rydder brættet for cirkler, hvilket indikerer mulige træk \\
-        \mintinline{java}|mainMenu(ActionEvent event)|          &                                    & Returner brugeren tilbage til main-menu af spillet        \\
-        \mintinline{java}|DrawCircle(int id, Pane pane)|        &                                    & Tegner hvid og sort brikker og brikker det kan mulig      \\
-                                                                &                                    & placer på brættet, baseret på spillerens tur              \\
+        \mintinline{java}|restart(ActionEvent event)|       & \mintinline{java}|reset()|         & Genstarter spillet og beder spillerene om                 \\
+                                                            & \mintinline{java}|setName()|       & at indtaste deres navne i tekstfelterne igen.             \\
+                                                            &                                    & Spiller der lavet første træk i                           \\
+                                                            &                                    & sidste runde, begynder anden                              \\
+        \mintinline{java}|reset()|                          &                                    & Itererer gennem brættet og rydder det                     \\
+        \mintinline{java}|update()|                         & \mintinline{java}|drawCircle()|    & Opdatere brættet og tegner cirkler (brikker)              \\
+                                                            &                                    & på brættet ifølge Board objektet                          \\
+        \mintinline{java}|exitGame(ActionEvent event)|      &                                    & lukker spille                                             \\
+        \mintinline{java}|checkScore()|                     &                                    & Opdaterer scoren for begge spillere                       \\
+        \mintinline{java}|saveHighScore(int score,|         &                                    & Gemmer vinderens score og navnet adskilt af               \\
+        \quad \mintinline{java}|String name)|               &                                    & komma inde i ``Highscore.txt'' file, hvis vinderens       \\
+                                                            &                                    & score er højre end nuværende highscore                    \\
+        \mintinline{java}|loadHighScore()|                  &                                    & Læser highscore og spillersnavne fra                      \\
+                                                            &                                    & ``Highscore.txt'' filen og retunere de som arrayet.       \\
+        \mintinline{java}|showHighScore(ActionEvent event)| & \mintinline{java}|loadHighScore()| & Når man trykker på highscore-knappen,                     \\
+                                                            &                                    & vises en advarselsboks/-prompt, der viser highscore       \\
+                                                            &                                    & og spillerens navn, hvis highscore er indstillet.         \\
+        \mintinline{java}|surrender(ActionEvent event)|     &                                    & Annoncere overgivelsen af den spiller                     \\
+                                                            &                                    & der trykkede på knappen,                                  \\
+                                                            &                                    & og den anden spillers sejr                                \\
+        \mintinline{java}|getRowIndex(MouseEvent event)|    &                                    & Returnerer rækkeindekset for pane, der er klikket på      \\
+        \mintinline{java}|getColumnIndex(MouseEvent event)| &                                    & Returnerer søjleindekset for pane, der er klikket på      \\
+        \mintinline{java}|showLegalMoves(int color)|        & \mintinline{java}|drawCircle()|    & Tegner en cirkel hvor spiller kan mulig placer en brik    \\
+        \mintinline{java}|hideLegalMoves()|                 &                                    & Rydder brættet for cirkler, hvilket indikerer mulige træk \\
+        \mintinline{java}|mainMenu(ActionEvent event)|      &                                    & Returner brugeren tilbage til main-menu af spillet        \\
+        \mintinline{java}|DrawCircle(int id, Pane pane)|    &                                    & Tegner hvid og sort brikker og brikker det kan mulig      \\
+                                                            &                                    & placer på brættet, baseret på spillerens tur              \\
         \bottomrule
     \end{tabular}
 \end{table}
