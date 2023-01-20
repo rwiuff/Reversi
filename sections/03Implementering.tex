@@ -131,8 +131,8 @@ Når validMoves har et hashmap med hashmaps af koordinater fra alle retninger ge
         Træk                               & Retning                             & Vendbare brikker                                 \\
         \midrule
         \mintinline{java}|HashMap<String,| & \mintinline{java}|HashMap<Integer,| & \mintinline{java}|HashMap<Integer, Integer[]>>>| \\
-        \multirow{2}{*}{"3,3"}             & \multirow{2}{*}{1}                  & 0, \{2,2\}                                         \\
-                                           &                                     & 1, \{1,1\}                                         \\
+        \multirow{2}{*}{"3,3"}             & \multirow{2}{*}{1}                  & 0, \{2,2\}                                       \\
+                                           &                                     & 1, \{1,1\}                                       \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -155,48 +155,48 @@ Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indehol
 \subsubsection{Avanceret}
 I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes. Nedenfor ses en tabel, der viser kronologien af de "overordnede" metoder", samt de metoder, de kalder.
 \begin{table}[H]
-\centering
-\caption{}\label{tbl:}
-\begin{tabular}{lll}
-\toprule
-Metode & Kalder metoderne: & evt. note \\
-\midrule
-beginGame() & setName() & Denne metode er interessant og unik ift. controller-klassens \\
-&& da den agerer som en metode, man under normale omstændigheder \\
-&& vil se i en "main"-klasse, eftersom at metoderne der fungerer som \\
-&& en "opstart", hvor de fremviser stage og scene. \\
-& \\
+    \centering
+    \caption{}\label{tbl:}
+    \begin{tabular}{lll}
+        \toprule
+        Metode          & Kalder metoderne: & evt. note                                                         \\
+        \midrule
+        beginGame()     & setName()         & Denne metode er interessant og unik ift. controller-klassens      \\
+                        &                   & da den agerer som en metode, man under normale omstændigheder     \\
+                        &                   & vil se i en "main"-klasse, eftersom at metoderne der fungerer som \\
+                        &                   & en "opstart", hvor de fremviser stage og scene.                   \\
+                        &                                                                                       \\
 
-setName() & setNameBtn() \\ 
-& checkScore() \\
-& \\
+        setName()       & setNameBtn()      &                                                                   \\
+                        & checkScore()      &                                                                   \\
+                        &                   &                                                                   \\
 
-setNameBtn() & in()\\
-& \\
+        setNameBtn()    & in()                                                                                  \\
+                        &                                                                                       \\
 
-        in()            & drawCircle()      & tildeler spillerne deres                                    \\
-                        &                   & farver og viser de fire                                     \\
-                        &                   & første mulige træk                                          \\
-                        &                                                                                 \\
+        in()            & drawCircle()      & tildeler spillerne deres                                          \\
+                        &                   & farver og viser de fire                                           \\
+                        &                   & første mulige træk                                                \\
+                        &                   &                                                                   \\
 
-        firstFour()     & update()          & Får spiller til at sætte                                    \\
-                        & checkscore()      & de fire første brikker                                      \\
-                        &                                                                                 \\
+        firstFour()     & update()          & Får spiller til at sætte                                          \\
+                        & checkscore()      & de fire første brikker                                            \\
+                        &                                                                                       \\
 
-        onPaneClicked() & getRowIndex()     & Styrer hvad der sker, når                                   \\
-                        & getColumnIndex()  & der bliver klikket på et felt                               \\
-                        & firstFour()       & Giver spillerne besked, om                                  \\
-                        & hideLegalMoves()  & hvorvidt deres træk er lovlige                              \\
-                        & update()          & Melder pas, når der                                         \\
-                        & checkScore()      & ikke er noget lovligt træk                                  \\
-                        & showLegalMoves()  & Annoncerer spillets slutning,                               \\
-                        &                   & når der ikke er                                             \\
-                        &                   & nogen lovlige træk tilbage                                  \\
-                        &                                                                                 \\
+        onPaneClicked() & getRowIndex()     & Styrer hvad der sker, når                                         \\
+                        & getColumnIndex()  & der bliver klikket på et felt                                     \\
+                        & firstFour()       & Giver spillerne besked, om                                        \\
+                        & hideLegalMoves()  & hvorvidt deres træk er lovlige                                    \\
+                        & update()          & Melder pas, når der                                               \\
+                        & checkScore()      & ikke er noget lovligt træk                                        \\
+                        & showLegalMoves()  & Annoncerer spillets slutning,                                     \\
+                        &                   & når der ikke er                                                   \\
+                        &                   & nogen lovlige træk tilbage                                        \\
+                        &                   &                                                                   \\
 
-        gameOver()      & loadHighScore()   & Erklærer vinderen                                           \\
-                        & checkHighScore()  & og opdaterer high-score'n                                   \\
-                        &                   & (hvis den er blevet slået)                                  \\
+        gameOver()      & loadHighScore()   & Erklærer vinderen                                                 \\
+                        & checkHighScore()  & og opdaterer high-score'n                                         \\
+                        &                   & (hvis den er blevet slået)                                        \\
 
 
         \bottomrule
@@ -204,54 +204,50 @@ setNameBtn() & in()\\
 \end{table}
 
 \begin{table}[H]
-\centering
-\caption{Metoder i \mintinline{java}|Controller.java|}\label{tbl:2}
-
-\begin{tabular}{lll}
-\toprule
-Metode & Kaldte metoder & Beskrivelse  \\
-\midrule
-restart(ActionEvent event) & reset() & Genstarter spillet og beder spillerene om   \\
-& setName() & at indsatte deres navne  i tekstfelte igen.  \\
-& & Spiller der lavet første træk i  \\
-& & sidste runde, begynder anden \\
-\\
-reset() & & Iterer gennem brættet og rydder det \\
-\\
-update() & drawCircle() & Opdatere brættet og tegner circkler(brikker)  \\
-& & på brættet ifølge Board objektet \\
-\\
-exitGame(ActionEvent event) & & lukker spille\\
-\\
-checkScore()& & Opdaterer scoren for begge spillere\\
-\\
-
-saveHighScore(int score,String name) & & Gemmer vinderens score og navnet adskilt af \\
-& &  komma inde i "Highscore.txt" file, hvis vinderens  \\
-& & score er højre end nuværende highscore\\
-\\
-loadHighScore() & & Læser highscore og spillersnavne fra \\
-& & "Highscore.txt" filen og retunere de som arrayet.\\
-\\
-showHighScore(ActionEvent event) & loadHighScore() & Når man trykker på highscore-knappen, \\
-& & vises en advarselsboks/-prompt, der viser highscore  \\
-& & og spillerens navn, hvis highscore er indstillet. \\
-\\
-
-surrender(ActionEvent event) & & Annoncere overgivelsen af den spiller\\
-& & der trykkede på knappen,\\
- & & og den anden spillers sejr\\
-\\
-getRowIndex(MouseEvent event)& & Returnerer rækkeindekset for pane, der er klikket på\\
-\\
-getColumnIndex(MouseEvent event)& & Returnerer søjleindekset for pane, der er klikket på\\
-\\
-showLegalMoves(int color) & drawCircle() & Tegner en cirkel hvor spiller kan mulig placer en brik\\
-\\
-hideLegalMoves() & & Rydder brættet for cirkler, hvilket indikerer mulige træk\\
-\\
-mainMenu(ActionEvent event) & & Returner tilbage til main-menu af spillet\\
-
+    \centering
+    \caption{Metoder i \mintinline{java}|Controller.java|}\label{tbl:2}
+    \begin{tabular}{lll}
+        \toprule
+        Metode                               & Kaldte metoder  & Beskrivelse                                               \\
+        \midrule
+        restart(ActionEvent event)           & reset()         & Genstarter spillet og beder spillerene om                 \\
+                                             & setName()       & at indsatte deres navne  i tekstfelte igen.               \\
+                                             &                 & Spiller der lavet første træk i                           \\
+                                             &                 & sidste runde, begynder anden                              \\
+                                             &                 &                                                           \\
+        reset()                              &                 & Iterer gennem brættet og rydder det                       \\
+                                             &                 &                                                           \\
+        update()                             & drawCircle()    & Opdatere brættet og tegner circkler(brikker)              \\
+                                             &                 & på brættet ifølge Board objektet                          \\
+                                             &                 &                                                           \\
+        exitGame(ActionEvent event)          &                 & lukker spille                                             \\
+                                             &                 &                                                           \\
+        checkScore()                         &                 & Opdaterer scoren for begge spillere                       \\
+                                             &                 &                                                           \\
+        saveHighScore(int score,String name) &                 & Gemmer vinderens score og navnet adskilt af               \\
+                                             &                 & komma inde i "Highscore.txt" file, hvis vinderens         \\
+                                             &                 & score er højre end nuværende highscore                    \\
+                                             &                 &                                                           \\
+        loadHighScore()                      &                 & Læser highscore og spillersnavne fra                      \\
+                                             &                 & "Highscore.txt" filen og retunere de som arrayet.         \\
+                                             &                 &                                                           \\
+        showHighScore(ActionEvent event)     & loadHighScore() & Når man trykker på highscore-knappen,                     \\
+                                             &                 & vises en advarselsboks/-prompt, der viser highscore       \\
+                                             &                 & og spillerens navn, hvis highscore er indstillet.         \\
+                                             &                 &                                                           \\
+        surrender(ActionEvent event)         &                 & Annoncere overgivelsen af den spiller                     \\
+                                             &                 & der trykkede på knappen,                                  \\
+                                             &                 & og den anden spillers sejr                                \\
+                                             &                 &                                                           \\
+        getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane, der er klikket på      \\
+                                             &                 &                                                           \\
+        getColumnIndex(MouseEvent event)     &                 & Returnerer søjleindekset for pane, der er klikket på      \\
+                                             &                 &                                                           \\
+        showLegalMoves(int color)            & drawCircle()    & Tegner en cirkel hvor spiller kan mulig placer en brik    \\
+                                             &                 &                                                           \\
+        hideLegalMoves()                     &                 & Rydder brættet for cirkler, hvilket indikerer mulige træk \\
+                                             &                 &                                                           \\
+        mainMenu(ActionEvent event)          &                 & Returner tilbage til main-menu af spillet                 \\
         \bottomrule
     \end{tabular}
 \end{table}
