@@ -83,25 +83,26 @@ gameOver() & loadHighScore() & Erklærer vinderen\\
 Metode & Kaldte metoder & Beskrivelse & Input & Output \\
 \midrule
 restart() & reset() & Genstarter spillet og beder spillerene om   \\
-& setName() & at indsatte deres navne  i tekstfelte igen. Spiller der lavet \\
-& & første træk i sidste runde, begynder anden \\
+& setName() & at indsatte deres navne  i tekstfelte igen. Spiller \\
+& & der lavet første træk i sidste runde, \\
+& &  begynder anden \\
 \\
 reset() & & Iterer gennem brættet og rydder det \\
 \\
-update() & drawCircle() & Opdatere brættet og tegner circkler(brikker) på brættet  \\
-& & ifølge Board objektet \\
+update() & drawCircle() & Opdatere brættet og tegner circkler(brikker)  \\
+& & på brættet ifølge Board objektet \\
 \\
 exitGame() \\
 \\
 checkScore()& & Opdaterer scoren for begge spillere\\
 \\
 
-saveHighScore() & & Gemmer vinderens score og navnet adskilt af komma\\
-& & inde i "Highscore.txt" file, hvis vinderens score er  \\
-& & højre end nuværende highscore\\
+saveHighScore() & & Gemmer vinderens score og navnet adskilt af \\
+& &  komma inde i "Highscore.txt" file, hvis vinderens  \\
+& & score er højre end nuværende highscore\\
 \\
 loadHighScore() & & Læser highscore og spillersnavne fra \\
-& & "Highscore.txt" filen og retunere de som arrayet
+& & "Highscore.txt" filen og retunere de som arrayet.\\
 \\
 showHighScore() & loadHighScore() \\
 surrender()\\
