@@ -78,5 +78,96 @@ Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indehol
 \subsubsection{Basic}
 
 
+
 \subsubsection{Avanceret}
-I den avancerede
+I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes.
+\begin{table}[H]
+\centering
+\caption{}\label{tbl:}
+\begin{tabular}{lllll}
+\toprule
+Metode & Kalder metoderne: & Beskrivelse & Input & Output \\
+\midrule
+beginGame() & setName() & Sætter hele spillet i gang & ActionEvent event & Ting 4 \\
+&& og loader spillebrættet \\
+& \\
+
+setName() & setNameBtn() & Beder spillerne om \\ 
+& checkScore() & at indtaste deres navne \\
+&& i tekstfelterne og \\
+&& sætter deres score lig 0\\
+& \\
+
+setNameBtn() & in() & fastlåser spillernes navne \\
+&& og sætter spillet i gang\\
+& \\
+
+in() & drawCircle() & tildeler spillerne deres \\
+&& farver og viser de fire \\
+&& første mulige træk \\
+& \\
+
+firstFour() & update() & Får spiller til at sætte \\
+& checkscore() & de fire første brikker\\
+& \\
+
+onPaneClicked() & getRowIndex() & Styrer hvad der sker, når \\ 
+& getColumnIndex() & der bliver klikket på et felt\\
+&  firstFour() & Giver spillerne besked, om \\
+& hideLegalMoves() &hvorvidt deres træk er lovlige\\
+& update() & Melder pas, når der \\ 
+& checkScore() & ikke er noget lovligt træk\\
+& showLegalMoves() & Annoncerer spillets slutning,\\ 
+&& når der ikke er \\
+&& nogen lovlige træk tilbage\\
+& \\
+
+gameOver() & loadHighScore() & Erklærer vinderen\\
+& checkHighScore() & og opdaterer high-score'n\\
+&& (hvis den er blevet slået) \\
+
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{}\label{tbl:2}
+\begin{tabular}{lllll}
+\toprule
+Metode & Kaldte metoder & Beskrivelse & Input & Output \\
+\midrule
+restart() & reset() & Genstarter spillet og beder spillerene om   \\
+& setName() & at indsatte deres navne  i tekstfelte igen.  \\
+& & Spiller der lavet første træk i  \\
+& & sidste runde, begynder anden \\
+\\
+reset() & & Iterer gennem brættet og rydder det \\
+\\
+update() & drawCircle() & Opdatere brættet og tegner circkler(brikker)  \\
+& & på brættet ifølge Board objektet \\
+\\
+exitGame() \\
+\\
+checkScore()& & Opdaterer scoren for begge spillere\\
+\\
+
+saveHighScore() & & Gemmer vinderens score og navnet adskilt af \\
+& &  komma inde i "Highscore.txt" file, hvis vinderens  \\
+& & score er højre end nuværende highscore\\
+\\
+loadHighScore() & & Læser highscore og spillersnavne fra \\
+& & "Highscore.txt" filen og retunere de som arrayet.\\
+\\
+showHighScore() & loadHighScore() \\
+surrender()\\
+getRowIndex()\\
+getColumnIndex()\\
+showLegalMoves() & drawCircle() \\
+hideLegalMoves()\\
+mainMenu()\\
+
+\bottomrule
+\end{tabular}
+\end{table}
