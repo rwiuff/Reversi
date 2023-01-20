@@ -43,7 +43,7 @@ tasks.named('test') {
 mainClassName = 'advancedreversi.Main'
 jar {
     archiveBaseName = 'AdvancedReversi'
-    archiveVersion =  '1.4.0'
+    archiveVersion =  '1.4.1'
     manifest {
         attributes 'Main-Class': 'advancedreversi.launcher'
     }
