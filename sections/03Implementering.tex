@@ -84,11 +84,11 @@ I den avancerede controller klasse er der rykket om på rækkefølgen, hvori met
 \begin{table}[H]
 \centering
 \caption{}\label{tbl:}
-\begin{tabular}{lllll}
+\begin{tabular}{lll}
 \toprule
-Metode & Kalder metoderne: & Beskrivelse & Input & Output \\
+Metode & Kalder metoderne: & Beskrivelse \\
 \midrule
-beginGame() & setName() & Sætter hele spillet i gang & ActionEvent event & Ting 4 \\
+beginGame() & setName() & Sætter hele spillet i gang\\
 && og loader spillebrættet \\
 & \\
 
@@ -138,7 +138,7 @@ gameOver() & loadHighScore() & Erklærer vinderen\\
 \toprule
 Metode & Kaldte metoder & Beskrivelse  \\
 \midrule
-restart() & reset() & Genstarter spillet og beder spillerene om   \\
+restart(ActionEvent event) & reset() & Genstarter spillet og beder spillerene om   \\
 & setName() & at indsatte deres navne  i tekstfelte igen.  \\
 & & Spiller der lavet første træk i  \\
 & & sidste runde, begynder anden \\
@@ -148,7 +148,7 @@ reset() & & Iterer gennem brættet og rydder det \\
 update() & drawCircle() & Opdatere brættet og tegner circkler(brikker)  \\
 & & på brættet ifølge Board objektet \\
 \\
-exitGame() \\
+exitGame() & & lukker spille\\
 \\
 checkScore()& & Opdaterer scoren for begge spillere\\
 \\
