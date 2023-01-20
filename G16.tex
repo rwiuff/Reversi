@@ -68,6 +68,7 @@
 \usepackage{multirow}
 \usepackage{dcolumn}
 \usepackage{fontawesome}
+\usepackage{pgfgantt}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \newcommand{\ttt}[1]{\texttt{#1}}
@@ -176,7 +177,7 @@
     \normalfont\scshape\color{FMNgrey}}
 {\thesubsection.}{.5em}{}
 
-\title{\vspace{-2.5cm}\includegraphics[width=.15\textwidth]{DTU}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
+\title{\includegraphics[width=.5\textwidth]{icon.eps}\lb\vspace{.5em}\Huge\scshape\color{DTUred} \titl\lb\vspace{-4mm}\rule{4cm}{0.5mm}\lb\Large{\courseno \ \course}}
 \preauthor{\begin{center}
     \large \lineskip 0.5em%
     \begin{tabular}[t]{r}}
@@ -184,9 +185,10 @@
 \postauthor{\end{tabular}\par\end{center}}
 \date{20. januar 2023}
 \maketitle
-
+\thispagestyle{empty}
 \pagenumbering{arabic}
-
+\setcounter{page}{0}
+\newpage
 \tableofcontents
 \addtocontents{toc}{~\hfill\textbf{Side}\par}
 \thispagestyle{empty}
@@ -196,7 +198,7 @@
 
 \input{sections/01Introduktion.tex}
 \input{sections/02Design.tex}
-\input{sections/03Implementation.tex}
+\input{sections/03Implementering.tex}
 \input{sections/04Test.tex}
 \input{sections/05ProjectManagement.tex}
 \input{sections/06Konklusion.tex}

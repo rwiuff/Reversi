@@ -1,9 +1,11 @@
 % !TeX root = ..\G16.tex
 \section{Introduktion \& Problemanalyse}
+\subsection{Tilgængelighed}\label{sec:introtilg}
+Hele projektet (inklusiv denne rapport) er tilgængeligt online på \href{https://github.com/rwiuff/Reversi}{\color{DTUred}Github} \github{https://github.com/rwiuff/Reversi}. I mappestrukturen er \emph{``BasicReversi''} og \emph{``AdvancedReversi''} rodmapper for hver deres projekt som kan importeres i Eclipse og Visual Studio Code. Læs mere i \cref{sec:GGG}.
 \subsection{Forfatterskab}
 En oversigt over hvilke gruppemedlemmer der har skrevet hvad i rapporten kan ses i \cref{sec:arbejde}.
 \subsection{Opgaven}\label{OP}
-I dette projekt er målet at udvikle et program der implementerer spillet ``Reversi''; et brætspil der handler om at vinde mest muligt terræn ved at indkapse og vende modstanderens brikker\footnote{\href{https://www.wikiwand.com/en/Reversi}{Reversi på Wikipedia}} Vi benytter os af regelsættet i projektoplægget, og jf. samme oplæg skrives den grafiske brugerflade med JavaFX.\newline
+I dette projekt er målet at udvikle et program der implementerer spillet ``Reversi''; et brætspil der handler om at vinde mest muligt terræn ved at indkapsle og vende modstanderens brikker\footnote{\href{https://www.wikiwand.com/en/Reversi}{Reversi på Wikipedia}} Vi benytter os af regelsættet i projektoplægget, og jf. samme oplæg skrives den grafiske brugerflade med JavaFX.\newline
 Med udgangspunkt i Model-Viewer-Controller konceptet (\emph{MVC}) skal der implementeres en klasse med den underliggende logik for spillet, en klasse der implementerer den grafiske brugerflade, og en klasse der binder disse sammen.
 \subsection{Specifikationer}\label{sec:speci}
 Reversi er et relativt simpelt spil med få regler. Vi ved, at vi skal lavet et bræt med 8x8 felter. I begyndelsen af spillet skal der placeres 4 brikker af to forskellige farver, én farve pr. spiller. Herefter skal de to spillere placere deres brikker én efter én, og vende modstanderens brikker ved at klemme dem inde mellem ensfarvede brikker. Brikkerne kan kun stilles et sted, hvor man med sikkerhed klemmer en brik af modsat farve inde. Vinderen er den spiller, der har flest brikker på brættet, når alle 64 felter er udfyldt. Alternativt kan man vinde spillet, ved at modstanderen siger "pas" to ture i træk.
@@ -25,7 +27,7 @@ Sekundære mål er at implementere så mange valgfri features som muligt, som vi
 Et andet vigtigt mål er at arbejde som en gruppe. Med det menes der at lære, hvorledes man arbejder sammen, dele arbejdet op når det kommer til et projekt af denne størrelse, og tage stilling til hvordan ens kode kan sammenflettes med de andre gruppemedlemmers kode.
 \subsection{Tilgang til opgaveløsningen}\label{TTO}
 Projektet har budt på adskillige overvejelser ift. løsning af problemer. Som det første havde vi det visuelle, og dernæst havde vi det logiske. Vi blev enige om at dele arbejdet op i grupper af to og to. Så kunne vi spørge os selv: Hvordan vil vi gribe vores opgave an? Hvad angår den grafiske del, besluttede vi os for at bruge \emph{Scene Builder}\footnote{\href{https://gluonhq.com/products/scene-builder/}{Scene Builder}} til at lave vores \emph{Scene} og nogle af vores \emph{Nodes}. Fordelen her er at have al grafisk info stående på en let overskuelig måde og kun definere interaktionen i vores klasser. Ulempen vil dog være, at det vil tage længere tid at skrive hver enkelt ting op (specificere en knaps layout, størrelse mm). En anden fordel ved Scene Builder er, at det er hurtigt, overskueligt (inde i selve programmet), og det er let at forbinde evt. kode fra andre klasser med det, man har designet i programmet.\newline
-Dog er det ikke alt, der ikke let kan løses i Scene Builder. Detaljer som actions og id på nodes er nemere at redigere direkte i \emph{FXML} filen efter layoutet er defineret i Scene Builder.\newline
+Dog er det ikke alt, der ikke let kan løses i Scene Builder. Detaljer som actions og id på nodes er nemmere at redigere direkte i \emph{FXML} filen efter layoutet er defineret i Scene Builder.\newline
 
 
 % Følgende tekst høre til i diskussionsafsnittet:
