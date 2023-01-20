@@ -182,7 +182,8 @@ mainMenu(ActionEvent event) & & Returner tilbage til main-menu af spillet\\
 \end{tabular}
 \end{table}
 
-\subsection{Genstarter Spillet} \label{gs}
+\subsubsection{Genstarter Spillet} \label{gs}
+
 Et af de grundlæggende kriterier for det basis Reversi-spil er evnen til at genstarte spillet uden at genstarte applikationen. Det er gjort muligt at genstarte spillet uden at genstarte programmet ved at oprette en knap. Genstart-knappen havde oprindelig funktionalitet til at genstarte spillet ved at skifte scener, det vil sige at skifte til scenen, hvor ingen brikker er placeret på brættet. Den tom brættet er den samme scene, der vises ved kørsel af FXML-filen i starten af spillet/programmet. Genstart af spillet med at skifte scener var ikke et optimalt og vellykket middel til at genstarte spillet, da det ikke tillod brugeren at spille spillet igen uden at lukke programm på grund af det uretmæssige initialisering af spillet samt kun indlæse scenen (tom brættet) med ingen funktionalitet. \newline
 \newline
 For at undgå denne ukorrekte genstart blev hver pane indeholdt i GridPane tildelt et id (fx: 05 repræsenterer Pane i 0. række og 5. kolonne i GridPane). Hver gang man trykker på genstart, vil to for-loops iterere gennem hver række og kolonne i GridPane, få adgang til den unikke identifikator for hver Pane ved hjælp af række- og kolonneindekset og derefter rydde fliserne på den. At tildele et id til ruderne og bruge for -loops til at iterere gennem Pane og slet fliser placeret på dem, gav den mest effektive og effektive metode til at genstarte spillet igen. Derudover, når spillet genstartes, vil den spiller, der foretager det første træk, før spillet genstartes, nu starte som nummer to.
