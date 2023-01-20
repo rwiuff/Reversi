@@ -33,12 +33,16 @@ I den avancerede controller klasse er der rykket om på rækkefølgen, hvori met
 Metode & Kaldte metoder & Beskrivelse & Input & Output \\
 \midrule
 beginGame() & setName() & Sætter hele spillet i gang og loader spillebrættet & ActionEvent event & Ting 4 \\
-setName() & setNameBtn() & Beder spillerne om at indtaste deres navne i tekstfelterne og sætter deres score lig 0\\
-& checkScore() \\
-setNameBtn() & in() \\
+
+setName() & setNameBtn() & Beder spillerne om at indtaste deres navne\\ 
+& checkScore() & i tekstfelterne og sætter deres score lig 0\\
+
+setNameBtn() & in() & fastlåser spillernes navne \\
 in() & drawCircle() \\
+
 firstFour() & update()\\
 & checkscore() \\
+
 onPaneClicked() & getRowIndex() \\
 & getColumnIndex() \\
 & firstFour() \\
@@ -46,6 +50,7 @@ onPaneClicked() & getRowIndex() \\
 & update()\\
 & checkScore() \\
 & showLegalMoves()\\
+
 gameOver() & loadHighScore()\\
 & checkHighScore() \\
 
@@ -61,8 +66,8 @@ gameOver() & loadHighScore()\\
 \toprule
 Metode & Kaldte metoder & Beskrivelse & Input & Output \\
 \midrule
-restart() & reset() \\
-& setName() \\
+restart() & reset() & Genstarter spillet og beder spillerene om   \\
+& setName() & at indsatte dernavne  i tekstfelte \\
 reset() \\
 update() & drawCircle() \\
 exitGame() \\
