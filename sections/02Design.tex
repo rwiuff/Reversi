@@ -13,7 +13,5 @@ En main-klasse, der fungerer som view; altså alt det, som spilleren kan se. Den
 \subsection{Controller}\label{C}
 En controller-klasse, der fungerer controller; denne klasse binder board og .fxml-filen sammen. Dette gør den ved at lave en masse metoder, der responderer på et klik med musen eller et klik på en "Button" på "scene", således at der sker nogle ændringer visuelt, og disse ændringer har forklaring med rod i logikken (board-klassen).
 \subsection{Board}\label{B}
-\begin{listing}[H]
- \java{BaiscReversi/app/src/main/java/basicrevrsi/Board.java}{22}{34}
-\end{listing}
+
 Som model i MVC konceptet laves en klasse der indeholder brættet som en datastruktur, og som indeholder logikken til at placere brikker, hvilke af modstanderens brikker der bliver indeklemt samt lovligheden af et givent træk. Board klassn skal kommunikere med controller klassen igennem en række heltals koder.
