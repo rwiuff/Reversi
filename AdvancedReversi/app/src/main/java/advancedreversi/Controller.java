@@ -616,7 +616,7 @@ public class Controller {
             controller.getReversiTimerpane().setVisible(true);
             
         } catch (IOException e) {
-        	//this place for backup plan if main,fxml not found we can load it from anther path , so the game is still running 
+        	 
             e.printStackTrace();
         }
     }
