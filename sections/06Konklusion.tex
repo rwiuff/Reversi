@@ -30,8 +30,8 @@ Der blev brugt "TimeLine" hvor den virkede fint med både "turnsskift"-hastighed
 Nogle af de største udfordringer vi har haft med SpeedMode er, at kombinere metoden ind og få den til at køre adskilt, dvs. kun når man vælger at spille med SpeedMode, som vi har lavet en knap til i "Menu.FXML" og en "BorderPane" i "Main.FXML".
 \subsubsection{Metodeimplementering}\label{MI}
 \begin{itemize}
-\item Efter oprettelsen af "ReversiTimer"-klassen, som indholder Timer-metoden, har Yahya tænkt sig at oprette en anden Controller-klasse for ReversiTimeren således at, man kan kald den ny "controller1" når man trykker på knappen " SpeedReversi" ellers kaldes den nuværende "Controller".
-På den måde vil vi kunne nemt flette Timer logikken ind med Standard logik uden væsentlig ændringer i koden, men der har været uenighed om det,fordi det kunne være et problem hvis vi sanerer opdager nogle fejl eller hvis vi skal ændre på noget i hoved Controller klassen, for så bliver vi nødt til at ændre det også i Controller2 klassen. 
+\item Efter oprettelsen af "ReversiTimer"-klassen, som indholder Timer-metoden, har Yahya tænkt sig at oprette en anden Controller-klasse for ReversiTimeren, således at man kan kaldee den nye "controller1" når man trykker på knappen " SpeedReversi" ellers kaldes den nuværende "Controller".
+På den måde vil vi nemt kunne flette Timer-logikken ind med standard logik uden væsentlige ændringer i koden, men der har været uenighed om det, for det kunne være et problem, hvis vi senere opdager nogle fejl eller hvis vi skal ændre på noget i hoved-Controller-klassen, for så bliver vi nødt til også at ændre det i Controller2-klassen. 
 \item Derfor har vi tænkte os at få Timeren ind med at tilføje en "boolean" som sætter "SpeedMode=false;" og så begyndt vi at tilføj 
 " if (speedMode == true) \{ " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så har vi sat 
 "speedReversi(ActionEvent event) \{	
