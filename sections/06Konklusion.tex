@@ -22,7 +22,7 @@ Timer-Metoden tog ca. 2 dage at implementere, for der har været nogle udfordrin
 \item Der blev brugt "Thread" til at manipulere timeren med spillet, men fejlen var at ved brug af "Thread.sleep" vil det tage programmet et sekund at kører metoden igennem. Det har vi oplevet, da vi har prøvet at spille hurtigt; så vil timeren ikke begynde på at tælle ned, for den har brug for et sekund til at tænke. 
 \item Som et forsøg på at løse fejlen, har vi prøvet at forkorte rundturstiden for "Thread.sleep" ved at bruge "System.nanoTime" hvor man kan regne tiden, som metoden bruger i nanoTime, og trække det fra. Det hjalp ikke; fejlen var det samme. 
 \item Et andet forsøg, var ved at prøve "Animationtimer" men vi kunne ikke få metoden til at ændre timeren fra spiller 1 til spiller 2. 
-
+ i 
 \item Løsning: 
 Der blev brugt "TimeLine" hvor den virkede fint med både "turnsskift"-hastighed mellem spillerne og reagerer med "getturn()". 
 \end{itemize}
@@ -32,12 +32,12 @@ Nogle af de største udfordringer vi har haft med SpeedMode er, at kombinere met
 \begin{itemize}
 \item Efter oprettelsen af "ReversiTimer"-klassen, som indholder Timer-metoden, har Yahya tænkt sig at oprette en anden Controller-klasse for ReversiTimeren, således at man kan kaldee den nye "controller1" når man trykker på knappen " SpeedReversi" ellers kaldes den nuværende "Controller".
 På den måde vil vi nemt kunne flette Timer-logikken ind med standard logik uden væsentlige ændringer i koden, men der har været uenighed om det, for det kunne være et problem, hvis vi senere opdager nogle fejl eller hvis vi skal ændre på noget i hoved-Controller-klassen, for så bliver vi nødt til også at ændre det i Controller2-klassen. 
-\item Derfor har vi tænkte os at få Timeren ind med at tilføje en "boolean" som sætter "SpeedMode=false;" og så begyndt vi at tilføj 
-" if (speedMode == true) \{ " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så har vi sat 
+\item Derfor havde vi tænkt os at få Timeren ind ved at tilføje en "boolean" som sætter "SpeedMode=false;" og så begyndte vi at tilføje 
+" if (speedMode == true) \{ " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så satte vi 
 "speedReversi(ActionEvent event) \{	
 		speedMode = true; "
-\item Vi var meget tætte på at få det hele til at køre, men udfordringer var stadig til sted. Vi mødet en fejl der gør at enten timeren kan ses på begge Mode ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
-Efter en lang analyse af "if" og "else" sætninger, fandt vi fejlen som var bag Controller, da vi få Loaded "main.fxml" med den standard Controller hver gang, derfor vil Value af SpeedMode være "True" altid. 
+\item Vi var meget tætte på at få det hele til at køre, men udfordringer var stadig til stede. Vi mødte en fejl, der gør at enten kan timeren ses på begge "modes", ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
+Efter en lang analyse af "if" og "else" sætninger fandt vi fejlen, som var bag 'Controller', da vi få Loaded "main.fxml" med den standard Controller hver gang, derfor vil Value af SpeedMode være "True" altid. 
 
 \item Løsning: 
 implementere følgende i "speedReversi(ActionEvent event)":
