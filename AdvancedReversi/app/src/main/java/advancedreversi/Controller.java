@@ -520,15 +520,7 @@ public class Controller {
         controller.setSpeedMode(false);
         controller.getReversiTimerpane().setVisible(false);
         
-        /*
-        if(speedMode) {
-        	time1.start();
-            time2.start();
-        }else { 
-         //   time1.pause();
-          //  time2.pause();
-        }
-        */
+      
         
     }
 
@@ -622,24 +614,6 @@ public class Controller {
            // speedMode = true; is diffrente with the new controller Speedmode
             controller.setSpeedMode(true);
             controller.getReversiTimerpane().setVisible(true);
-            
-            /* errors
-             *  
-            1-the main error is using attributes of anther controller instance speedMode of target controller is alwyase the same value is true
-            1.2-changing the attribute from the controller running only for Menu (change dirrectlly)
-              solution of error 1 : get the instance of the target controller from mainLoader of the FXMLLoader
-                                    changing the attribute (SpeedMode,ReversiTimerpane) from the target controller (not dirrectlly)
-            2-showing the ReversiTimerpane in BeginGame solution is setVisibale(false) to ReversiTimerpane
-            */
-            /*
-            if(speedMode) {
-            	time1.start();
-                time2.start();
-            }else { 
-             //   time1.pause();
-              //  time2.pause();
-            }
-            */
             
         } catch (IOException e) {
         	//this place for backup plan if main,fxml not found we can load it from anther path , so the game is still running 
