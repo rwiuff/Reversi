@@ -167,18 +167,18 @@ Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indehol
                         &                   &                                                                   \\
                         
                             Restart() & in() & Genstarter spillet. \\
-                         &         &        Spiller der lavet første træk i \\      &         & sidste runde, begynder anden.\\
+                         &         &        Spilleren der lavede første træk i \\      &         & sidste runde, laver andet træk i den næste.\\
                          \\
-                         DrawCircle(int id, Pane pane) & & Tegner hvid og sort brikker på brættet, \\
-                         & & baseret på spillerens tur
+                         DrawCircle(int id, Pane pane) & & Tegner hvide og sorte brikker på brættet, \\
+                         & & baseret på spillertur.
                          \\
                          \\
-                          reset()                              &                 & Iterer gennem brættet og rydder det                       \\
+                          reset()                              &                 & Itererer gennem brættet og rydder det.                       \\
                                              &                 &                                                           \\
-        update()                             & drawCircle()    & Opdatere brættet og tegner circkler(brikker)              \\
-                                             &                 & på brættet ifølge Board objektet                          \\
+        update()                             & drawCircle()    & Opdaterer brættet og tegner circkler(brikker)              \\
+                                             &                 & på brættet ifølge Board objektet.                          \\
                                              \\
-         getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane, der er klikket på      \\
+         getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane't, der er klikket på      \\
                                              &                 &                                                           \\
         getColumnIndex(MouseEvent event)     &                 & Returnerer søjleindekset for pane, der er klikket på      \\
                                              &                 &                                                           \\
