@@ -94,7 +94,7 @@ public class Controller {
 		setName(); // Runs hint: Enter playernames
 	}
 
-	// This method controls what happens, when a pane is clicked, under different
+	// This method controls what happens, when a pane is clicked under different
 	// circumstances. It behaves differently depending on the situation,
 	// as in if the first four tiles have been placed or not, and will
 	// finally get the result of the match and announce the winner
