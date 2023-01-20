@@ -41,12 +41,12 @@ setNameBtn() & in() & fastlåser spillernes navne \\
 && og sætter spillet i gang\\
 
 in() & drawCircle() & tildeler spillerne deres farver\\
-&& og sætter 
+&& og viser de fire første mulige træk \\
 
-firstFour() & update()\\
+firstFour() & update() & Får spiller til at sætte de fire første brikker\\
 & checkscore() \\
 
-onPaneClicked() & getRowIndex() \\
+onPaneClicked() & getRowIndex() & \\
 & getColumnIndex() \\
 & firstFour() \\
 & hideLegalMoves() \\
@@ -70,7 +70,8 @@ gameOver() & loadHighScore()\\
 Metode & Kaldte metoder & Beskrivelse & Input & Output \\
 \midrule
 restart() & reset() & Genstarter spillet og beder spillerene om   \\
-& setName() & at indsatte der navne  i tekstfelte.  \\
+& setName() & at indsatte deres navne  i tekstfelte. Spiller der lavet  \\
+& & første træk i sidste runde, begynder anden \\
 reset() \\
 update() & drawCircle() \\
 exitGame() \\
