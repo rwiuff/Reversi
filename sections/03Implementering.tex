@@ -155,15 +155,15 @@ Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indehol
         firstFour(int row, int column, Pane pane)   &  & Spilleren kan sætte de første fire brikker
         \\
         \\
-         onPaneClicked(MouseEvent event) & getRowIndex()     & Dette fet                                         \\
-                        & getColumnIndex()  & der bliver klikket på et felt                                     \\
+         onPaneClicked(MouseEvent event) & getRowIndex()     & Tegner en cirkel i midten af pane't,                                         \\
+                        & getColumnIndex()  & når der bliver klikket på et felt.                                     \\
                         & firstFour()       & Giver spillerne besked, om                                        \\
-                        & update()  & hvorvidt deres træk er lovlige                                    \\
+                        & update()  & hvorvidt deres træk er lovlige.                                    \\
                         &                & Melder pas, når der                                               \\
-                        &                & ikke er noget lovligt træk                                        \\
+                        &                & ikke er noget lovligt træk.                                        \\
                         &                     & Annoncerer spillets slutning,                                     \\
-                        &                   & når der ikke er                                                   \\
-                        &                    & Erklærer vinderen                                      \\
+                        &                   & når der ikke er flere træk tilbage                                                  \\
+                        &                    & og erklærer vinderen                                      \\
                         &                   &                                                                   \\
                         
                             Restart() & in() & Genstarter spillet. \\
