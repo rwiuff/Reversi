@@ -80,7 +80,7 @@ Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indehol
 
 
 \subsubsection{Avanceret}
-I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes.
+I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes. Nedenfor ses en tabel, der viser kronologien af de "overordnede" metoder", samt de metoder, de kalder.
 \begin{table}[H]
 \centering
 \caption{}\label{tbl:}
@@ -148,36 +148,36 @@ reset() & & Iterer gennem brættet og rydder det \\
 update() & drawCircle() & Opdatere brættet og tegner circkler(brikker)  \\
 & & på brættet ifølge Board objektet \\
 \\
-exitGame() & & lukker spille\\
+exitGame(ActionEvent event) & & lukker spille\\
 \\
 checkScore()& & Opdaterer scoren for begge spillere\\
 \\
 
-saveHighScore() & & Gemmer vinderens score og navnet adskilt af \\
+saveHighScore(int score,String name) & & Gemmer vinderens score og navnet adskilt af \\
 & &  komma inde i "Highscore.txt" file, hvis vinderens  \\
 & & score er højre end nuværende highscore\\
 \\
 loadHighScore() & & Læser highscore og spillersnavne fra \\
 & & "Highscore.txt" filen og retunere de som arrayet.\\
 \\
-showHighScore() & loadHighScore() & Når man trykker på highscore-knappen, \\
+showHighScore(ActionEvent event) & loadHighScore() & Når man trykker på highscore-knappen, \\
 & & vises en advarselsboks/-prompt, der viser highscore  \\
 & & og spillerens navn, hvis highscore er indstillet. \\
 \\
 
-surrender() & & Annoncere overgivelsen af den spiller\\
+surrender(ActionEvent event) & & Annoncere overgivelsen af den spiller\\
 & & der trykkede på knappen,\\
  & & og den anden spillers sejr\\
 \\
-getRowIndex()& & Returnerer rækkeindekset for pane, der er klikket på\\
+getRowIndex(MouseEvent event)& & Returnerer rækkeindekset for pane, der er klikket på\\
 \\
-getColumnIndex()& & Returnerer søjleindekset for pane, der er klikket på\\
+getColumnIndex(MouseEvent event)& & Returnerer søjleindekset for pane, der er klikket på\\
 \\
 showLegalMoves() & drawCircle() & Tegner en cirkel hvor spiller kan mulig placer en brik\\
 \\
 hideLegalMoves() & & Rydder brættet for cirkler, hvilket indikerer mulige træk\\
 \\
-mainMenu() & & Returner tilbage til main-menu af spillet\\
+mainMenu(ActionEvent event) & & Returner tilbage til main-menu af spillet\\
 
 \bottomrule
 \end{tabular}
