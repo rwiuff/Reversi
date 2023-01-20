@@ -126,66 +126,46 @@ Når validMoves har et hashmap med hashmaps af koordinater fra alle retninger ge
 \end{table}
 Årsagen til at retning indgår som nøgle i validMoves er simpel: Alle værdier skal have en unik nøgle. Hvis ikke f.eks. retning blev brugt ville moveAnalyser bare overskrive brikker fundet i en retning med brikker fundet i en tidligere retning.
 \subsection{Main}
-
 \subsubsection{Basic}\label{bm}
 I Main klassen, FXMLLoader klassen indlæser ``main.fxml'', som indeholder layoutet for, hvordan spillet skal se ud visuelt. Ved at indlæse FXML-filen tildeler den det resulterende overordnede element til variablen ``root'', og opretter et nyt Scene-objekt med ``root'' som dets rodelement. Dette sceneobjekt er indstillet som den nye scene i den primary stage. Endvidere tilføjes en titel samt ikonbilleder til den primary stage. Den opretter også en reference til controller-objektet, der oprettes, når FXML-filen indlæses, ved at kalde 'getController()'-metoden på FXMLLoader objektet. Den kalder derefter 'in()' fra controller-klassen. Til sidst viser dette primaryStage til brugeren.
-
 \subsubsection{Avanceret} \label{am}
 I lighed med BasicReversi Main klassen udfører AdvancedReversi Main klassen de samme funktioner. Basic Reversi indlæser ``main.fxml''-filen, som kun indeholder boardet, genstartsknappen og en label for at vise meddelelserne til brugeren, hvilket er en af forskellene mellem de to Main klasser. I modsætning hertil indlæser AdvancedReversi Main klassen spillets hovedmenu, ``menu.fxml.'' Tre separate knapper, inklusive BeginGame, HighScore og Exit, er til stede i denne hovedmenu. ``Main.fxml''-filen, som indeholder boardet og andre sofistikerede funktioner, indlæses af FXMLLoader, når der trykkes på BeginGame-knappen. Highscore-knappen kan bruges til at se spillets højeste score, mens Exit-knappen kan bruges til at lukke applikationen. En anden forskel er, at hver gang ``menu.fxml'' udføres, oprettes en fil med navnet ``HighScore.txt'' til at gemme highscore information, hvis en sådan file ikke allerede eksisterer. Derudover giver Avanceret Reversi mulighed for at spille spillet i fuldskærmstilstand og beder brugeren om at bekræfte sit valg, når man trykker på exit.
-
 \subsubsection{FXML}\label{BD}
 Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indeholdt i gridpanet's celler er tildelt et unikt id. For eksempel er 05 et unikt id tildelt til et pane, hvor 0 repræsenterer rækkeindekset, og 5 repræsenterer kolonneindekset for panets placering i gridpanet. Hver pane er tildelt et id for at gøre det nemmere at placere/tegne eller slette en brik fra brættet.
-
-
 \subsection{Controller}
-
 \subsubsection{Basic}
-
-\subsubsection{}
+\cref{tbl:1} viser metoderne implementeret i BasicReversi controller klassen.
 \begin{table}[H]
     \centering
-    \caption{Metoder brugt i \mintinline{java}|BasicReversi Controller.java|}\label{tbl:1}
+    \caption{Metoder brugt i BasicReversi \mintinline{java}|Controller.java|}\label{tbl:1}
     \begin{tabular}{lll}
         \toprule
         Metode                                    & Kalder metoderne: & Beskrivelse                                          \\
         \midrule
-        in()                                      &                   & tildeler spillerne deres farver
-        \\
-        \\
-        firstFour(int row, int column, Pane pane) &                   & Spilleren kan sætte de første fire brikker
-        \\
-        \\
-         onPaneClicked(MouseEvent event) & getRowIndex()     & Tegner en cirkel i midten af pane't,                                         \\
-                        & getColumnIndex()  & når der bliver klikket på et felt.                                     \\
-                        & firstFour()       & Giver spillerne besked, om                                        \\
-                        & update()  & hvorvidt deres træk er lovlige.                                    \\
-                        &                & Melder pas, når der                                               \\
-                        &                & ikke er noget lovligt træk.                                        \\
-                        &                     & Annoncerer spillets slutning,                                     \\
-                        &                   & når der ikke er flere træk tilbage                                                  \\
-                        &                    & og erklærer vinderen                                      \\
-                        &                   &                                                                   \\
-                        
-                            Restart() & in() & Genstarter spillet. \\
-                         &         &        Spilleren der lavede første træk i \\      &         & sidste runde, laver andet træk i den næste.\\
-                         \\
-                         DrawCircle(int id, Pane pane) & & Tegner hvide og sorte brikker på brættet, \\
-                         & & baseret på spillertur.
-                         \\
-                         \\
-                          reset()                              &                 & Itererer gennem brættet og rydder det.                       \\
-                                             &                 &                                                           \\
-        update()                             & drawCircle()    & Opdaterer brættet og tegner circkler(brikker)              \\
-                                             &                 & på brættet ifølge Board objektet.                          \\
-                                             \\
-         getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane't, der klikkes på.      \\
-                                             &                 &                                                           \\
-        getColumnIndex(MouseEvent event)     &                 & Returnerer søjleindekset for pane't, der klikkes på.      \\
-                                             &                 &                                                           \\
- \bottomrule
+        in()                                      &                   & tildeler spillerne deres farver                      \\
+        firstFour(int row, int column, Pane pane) &                   & Spilleren kan sætte de første fire brikker           \\
+        onPaneClicked(MouseEvent event)           & getRowIndex()     & Tegner en cirkel i midten af pane't,                 \\
+                                                  & getColumnIndex()  & når der bliver klikket på et felt.                   \\
+                                                  & firstFour()       & Giver spillerne besked, om                           \\
+                                                  & update()          & hvorvidt deres træk er lovlige.                      \\
+                                                  &                   & Melder pas, når der                                  \\
+                                                  &                   & ikke er noget lovligt træk.                          \\
+                                                  &                   & Annoncerer spillets slutning,                        \\
+                                                  &                   & når der ikke er flere træk tilbage                   \\
+                                                  &                   & og erklærer vinderen                                 \\
+        Restart()                                 & in()              & Genstarter spillet.                                  \\
+                                                  &                   & Spilleren der lavede første træk i                   \\
+                                                  &                   & sidste runde, laver andet træk i den næste.          \\
+        DrawCircle(int id, Pane pane)             &                   & Tegner hvide og sorte brikker på brættet,            \\
+                                                  &                   & baseret på spillertur.                               \\
+        reset()                                   &                   & Itererer gennem brættet og rydder det.               \\
+        update()                                  & drawCircle()      & Opdaterer brættet og tegner circkler(brikker)        \\
+                                                  &                   & på brættet ifølge Board objektet.                    \\
+        getRowIndex(MouseEvent event)             &                   & Returnerer rækkeindekset for pane't, der klikkes på. \\
+        getColumnIndex(MouseEvent event)          &                   & Returnerer søjleindekset for pane't, der klikkes på. \\
+        \bottomrule
     \end{tabular}
 \end{table}
-
 En alternativ model til at kortlægge de overordnede metoder i basis-versionen af Reversi kan se således ud:
 \begin{figure}[H]
     \centering
@@ -193,7 +173,6 @@ En alternativ model til at kortlægge de overordnede metoder i basis-versionen a
     \includegraphics[width=1\textwidth]{Graphics/Basis.png}
 \end{figure}
 Den røde tråd er meget enkel: spillet igangsættes med metoden 'in()', hvor spillerne bliver tildelt deres farver. Derefter skal den første spiller sætte de første fire brikker ved 'firstFour()'. Nu kan spillerne vælge at genstarte spillet ved 'restart()', i hvilket tilfælde de føres tilbage til 'in()', eller de kan spille videre, hvilket vil føre dem videre til 'onPaneClicked'. Spillet fortsætter, indtil en af afslutningsbetingelserne er opfyldt, hvorefter spillet afsluttes, pointene optælles og vinderen kåres. Nu kan spillerne vælge at genstarte spillet, hvilket tager dem tilbage til 'in()'.
-
 \subsubsection{Avancerede overordnede metoder}\label{AOM}
 I den avancerede controller klasse er der rykket om på rækkefølgen, hvori metoderne kaldes. Nedenfor ses en tabel, der viser kronologien af de ``overordnede metoder'', samt de metoder, de kalder.
 \begin{table}[H]
@@ -204,53 +183,35 @@ I den avancerede controller klasse er der rykket om på rækkefølgen, hvori met
         Metode          & Kalder metoderne: & Beskrivelse                                   \\
         \midrule
         beginGame()     & setName()         & Starter spillet og loader Reversi brættet.    \\
-                        &                                                                   \\
-
         setName()       & setNameBtn()      & Anmoder spillerne om at indtaste deres navne. \\
                         & checkScore()      &                                               \\
-                        &                   &                                               \\
-
         setNameBtn()    & in()              & Fastlåser navnene til spillerne.              \\
-                        &                                                                   \\
-
         in()            & drawCircle()      & Tildeler spillerne deres                      \\
                         &                   & farver og viser de fire                       \\
                         &                   & første mulige træk.                           \\
-                        &                   &                                               \\
-
         firstFour()     & update()          & Får spiller nr. 1 til at sætte                \\
                         & checkscore()      & de fire første brikker.                       \\
-                        &                                                                   \\
-
         onPaneClicked() & getRowIndex()     & Styrer hvad der sker, når                     \\
                         & getColumnIndex()  & der bliver klikket på et felt.                \\
                         & firstFour()       & Annoncerer spillets slutning,                 \\
                         & hideLegalMoves()  & når der ikke er flere lovlige træk.           \\
-                        & update()                                                          \\
-                        & checkScore()                                                      \\
-                        & showLegalMoves()                                                  \\
-                        &                                                                   \\
-
+                        & update()          &                                               \\
+                        & checkScore()      &                                               \\
+                        & showLegalMoves()  &                                               \\
         gameOver()      & loadHighScore()   & Erklærer vinderen                             \\
                         & checkHighScore()  & og opdaterer highscoren                       \\
                         &                   & (hvis den er blevet slået)                    \\
-
-
         \bottomrule
     \end{tabular}
 \end{table}
-
-
 En alternativ repræsentation af metodernes rækkefølge kan vises ved figuren nedenfor:
 \begin{figure}[H]
     \centering
     \caption{AdvancedReversi: overordnede metoder}\label{ARF}
     \includegraphics[width=1\textwidth]{Graphics/Screenshot 2023-01-20 at 16.35.36.png}
 \end{figure}
-Her man se, at det hele begynder ved 'beginGame()'. Skriver spillerne deres navne og fortsætter til 'firstFour', hvorefter de nu er i stand til- (men ikke tvunget) at overgive sig, ved at trykke på 'surrender'. Dette vil føre dem til at trykke på 'restart', hvorefter kredsløbet gentager sig. Hvis de ikke giver op, føres de videre til 'onPaneClicked()', som fungerer som spillets ``hovedfase'', hvor spiller sætter brikker og fylder brættet ud. I sidste ende, når der ikke er flere lovlige træk, sendes spillerne videre til 'gameOver()', hvor pointene tælles op og vinderen kåres.
-
+Her man se, at det hele begynder ved 'beginGame()'. Skriver spillerne deres navne og fortsætter til 'firstFour', hvorefter de nu er i stand til- (men ikke tvunget) at overgive sig, ved at trykke på 'surrender'. Dette vil føre dem til at trykke på 'restart', hvorefter kredsløbet gentager sig. Hvis de ikke giver op, føres de videre til 'onPaneClicked()', som fungerer som spillets ``hovedfase'', hvor spiller sætter brikker og fylder brættet ud. I sidste ende, når der ikke er flere lovlige træk, sendes spillerne videre til 'gameOver()', hvor pointene tælles op og vinderen kåres.\newline
 En metode der er ganske bemærkelsesværdig under controller-klassen er 'beginGame()'. Denne metode, som kaldes ved et tryk på knappen ``Begin Game'' fra hovedmenuen, igangsætter hele spillet, viser brættet og kalder 'setName()'-metoden. Hvad der er usædvanligt ved denne metode er, at den fungerer ikke just som en controller-metode, der henter data fra 'Board' og bearbejder det. Den fungerer snarer som en metode inde fra 'Main'-klassen, altså klassen der fungerer som ``view'', hvis vi tager udgangspunkt i MVC konceptet. Den har til job at skulle ``vise'', men den befinder sig inde i 'controller'-klassen. Grunden til at den befinder sig her, er fordi den kaldes via. et ``ActionEvent event'', altså kaldes den, når spilleren interagerer manuelt med knappen i hovedmenuen.
-
 \subsubsection{Avancerede Underordnede Metoder}
 \cref{tbl:2}
 \begin{table}[H]
@@ -264,51 +225,32 @@ En metode der er ganske bemærkelsesværdig under controller-klassen er 'beginGa
                                              & setName()       & at indtaste deres navne i tekstfelterne igen.             \\
                                              &                 & Spiller der lavet første træk i                           \\
                                              &                 & sidste runde, begynder anden                              \\
-                                             &                 &                                                           \\
         reset()                              &                 & Itererer gennem brættet og rydder det                     \\
-                                             &                 &                                                           \\
         update()                             & drawCircle()    & Opdatere brættet og tegner cirkler (brikker)              \\
                                              &                 & på brættet ifølge Board objektet                          \\
-                                             &                 &                                                           \\
         exitGame(ActionEvent event)          &                 & lukker spille                                             \\
-                                             &                 &                                                           \\
         checkScore()                         &                 & Opdaterer scoren for begge spillere                       \\
-                                             &                 &                                                           \\
         saveHighScore(int score,String name) &                 & Gemmer vinderens score og navnet adskilt af               \\
                                              &                 & komma inde i ``Highscore.txt'' file, hvis vinderens       \\
                                              &                 & score er højre end nuværende highscore                    \\
-                                             &                 &                                                           \\
         loadHighScore()                      &                 & Læser highscore og spillersnavne fra                      \\
                                              &                 & ``Highscore.txt'' filen og retunere de som arrayet.       \\
-                                             &                 &                                                           \\
         showHighScore(ActionEvent event)     & loadHighScore() & Når man trykker på highscore-knappen,                     \\
                                              &                 & vises en advarselsboks/-prompt, der viser highscore       \\
                                              &                 & og spillerens navn, hvis highscore er indstillet.         \\
-                                             &                 &                                                           \\
         surrender(ActionEvent event)         &                 & Annoncere overgivelsen af den spiller                     \\
                                              &                 & der trykkede på knappen,                                  \\
                                              &                 & og den anden spillers sejr                                \\
-                                             &                 &                                                           \\
         getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane, der er klikket på      \\
-                                             &                 &                                                           \\
         getColumnIndex(MouseEvent event)     &                 & Returnerer søjleindekset for pane, der er klikket på      \\
-                                             &                 &                                                           \\
         showLegalMoves(int color)            & drawCircle()    & Tegner en cirkel hvor spiller kan mulig placer en brik    \\
-                                             &                 &                                                           \\
         hideLegalMoves()                     &                 & Rydder brættet for cirkler, hvilket indikerer mulige træk \\
-                                             &                 &                                                           \\
         mainMenu(ActionEvent event)          &                 & Returner brugeren tilbage til main-menu af spillet        \\
-        \\
         DrawCircle(int id, Pane pane)        &                 & Tegner hvid og sort brikker og brikker det kan mulig      \\
-                                             &                 & placer på brættet, baseret på spillerens tur
-        \\
+                                             &                 & placer på brættet, baseret på spillerens tur              \\
         \bottomrule
     \end{tabular}
 \end{table}
-
 \subsubsection{Genstarter Spillet} \label{gs}
-
-Et af de grundlæggende kriterier for basis-Reversi-spillet er evnen til at genstarte spillet uden at genstarte applikationen. Dette er gjort muligt ved at oprette en knap. Genstart-knappen havde oprindeligt funktionalitet til at genstarte spillet ved at skifte scener, det vil sige at skifte til scenen, hvor ingen brikker er placeret på brættet. Det tomme bræt er den samme scene, der vises ved kørsel af FXML-filen i starten af spillet/programmet. Genstart af spillet ved at skifte scener var ikke et optimalt og vellykket middel til at genstarte spillet, da det ikke tillod brugeren at spille spillet igen uden at lukke programmet, på grund af den uretmæssige initialisering af spillet samt kun indlæse scenen (det tomme bræt) med ingen funktionalitet. \newline
-\newline
+Et af de grundlæggende kriterier for basis-Reversi-spillet er evnen til at genstarte spillet uden at genstarte applikationen. Dette er gjort muligt ved at oprette en knap. Genstart-knappen havde oprindeligt funktionalitet til at genstarte spillet ved at skifte scener, det vil sige at skifte til scenen, hvor ingen brikker er placeret på brættet. Det tomme bræt er den samme scene, der vises ved kørsel af FXML-filen i starten af spillet/programmet. Genstart af spillet ved at skifte scener var ikke et optimalt og vellykket middel til at genstarte spillet, da det ikke tillod brugeren at spille spillet igen uden at lukke programmet, på grund af den uretmæssige initialisering af spillet samt kun indlæse scenen (det tomme bræt) med ingen funktionalitet.\newline
 For at undgå denne ukorrekte genstart blev hvert pane indeholdt i GridPane tildelt et id (fx: 05 repræsenterer Pane i 0. række og 5. kolonne i GridPane). Hver gang man trykker på genstart, vil to for-loops iterere gennem hver række og kolonne i GridPane, få adgang til den unikke identifikator for hver pane ved hjælp af række- og kolonneindekset og derefter rydde brikkerne på dem. At tildele et id til pane og bruge for-loops til at iterere gennem dem og slette brikkerne placeret på dem, gav den mest effektive metode til at genstarte spillet. Derudover, når spillet genstartes, vil den spiller, der foretager det første træk, før spillet genstartes, nu starte som nummer to.
-
