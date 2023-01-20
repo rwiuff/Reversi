@@ -24,11 +24,11 @@ Timer-Metoden tog ca. 2 dage at implementere, for der har været nogle udfordrin
 \item Et andet forsøg, var ved at prøve "Animationtimer" men vi kunne ikke få metoden til at ændre timeren fra spiller 1 til spiller 2. 
 
 \item Løsning: 
-Der blev brugt "TimeLine" hvor den virkede fint med både "turnsskift"hastighed mellem spillerne og regering med "getturn()". 
+Der blev brugt "TimeLine" hvor den virkede fint med både "turnsskift"-hastighed mellem spillerne og reagerer med "getturn()". 
 \end{itemize}
-\subsubsection{Flette Reversi Timer}\label{FRT}
-Som nogle af de største udfordringer vi har haft med SpeedMode er, at kombinær metoden ind og få den til at køre adskillet, Dvs. kun når man vælge at spille med SpeedMode, som vi har lavet en knappe til i "Menu.FXML" og en "BorderPane" i "Main.FXML".
-\subsubsection{Metode implementering}\label{MI}
+\subsubsection{Flette Reversi-Timer}\label{FRT}
+Nogle af de største udfordringer vi har haft med SpeedMode er, at kombinere metoden ind og få den til at køre adskilt, dvs. kun når man vælger at spille med SpeedMode, som vi har lavet en knap til i "Menu.FXML" og en "BorderPane" i "Main.FXML".
+\subsubsection{Metodeimplementering}\label{MI}
 \begin{itemize}
 \item Efter oprettelsen af "ReversiTimer" klassen som indholder Timer metoden, har Yahya tænkte sig at oprette en anden Controller klasse for ReversiTimeren således at, man kan kald den ny "controller1" når man trykker på knappen " SpeedReversi" ellers kaldes den nuværende "Controller".
 På den måde vil vi kunne nemt flette Timer logikken ind med Standard logik uden væsentlig ændringer i koden, men der har været uenighed om det,fordi det kunne være et problem hvis vi sanerer opdager nogle fejl eller hvis vi skal ændre på noget i hoved Controller klassen, for så bliver vi nødt til at ændre det også i Controller2 klassen. 
@@ -49,7 +49,7 @@ implementere følgende i "speedReversi(ActionEvent event)":
    " controller.setSpeedMode(false);
         controller.getReversiTimerpane().setVisible(false); "
 
-\item Dette opnåede rettelser var desværre forsent til at kunne flette ind i hoved projekt, for vi fik at vide at sene ændrein
+\item Dette opnåede rettelser var desværre forsent til at kunne flette ind i hoved projekt, som vi fik at vide at sene ændringer kan kost dyrt. Derfor valgt vi at leverer den bedste version vi kunne nå til den tid vi har. 
 \end{itemize}
 
 
