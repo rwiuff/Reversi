@@ -108,18 +108,6 @@ Herefter itererer metoden over alle felter i brættet. Mødes et tomt felt teste
             \end{array}
         \end{align*}
     \end{subfigure}
-    \hfil
-    \begin{subfigure}[t]{.3\textwidth}
-        \caption{Tredje skridt}
-        \begin{align*}
-            \begin{array}{cccc}
-                \color{blue}1 & 0               & 0               & 0             \\
-                0             & \color{DTUred}2 & 0               & 0             \\
-                0             & 0               & \color{DTUred}2 & 0             \\
-                0             & 0               & 0               & \color{blue}1
-            \end{array}
-        \end{align*}
-    \end{subfigure}
 \end{figure}
 Den fundne nabobriks koordinater gemmes og returneres til validMoves. Hvis validMoves modtager sådan et koordinat iværksættes saveFlips som gemmer de indkapslede brikker i et hashmap efter samme skridt som i \cref{fig:findOwn}. Her vil de røde brikkerks koordinater blive gemt.\newline
 Når validMoves har et hashmap med hashmaps af koordinater fra alle retninger gemmes disse i validMoves hashmappet med trækkets koordinat som nøgle. \cref{tbl:hashmaps} viser strukturen af validMoves.
@@ -140,7 +128,7 @@ Når validMoves har et hashmap med hashmaps af koordinater fra alle retninger ge
 \subsection{Main}
 
 \subsubsection{Basic}\label{bm}
-
+FXMLLoader-klassen indlæser "main.fxml", som indeholder layoutet for, hvordan Reversi-spillet skal se ud visuelt. Ved at indlæse fxml-filen tildeler den det resulterende overordnede element til variablen "root", og opretter et nyt Scene-objekt med "root" som dets rodelement. Dette sceneobjekt er indstillet som den nye scene i den primary stage. Endvidere tilføjes en titel samt ikonbilleder til den primary stage. Den opretter også en reference til controllerobjektet, der oprettes, når FXML-filen indlæses, ved at kalde getController()-metoden på FXMLLoader-objektet. Den kalder derefter in() fra controllerklassen. Til sidste, viser dette primaryStage til brugen.
 
 \subsubsection{Avanceret}
 
