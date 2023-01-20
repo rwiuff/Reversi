@@ -155,35 +155,34 @@ Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indehol
         firstFour(int row, int column, Pane pane) &                   & Spilleren kan sætte de første fire brikker
         \\
         \\
-        onPaneClicked(MouseEvent event)           & getRowIndex()     & Dette fet                                            \\
-                                                  & getColumnIndex()  & der bliver klikket på et felt                        \\
-                                                  & firstFour()       & Giver spillerne besked, om                           \\
-                                                  & update()          & hvorvidt deres træk er lovlige                       \\
-                                                  &                   & Melder pas, når der                                  \\
-                                                  &                   & ikke er noget lovligt træk                           \\
-                                                  &                   & Annoncerer spillets slutning,                        \\
-                                                  &                   & når der ikke er                                      \\
-                                                  &                   & Erklærer vinderen                                    \\
-                                                  &                   &                                                      \\
-
-        Restart()                                 & in()              & Genstarter spillet.                                  \\
-                                                  &                   & Spiller der lavet første træk i                      \\
-                                                  &                   & sidste runde, begynder anden.                        \\
-        \\
-        DrawCircle(int id, Pane pane)             &                   & Tegner hvid og sort brikker på brættet,              \\
-                                                  &                   & baseret på spillerens tur
-        \\
-        \\
-        reset()                                   &                   & Itererer gennem brættet og rydder det                \\
-                                                  &                   &                                                      \\
-        update()                                  & drawCircle()      & Opdatere brættet og tegner cirkler(brikker)          \\
-                                                  &                   & på brættet ifølge Board objektet                     \\
-        \\
-        getRowIndex(MouseEvent event)             &                   & Returnerer rækkeindekset for pane, der er klikket på \\
-                                                  &                   &                                                      \\
-        getColumnIndex(MouseEvent event)          &                   & Returnerer søjleindekset for pane, der er klikket på \\
-                                                  &                   &                                                      \\
-        \bottomrule
+         onPaneClicked(MouseEvent event) & getRowIndex()     & Tegner en cirkel i midten af pane't,                                         \\
+                        & getColumnIndex()  & når der bliver klikket på et felt.                                     \\
+                        & firstFour()       & Giver spillerne besked, om                                        \\
+                        & update()  & hvorvidt deres træk er lovlige.                                    \\
+                        &                & Melder pas, når der                                               \\
+                        &                & ikke er noget lovligt træk.                                        \\
+                        &                     & Annoncerer spillets slutning,                                     \\
+                        &                   & når der ikke er flere træk tilbage                                                  \\
+                        &                    & og erklærer vinderen                                      \\
+                        &                   &                                                                   \\
+                        
+                            Restart() & in() & Genstarter spillet. \\
+                         &         &        Spilleren der lavede første træk i \\      &         & sidste runde, laver andet træk i den næste.\\
+                         \\
+                         DrawCircle(int id, Pane pane) & & Tegner hvide og sorte brikker på brættet, \\
+                         & & baseret på spillertur.
+                         \\
+                         \\
+                          reset()                              &                 & Itererer gennem brættet og rydder det.                       \\
+                                             &                 &                                                           \\
+        update()                             & drawCircle()    & Opdaterer brættet og tegner circkler(brikker)              \\
+                                             &                 & på brættet ifølge Board objektet.                          \\
+                                             \\
+         getRowIndex(MouseEvent event)        &                 & Returnerer rækkeindekset for pane't, der klikkes på.      \\
+                                             &                 &                                                           \\
+        getColumnIndex(MouseEvent event)     &                 & Returnerer søjleindekset for pane't, der klikkes på.      \\
+                                             &                 &                                                           \\
+ \bottomrule
     \end{tabular}
 \end{table}
 
@@ -309,6 +308,7 @@ En metode der er ganske bemærkelsesværdig under controller-klassen er 'beginGa
 
 \subsubsection{Genstarter Spillet} \label{gs}
 
-Et af de grundlæggende kriterier for det basis Reversi-spil er evnen til at genstarte spillet uden at genstarte applikationen. Det er gjort muligt at genstarte spillet uden at genstarte programmet ved at oprette en knap. Genstart-knappen havde oprindelig funktionalitet til at genstarte spillet ved at skifte scener, det vil sige at skifte til scenen, hvor ingen brikker er placeret på brættet. Den tom brættet er den samme scene, der vises ved kørsel af FXML-filen i starten af spillet/programmet. Genstart af spillet med at skifte scener var ikke et optimalt og vellykket middel til at genstarte spillet, da det ikke tillod brugeren at spille spillet igen uden at lukke programm, på grund af det uretmæssige initialisering af spillet samt kun indlæse scenen (tom brættet) med ingen funktionalitet. \newline
-For at undgå denne ukorrekte genstart blev hver pane indeholdt i GridPane tildelt et id (fx: 05 repræsenterer Pane i 0. række og 5. kolonne i GridPane). Hver gang man trykker på genstart, vil to for-loops iterere gennem hver række og kolonne i GridPane, få adgang til den unikke identifikator for hver Pane ved hjælp af række- og kolonneindekset og derefter rydder brikkerne  på den. At tildele et id til ruderne og bruge for -loops til at iterere gennem Pane og slet brikkerne placeret på dem, gav den mest effektive og effektive metode til at genstarte spillet igen. Derudover, når spillet genstartes, vil den spiller, der foretager det første træk, før spillet genstartes, nu starte som nummer to.
+Et af de grundlæggende kriterier for basis-Reversi-spillet er evnen til at genstarte spillet uden at genstarte applikationen. Dette er gjort muligt ved at oprette en knap. Genstart-knappen havde oprindeligt funktionalitet til at genstarte spillet ved at skifte scener, det vil sige at skifte til scenen, hvor ingen brikker er placeret på brættet. Det tomme bræt er den samme scene, der vises ved kørsel af FXML-filen i starten af spillet/programmet. Genstart af spillet ved at skifte scener var ikke et optimalt og vellykket middel til at genstarte spillet, da det ikke tillod brugeren at spille spillet igen uden at lukke programmet, på grund af den uretmæssige initialisering af spillet samt kun indlæse scenen (det tomme bræt) med ingen funktionalitet. \newline
+\newline
+For at undgå denne ukorrekte genstart blev hvert pane indeholdt i GridPane tildelt et id (fx: 05 repræsenterer Pane i 0. række og 5. kolonne i GridPane). Hver gang man trykker på genstart, vil to for-loops iterere gennem hver række og kolonne i GridPane, få adgang til den unikke identifikator for hver pane ved hjælp af række- og kolonneindekset og derefter rydde brikkerne på dem. At tildele et id til pane og bruge for-loops til at iterere gennem dem og slette brikkerne placeret på dem, gav den mest effektive metode til at genstarte spillet. Derudover, når spillet genstartes, vil den spiller, der foretager det første træk, før spillet genstartes, nu starte som nummer to.
 
