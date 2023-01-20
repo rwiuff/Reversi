@@ -9,12 +9,12 @@ Vi lærte også at arbejde som en gruppe inden for software/programmerings-felte
 
 \subsection{Vores mangler}
 \subsubsection{SpeedReversi}\label{SR}
-En pointe fremhævet i den avanceret del af Yahya, er, at give spillere mulighed for at spille med en timer.
+En pointe fremhævet i den avancerede del af Yahya, er, at give spillere mulighed for at spille med en timer.
 \begin{itemize}
-\item Timeren er en vigtig del af de fleste strategispil (spil, der kræver en vis forhånds planlægning til næste træk), fordi timeren øvre spillernes tænkehastighed og tvinger dem til at tænke hurtigere og træffe beslutninger for næste træk under pres, hvilket kan føre til, at man træffer en forkert beslutning eller man løber tør for tid. denne tilføjelse til denne type spil gør spillet sjovere for nogle. 
+\item Timeren er en vigtig del af de fleste strategispil (spil, der kræver en vis forhånds- planlægning til næste træk), fordi timeren øver spillernes tænkehastighed og tvinger dem til at tænke hurtigere og træffe beslutninger for næste træk under pres, hvilket kan føre til at man træffer en forkert beslutning, eller at man løber tør for tid. Denne tilføjelse til denne type spil gør spillet sjovere for nogle. 
 \end{itemize}
 
-I gruppen aftalte vi om at Yahya starter med at implementerer timer metoden ind i vores standard logik og få den til at køre direkte når spillet starter, derefter vil vi så tilføj en Bottom til ” menu.fxml ” kaldes ” Speed-Reversi ”, der befinder plads under ”BeginGame” (normal game).
+I gruppen aftalte vi at Yahya starter med at implementere timer-metoden ind i vores standard logik og får den til at køre direkte, når spillet starter. Derefter vil vi så tilføje en Bottom til ”menu.fxml” kaldet: ” Speed-Reversi ”, der befinder plads under ”BeginGame” (normal game).
 På den måde adskiller vi ”SpeedMode”, så den bliver en ekstra valg hvis man ønsker det. 
 Timer-Metoden tog ca. 2 dag at implementerer, for der har været nogle udfordringer undervejs så som: 
 \begin{itemize}
@@ -40,7 +40,10 @@ På den måde vil vi kunne nemt flette Timer logikken ind med Standard logik ude
 Efter en lang analyse af "if" og "else" sætninger, fandt vi fejlen som var bag Controller, da vi få Loaded "main.fxml" med den standard Controller hver gang, derfor vil Value af SpeedMode være "True" altid. 
 
 \item Løsning: 
-
+implementere følgende i "speedReversi(ActionEvent event)":
+\item kalder metoderne fra "begingame()" med følgende tilføjelser 
+" controller.setSpeedMode(true);
+            controller.getReversiTimerpane().setVisible(true); " 
 
 
 \end{itemize}
