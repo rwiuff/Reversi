@@ -625,8 +625,8 @@ public class Controller {
             
             /* errors
              *  
-            1-the main error is using attributes of anther controller instance speedMode of target controller is alywase the same value is true
-            1.2-changing the attribute from the controller runing only for Menu (change directlly)
+            1-the main error is using attributes of anther controller instance speedMode of target controller is alwyase the same value is true
+            1.2-changing the attribute from the controller running only for Menu (change dirrectlly)
               solution of error 1 : get the instance of the target controller from mainLoader of the FXMLLoader
                                     changing the attribute (SpeedMode,ReversiTimerpane) from the target controller (not dirrectlly)
             2-showing the ReversiTimerpane in BeginGame solution is setVisibale(false) to ReversiTimerpane
