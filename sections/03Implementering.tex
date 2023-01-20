@@ -128,13 +128,13 @@ Når validMoves har et hashmap med hashmaps af koordinater fra alle retninger ge
 \subsection{Main}
 
 \subsubsection{Basic}\label{bm}
-I Main-klassen, FXMLLoader-klassen indlæser "main.fxml", som indeholder layoutet for, hvordan Reversi-spillet skal se ud visuelt. Ved at indlæse fxml-filen tildeler den det resulterende overordnede element til variablen "root", og opretter et nyt Scene-objekt med "root" som dets rodelement. Dette sceneobjekt er indstillet som den nye scene i den primary stage. Endvidere tilføjes en titel samt ikonbilleder til den primary stage. Den opretter også en reference til controllerobjektet, der oprettes, når FXML-filen indlæses, ved at kalde getController()-metoden på FXMLLoader-objektet. Den kalder derefter in() fra controllerklassen. Til sidste, viser dette primaryStage til brugen.
+I Main-klassen, FXMLLoader-klassen indlæses "main.fxml", som indeholder layoutet for, hvordan Reversi-spillet skal se ud visuelt. Ved at indlæse FXML-filen tildeler den det resulterende overordnede element til variablen "root", og opretter et nyt Scene-objekt med "root" som dets rodelement. Dette sceneobjekt er indstillet som den nye scene i den primary stage. Endvidere tilføjes en titel samt ikonbilleder til den primary stage. Den opretter også en reference til controller-objektet, der oprettes, når FXML-filen indlæses, ved at kalde 'getController()'-metoden på FXMLLoader-objektet. Den kalder derefter 'in()' fra controller-klassen. Til sidst viser dette primaryStage til brugeren.
 
 \subsubsection{Avanceret} \label{am}
 I lighed med Basic Reversi-Mainklassen udfører Avanceret Reversi-Mainklassen de samme funktioner. Basic Reversi indlæser "main.fxml"-filen, som kun indeholder boardet, genstartsknappen og en label for at vise meddelelserne til brugeren, hvilket er en af forskellene mellem de to Main-klasser. I modsætning hertil indlæser Advanced Reversi Main-klassen spillets hovedmenu, "menu.fxml." Tre separate knapper, inklusive BeginGame, HighScore og Exit, er til stede i denne hovedmenu. "Main.fxml"-filen, som indeholder boardet og andre sofistikerede funktioner, indlæses af FXMLLoader, når der trykkes på BeginGame-knappen. Highscore-knappen kan bruges til at se spillets højeste score, mens Exit-knappen kan bruges til at lukke applikationen. En anden forskel er, at hver gang "menu.fxml" udføres, oprettes en fil med navnet "HighScore.txt" til at gemme  highscore information, hvis en sådan file ikke allerede eksisterer. Derudover giver Avanceret Reversi mulighed for at spille spillet i fuldskærmstilstand og beder brugeren om at bekræfte sit valg, når man trykker på exit.
 
 \subsubsection{FXML}\label{BD}
-Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indeholdt i gridpanes cellen er tildelt et unikt id. For eksempel er 05 et unikt id tildelt til en pane, hvor 0 repræsenterer rækkeindekset, og 5 repræsenterer kolonneindekset for panes placering i gridpane. Hver pane er tildelt et id for at gøre det nemmere at placere/tegne eller slette en brik fra brættet.
+Brættet er lavet af et 8x8 gridpane med et pane i hver celle. Hver pane indeholdt i gridpanet's celler er tildelt et unikt id. For eksempel er 05 et unikt id tildelt til et pane, hvor 0 repræsenterer rækkeindekset, og 5 repræsenterer kolonneindekset for panet's placering i gridpanet. Hver pane er tildelt et id for at gøre det nemmere at placere/tegne eller slette en brik fra brættet.
 
 
 \subsection{Controller}
@@ -149,7 +149,7 @@ Brættet er lavet af en 8x8 gridpane med en pane i hver celle. Hver pane indehol
         \toprule
     Metode          & Kalder metoderne: & Beskrivelse                                                         \\
         \midrule
-       in()         &   & tildeler spilleren deres farver
+       in()         &   & tildeler spillerne deres farver
              \\
              \\
         firstFour(int row, int column, Pane pane)   &  & Spilleren kan sætte de første fire brikker
@@ -252,9 +252,10 @@ Her man se, at det hele begynder ved 'beginGame()'. Skriver spillerne deres navn
 En metode der er ganske bemærkelsesværdig under controller-klassen er 'beginGame()'. Denne metode, som kaldes ved et tryk på knappen "Begin Game" fra hovedmenuen, igangsætter hele spillet, viser brættet og kalder 'setName()'-metoden. Hvad der er usædvanligt ved denne metode er, at den fungerer ikke just som en controller-metode, der henter data fra 'Board' og bearbejder det. Den fungerer snarer som en metode inde fra 'Main'-klassen, altså klassen der fungerer som "view", hvis vi tager udgangspunkt i MVC-modellen. Den har til job at skulle "vise", men den befinder sig inde i 'controller'-klassen. Grunden til at den befinder sig her, er fordi den kaldes via. en "ActionEvent event", altså kaldes den, når spilleren interagerer manuelt med knappen i hovedmenuen. 
 
 \subsubsection{Avancerede Underordnede Metoder}
+\cref{tbl:2}
 \begin{table}[H]
     \centering
-    \caption{Metoder  brugt til avancerede funktioner og i overordnede metoder \mintinline{java}|Avanceret-Controller.java|}\label{tbl:2}
+    \caption{Metoder brugt til avancerede funktioner og i overordnede metoder \mintinline{java}|Avanceret-Controller.java|}\label{tbl:2}
     \begin{tabular}{lll}
         \toprule
         Metode                               & Kaldte metoder  & Beskrivelse                                               \\

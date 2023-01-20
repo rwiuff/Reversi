@@ -8,7 +8,7 @@ Vi lærte også at arbejde som en gruppe inden for software/programmerings-felte
 
 
 \subsection{Vores mangler}
-\subsubsection{SpeedReversi}
+\subsubsection{SpeedReversi}\label{SR}
 En pointe fremhævet i den avanceret del af Yahya, er, at give spillere mulighed for at spille med en timer.
 \begin{itemize}
 \item Timeren er en vigtig del af de fleste strategispil (spil, der kræver en vis forhånds planlægning til næste træk), fordi timeren øvre spillernes tænkehastighed og tvinger dem til at tænke hurtigere og træffe beslutninger for næste træk under pres, hvilket kan føre til, at man træffer en forkert beslutning eller man løber tør for tid. denne tilføjelse til denne type spil gør spillet sjovere for nogle. 
@@ -26,16 +26,16 @@ Timer-Metoden tog ca. 2 dag at implementerer, for der har været nogle udfordrin
 \item Løsning: 
 Der blev brugt "TimeLine" hvor den virkede fint med både turnsskifthastighed mellem spillerne og regering med "getturn()". 
 \end{itemize}
-\subsubsection{Flette Reversi Timer}
+\subsubsection{Flette Reversi Timer}\label{FRT}
 Som nogle af de største udfordringer vi har haft med SpeedMode er, at kombinær metoden ind og få den til at køre adskillet, Dvs. kun når man vælge at spille med SpeedMode, som vi har lavet en knappe til i "Menu.FXML" og en "BorderPane" i "Main.FXML".
-\subsubsection{Metode implementering}
+\subsubsection{Metode implementering}\label{MI}
 \begin{itemize}
 \item Efter oprettelsen af "ReversiTimer" klassen som indholder Timer metoden, har Yahya tænkte sig at oprette en anden Controller klasse for ReversiTimeren således at, man kan kald den ny "controller1" når man trykker på knappen " SpeedReversi" ellers kaldes den nuværende "Controller".
 På den måde vil vi kunne nemt flette Timer logikken ind med Standard logik uden væsentlig ændringer i koden, men der har været uenighed om det,fordi det kunne være et problem hvis vi sanerer opdager nogle fejl eller hvis vi skal ændre på noget i hoved Controller klassen, for så bliver vi nødt til at ændre det også i Controller2 klassen. 
 \item Derfor har vi tænkte os at få Timeren ind med at tilføje en "boolean" som sætter "SpeedMode=false;" og så begyndt vi at tilføj 
-" if (speedMode == true) { " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så har vi sat 
-"speedReversi(ActionEvent event) {	
-		speedMode = true; " 
+" if (speedMode == true) \{ " "else" til metoderne ( in(),restart(),onPaneClicked(),beginGame) og så har vi sat 
+"speedReversi(ActionEvent event) \{	
+		speedMode = true; "
 \item Vi var meget tæt på at få det hele til at køre, men udfordringer var stadig til sted. Vi mødet en fejl der gør at enten timeren kan ses på begge Mode ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
 Efter en lang analyse af "if" og "else" sætninger, fandt 
 
@@ -64,3 +64,4 @@ Dette projekt har bidraget meget til mit billede af, hvordan det er at arbejde i
 \subsubsection{Rasmus}
 
 \subsubsection{Abinav}\label{AA}
+
