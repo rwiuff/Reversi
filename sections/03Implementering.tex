@@ -46,10 +46,10 @@ in() & drawCircle() & tildeler spillerne deres farver\\
 firstFour() & update() & Får spiller til at sætte de fire første brikker\\
 & checkscore() \\
 
-onPaneClicked() & getRowIndex() & Styrer hvad der sker, når der bliver klikket \\
-& getColumnIndex() \\
-& firstFour() \\
-& hideLegalMoves() \\
+onPaneClicked() & getRowIndex() & Styrer hvad der sker, når der bliver klikket på et felt\\
+& getColumnIndex() & Giver spillerne besked, om hvorvidt deres træk er lovlige\\
+& firstFour() & Melder pas, når der ikke er noget lovligt træk\\
+& hideLegalMoves() & Annoncerer spillets slutning, når der ikke er nogen lovlige træk tilbage\\
 & update()\\
 & checkScore() \\
 & showLegalMoves()\\
@@ -72,8 +72,10 @@ Metode & Kaldte metoder & Beskrivelse & Input & Output \\
 restart() & reset() & Genstarter spillet og beder spillerene om   \\
 & setName() & at indsatte deres navne  i tekstfelte igen. Spiller der lavet \\
 & & første træk i sidste runde, begynder anden \\
-reset() \\
-update() & drawCircle() \\
+\\
+reset() & & Iterer gennem brættet og rydder det \\
+\\
+update() & drawCircle() & \\
 exitGame() \\
 checkScore() \\
 saveHighScore()\\
