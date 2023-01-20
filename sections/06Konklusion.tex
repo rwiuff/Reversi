@@ -37,7 +37,7 @@ På den måde vil vi nemt kunne flette Timer-logikken ind med standard logik ude
 "speedReversi(ActionEvent event) \{	
 		speedMode = true; "
 \item Vi var meget tætte på at få det hele til at køre, men udfordringer var stadig til stede. Vi mødte en fejl, der gør at enten kan timeren ses på begge "modes", ellers forsvinder den i begge Mode også, dvs. at der har været en sammenhæng mellem den normal logik og den ny med Timeren.
-Efter en lang analyse af "if" og "else" sætninger fandt vi fejlen, som var bag 'Controller', da vi få Loaded "main.fxml" med den standard Controller hver gang, derfor vil Value af SpeedMode være "True" altid. 
+Efter en lang analyse af "if" og "else" sætninger fandt vi fejlen, som var bag 'Controller', da vi loadede "main.fxml" med standard Controller'e hver gang, derfor vil Value af SpeedMode være "True" altid. 
 
 \item Løsning: 
 implementere følgende i "speedReversi(ActionEvent event)":
