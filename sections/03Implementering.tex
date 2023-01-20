@@ -47,18 +47,22 @@ setNameBtn() & in() & fastlåser spillernes navne \\
 & \\
 
 in() & drawCircle() & tildeler spillerne deres \\
-&& farver og viser de fire første mulige træk \\
+&& farver og viser de fire \\
 && første mulige træk \\
 & \\
 
-firstFour() & update() & Får spiller til at sætte de fire første brikker\\
-& checkscore() \\
+firstFour() & update() & Får spiller til at sætte \\
+& checkscore() & de fire første brikker\\
 & \\
 
-onPaneClicked() & getRowIndex() & Styrer hvad der sker, når der bliver klikket på et felt\\
-& getColumnIndex() & Giver spillerne besked, om hvorvidt deres træk er lovlige\\
-& firstFour() & Melder pas, når der ikke er noget lovligt træk\\
-& hideLegalMoves() & Annoncerer spillets slutning, når der ikke er \\
+onPaneClicked() & getRowIndex() & Styrer hvad der sker, når \\ 
+&&der bliver klikket på et felt\\
+& getColumnIndex() & Giver spillerne besked, om \\
+&&hvorvidt deres træk er lovlige\\
+& firstFour() & Melder pas, når der \\ 
+&& ikke er noget lovligt træk\\
+& hideLegalMoves() & Annoncerer spillets slutning,\\ 
+&& når der ikke er \\
 & update() & nogen lovlige træk tilbage\\
 & checkScore() \\
 & showLegalMoves()\\
@@ -93,8 +97,11 @@ exitGame() \\
 checkScore()& & Opdaterer scoren for begge spillere\\
 \\
 
-saveHighScore() & & Gemmer vinderens score og n\\
-loadHighScore()\\
+saveHighScore() & & Gemmer vinderens score og navnet adskilt af komma\\
+& & inde i "Highscore.txt" file, hvis vinderens score er  \\
+& & højre end nuværende highscore\\
+\\
+loadHighScore() & & Loader hi\\
 showHighScore() & loadHighScore() \\
 surrender()\\
 getRowIndex()\\
